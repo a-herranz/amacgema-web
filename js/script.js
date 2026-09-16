@@ -49,4 +49,14 @@ document.addEventListener('DOMContentLoaded', function () {
       botonSubmenuAyudas.setAttribute('aria-expanded', abiertoAyudas);
     });
   }
+
+  // En las subpáginas de "Quiénes somos" ofrece siempre una vuelta clara al índice.
+  var paginasQuienes = ['proposito.html', 'historia.html', 'sede-social.html', 'gobierno.html'];
+  var paginaActual = window.location.pathname.split('/').pop();
+  if (paginasQuienes.indexOf(paginaActual) !== -1 && !document.querySelector('.hero a[href="quienes-somos.html"]')) {
+    var sobrelinea = document.querySelector('.hero .sobrelinea');
+    if (sobrelinea) {
+      sobrelinea.insertAdjacentHTML('afterend', '<a class="enlace-flecha" href="quienes-somos.html">Volver a Quiénes somos</a>');
+    }
+  }
 });

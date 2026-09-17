@@ -51,7 +51,65 @@
                 </form>
             </div>
         </section>
-    </main>
+
+        <section class="seccion seccion-alt">
+            <div class="contenedor">
+                <div class="seccion-titulo">
+                    <h2>Cómo llegar</h2>
+                    <p>Nuestra sede está en Plaza del Pilar, 14, en pleno centro de Zaragoza.</p>
+                </div>
+                <div class="mapa-contenedor">
+                    <iframe
+                        src="https://www.google.com/maps?q=Plaza+del+Pilar+14,+50003+Zaragoza&output=embed"
+                        width="100%"
+                        height="400"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa de la sede de AMAC-GEMA en Plaza del Pilar, 14, Zaragoza">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion">
+            <div class="contenedor">
+                <div class="seccion-titulo">
+                    <h2>Síguenos</h2>
+                    <p>Entérate de nuestras actividades y noticias en redes sociales.</p>
+                </div>
+                <div class="rejilla-redes">
+                    <!-- Widget oficial de Facebook (Page Plugin): no requiere token ni revisión de app -->
+                    <div class="tarjeta tarjeta-red">
+                        <h3>Facebook</h3>
+                        <div id="fb-root"></div>
+                        <script async defer crossorigin="anonymous"
+                            src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v19.0">
+                        </script>
+                        <div class="fb-page"
+                            data-href="https://www.facebook.com/amac.gema/"
+                            data-tabs="timeline"
+                            data-width="340"
+                            data-height="400"
+                            data-small-header="true"
+                            data-adapt-container-width="true"
+                            data-hide-cover="false"
+                            data-show-facepile="false">
+                        </div>
+                    </div>
+
+                    <!-- Instagram: mostramos una tarjeta con enlace directo en vez de un feed embebido,
+                         ya que Instagram exige API con revisión y token renovable para mostrar publicaciones,
+                         algo poco práctico de mantener sin un equipo técnico dedicado. -->
+                    <div class="tarjeta tarjeta-red tarjeta-instagram">
+                        <h3>Instagram</h3>
+                        <p>Síguenos en Instagram para ver fotos de nuestras actividades, talleres y encuentros.</p>
+                        <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer" class="boton boton-secundario">Ver nuestro Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     <footer class="pie">
         <div class="contenedor">
             <p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p>

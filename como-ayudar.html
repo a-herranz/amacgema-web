@@ -1,16 +1,21 @@
 <!doctype html>
 <html lang="es">
     <head>
-        <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Cómo ayudar | AMAC-GEMA</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
         <a class="enlace-saltar" href="#contenido-principal">Saltar al contenido principal</a>
         <header class="cabecera">
             <div class="contenedor">
-                <a class="logo" href="index.html"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+                <a class="logo" href="index.html">
+                    <img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA">
+                    <span>AMAC-GEMA</span>
+                </a>
                 <nav class="nav-principal" aria-label="Menú principal">
                     <ul>
                         <li><a href="index.html">Inicio</a></li>
@@ -23,6 +28,7 @@
                 </nav>
             </div>
         </header>
+
         <main id="contenido-principal">
             <section class="hero hero-interior">
                 <div class="contenedor">
@@ -31,27 +37,39 @@
                     <p>Tu tiempo, tus ideas y tu apoyo hacen posible que sigamos acompañando.</p>
                 </div>
             </section>
+
             <section class="seccion">
                 <div class="contenedor">
+                    <div class="seccion-titulo">
+                        <h2>Formas de colaborar con AMAC-GEMA</h2>
+                        <p>Selecciona cada apartado para conocer los detalles sobre cómo hacerte socia, participar o difundir nuestra labor.</p>
+                    </div>
+
                     <div class="rejilla-tarjetas">
-                        <article class="tarjeta">
+                        <a class="tarjeta tarjeta-enlace" href="como-ayudar-socias.html">
+                            <p class="etiqueta">Apoyo Periódico</p>
                             <h3>Hazte socia</h3>
-                            <p>La colaboración periódica aporta estabilidad a los proyectos de la asociación.</p>
-                            <a class="enlace-flecha" href="contacto.html">Solicitar información</a>
-                        </article>
-                        <article class="tarjeta">
+                            <p>La colaboración periódica aporta estabilidad y continuidad a los proyectos y servicios profesionales de la asociación.</p>
+                            <span>Ver detalles para asociarse →</span>
+                        </a>
+
+                        <a class="tarjeta tarjeta-enlace" href="como-ayudar-voluntaria.html">
+                            <p class="etiqueta">Acción Solidaria</p>
                             <h3>Participa como voluntaria</h3>
-                            <p>Comparte tu tiempo y habilidades en iniciativas que fortalecen la comunidad.</p>
-                            <a class="enlace-flecha" href="contacto.html">Quiero colaborar</a>
-                        </article>
-                        <article class="tarjeta">
+                            <p>Comparte tu tiempo, ilusión y habilidades en iniciativas solidarias que fortalecen la comunidad y apoyan a las usuarias.</p>
+                            <span>Ver detalles de voluntariado →</span>
+                        </a>
+
+                        <a class="tarjeta tarjeta-enlace" href="como-ayudar-difunde.html">
+                            <p class="etiqueta">Sensibilización</p>
                             <h3>Difunde nuestra labor</h3>
-                            <p>Hablar de AMAC-GEMA en tu entorno ayuda a que más personas puedan encontrarnos.</p>
-                            <a class="enlace-flecha" href="contacto.html">Ponte en contacto</a>
-                        </article>
+                            <p>Hablar de AMAC-GEMA en tu entorno y redes sociales ayuda a que más personas puedan encontrarnos y recibir apoyo.</p>
+                            <span>Ver cómo difundir →</span>
+                        </a>
                     </div>
                 </div>
             </section>
+
             <section class="seccion seccion-alt">
                 <div class="contenedor">
                     <div class="ayuda-destacada">
@@ -62,11 +80,12 @@
                 </div>
             </section>
         </main>
+
         <footer class="pie">
             <div class="contenedor">
                 <p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p>
                 <p><a href="contacto.html">Contacta con nosotras</a></p>
-                <small>© <span id="anio"></span> AMAC-GEMA.</small>
+                <small>© <span id="anio">2025</span> AMAC-GEMA.</small>
             </div>
         </footer>
         <script src="js/script.js"></script>

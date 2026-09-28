@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Jornada Aragonesa de Cáncer Ginecológico | AMAC-GEMA</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/styles.css">
+        <style>
+            .layout-jornada {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 2.5rem;
+                align-items: flex-start;
+                margin-top: 2rem;
+            }
+            .layout-jornada .columna-imagen {
+                flex: 1;
+                min-width: 300px;
+            }
+            .layout-jornada .columna-imagen img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            }
+            .layout-jornada .columna-info {
+                flex: 1.2;
+                min-width: 300px;
+            }
+            .layout-jornada h2 {
+                margin-top: 0;
+                font-size: 1.75rem;
+                color: #2c3e50;
+            }
+            .bloque-info {
+                background: #fdfdfd;
+                border-left: 4px solid #e91e63;
+                padding: 1rem 1.5rem;
+                margin-bottom: 1.5rem;
+                border-radius: 0 8px 8px 0;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            }
+        </style>
+    </head>
+    <body>
+        <a class="enlace-saltar" href="#contenido-principal">Saltar al contenido principal</a>
+        <header class="cabecera">
+            <div class="contenedor">
+                <a class="logo" href="index.html"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+                <nav class="nav-principal" aria-label="Menú principal">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="quienes-somos.html">Quiénes somos</a></li>
+                        <li><a href="que-hacemos.html" aria-current="page">Qué hacemos</a></li>
+                        <li><a href="como-ayudar.html">Cómo ayudar</a></li>
+                        <li><a href="noticias.html">Noticias</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main id="contenido-principal">
+            <section class="hero hero-interior">
+                <div class="contenedor">
+                    <p class="sobrelinea">Divulgación y Encuentros</p>
+                    <a class="enlace-flecha" href="proyectos.html">Volver a Proyectos</a>
+                    <h1>Jornada Aragonesa de Cáncer Ginecológico</h1>
+                    <p>Espacios de divulgación, prevención y encuentro impulsados por AMAC-GEMA.</p>
+                </div>
+            </section>
+            <section class="seccion">
+                <div class="contenedor">
+                    <div class="layout-jornada">
+                        <div class="columna-imagen">
+                            <img src="img/proyecto-jornada-ginecologico.jpg" alt="Cartel de la VI Jornada Aragonesa de Cáncer Ginecológico">
+                        </div>
+                        <div class="columna-info">
+                            <div class="bloque-info">
+                                <h2>Sobre las Jornadas</h2>
+                                <p>AMAC-GEMA impulsa periódicamente jornadas dedicadas al cáncer ginecológico y de mama. Estos encuentros son espacios abiertos de divulgación que reúnen a profesionales sanitarios, personas afectadas y a la ciudadanía para compartir conocimiento riguroso, debatir sobre necesidades reales y promover la prevención y la calidad de vida.</p>
+                                <h3>Colaboran:</h3><p>Ayuntamiento de Zaragoza, Gobierno de Aragón, Fundación CAI</p>
+                            </div>
+
+                            <h2>Última Edición (2026): Aspectos Destacados</h2>
+                            <ul>
+                                <li><strong>Título:</strong> VI Edición “Virus del Papiloma Humano: qué necesitamos saber”.</li>
+                                <li><strong>Fecha y Hora:</strong> Lunes 12 de mayo de 2025 a las 17:30 h.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 1.5rem;">Ponencias y Participantes</h3>
+                            <p><strong>Radioterapia intraoperatoria en el Cáncer de Cérvix:</strong> Impartida por la Dra. Arantxa Campos (Médico especialista en Oncología Radioterápica en UCMORA).</p>
+                            <p><strong>Prevención en Cáncer de Cuello de Útero:</strong> Impartida por la Dra. Amparo Borque (Facultativo Especialista de Área en el Hospital Universitario Miguel Servet).</p>
+                            <p><strong>Modera:</strong> Dra. Reyes Ibáñez (Jefa de Sección de Tumores de Mama y Ginecológicos del Servicio de Oncología Radioterápica del Hospital Miguel Servet).</p>
+
+                            <div style="margin-top: 2rem;">
+                                <a class="boton boton-primario" href="contacto.html">Consultar más información</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="pie">
+            <div class="contenedor">
+                <p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p>
+                <small>© <span id="anio">2025</span> AMAC-GEMA.</small>
+            </div>
+        </footer>
+        <script src="js/script.js"></script>
+    </body>
+</html>

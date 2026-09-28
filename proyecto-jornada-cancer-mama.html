@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Jornada Aragonesa de Cáncer de Mama | AMAC-GEMA</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/styles.css">
+        <style>
+            .layout-jornada {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 2.5rem;
+                align-items: flex-start;
+                margin-top: 2rem;
+            }
+            .layout-jornada .columna-imagen {
+                flex: 1;
+                min-width: 300px;
+            }
+            .layout-jornada .columna-imagen img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            }
+            .layout-jornada .columna-info {
+                flex: 1.2;
+                min-width: 300px;
+            }
+            .layout-jornada h2 {
+                margin-top: 0;
+                font-size: 1.75rem;
+                color: #2c3e50;
+            }
+            .bloque-info {
+                background: #fdfdfd;
+                border-left: 4px solid #e91e63;
+                padding: 1rem 1.5rem;
+                margin-bottom: 1.5rem;
+                border-radius: 0 8px 8px 0;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            }
+        </style>
+    </head>
+    <body>
+        <a class="enlace-saltar" href="#contenido-principal">Saltar al contenido principal</a>
+        <header class="cabecera">
+            <div class="contenedor">
+                <a class="logo" href="index.html"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+                <nav class="nav-principal" aria-label="Menú principal">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="quienes-somos.html">Quiénes somos</a></li>
+                        <li><a href="que-hacemos.html" aria-current="page">Qué hacemos</a></li>
+                        <li><a href="como-ayudar.html">Cómo ayudar</a></li>
+                        <li><a href="noticias.html">Noticias</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main id="contenido-principal">
+            <section class="hero hero-interior">
+                <div class="contenedor">
+                    <p class="sobrelinea">Divulgación y Encuentros</p>
+                    <a class="enlace-flecha" href="proyectos.html">Volver a Proyectos</a>
+                    <h1>Jornada Aragonesas de Cáncer de Mama</h1>
+                    <p>Encuentros anuales para acercar conocimiento, conversación y voces expertas a la sociedad.</p>
+                </div>
+            </section>
+            <section class="seccion">
+                <div class="contenedor">
+                    <div class="layout-jornada">
+                        <div class="columna-imagen">
+                            <img src="img/proyecto-jornada-mama.jpg" alt="Cartel de la XXIV Jornada Aragonesa de Cáncer de Mama">
+                        </div>
+                        <div class="columna-info">
+                            <div class="bloque-info">
+                                <h2>Sobre las Jornadas</h2>
+                                <p>Las jornadas de cáncer de mama organizadas por AMAC-GEMA se han consolidado a lo largo de su trayectoria como un referente de divulgación en Aragón. Su objetivo principal es abordar de forma integral los avances médicos, la investigación, el impacto emocional y los estilos de vida, sirviendo como punto de encuentro entre especialistas, pacientes y familiares.</p>
+                                <h3>Colaboran:</h3><p>Ayuntamiento de Zaragoza, Gobierno de Aragón, Fundación CAI, Karicia</p>
+                            </div>
+
+                            <h2>Última Edición (2026): Aspectos Destacados</h2>
+                            <ul>
+                                <li><strong>Lema central:</strong> XXIV Edición “Cáncer de mama; de dónde venimos, hacia dónde vamos”.</li>
+                                <li><strong>Fecha y Hora:</strong> 28 de octubre de 2025 a las 17:30 h.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 1.5rem;">Ponencias y Participantes</h3>
+                            <p><strong>Inteligencia Artificial y Cáncer de Mama:</strong> Una tecnología para diagnosticar, tratar y curar mejor, impartida por el Prof. Dr. Sergio Lozares (Doctor en Física Atómica y Nuclear, especialista en Radiofísica y profesor en la Universidad de Zaragoza).</p>
+                            <p><strong>Cáncer de Mama y estilo de vida:</strong> Impartida por la Dra. Isabel Vicente (Jefa de Sección de la Unidad de Mama del Servicio de Ginecología del Hospital Miguel Servet).</p>
+                            <p><strong>Modera:</strong> Dra. Arantxa Campos (Jefa de Sección de Oncología Radioterápica de la UCMORA).</p>
+                            
+                            <div style="margin-top: 2rem;">
+                                <a class="boton boton-primario" href="contacto.html">Consultar más información</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="pie">
+            <div class="contenedor">
+                <p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p>
+                <small>© <span id="anio">2025</span> AMAC-GEMA.</small>
+            </div>
+        </footer>
+        <script src="js/script.js"></script>
+    </body>
+</html>

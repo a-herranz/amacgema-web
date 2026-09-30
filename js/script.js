@@ -33,6 +33,57 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Añade el desplegable de "Hablando de cáncer" con sus 6 categorías.
+  var enlaceHablando = document.querySelector('.nav-principal a[href="hablando-de-cancer.html"]');
+  if (enlaceHablando) {
+    var elementoHablando = enlaceHablando.closest('li');
+    var idSubmenuHablando = 'submenu-hablando-de-cancer';
+    elementoHablando.classList.add('menu-con-desplegable');
+    elementoHablando.insertAdjacentHTML('beforeend',
+      '<button class="boton-submenu" type="button" aria-expanded="false" aria-controls="' + idSubmenuHablando + '">' +
+      '<span class="sr-only">Abrir submenú de Hablando de cáncer</span><span aria-hidden="true">⌄</span></button>' +
+      '<ul class="submenu" id="' + idSubmenuHablando + '">' +
+      '<li><a href="hablando-de-cancer.html">Resumen</a></li>' +
+      '<li><a href="aspectos-generales.html">Aspectos generales</a></li>' +
+      '<li><a href="cancer-de-mama.html">Cáncer de mama</a></li>' +
+      '<li><a href="cancer-ginecologico.html">Cáncer ginecológico</a></li>' +
+      '<li><a href="linfedema.html">Linfedema</a></li>' +
+      '<li><a href="aspectos-sociales.html">Aspectos sociales</a></li>' +
+      '<li><a href="aspectos-psicologicos.html">Aspectos psicológicos</a></li></ul>'
+    );
+
+    // Marca como activa la categoría a la que pertenece la página actual,
+    // aunque estemos en una subpágina (p. ej. concepto.html pertenece a
+    // Aspectos generales; sintomas.html pertenece a Cáncer de mama).
+    var categoriasHablando = {
+      'aspectos-generales.html': ['aspectos-generales.html', 'concepto.html', 'itinerario-diagnostico.html', 'planteamiento-terapeutico.html'],
+      'cancer-de-mama.html': ['cancer-de-mama.html', 'anatomia.html', 'factores-asociados.html', 'sintomas.html', 'diagnostico.html', 'tratamiento.html', 'prevencion-diagnostico-precoz.html'],
+      'cancer-ginecologico.html': ['cancer-ginecologico.html', 'anatomia-genital.html', 'cancer-por-localizacion.html', 'prevencion-diagnostico-precoz-ginecologico.html'],
+      'linfedema.html': ['linfedema.html'],
+      'aspectos-sociales.html': ['aspectos-sociales.html'],
+      'aspectos-psicologicos.html': ['aspectos-psicologicos.html']
+    };
+    var paginaActualHablando = window.location.pathname.split('/').pop() || 'index.html';
+    var hrefCategoriaActual = null;
+    Object.keys(categoriasHablando).forEach(function (href) {
+      if (categoriasHablando[href].indexOf(paginaActualHablando) !== -1) {
+        hrefCategoriaActual = href;
+      }
+    });
+    if (hrefCategoriaActual) {
+      var enlaceCategoriaActual = elementoHablando.querySelector('.submenu a[href="' + hrefCategoriaActual + '"]');
+      if (enlaceCategoriaActual) {
+        enlaceCategoriaActual.setAttribute('aria-current', 'page');
+      }
+    }
+
+    var botonSubmenuHablando = elementoHablando.querySelector('.boton-submenu');
+    botonSubmenuHablando.addEventListener('click', function () {
+      var abiertoHablando = elementoHablando.classList.toggle('submenu-abierto');
+      botonSubmenuHablando.setAttribute('aria-expanded', abiertoHablando);
+    });
+  }
+
   // Ofrece acceso directo a cada vía de ayuda desde "Qué hacemos".
   var enlaceQueHacemos = document.querySelector('.nav-principal a[href="que-hacemos.html"]');
   if (enlaceQueHacemos) {

@@ -1187,3 +1187,38 @@ p { margin-bottom: 1em; }
     display: none;
   }
 }
+
+.indice-rapido {
+  background-color: var(--color-fondo-alt);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2.5rem;
+}
+ 
+.indice-rapido ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+ 
+.indice-rapido a {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-acento);
+}
+ 
+.indice-rapido a:hover {
+  color: var(--color-primario);
+}
+ 
+/* Compensa la cabecera y el subnav fijos al saltar a un ancla, para que
+   el título no quede tapado justo debajo del menú */
+h2[id] {
+  scroll-margin-top: 7rem;
+}
+ 

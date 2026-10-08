@@ -79,16 +79,33 @@ document.addEventListener('DOMContentLoaded', function () {
   var barraSubnav = document.querySelector('.subnav .contenedor');
   if (barraSubnav) {
     var actualSubnav = barraSubnav.querySelector('[aria-current="page"]');
-    if (actualSubnav) {
-      var izquierda = actualSubnav.getBoundingClientRect().left - barraSubnav.getBoundingClientRect().left;
-      barraSubnav.scrollLeft += izquierda - (barraSubnav.clientWidth - actualSubnav.offsetWidth) / 2;
-    }
     var marcarDesplazamiento = function () {
       var resto = barraSubnav.scrollWidth - barraSubnav.clientWidth - barraSubnav.scrollLeft;
       barraSubnav.parentElement.classList.toggle('subnav-hay-mas', resto > 4);
       barraSubnav.parentElement.classList.toggle('subnav-hay-antes', barraSubnav.scrollLeft > 4);
     };
-    marcarDesplazamiento();
+    // Se desplaza solo lo justo para que la página actual quede a la vista
+    // (con un margen para que no quede bajo el degradado). Si ya cabe, no
+    // se mueve: así la ruta del principio ("Qué hacemos ›") sigue visible.
+    var mostrarActual = function () {
+      if (actualSubnav) {
+        var margen = 48;
+        var caja = barraSubnav.getBoundingClientRect();
+        var item = actualSubnav.getBoundingClientRect();
+        if (item.right > caja.right - margen) {
+          barraSubnav.scrollLeft += item.right - (caja.right - margen);
+        } else if (item.left < caja.left + margen) {
+          barraSubnav.scrollLeft -= (caja.left + margen) - item.left;
+        }
+      }
+      marcarDesplazamiento();
+    };
+    mostrarActual();
+    // La tipografía web llega después y ensancha las pastillas: se recalcula.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(mostrarActual);
+    }
+    window.addEventListener('load', mostrarActual);
     barraSubnav.addEventListener('scroll', marcarDesplazamiento, { passive: true });
     window.addEventListener('resize', marcarDesplazamiento);
   }

@@ -173,7 +173,8 @@ button:focus-visible {
 /* Pista visible de que el enlace sale de la web y abre otra pestaña.
    El aviso para lectores de pantalla lo añade scripts/build.py. */
 a[target="_blank"]:not(.logo-colaborador)::after {
-  content: " ↗";
+  /* espacio no separable: el icono nunca salta solo a otra línea */
+  content: "\00a0↗";
   font-size: 0.85em;
 }
 
@@ -1072,12 +1073,14 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem 1.5rem;
+  gap: 0.3rem 0.8rem;
   margin: 0;
   padding: 0;
 }
 
 .indice-rapido a {
+  display: inline-block;
+  padding: 0.35rem 0.5rem;
   font-family: var(--fuente-titulos);
   font-weight: 600;
   font-size: 0.95rem;
@@ -1981,10 +1984,15 @@ a.via-contacto-dato:focus-visible {
     justify-content: center;
   }
 
+  /* Mientras el hero muestre solo el logo (ya visible en la cabecera), en
+     móvil se oculta para que el mensaje y los botones salgan arriba. Una
+     foto real, sin esta clase, sí se muestra. */
   .hero-imagen-placeholder {
-    order: -1;
-    max-width: 320px;
-    margin: 0 auto;
+    display: none;
+  }
+
+  .hero-interior h1 {
+    font-size: 1.75rem;
   }
 
   .seccion {

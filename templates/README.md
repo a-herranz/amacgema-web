@@ -66,6 +66,10 @@ pages/
   como-ayudar/
     como-ayudar.html  como-ayudar-difunde.html
     como-ayudar-socias.html  como-ayudar-voluntaria.html
+    como-ayudar-empresas.html
+  legal/
+    aviso-legal.html  politica-privacidad.html  politica-cookies.html
+  404.html
 ```
 
 ## Para cambiar el navbar o el footer
@@ -165,6 +169,12 @@ Después de editar, ejecuta `python scripts/build.py` para regenerar.
   aviso para lectores de pantalla (el icono ↗ lo pone el CSS).
 - **Página 404**: `pages/404.html` se publica con una etiqueta `<base>`
   para que funcione en cualquier ruta inexistente.
+
+- **Aviso de datos pendientes**: si una página contiene un
+  `<mark class="pendiente">`, el build lo indica al terminar. Se usa en los
+  textos legales (`pages/legal/`) para los datos de la asociación que
+  faltan por confirmar (NIF, registro, piso o local, plazos de
+  conservación): no publiques la web sin rellenarlos.
 
 La hoja de estilos incluye además una versión para imprimir (sección 18).
 

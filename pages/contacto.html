@@ -101,22 +101,15 @@ nav: contacto.html
                     <p>Entérate de nuestras actividades y noticias en redes sociales.</p>
                 </div>
                 <div class="rejilla-redes">
-                    <!-- Widget oficial de Facebook (Page Plugin): no requiere token ni revisión de app -->
+                    <!-- Widget oficial de Facebook (Page Plugin). No se carga al abrir la
+                         página: Facebook instala cookies de seguimiento, y la ley exige
+                         consentimiento previo. js/script.js lo carga al pulsar el botón. -->
                     <div class="tarjeta tarjeta-red">
                         <h3>Facebook</h3>
-                        <div id="fb-root"></div>
-                        <script async defer crossorigin="anonymous"
-                            src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v19.0">
-                        </script>
-                        <div class="fb-page"
-                            data-href="https://www.facebook.com/amac.gema/"
-                            data-tabs="timeline"
-                            data-width="340"
-                            data-height="400"
-                            data-small-header="true"
-                            data-adapt-container-width="true"
-                            data-hide-cover="false"
-                            data-show-facepile="false">
+                        <div class="facebook-publicaciones" id="facebook-publicaciones" tabindex="-1">
+                            <p>Para ver aquí nuestras últimas publicaciones, se cargará contenido de Facebook, que puede instalar sus propias cookies. <a href="politica-cookies.html">Más información</a>.</p>
+                            <button class="boton boton-primario cargar-facebook" type="button">Ver publicaciones de Facebook</button>
+                            <p class="nota">O visita directamente <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">nuestra página de Facebook</a>.</p>
                         </div>
                     </div>
 

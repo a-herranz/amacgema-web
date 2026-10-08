@@ -48,6 +48,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Publicaciones de Facebook (página de Contacto): el widget instala
+  // cookies de Meta, así que solo se carga cuando la persona lo pide.
+  var botonFacebook = document.querySelector('.cargar-facebook');
+  if (botonFacebook) {
+    botonFacebook.addEventListener('click', function () {
+      var caja = document.getElementById('facebook-publicaciones');
+      caja.innerHTML =
+        '<div id="fb-root"></div>' +
+        '<div class="fb-page" data-href="https://www.facebook.com/amac.gema/"' +
+        ' data-tabs="timeline" data-width="340" data-height="400"' +
+        ' data-small-header="true" data-adapt-container-width="true"' +
+        ' data-hide-cover="false" data-show-facepile="false"></div>';
+      var sdk = document.createElement('script');
+      sdk.async = true;
+      sdk.defer = true;
+      sdk.crossOrigin = 'anonymous';
+      sdk.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v19.0';
+      document.body.appendChild(sdk);
+      // El botón desaparece al sustituir el contenido: el foco pasa a la caja
+      // para que quien navega con teclado no lo pierda.
+      caja.focus();
+    });
+  }
+
   // Submenú de sección: en móvil la barra es más ancha que la pantalla.
   // Se desplaza sola hasta la página actual (que si no podría quedar fuera
   // de la vista) y marca con una clase en qué lados quedan más opciones,

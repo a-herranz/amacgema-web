@@ -1624,6 +1624,20 @@ img.foto-proyecto-grande {
   margin-top: 1rem;
 }
 
+/* Recuadro previo al widget de Facebook: explica qué se cargará y deja
+   elegir. El widget solo aparece al pulsar el botón (js/script.js). */
+.facebook-publicaciones {
+  text-align: center;
+}
+
+.facebook-publicaciones .boton {
+  margin: 0.4rem 0 0.8rem;
+}
+
+.facebook-publicaciones:focus {
+  outline: none;
+}
+
 /* El widget de Facebook necesita su propio ancho fijo; centramos el contenedor */
 .fb-page {
   max-width: 100%;
@@ -1747,6 +1761,28 @@ a.via-contacto-dato:focus-visible {
   text-align: center;
   color: var(--color-primario-claro);
   font-size: 0.85rem;
+}
+
+.pie-legal {
+  margin: 0.6rem 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-primario-claro);
+}
+
+.pie .pie-legal a {
+  font-weight: 400;
+}
+
+/* Dato que falta por confirmar (textos legales): bien visible para que no
+   se publique sin rellenar. El build avisa de las páginas que lo contienen. */
+.pendiente {
+  background-color: var(--color-primario-claro);
+  color: var(--color-acento-oscuro);
+  border: 1px dashed var(--color-acento);
+  border-radius: 4px;
+  padding: 0 0.3rem;
+  font-weight: 600;
 }
 
 /* ==========================================================================
@@ -2122,6 +2158,7 @@ a.via-contacto-dato:focus-visible {
 
   .pie-columna p,
   .pie small,
+  .pie-legal,
   .pie a {
     color: #000;
   }

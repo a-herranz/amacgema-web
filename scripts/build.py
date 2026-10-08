@@ -226,6 +226,9 @@ def build():
             removed.append(fname)
 
     print(f"Generadas {len(built)} páginas.")
+    pendientes = sorted(f for f in built if 'class="pendiente"' in open(f, encoding="utf-8").read())
+    if pendientes:
+        print("AVISO: datos marcados como pendientes en: " + ", ".join(pendientes))
     if removed:
         print(f"Eliminadas {len(removed)} páginas huérfanas: {', '.join(sorted(removed))}")
 

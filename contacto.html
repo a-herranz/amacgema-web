@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contacto | AMAC-GEMA</title>
-  <meta name="description" content="Ponte en contacto con AMAC-GEMA: dirección, teléfono y formulario para pedir información o apoyo.">
+  <meta name="description" content="Ponte en contacto con AMAC-GEMA: teléfono, correo electrónico y cómo llegar a nuestra sede en la Plaza del Pilar de Zaragoza.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
   <meta property="og:site_name" content="AMAC-GEMA">
   <meta property="og:title" content="Contacto | AMAC-GEMA">
-  <meta property="og:description" content="Ponte en contacto con AMAC-GEMA: dirección, teléfono y formulario para pedir información o apoyo.">
+  <meta property="og:description" content="Ponte en contacto con AMAC-GEMA: teléfono, correo electrónico y cómo llegar a nuestra sede en la Plaza del Pilar de Zaragoza.">
   <meta property="og:url" content="https://a-herranz.github.io/amacgema-web/contacto.html">
   <meta property="og:image" content="https://a-herranz.github.io/amacgema-web/img/compartir.jpg">
   <meta property="og:image:width" content="1200">
@@ -26,12 +26,12 @@
   <header class="cabecera">
     <div class="contenedor">
       <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
-      <!-- Solo visible en móvil (ver sección 17 RESPONSIVE del CSS): en
-           escritorio el menú está siempre visible y este botón no se
-           muestra. -->
       <!-- Solo en móvil: con el menú plegado, llamar debe seguir estando a un
            toque, no dentro de la hamburguesa ni al final de la página. -->
       <a class="boton-llamar-movil" href="tel:+34976297764"><span aria-hidden="true">📞</span> Llamar</a>
+      <!-- Solo visible en móvil (ver sección 16 RESPONSIVE del CSS): en
+           escritorio el menú está siempre visible y este botón no se
+           muestra. -->
       <button class="boton-menu-movil" type="button" aria-expanded="false" aria-controls="menu-principal">
         <span class="sr-only">Abrir menú</span>
         <span class="icono-menu-movil" aria-hidden="true">☰</span>
@@ -60,7 +60,7 @@
             </div>
         </section>
 
-        <!-- Vías de contacto directo, antes del formulario: mucha gente que
+        <!-- Vías de contacto directo, antes del correo: mucha gente que
              llega aquí prefiere llamar a escribir, y antes tenía que bajar
              hasta el pie de página para encontrar el teléfono. -->
         <section class="seccion">
@@ -75,7 +75,7 @@
                     <li>
                         <span class="via-contacto-icono" aria-hidden="true">✉️</span>
                         <p class="via-contacto-etiqueta">Escríbenos</p>
-                        <a class="via-contacto-dato" href="mailto:amacgema@gmail.com">amacgema@gmail.com</a>
+                        <a class="via-contacto-dato" href="mailto:amacgema@gmail.com?subject=%5BWeb%5D%20Consulta">amacgema@gmail.com</a>
                         <p class="nota">Te respondemos lo antes posible</p>
                     </li>
                     <li>
@@ -91,25 +91,18 @@
         <section class="seccion seccion-alt">
             <div class="contenedor dos-columnas">
                 <div>
-                    <h2>O déjanos un mensaje</h2>
-                    <p>Si prefieres escribir, cuéntanos qué necesitas y nos pondremos en contacto contigo. No hace falta que des detalles: con saber cómo localizarte es suficiente.</p>
+                    <h2>O escríbenos un correo</h2>
+                    <p>Si prefieres escribir, pulsa el botón: se abrirá tu correo con un mensaje ya preparado. Solo tienes que contarnos qué necesitas y cómo localizarte; no hace falta que des detalles.</p>
                     <p class="nota">No incluyas información médica sensible. Para una urgencia sanitaria, contacta con los servicios de emergencia.</p>
                 </div>
-                <form class="formulario" action="#" method="post">
-                    <label for="nombre">Nombre</label>
-                    <input id="nombre" name="nombre" type="text" autocomplete="name" required>
-
-                    <label for="correo">Correo electrónico <span class="etiqueta-opcional">(opcional si nos dejas el teléfono)</span></label>
-                    <input id="correo" name="correo" type="email" autocomplete="email">
-
-                    <label for="telefono">Teléfono <span class="etiqueta-opcional">(opcional si nos dejas el correo)</span></label>
-                    <input id="telefono" name="telefono" type="tel" autocomplete="tel">
-
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
-
-                    <button class="boton boton-primario" type="submit">Enviar mensaje</button>
-                </form>
+                <!-- Sin formulario: GitHub Pages no puede procesarlo y la web no custodia
+                     datos. El botón abre el correo de la persona con asunto y plantilla. -->
+                <div class="bloque-destacado">
+                    <p class="etiqueta">Correo electrónico</p>
+                    <p>El asunto irá marcado con <strong>[Web]</strong> para que podamos atenderte antes.</p>
+                    <a class="boton boton-primario" href="mailto:amacgema@gmail.com?subject=%5BWeb%5D%20Consulta%20desde%20la%20p%C3%A1gina%20de%20contacto&amp;body=Hola%3A%0D%0A%0D%0A%5BCu%C3%A9ntanos%20aqu%C3%AD%20qu%C3%A9%20necesitas%5D%0D%0A%0D%0ANombre%3A%0D%0ATel%C3%A9fono%20%28si%20prefieres%20que%20te%20llamemos%29%3A%0D%0A%0D%0APor%20favor%2C%20no%20incluyas%20informaci%C3%B3n%20m%C3%A9dica%20sensible.%0D%0A">Escribir un correo</a>
+                    <p class="nota">Si no se abre tu programa de correo, escríbenos directamente a <a href="mailto:amacgema@gmail.com?subject=%5BWeb%5D%20Consulta">amacgema@gmail.com</a>.</p>
+                </div>
             </div>
         </section>
 
@@ -198,7 +191,7 @@
         <p class="pie-titulo">Contacto</p>
         <p>Plaza del Pilar, 14 · 50003 Zaragoza</p>
         <p><a href="tel:+34976297764">976 297 764</a></p>
-        <p><a href="mailto:amacgema@gmail.com">amacgema@gmail.com</a></p>
+        <p><a href="mailto:amacgema@gmail.com?subject=%5BWeb%5D%20Consulta">amacgema@gmail.com</a></p>
       </div>
       <div class="pie-columna">
         <p class="pie-titulo">Síguenos</p>

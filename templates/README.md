@@ -166,7 +166,7 @@ Después de editar, ejecuta `python scripts/build.py` para regenerar.
 - **Página 404**: `pages/404.html` se publica con una etiqueta `<base>`
   para que funcione en cualquier ruta inexistente.
 
-La hoja de estilos incluye además una versión para imprimir (sección 19).
+La hoja de estilos incluye además una versión para imprimir (sección 18).
 
 ## Requisitos
 

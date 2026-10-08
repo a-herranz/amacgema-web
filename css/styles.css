@@ -38,11 +38,10 @@
      12. Constelaciones ("Qué hacemos")
      13. Cronología ("Historia")
      14. Espacios, proyectos y redes
-     15. Formulario
-     16. Pie de página
-     17. Responsive
-     18. Movimiento reducido
-     19. Impresión
+     15. Pie de página
+     16. Responsive
+     17. Movimiento reducido
+     18. Impresión
    ========================================================================== */
 
 /* ==========================================================================
@@ -305,7 +304,7 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 }
 
 /* Botón de menú para móvil: oculto en escritorio, donde el menú ya está
-   siempre visible. Ver la sección 17 (RESPONSIVE) para su aparición y el
+   siempre visible. Ver la sección 16 (RESPONSIVE) para su aparición y el
    comportamiento del panel desplegable. */
 .boton-llamar-movil {
   display: none;
@@ -885,6 +884,10 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 .tarjeta--secundario { border-top-color: var(--color-secundario); }
 
 .nota { color: var(--color-texto-suave); font-size: 0.92rem; }
+
+.bloque-destacado .boton + .nota {
+  margin-top: 1rem;
+}
 
 /* Bloque de cierre de "Cómo ayudar" */
 .ayuda-destacada {
@@ -1493,7 +1496,7 @@ a.satelite-caja:focus-visible {
 
 /* La fila "invertida" coloca el texto primero en el HTML, así que en
    pantallas grandes ya queda texto-izquierda / imagen-derecha. Solo
-   necesita reglas propias para el orden en móvil (sección 17). */
+   necesita reglas propias para el orden en móvil (sección 16). */
 
 .espacio-imagen {
   width: 100%;
@@ -1683,52 +1686,8 @@ a.via-contacto-dato:focus-visible {
   margin: 0.4rem 0 0;
 }
 
-.etiqueta-opcional {
-  font-family: var(--fuente-texto);
-  font-weight: 400;
-  font-size: 0.85rem;
-  color: var(--color-texto-suave);
-  text-transform: none;
-  letter-spacing: normal;
-}
-
 /* ==========================================================================
-   15. FORMULARIO
-   ========================================================================== */
-
-.formulario {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.formulario label {
-  display: block;
-  font-family: var(--fuente-titulos);
-  font-weight: 600;
-  margin-bottom: 0.4rem;
-  margin-top: 1.2rem;
-}
-
-.formulario input,
-.formulario textarea {
-  width: 100%;
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio-chico);
-  font-family: var(--fuente-texto);
-  font-size: 1rem;
-  background-color: var(--color-blanco);
-}
-
-.formulario input:focus,
-.formulario textarea:focus {
-  outline: none;
-  border-color: var(--color-primario);
-  box-shadow: var(--sombra-foco);
-}
-
-/* ==========================================================================
-   16. PIE DE PÁGINA
+   15. PIE DE PÁGINA
    Tono cálido (ciruela de la paleta) en vez de gris casi negro: el pie es
    donde mucha gente busca el teléfono o la dirección como último recurso,
    y debe sentirse parte de la misma web cercana.
@@ -1791,7 +1750,7 @@ a.via-contacto-dato:focus-visible {
 }
 
 /* ==========================================================================
-   17. RESPONSIVE
+   16. RESPONSIVE
    Un único bloque por punto de ruptura, de mayor a menor.
    ========================================================================== */
 
@@ -2062,7 +2021,7 @@ a.via-contacto-dato:focus-visible {
 }
 
 /* ==========================================================================
-   18. MOVIMIENTO REDUCIDO
+   17. MOVIMIENTO REDUCIDO
    Respeta la preferencia del sistema para quien marea el movimiento.
    ========================================================================== */
 
@@ -2080,7 +2039,7 @@ a.via-contacto-dato:focus-visible {
 }
 
 /* ==========================================================================
-   19. IMPRESIÓN
+   18. IMPRESIÓN
    Mucha gente imprime la información médica para llevarla a la consulta.
    Se imprime solo el contenido, en negro sobre blanco, sin menús ni
    botones, y con el pie reducido para que la hoja lleve el contacto.

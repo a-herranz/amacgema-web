@@ -1,48 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Cáncer por localización | Cáncer ginecológico | AMAC-GEMA</title>
-        <meta name="description" content="Cáncer de ovario, de útero (endometrio y cuello/cérvix), de vagina y de vulva: causas, síntomas, diagnóstico y tratamiento.">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body>
-        <a class="enlace-saltar" href="#contenido-principal">Saltar al contenido principal</a>
-        <header class="cabecera">
-            <div class="contenedor">
-                <a class="logo" href="index.html">
-                    <img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA">
-                </a>
-                <nav class="nav-principal" aria-label="Menú principal">
-                    <ul>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="quienes-somos.html">Quiénes somos</a></li>
-                        <li><a href="que-hacemos.html">Qué hacemos</a></li>
-                        <li><a href="hablando-de-cancer.html" aria-current="page">Hablando de cáncer</a></li>
-                        <li><a href="como-ayudar.html">Cómo ayudar</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-
-        <!-- Submenú de navegación entre las páginas del apartado -->
-        <nav class="subnav" aria-label="Secciones de cáncer ginecológico">
-            <div class="contenedor">
-                <ul>
-                    <li><a href="cancer-ginecologico.html">Cáncer ginecológico</a></li>
-                    <li><a href="anatomia-genital.html">Anatomía</a></li>
-                    <li><a href="cancer-por-localizacion.html" aria-current="page">Cáncer por localización</a></li>
-                    <li><a href="prevencion-diagnostico-precoz-ginecologico.html">Prevención y diagnóstico precoz</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <main id="contenido-principal">
-            <section class="hero hero-interior">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cáncer por localización | Cáncer ginecológico | AMAC-GEMA</title>
+  <meta name="description" content="Cáncer de ovario, de útero (endometrio y cuello/cérvix), de vagina y de vulva: causas, síntomas, diagnóstico y tratamiento.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="AMAC-GEMA">
+  <meta property="og:title" content="Cáncer por localización | Cáncer ginecológico | AMAC-GEMA">
+  <meta property="og:description" content="Cáncer de ovario, de útero (endometrio y cuello/cérvix), de vagina y de vulva: causas, síntomas, diagnóstico y tratamiento.">
+  <meta property="og:url" content="https://a-herranz.github.io/amacgema-web/cancer-por-localizacion.html">
+  <meta property="og:image" content="https://a-herranz.github.io/amacgema-web/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+      <!-- Solo visible en móvil (ver sección 17 RESPONSIVE del CSS): en
+           escritorio el menú está siempre visible y este botón no se
+           muestra. -->
+      <!-- Solo en móvil: con el menú plegado, llamar debe seguir estando a un
+           toque, no dentro de la hamburguesa ni al final de la página. -->
+      <a class="boton-llamar-movil" href="tel:+34976297764"><span aria-hidden="true">📞</span> Llamar</a>
+      <button class="boton-menu-movil" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="icono-menu-movil" aria-hidden="true">☰</span>
+      </button>
+      <nav class="nav-principal" id="menu-principal" aria-label="Menú principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a href="que-hacemos.html">Qué hacemos</a></li>
+          <li><a href="hablando-de-cancer.html" aria-current="page">Hablando de cáncer</a></li>
+          <li><a href="como-ayudar.html">Cómo ayudar</a></li>
+          <!-- Botón distinto del resto: en cualquier página, la acción de
+               contactar debe ser la más visible, no un enlace más entre
+               otros seis. -->
+          <li class="nav-cta"><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <nav class="subnav" aria-label="Secciones de cáncer ginecológico">
+    <div class="contenedor">
+      <ul>
+        <li class="subnav-nivel"><a href="hablando-de-cancer.html">Hablando de cáncer</a></li>
+        <li class="subnav-nivel"><a href="cancer-ginecologico.html">Cáncer ginecológico</a></li>
+        <li><a href="anatomia-genital.html">Anatomía</a></li>
+        <li><a href="cancer-por-localizacion.html" aria-current="page">Cáncer por localización</a></li>
+        <li><a href="prevencion-diagnostico-precoz-ginecologico.html">Prevención<span class="solo-escritorio"> y diagnóstico precoz</span></a></li>
+        <li class="subnav-aparte"><a href="glosario.html"><span aria-hidden="true">📖</span> Glosario</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main id="contenido-principal">
+<section class="hero hero-interior">
                 <div class="contenedor">
                     <p class="sobrelinea">Hablando de Cáncer · Cáncer ginecológico</p>
                     <h1>Cáncer por localización</h1>
@@ -51,7 +73,12 @@
             </section>
 
             <section class="seccion">
-                <div class="contenedor">
+                <div class="contenedor contenido-lectura">
+
+                    <div class="bloque-destacado" style="margin-bottom: 2rem;">
+                        <p class="etiqueta">Lo esencial</p>
+                        <p>Esta página explica los cuatro tipos de cáncer ginecológico según dónde aparecen: ovario, útero (<a class="termino-glosario" href="glosario.html#endometrio" title="Ver en el glosario">endometrio</a> y cuello), vagina y vulva. Usa el índice de abajo para ir directamente al que te interese — no hace falta leerla entera. Si te encuentras con alguna palabra que no entiendes, consulta el <a href="glosario.html">glosario de términos</a>.</p>
+                    </div>
 
                     <!-- Índice de salto rápido, dado lo extenso del contenido -->
                     <nav class="indice-rapido" aria-label="Índice de esta página">
@@ -70,19 +97,19 @@
                     <p>Desconocidas; solo en un 5-10% existe un factor hereditario. Se habla de 3 líneas hereditarias:</p>
                     <ul class="lista-apoyo">
                         <li>Familias con historia de tumores de ovario únicamente.</li>
-                        <li>Familias con historia de tumores de mama y ovario, asociados a mutaciones del gen supresor de tumores BRCA-1 y BRCA-2 (genes que sintetizan proteínas que reparan el ADN, manteniendo la integridad génica).</li>
+                        <li>Familias con historia de tumores de mama y ovario, asociados a mutaciones del gen supresor de tumores <a class="termino-glosario" href="glosario.html#brca" title="Ver en el glosario">BRCA</a>-1 y BRCA-2 (genes que sintetizan proteínas que reparan el ADN, manteniendo la integridad génica).</li>
                         <li>Familias con cánceres, tanto en hombres como en mujeres, de estómago, colon, mama, ovario, tiroides, endometrio y sarcomas.</li>
                     </ul>
-                    <p>Como factores asociados se habla de la nuliparidad y de los tratamientos estimulantes de la fertilidad, mientras que los tratamientos con anticonceptivos orales podrían representar un factor protector.</p>
+                    <p>Como factores asociados se habla de la <a class="termino-glosario" href="glosario.html#nuliparidad" title="Ver en el glosario">nuliparidad</a> y de los tratamientos estimulantes de la fertilidad, mientras que los tratamientos con anticonceptivos orales podrían representar un factor protector.</p>
 
                     <h3>Síntomas</h3>
                     <ul class="lista-apoyo">
-                        <li>Distensión abdominal, muchas veces por ascitis.</li>
-                        <li>Molestias abdominales inespecíficas (dispepsias, gases). El dolor puede estar producido en las fases iniciales por distensión del ovario, necrosis, torsión o rotura.</li>
+                        <li>Distensión abdominal, muchas veces por <a class="termino-glosario" href="glosario.html#ascitis" title="Ver en el glosario">ascitis</a>.</li>
+                        <li>Molestias abdominales inespecíficas (<a class="termino-glosario" href="glosario.html#dispepsia" title="Ver en el glosario">dispepsias</a>, gases). El dolor puede estar producido en las fases iniciales por distensión del ovario, necrosis, torsión o rotura.</li>
                         <li>Masa pélvica.</li>
                         <li>Anorexia, pérdida de peso, sensación de plenitud tras pequeñas ingestas.</li>
-                        <li>Trastornos menstruales: amenorrea, metrorragias (hemorragia vaginal anormal).</li>
-                        <li>Diuresis frecuente, diarrea o estreñimiento.</li>
+                        <li>Trastornos menstruales: <a class="termino-glosario" href="glosario.html#amenorrea" title="Ver en el glosario">amenorrea</a>, <a class="termino-glosario" href="glosario.html#metrorragia" title="Ver en el glosario">metrorragias</a> (hemorragia vaginal anormal).</li>
+                        <li><a class="termino-glosario" href="glosario.html#diuresis" title="Ver en el glosario">Diuresis</a> frecuente, diarrea o estreñimiento.</li>
                         <li>Derrame pleural, sensación de falta de aire.</li>
                     </ul>
 
@@ -91,10 +118,10 @@
                         <li><strong>Evaluación general:</strong> síntomas, signos, analítica y radiografía de tórax.</li>
                         <li><strong>Ecografía abdominal y vaginal:</strong> valora ovarios, tumor y líquido libre en abdomen.</li>
                         <li><strong>Marcador tumoral CA-125:</strong> anticuerpo generado contra antígenos de algunas células epiteliales, que puede estar aumentado sin que exista un tumor ovárico (enfermedad inflamatoria pélvica, menstruación, hepatitis, diabetes mal controlada, insuficiencia cardiaca, diverticulitis, pericarditis, periartritis nodosa...). Puede ser útil en el seguimiento de la enfermedad.</li>
-                        <li><strong>TAC o escáner:</strong> tamaño y localización del tumor, ascitis, metástasis viscerales en hígado y bazo, implantes peritoneales mayores de 2 cm.</li>
-                        <li><strong>Paracentesis:</strong> extracción de líquido acumulado en el abdomen, para investigar marcadores tumorales y buscar células malignas.</li>
-                        <li><strong>Laparoscopia exploradora:</strong> introducción por el ombligo de un tubo flexible con videocámara para visualizar el interior del abdomen en un monitor. Requiere anestesia general y permite tomar muestras.</li>
-                        <li><strong>Laparotomía:</strong> la prueba diagnóstica por excelencia ante la sospecha, con fines diagnósticos, terapéuticos y de estadificación.</li>
+                        <li><strong>TAC o escáner:</strong> tamaño y localización del tumor, ascitis, metástasis viscerales en hígado y bazo, implantes <a class="termino-glosario" href="glosario.html#peritoneal" title="Ver en el glosario">peritoneales</a> mayores de 2 cm.</li>
+                        <li><strong><a class="termino-glosario" href="glosario.html#paracentesis" title="Ver en el glosario">Paracentesis</a>:</strong> extracción de líquido acumulado en el abdomen, para investigar marcadores tumorales y buscar células malignas.</li>
+                        <li><strong><a class="termino-glosario" href="glosario.html#laparoscopia" title="Ver en el glosario">Laparoscopia</a> exploradora:</strong> introducción por el ombligo de un tubo flexible con videocámara para visualizar el interior del abdomen en un monitor. Requiere anestesia general y permite tomar muestras.</li>
+                        <li><strong><a class="termino-glosario" href="glosario.html#laparotomia" title="Ver en el glosario">Laparotomía</a>:</strong> la prueba diagnóstica por excelencia ante la sospecha, con fines diagnósticos, terapéuticos y de <a class="termino-glosario" href="glosario.html#estadificacion" title="Ver en el glosario">estadificación</a>.</li>
                     </ul>
                     <p>La estadificación es siempre quirúrgica, realizada por un cirujano ginecológico experto en cáncer de ovario, pues precisa la visualización directa y minuciosa de toda la cavidad abdominal. En una primera aproximación se extirpa el ovario afectado y se remite a anatomía patológica; si el patólogo confirma el cáncer, se prosigue con la cirugía terapéutica y de estadificación.</p>
 
@@ -103,20 +130,20 @@
                         <li><strong>Local, por invasión directa:</strong> trompa, útero, vejiga y recto.</li>
                         <li><strong>Diseminación peritoneal:</strong> se desprenden células del ovario y se produce una siembra en el peritoneo (membrana que envuelve las vísceras abdominales).</li>
                         <li><strong>Diseminación linfática:</strong> hacia ganglios de la pelvis y de la arteria aorta.</li>
-                        <li><strong>Diseminación hematógena:</strong> hacia hígado, hueso y pulmón.</li>
+                        <li><strong>Diseminación <a class="termino-glosario" href="glosario.html#hematogena" title="Ver en el glosario">hematógena</a>:</strong> hacia hígado, hueso y pulmón.</li>
                     </ul>
 
                     <h3>Tipos de tumores</h3>
                     <p><strong>Epiteliales:</strong> representan entre el 85 y el 90% de los tumores de ovario. Si son de baja malignidad, se habla de tumores borderline.</p>
                     <ul class="lista-apoyo">
-                        <li><strong>Serosos (adenocarcinomas):</strong> los más frecuentes, alcanzan tamaños medios de 15 cm.</li>
+                        <li><strong>Serosos (<a class="termino-glosario" href="glosario.html#adenocarcinoma" title="Ver en el glosario">adenocarcinomas</a>):</strong> los más frecuentes, alcanzan tamaños medios de 15 cm.</li>
                         <li><strong>Mucinosos:</strong> compuestos por gran cantidad de moco. Representan un 15%, en mujeres jóvenes. Se diagnostican en estadios precoces y tienen mejor pronóstico que los serosos.</li>
                         <li><strong>Endometrioides:</strong> 15-25%; suelen ser bilaterales y sólidos.</li>
                         <li><strong>Tumores de células claras:</strong> 5%.</li>
                         <li>Indiferenciado o tumor de Brenner.</li>
                         <li>Carcinosarcoma.</li>
                     </ul>
-                    <p><strong>Germinales:</strong> tumores muy poco frecuentes. Se dan en la 2ª o 3ª década de la vida y son muy sensibles a la radioterapia y quimioterapia (teratomas, disgerminomas).</p>
+                    <p><strong>Germinales:</strong> tumores muy poco frecuentes. Se dan en la 2ª o 3ª década de la vida y son muy sensibles a la <a class="termino-glosario" href="glosario.html#radioterapia" title="Ver en el glosario">radioterapia</a> y <a class="termino-glosario" href="glosario.html#quimioterapia" title="Ver en el glosario">quimioterapia</a> (<a class="termino-glosario" href="glosario.html#teratoma" title="Ver en el glosario">teratomas</a>, <a class="termino-glosario" href="glosario.html#disgerminoma" title="Ver en el glosario">disgerminomas</a>).</p>
                     <p><strong>Estromales:</strong> todavía más raros.</p>
 
                     <h3>Estadios</h3>
@@ -135,15 +162,15 @@
                         <li>Estadio tumoral y volumen antes de la laparotomía.</li>
                         <li>Grado de diferenciación.</li>
                         <li>Histología: peor pronóstico en los mucinosos y los de células claras.</li>
-                        <li>Residuos tumorales menores de 2 cm tras la cirugía citorreductora.</li>
+                        <li>Residuos tumorales menores de 2 cm tras la cirugía <a class="termino-glosario" href="glosario.html#citorreductora" title="Ver en el glosario">citorreductora</a>.</li>
                         <li>Condiciones generales de la paciente: edad, estado general.</li>
                     </ul>
 
                     <h3>Tratamiento</h3>
                     <p><strong>1. Cirugía:</strong> diagnóstica o terapéutica. Puede ser conservadora (solo un ovario, si el tumor es poco agresivo, IA, y la mujer es joven y quiere conservar la fertilidad) o citorreductora (quitar una buena parte del tumor para que la quimioterapia sea más efectiva).</p>
-                    <p>En estadios iniciales: extracción del ovario afectado y estudio anatomopatológico. Si se confirma el cáncer: extirpación del otro ovario y del útero, extirpación de la grasa existente en la parte anterior del intestino, toma de muestras de zonas sospechosas y biopsia de ganglios linfáticos.</p>
+                    <p>En estadios iniciales: extracción del ovario afectado y estudio <a class="termino-glosario" href="glosario.html#anatomopatologico" title="Ver en el glosario">anatomopatológico</a>. Si se confirma el cáncer: extirpación del otro ovario y del útero, extirpación de la grasa existente en la parte anterior del intestino, toma de muestras de zonas sospechosas y <a class="termino-glosario" href="glosario.html#biopsia" title="Ver en el glosario">biopsia</a> de ganglios linfáticos.</p>
                     <p>En estadios avanzados, el tratamiento quirúrgico es similar, pero al haber más masa tumoral visible se requiere una cirugía citorreductora. Si se deja menos de 1 cm de masa tumoral, mejora el pronóstico.</p>
-                    <p><strong>2. Quimioterapia:</strong> complementaria a la cirugía. Si el tumor es quimio-sensible, se aplica paclitaxel más carboplatino.</p>
+                    <p><strong>2. Quimioterapia:</strong> complementaria a la cirugía. Si el tumor es quimio-sensible, se aplica <a class="termino-glosario" href="glosario.html#paclitaxel" title="Ver en el glosario">paclitaxel</a> más <a class="termino-glosario" href="glosario.html#carboplatino" title="Ver en el glosario">carboplatino</a>.</p>
                     <p><strong>3. Tratamiento de las recaídas:</strong> depende de la sensibilidad o resistencia al platino, y del tiempo libre de tratamiento (más de 6 meses). A mayor intervalo, mayor sensibilidad al platino, por lo que está indicada la quimioterapia. Si es resistente al platino, se hace control de síntomas, con una quimioterapia cómoda en equilibrio con la respuesta y las preferencias de la paciente.</p>
 
                     <!-- ==================== 2. CÁNCER DE ÚTERO ==================== -->
@@ -152,7 +179,7 @@
                     <h3>Anatomía</h3>
                     <p>Es la parte del aparato genital femenino encargada de albergar el feto durante la gestación. Está situado en la pelvis, por detrás de la vejiga y por delante del recto.</p>
                     <p>Tiene forma de pera invertida, con dos partes: la más estrecha, que asoma en la vagina, es el cuello o cérvix, y la más grande es el cuerpo. Mide unos 7 cm de largo.</p>
-                    <p>Está formado por distintas capas: la interna es una mucosa llamada endometrio, y otra más externa, muscular y muy potente, llamada miometrio, encargada de realizar el trabajo del parto en el momento del alumbramiento.</p>
+                    <p>Está formado por distintas capas: la interna es una mucosa llamada endometrio, y otra más externa, muscular y muy potente, llamada <a class="termino-glosario" href="glosario.html#miometrio" title="Ver en el glosario">miometrio</a>, encargada de realizar el trabajo del parto en el momento del alumbramiento.</p>
 
                     <h3>Funciones</h3>
                     <p>Durante la primera parte del ciclo menstrual, el ovario segrega estrógenos, encargados de engrosar el endometrio para poder albergar al embrión en caso de embarazo.</p>
@@ -164,13 +191,13 @@
                     <ul class="lista-apoyo">
                         <li>Obesidad.</li>
                         <li>Infertilidad.</li>
-                        <li>Menarquia temprana y menopausia tardía.</li>
+                        <li><a class="termino-glosario" href="glosario.html#menarquia" title="Ver en el glosario">Menarquia</a> temprana y menopausia tardía.</li>
                         <li>Ovarios poliquísticos.</li>
                         <li>Tumores de ovario productores de estrógenos.</li>
                         <li>Tratamiento hormonal sustitutivo (THS) solo a base de estrógenos.</li>
                         <li>Antecedentes de cáncer de mama, ovario o colon.</li>
                     </ul>
-                    <p>También la combinación de hipertensión, diabetes y obesidad; la radiación de la pelvis; el tratamiento con tamoxifeno; y el síndrome de cáncer colorrectal hereditario no polipósico, que se caracteriza por una susceptibilidad genética a padecer enfermedades malignas de colon, endometrio y ovario (0,5-1,4%).</p>
+                    <p>También la combinación de hipertensión, diabetes y obesidad; la radiación de la pelvis; el tratamiento con <a class="termino-glosario" href="glosario.html#tamoxifeno" title="Ver en el glosario">tamoxifeno</a>; y el síndrome de cáncer colorrectal hereditario no polipósico, que se caracteriza por una susceptibilidad genética a padecer enfermedades malignas de colon, endometrio y ovario (0,5-1,4%).</p>
 
                     <p><strong>Síntomas:</strong></p>
                     <ul class="lista-apoyo">
@@ -192,7 +219,7 @@
 
                     <p><strong>Diagnóstico:</strong></p>
                     <ul class="lista-apoyo">
-                        <li>Exploración ginecológica: palpación y espéculo.</li>
+                        <li>Exploración ginecológica: palpación y <a class="termino-glosario" href="glosario.html#especulo" title="Ver en el glosario">espéculo</a>.</li>
                         <li>Ecografía vaginal.</li>
                         <li>Biopsia con cánula.</li>
                         <li>Histeroscopia: visualización del útero mediante un endoscopio flexible con luz, que permite tomar muestras de zonas sospechosas.</li>
@@ -203,7 +230,7 @@
                     <p><strong>Tipos:</strong></p>
                     <ul class="lista-apoyo">
                         <li><strong>Tipo I (adenocarcinoma):</strong> se origina en el endometrio, es el más frecuente (80%), de bajo grado tumoral, con crecimiento favorecido por la influencia estrogénica.</li>
-                        <li><strong>Tipo II:</strong> de mayor grado, no estrógeno-dependiente: carcinoma escamoso, mucinoso, de células claras, seroso, microcítico e indiferenciado.</li>
+                        <li><strong>Tipo II:</strong> de mayor grado, no estrógeno-dependiente: <a class="termino-glosario" href="glosario.html#carcinoma-escamoso" title="Ver en el glosario">carcinoma escamoso</a>, mucinoso, de células claras, seroso, microcítico e indiferenciado.</li>
                         <li><strong>Sarcoma:</strong> se origina en las fibras musculares del miometrio. Es raro, alrededor de un 4% de los tumores del cuerpo del útero.</li>
                     </ul>
 
@@ -212,22 +239,22 @@
                     <p><strong>Estadios:</strong></p>
                     <ul class="lista-apoyo">
                         <li><strong>Estadio I:</strong> solo en el útero, no afecta a los ganglios linfáticos de la pelvis (IA: solo el endometrio; IB: invadido menos del 50% del miometrio; IC: invadido más del 50%).</li>
-                        <li><strong>Estadio II:</strong> se ha extendido al cuello (IIA: afecta el endocérvix; IIB: afecta el estroma cervical).</li>
-                        <li><strong>Estadio III:</strong> afecta otras estructuras fuera del útero, pero sigue en la pelvis: ovarios, vagina, ganglios (IIIA: serosa, anejos o citología peritoneal positiva; IIIB: metástasis vaginal; IIIC: ganglios linfáticos pélvicos o paraaórticos).</li>
+                        <li><strong>Estadio II:</strong> se ha extendido al cuello (IIA: afecta el endocérvix; IIB: afecta el <a class="termino-glosario" href="glosario.html#estroma" title="Ver en el glosario">estroma</a> cervical).</li>
+                        <li><strong>Estadio III:</strong> afecta otras estructuras fuera del útero, pero sigue en la pelvis: ovarios, vagina, ganglios (IIIA: serosa, anejos o citología peritoneal positiva; IIIB: metástasis vaginal; IIIC: ganglios linfáticos pélvicos o <a class="termino-glosario" href="glosario.html#paraaortico" title="Ver en el glosario">paraaórticos</a>).</li>
                         <li><strong>Estadio IV:</strong> afecta al recto y la vejiga (IVA) u órganos más distales (IVB).</li>
                     </ul>
 
                     <p><strong>Tratamientos:</strong></p>
                     <ul class="lista-apoyo">
-                        <li><strong>Quirúrgico:</strong> exploración exhaustiva de pelvis y abdomen, citología de lavado peritoneal, histerectomía total con anexectomía, disección de ganglios pélvicos y paraaórticos, resección de metástasis.</li>
+                        <li><strong>Quirúrgico:</strong> exploración exhaustiva de pelvis y abdomen, citología de lavado peritoneal, <a class="termino-glosario" href="glosario.html#histerectomia" title="Ver en el glosario">histerectomía</a> total con <a class="termino-glosario" href="glosario.html#anexectomia" title="Ver en el glosario">anexectomía</a>, disección de ganglios pélvicos y paraaórticos, resección de metástasis.</li>
                         <li><strong>Radioterapia:</strong> su indicación depende del grado histológico, la profundidad de invasión del miometrio y la afectación de ganglios y/o del estroma cervical.</li>
-                        <li><strong>Hormonoterapia:</strong> progesterona y derivados. Indicada en enfermedad avanzada y con receptores hormonales positivos; no se ha demostrado su utilidad en estadios avanzados.</li>
-                        <li><strong>Quimioterapia:</strong> en estadios III y IV con enfermedad residual menor de 2 cm (cisplatino + adriamicina), o en enfermedad metastásica no subsidiaria de hormonoterapia (cisplatino + adriamicina + taxol).</li>
+                        <li><strong><a class="termino-glosario" href="glosario.html#hormonoterapia" title="Ver en el glosario">Hormonoterapia</a>:</strong> progesterona y derivados. Indicada en enfermedad avanzada y con receptores hormonales positivos; no se ha demostrado su utilidad en estadios avanzados.</li>
+                        <li><strong>Quimioterapia:</strong> en estadios III y IV con enfermedad residual menor de 2 cm (<a class="termino-glosario" href="glosario.html#cisplatino" title="Ver en el glosario">cisplatino</a> + <a class="termino-glosario" href="glosario.html#adriamicina" title="Ver en el glosario">adriamicina</a>), o en enfermedad metastásica no subsidiaria de hormonoterapia (cisplatino + adriamicina + taxol).</li>
                     </ul>
 
                     <h3>2.2. Cáncer de cuello de útero o de cérvix</h3>
                     <p>El cuello del útero tiene dos tipos de mucosas: el endocérvix, que recubre el canal interno del cuello, y el ectocérvix, que continúa con la mucosa de la vagina.</p>
-                    <p>Existen cambios premalignos en las células mucosas que se denominan CIN (Neoplasia Intraepitelial Cervical), o displasia.</p>
+                    <p>Existen cambios premalignos en las células mucosas que se denominan CIN (Neoplasia Intraepitelial Cervical), o <a class="termino-glosario" href="glosario.html#displasia" title="Ver en el glosario">displasia</a>.</p>
 
                     <p><strong>Formas de crecimiento:</strong> local (hacia vagina, ligamentos suspensorios, vejiga o recto), linfática y hematógena.</p>
 
@@ -245,7 +272,7 @@
 
                     <p><strong>Diagnóstico:</strong></p>
                     <ul class="lista-apoyo">
-                        <li>Exploración ginecológica: espéculo y colposcopia (visualización del cuello del útero y la vagina con el colposcopio, una especie de microscopio con luz potente que permite ver imágenes sospechosas y tomar biopsias).</li>
+                        <li>Exploración ginecológica: espéculo y <a class="termino-glosario" href="glosario.html#colposcopia" title="Ver en el glosario">colposcopia</a> (visualización del cuello del útero y la vagina con el colposcopio, una especie de microscopio con luz potente que permite ver imágenes sospechosas y tomar biopsias).</li>
                         <li>Detección de lesiones premalignas mediante el test de Papanicolau o citología cervicovaginal.</li>
                         <li>Otras pruebas: radiografía de tórax, urografía intravenosa, cistoscopia, rectoscopia, TAC, resonancia nuclear magnética.</li>
                     </ul>
@@ -254,14 +281,14 @@
 
                     <p><strong>Estadios:</strong></p>
                     <ul class="lista-apoyo">
-                        <li><strong>Estadio 0:</strong> carcinoma in situ o preinvasivo; el tumor es muy superficial y se limita a las células de la mucosa.</li>
+                        <li><strong>Estadio 0:</strong> carcinoma <a class="termino-glosario" href="glosario.html#in-situ" title="Ver en el glosario">in situ</a> o preinvasivo; el tumor es muy superficial y se limita a las células de la mucosa.</li>
                         <li><strong>Estadio I:</strong> el tumor está limitado al cuello del útero.</li>
                         <li><strong>Estadio II:</strong> se ha diseminado fuera del cérvix, invadiendo la vagina sin llegar al tercio inferior y/o los ligamentos laterales (parametrios), sin llegar a la pared de la pelvis.</li>
                         <li><strong>Estadio III:</strong> invade la parte más baja de la vagina, afecta a ganglios linfáticos próximos o alcanza los tejidos laterales del cérvix hasta la pared de la pelvis.</li>
                         <li><strong>Estadio IV:</strong> se ha extendido a órganos próximos o presenta metástasis.</li>
                     </ul>
 
-                    <p><strong>Tratamientos:</strong> las lesiones precursoras se tratan con la extirpación de un fragmento de cuello uterino (asa de diatermia, láser, criocoagulación o bisturí frío). El cáncer «in situ» se trata con una conización. En el cáncer invasor, el tratamiento depende del estadio: en fase inicial se extirpan el útero, las trompas, los ovarios, los tejidos adyacentes y los ganglios linfáticos regionales; en estadios más avanzados se recurre a radioterapia sola o combinada con quimioterapia.</p>
+                    <p><strong>Tratamientos:</strong> las lesiones precursoras se tratan con la extirpación de un fragmento de cuello uterino (asa de <a class="termino-glosario" href="glosario.html#diatermia" title="Ver en el glosario">diatermia</a>, láser, <a class="termino-glosario" href="glosario.html#criocoagulacion" title="Ver en el glosario">criocoagulación</a> o bisturí frío). El cáncer «in situ» se trata con una <a class="termino-glosario" href="glosario.html#conizacion" title="Ver en el glosario">conización</a>. En el cáncer invasor, el tratamiento depende del estadio: en fase inicial se extirpan el útero, las trompas, los ovarios, los tejidos adyacentes y los ganglios linfáticos regionales; en estadios más avanzados se recurre a radioterapia sola o combinada con quimioterapia.</p>
 
                     <!-- ==================== 3. CÁNCER DE VAGINA ==================== -->
                     <h2 id="cancer-vagina">3. Cáncer de vagina</h2>
@@ -274,24 +301,46 @@
 
                     <p><strong>Síntomas clínicos:</strong> picor, dolor o sensación de ardor en la vulva, generalmente asociado a una úlcera o tumor.</p>
 
-                    <p><strong>Diagnóstico:</strong> visualización de la vulva, observando coloración, estado trófico y la existencia de lesiones pigmentadas, úlceras, excrecencias y eczemas. En la zona sospechosa se realiza una citología por raspado y biopsia con anestesia local. Cuando invade el tejido subyacente, puede extenderse a otras zonas del cuerpo, generalmente a través de los ganglios linfáticos, siendo los de la ingle los primeros en afectarse.</p>
+                    <p><strong>Diagnóstico:</strong> visualización de la vulva, observando coloración, estado <a class="termino-glosario" href="glosario.html#trofico" title="Ver en el glosario">trófico</a> y la existencia de lesiones pigmentadas, úlceras, <a class="termino-glosario" href="glosario.html#excrecencia" title="Ver en el glosario">excrecencias</a> y eczemas. En la zona sospechosa se realiza una citología por raspado y biopsia con anestesia local. Cuando invade el tejido subyacente, puede extenderse a otras zonas del cuerpo, generalmente a través de los ganglios linfáticos, siendo los de la ingle los primeros en afectarse.</p>
 
-                    <p><strong>Tratamiento:</strong> depende de la fase de la enfermedad. En estadios iniciales, basta con extirpar la lesión y un margen de tejido sano alrededor. En fases más avanzadas es necesario extirpar toda la vulva (vulvectomía) y los ganglios regionales; tras la cirugía puede ser necesario recurrir a radioterapia y/o quimioterapia.</p>
+                    <p><strong>Tratamiento:</strong> depende de la fase de la enfermedad. En estadios iniciales, basta con extirpar la lesión y un margen de tejido sano alrededor. En fases más avanzadas es necesario extirpar toda la vulva (<a class="termino-glosario" href="glosario.html#vulvectomia" title="Ver en el glosario">vulvectomía</a>) y los ganglios regionales; tras la cirugía puede ser necesario recurrir a radioterapia y/o quimioterapia.</p>
 
                 </div>
             </section>
-        </main>
-
-        <footer class="pie">
-            <div class="contenedor">
-                <p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p>
-                <div class="redes">
-                    <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook</a>
-                    <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram</a>
-                </div>
-                <small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small>
-            </div>
-        </footer>
-        <script src="js/script.js"></script>
-    </body>
+    <section class="seccion seccion-alt cierre-apoyo">
+      <div class="contenedor centrado">
+        <h2>¿Te preocupa algo de lo que acabas de leer?</h2>
+        <p>No tienes que resolverlo sola. Escríbenos o llámanos: te escuchamos y te orientamos.</p>
+        <div class="cierre-apoyo-acciones">
+          <a class="boton boton-primario" href="contacto.html">Habla con nosotras</a>
+          <a class="enlace-telefono" href="tel:+34976297764"><span aria-hidden="true">📞</span> 976 297 764</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="pie">
+    <div class="contenedor pie-grid">
+      <div class="pie-columna">
+        <p class="pie-marca"><strong>AMAC-GEMA</strong></p>
+        <p>Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama. Acompañando desde 1994.</p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Contacto</p>
+        <p>Plaza del Pilar, 14 · 50003 Zaragoza</p>
+        <p><a href="tel:+34976297764">976 297 764</a></p>
+        <p><a href="mailto:amacgema@gmail.com">amacgema@gmail.com</a></p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Síguenos</p>
+        <div class="redes" aria-label="Redes sociales">
+          <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (se abre en otra pestaña)</span></a>
+          <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (se abre en otra pestaña)</span></a>
+        </div>
+        <p><a href="contacto.html">Contacta con nosotras →</a></p>
+      </div>
+    </div>
+    <small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
 </html>

@@ -1,130 +1,234 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMAC-GEMA | Acompañamiento e información</title>
-    <meta name="description" content="AMAC-GEMA acompaña e informa a mujeres afectadas por cáncer genital y de mama en Aragón.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMAC-GEMA | Acompañamiento e información</title>
+  <meta name="description" content="AMAC-GEMA acompaña e informa a mujeres afectadas por cáncer genital y de mama en Aragón.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="AMAC-GEMA">
+  <meta property="og:title" content="AMAC-GEMA | Acompañamiento e información">
+  <meta property="og:description" content="AMAC-GEMA acompaña e informa a mujeres afectadas por cáncer genital y de mama en Aragón.">
+  <meta property="og:url" content="https://a-herranz.github.io/amacgema-web/">
+  <meta property="og:image" content="https://a-herranz.github.io/amacgema-web/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>
-    <header class="cabecera">
-        <div class="contenedor">
-            <a href="index.html" class="logo" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
-            <nav class="nav-principal" aria-label="Menú principal">
-                <ul>
-                    <li><a href="index.html" aria-current="page">Inicio</a></li>
-                    <li><a href="quienes-somos.html">Quiénes somos</a></li>
-                    <li><a href="que-hacemos.html">Qué hacemos</a></li>
-                    <li><a href="hablando-de-cancer.html">Hablando de cáncer</a></li>
-                    <li><a href="como-ayudar.html">Cómo ayudar</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-            </nav>
+  <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+      <!-- Solo visible en móvil (ver sección 17 RESPONSIVE del CSS): en
+           escritorio el menú está siempre visible y este botón no se
+           muestra. -->
+      <!-- Solo en móvil: con el menú plegado, llamar debe seguir estando a un
+           toque, no dentro de la hamburguesa ni al final de la página. -->
+      <a class="boton-llamar-movil" href="tel:+34976297764"><span aria-hidden="true">📞</span> Llamar</a>
+      <button class="boton-menu-movil" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="icono-menu-movil" aria-hidden="true">☰</span>
+      </button>
+      <nav class="nav-principal" id="menu-principal" aria-label="Menú principal">
+        <ul>
+          <li><a href="index.html" aria-current="page">Inicio</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a href="que-hacemos.html">Qué hacemos</a></li>
+          <li><a href="hablando-de-cancer.html">Hablando de cáncer</a></li>
+          <li><a href="como-ayudar.html">Cómo ayudar</a></li>
+          <!-- Botón distinto del resto: en cualquier página, la acción de
+               contactar debe ser la más visible, no un enlace más entre
+               otros seis. -->
+          <li class="nav-cta"><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="contenido-principal">
+<section class="hero hero-con-imagen">
+  <div class="contenedor hero-grid">
+    <div class="hero-texto">
+      <p class="sobrelinea">AMAC-GEMA · Zaragoza</p>
+      <h1>No estás sola</h1>
+      <p>Un espacio de escucha, apoyo e información para mujeres afectadas por cáncer genital y de mama, y para quienes las acompañan.</p>
+      <div class="hero-acciones">
+        <a href="contacto.html" class="boton boton-primario">Habla con nosotras</a>
+        <a href="tel:+34976297764" class="enlace-telefono"><span aria-hidden="true">📞</span> 976 297 764</a>
+      </div>
+    </div>
+    <!--
+      PLACEHOLDER DE IMAGEN: de momento se muestra el logo.
+      Sustitúyelo por una foto real de la asociación (sede,
+      actividad grupal, equipo) en cuanto la tengáis. Evita
+      imágenes de banco de imágenes genéricas: para una
+      asociación de apoyo, una foto real transmite mucha más
+      cercanía y confianza.
+      Para el cambio: quita la clase "hero-imagen-placeholder"
+      del div y sustituye la imagen por la foto real, por
+      ejemplo <img src="img/sede-actividad.jpg" alt="Grupo de socias de AMAC-GEMA en una actividad en la sede">
+    -->
+    <div class="hero-imagen-placeholder">
+      <img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA">
+    </div>
+  </div>
+</section>
+
+<!-- ============ ¿QUÉ NECESITAS AHORA MISMO? ============
+     Deliberadamente solo 3 caminos grandes, con un único acento de color.
+     Quien llega aquí puede estar angustiada o recién diagnosticada: no
+     necesita un catálogo de servicios, necesita saber por dónde empezar. -->
+<section class="seccion"><div class="contenedor">
+  <div class="seccion-titulo">
+    <h2>¿Qué necesitas ahora mismo?</h2>
+    <p>Elige el camino que mejor se ajuste a ti. Te acompañamos en cualquiera de ellos.</p>
+  </div>
+  <div class="opciones-ahora">
+    <a class="opcion-ahora" href="contacto.html">
+      <span class="opcion-icono" aria-hidden="true">💬</span>
+      <h3>Hablar con alguien</h3>
+      <p>Escríbenos o llama: te escuchamos y te orientamos sin compromiso.</p>
+      <span>Contactar →</span>
+    </a>
+    <a class="opcion-ahora" href="hablando-de-cancer.html">
+      <span class="opcion-icono" aria-hidden="true">📖</span>
+      <h3>Informarme sobre mi diagnóstico</h3>
+      <p>Información clara sobre cáncer de mama, cáncer ginecológico y sus tratamientos.</p>
+      <span>Hablando de cáncer →</span>
+    </a>
+    <a class="opcion-ahora" href="que-hacemos.html">
+      <span class="opcion-icono" aria-hidden="true">🤝</span>
+      <h3>Conocer el acompañamiento</h3>
+      <p>Ayuda profesional, testimonial y actividades guiadas, todo en un mismo lugar.</p>
+      <span>Qué hacemos →</span>
+    </a>
+  </div>
+</div></section>
+
+<!-- ============ CERCANÍA ============
+     Un mensaje de la propia asociación (no una cita inventada de una
+     paciente) que rompe el patrón de tarjetas y aporta calidez antes de
+     seguir bajando por la página. -->
+<section class="seccion seccion-alt"><div class="contenedor">
+  <div class="cita-cercania">
+    <blockquote>
+      «El apoyo entre iguales no sustituye a la atención profesional: la complementa con escucha, cercanía y la posibilidad de hablar con quien comprende parte de lo vivido.»
+    </blockquote>
+    <footer>Desde 1994 acompañando a mujeres aragonesas en Zaragoza — nunca has estado sola.</footer>
+  </div>
+</div></section>
+
+<!-- ============ PROYECTOS DESTACADOS ============ -->
+<section class="seccion"><div class="contenedor">
+  <div class="seccion-titulo">
+    <h2>Proyectos y acciones destacadas</h2>
+    <p>Iniciativas que muestran cómo el acompañamiento también se construye desde la educación, la cultura y la participación comunitaria.</p>
+  </div>
+  <div class="rejilla-tarjetas">
+    <a class="tarjeta tarjeta-enlace tarjeta-noticia" href="proyecto-jornada-cancer-mama.html">
+      <span class="foto-proyecto" role="img" aria-label="Fotografía de las Jornadas Aragonesas de Cáncer de Mama"><img src="img/proyecto-jornada-mama.jpg" alt="Jornadas Aragonesas Cáncer Mama" style="height: 200px;"></span>
+      <p class="etiqueta">Divulgación</p>
+      <h3>Jornadas Aragonesas Cáncer Mama</h3>
+      <p>Conocimiento y debate sobre cáncer de mama.</p>
+      <span>Leer proyecto →</span>
+    </a>
+    <a class="tarjeta tarjeta-enlace tarjeta-noticia" href="proyecto-jornada-cancer-ginecologico.html">
+      <span class="foto-proyecto" role="img" aria-label="Fotografía de las Jornadas Aragonesas de Cáncer Ginecológico"><img src="img/proyecto-jornada-ginecologico.jpg" alt="Jornadas Aragonesas Cáncer Ginecológico" style="height: 200px;"></span>
+      <p class="etiqueta">Divulgación</p>
+      <h3>Jornadas Aragonesas Cáncer Ginecológico</h3>
+      <p>Conocimiento y debate sobre cáncer ginecológico.</p>
+      <span>Leer proyecto →</span>
+    </a>
+    <a class="tarjeta tarjeta-enlace tarjeta-noticia" href="proyecto-marcha-por-la-salud.html">
+      <span class="foto-proyecto" role="img" aria-label="Fotografía de la Marcha por la Salud"><img src="img/proyecto-marcha-salud.jpg" alt="Marcha por la Salud" style="height: 200px;"></span>
+      <p class="etiqueta">Solidaridad</p>
+      <h3>Marcha por la Salud</h3>
+      <p>Un evento solidario para promover la actividad física, la visibilidad y el apoyo mutuo.</p>
+      <span>Leer proyecto →</span>
+    </a>
+  </div>
+  <p class="ver-mas"><a href="que-hacemos.html" class="enlace-flecha">Ver todo lo que hacemos</a></p>
+</div></section>
+
+<!-- ============ QUIÉNES SOMOS ============ -->
+<section class="seccion seccion-alt"><div class="contenedor dos-columnas">
+  <div>
+    <h2>Conoce AMAC-GEMA</h2>
+    <p>Desde 1994, acompañamos en Zaragoza a mujeres aragonesas afectadas por cáncer genital y de mama, y a sus familias, con información, apoyo y una comunidad que entiende lo que están viviendo.</p>
+    <a href="quienes-somos.html" class="enlace-flecha">Nuestra asociación</a>
+  </div>
+  <div class="bloque-destacado">
+    <h3>Tu primer paso puede ser sencillo</h3>
+    <p>Escríbenos si necesitas orientación o quieres saber cómo participar.</p>
+    <a href="contacto.html" class="boton boton-secundario">Contactar</a>
+  </div>
+</div></section>
+
+<!-- ============ CÓMO AYUDAR ============
+     Al final de la página y con un tono (teal) distinto del resto: se
+     dirige a otro público —quien quiere colaborar—, no a quien acaba de
+     llegar buscando apoyo. -->
+<section class="seccion seccion-colabora"><div class="contenedor">
+  <div class="seccion-titulo">
+    <h2>¿Quieres sumarte tú?</h2>
+    <p>Si no necesitas apoyo pero quieres colaborar, esto es para ti: tu tiempo, tus ideas o tu ayuda periódica hacen posible que sigamos acompañando.</p>
+  </div>
+  <div class="rejilla-tarjetas">
+    <a class="tarjeta tarjeta-enlace" href="como-ayudar-socias.html">
+      <p class="etiqueta">Apoyo periódico</p>
+      <h3>Hazte socia</h3>
+      <p>La colaboración periódica aporta estabilidad y continuidad a los proyectos y servicios de la asociación.</p>
+      <span>Ver detalles para asociarse →</span>
+    </a>
+    <a class="tarjeta tarjeta-enlace" href="como-ayudar-voluntaria.html">
+      <p class="etiqueta">Acción solidaria</p>
+      <h3>Participa como voluntaria</h3>
+      <p>Comparte tu tiempo, ilusión y habilidades en iniciativas que fortalecen la comunidad.</p>
+      <span>Ver detalles de voluntariado →</span>
+    </a>
+    <a class="tarjeta tarjeta-enlace" href="como-ayudar-difunde.html">
+      <p class="etiqueta">Sensibilización</p>
+      <h3>Difunde nuestra labor</h3>
+      <p>Hablar de AMAC-GEMA en tu entorno y redes sociales ayuda a que más mujeres puedan encontrarnos.</p>
+      <span>Ver cómo difundir →</span>
+    </a>
+  </div>
+  <div class="ayuda-destacada">
+    <h2>Súmate a AMAC-GEMA</h2>
+    <p>Con tu ayuda, colaboración o voluntariado, seguimos acompañando a más mujeres cada año.</p>
+    <a href="como-ayudar.html" class="boton boton-primario">Cómo ayudar</a>
+  </div>
+</div></section>
+  </main>
+  <footer class="pie">
+    <div class="contenedor pie-grid">
+      <div class="pie-columna">
+        <p class="pie-marca"><strong>AMAC-GEMA</strong></p>
+        <p>Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama. Acompañando desde 1994.</p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Contacto</p>
+        <p>Plaza del Pilar, 14 · 50003 Zaragoza</p>
+        <p><a href="tel:+34976297764">976 297 764</a></p>
+        <p><a href="mailto:amacgema@gmail.com">amacgema@gmail.com</a></p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Síguenos</p>
+        <div class="redes" aria-label="Redes sociales">
+          <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (se abre en otra pestaña)</span></a>
+          <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (se abre en otra pestaña)</span></a>
         </div>
-    </header>
-    <main id="contenido-principal">
-        <section class="hero hero-con-imagen">
-            <div class="contenedor hero-grid">
-                <div class="hero-texto">
-                    <p class="sobrelinea">AMAC-GEMA · Zaragoza</p>
-                    <h1>No estás sola</h1>
-                    <p>Un espacio de escucha, apoyo e información para mujeres afectadas por cáncer genital y de mama, y para quienes las acompañan.</p>
-                    <div class="hero-acciones">
-                        <a href="contacto.html" class="boton boton-primario">Habla con nosotras</a>
-                        <a href="tel:+34976297764" class="enlace-telefono">📞 976 297 764</a>
-                    </div>
-                </div>
-                <!--
-                  PLACEHOLDER DE IMAGEN:
-                  Sustituye por una foto real de la asociación (sede, actividad grupal,
-                  equipo) en cuanto la tengáis. Evita imágenes de banco de imágenes
-                  genéricas: para una asociación de apoyo, una foto real transmite
-                  mucha más cercanía y confianza.
-                  Ejemplo: <img src="img/sede-actividad.jpg" alt="Grupo de socias de AMAC-GEMA en una actividad en la sede">
-                -->
-                <div class="hero-imagen-placeholder" aria-hidden="true"></div>
-            </div>
-        </section>
-        <section class="seccion">
-            <div class="contenedor">
-                <div class="seccion-titulo">
-                    <h2>Estamos cerca</h2>
-                    <p>Ofrecemos una atención humana y respetuosa en cada momento del proceso.</p>
-                </div>
-                <div class="rejilla-tarjetas">
-                    <article class="tarjeta">
-                        <h3>Escucha y apoyo</h3>
-                        <p>Un entorno de confianza para compartir dudas, emociones y experiencias.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <h3>Información útil</h3>
-                        <p>Recursos para tomar decisiones informadas con mayor tranquilidad.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <h3>Comunidad</h3>
-                        <p>La fuerza de encontrarse con otras mujeres que comprenden lo que estás viviendo.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-        <section class="seccion seccion-alt">
-            <div class="contenedor">
-                <div class="seccion-titulo">
-                    <h2>Qué hacemos</h2>
-                    <p>Algunos de los programas y actividades con los que acompañamos a nuestras socias y pacientes.</p>
-                </div>
-                <div class="rejilla-tarjetas">
-                    <article class="tarjeta">
-                        <h3>Apoyo biopsicosocial</h3>
-                        <p>Acompañamiento psicológico y social individual y en grupo, en cada etapa del proceso.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <h3>Actividad física y bienestar</h3>
-                        <p>Sesiones de suelo pélvico, relajación e hipopresivos en nuestras salas polivalentes.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <h3>Voluntariado</h3>
-                        <p>Personas que aportan tiempo y experiencia para que ninguna mujer se sienta sola.</p>
-                    </article>
-                </div>
-                <p class="ver-mas"><a href="que-hacemos.html" class="enlace-flecha">Ver todos nuestros programas</a></p>
-            </div>
-        </section>
-        <section class="seccion">
-            <div class="contenedor dos-columnas">
-                <div>
-                    <h2>Conoce AMAC-GEMA</h2>
-                    <p>Desde 1994, acompañamos en Zaragoza a mujeres aragonesas afectadas por cáncer genital y de mama, y a sus familias, con información, apoyo y una comunidad que entiende lo que están viviendo.</p>
-                    <a href="quienes-somos.html" class="enlace-flecha">Nuestra asociación</a>
-                </div>
-                <div class="bloque-destacado">
-                    <h3>Tu primer paso puede ser sencillo</h3>
-                    <p>Escríbenos si necesitas orientación o quieres saber cómo participar.</p>
-                    <a href="contacto.html" class="boton boton-secundario">Contactar</a>
-                </div>
-            </div>
-        </section>
-        <section class="seccion">
-            <div class="contenedor">
-                <div class="ayuda-destacada">
-                    <h2>Súmate a AMAC-GEMA</h2>
-                    <p>Con tu ayuda, colaboración o voluntariado, seguimos acompañando a más mujeres cada año.</p>
-                    <a href="como-ayudar.html" class="boton boton-primario">Cómo ayudar</a>
-                </div>
-            </div>
-        </section>
-        <section class="seccion seccion-alt">
-            <div class="contenedor">
-                <div class="seccion-titulo">
-                    <h2>Últimas noticias</h2>
-                    <p>Mantente al día de lo que ocurre en AMAC-GEMA.</p>
-                </div>
-                <p class="ver-mas"><a href="noticias.html" class="enlace-flecha">Ver todas las noticias</a></p>
-            </div>
-        </section>
-    </main>
-<footer class="pie"><div class="contenedor"><p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p><p>Zaragoza, Aragón</p><div class="redes" aria-label="Redes sociales"><a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram</a></div><p><a href="contacto.html">Contacta con nosotras</a></p><small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small></div></footer><script src="js/script.js"></script></body></html>
+        <p><a href="contacto.html">Contacta con nosotras →</a></p>
+      </div>
+    </div>
+    <small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>

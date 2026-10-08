@@ -1,0 +1,28 @@
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+      <!-- Solo visible en móvil (ver sección 17 RESPONSIVE del CSS): en
+           escritorio el menú está siempre visible y este botón no se
+           muestra. -->
+      <!-- Solo en móvil: con el menú plegado, llamar debe seguir estando a un
+           toque, no dentro de la hamburguesa ni al final de la página. -->
+      <a class="boton-llamar-movil" href="tel:+34976297764"><span aria-hidden="true">📞</span> Llamar</a>
+      <button class="boton-menu-movil" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="icono-menu-movil" aria-hidden="true">☰</span>
+      </button>
+      <nav class="nav-principal" id="menu-principal" aria-label="Menú principal">
+        <ul>
+          <li><a href="index.html"{{ACTIVE:index.html}}>Inicio</a></li>
+          <li><a href="quienes-somos.html"{{ACTIVE:quienes-somos.html}}>Quiénes somos</a></li>
+          <li><a href="que-hacemos.html"{{ACTIVE:que-hacemos.html}}>Qué hacemos</a></li>
+          <li><a href="hablando-de-cancer.html"{{ACTIVE:hablando-de-cancer.html}}>Hablando de cáncer</a></li>
+          <li><a href="como-ayudar.html"{{ACTIVE:como-ayudar.html}}>Cómo ayudar</a></li>
+          <!-- Botón distinto del resto: en cualquier página, la acción de
+               contactar debe ser la más visible, no un enlace más entre
+               otros seis. -->
+          <li class="nav-cta"><a href="contacto.html"{{ACTIVE:contacto.html}}>Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>

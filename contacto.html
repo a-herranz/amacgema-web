@@ -1,66 +1,143 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Contacto | AMAC-GEMA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | AMAC-GEMA</title>
+  <meta name="description" content="Ponte en contacto con AMAC-GEMA: dirección, teléfono y formulario para pedir información o apoyo.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="AMAC-GEMA">
+  <meta property="og:title" content="Contacto | AMAC-GEMA">
+  <meta property="og:description" content="Ponte en contacto con AMAC-GEMA: dirección, teléfono y formulario para pedir información o apoyo.">
+  <meta property="og:url" content="https://a-herranz.github.io/amacgema-web/contacto.html">
+  <meta property="og:image" content="https://a-herranz.github.io/amacgema-web/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <a class="enlace-saltar" href="#contenido-principal">Saltar al contenido principal</a>
-    <header class="cabecera">
-        <div class="contenedor">
-            <a class="logo" href="index.html"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
-            <nav class="nav-principal" aria-label="Menú principal">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="quienes-somos.html">Quiénes somos</a></li>
-                    <li><a href="que-hacemos.html">Qué hacemos</a></li>
-                    <li><a href="hablando-de-cancer.html">Hablando de cáncer</a></li>
-                    <li><a href="como-ayudar.html">Cómo ayudar</a></li>
-                    <li><a aria-current="page" href="contacto.html">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main id="contenido-principal">
-        <section class="hero hero-interior">
+  <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+      <!-- Solo visible en móvil (ver sección 17 RESPONSIVE del CSS): en
+           escritorio el menú está siempre visible y este botón no se
+           muestra. -->
+      <!-- Solo en móvil: con el menú plegado, llamar debe seguir estando a un
+           toque, no dentro de la hamburguesa ni al final de la página. -->
+      <a class="boton-llamar-movil" href="tel:+34976297764"><span aria-hidden="true">📞</span> Llamar</a>
+      <button class="boton-menu-movil" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="icono-menu-movil" aria-hidden="true">☰</span>
+      </button>
+      <nav class="nav-principal" id="menu-principal" aria-label="Menú principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a href="que-hacemos.html">Qué hacemos</a></li>
+          <li><a href="hablando-de-cancer.html">Hablando de cáncer</a></li>
+          <li><a href="como-ayudar.html">Cómo ayudar</a></li>
+          <!-- Botón distinto del resto: en cualquier página, la acción de
+               contactar debe ser la más visible, no un enlace más entre
+               otros seis. -->
+          <li class="nav-cta"><a href="contacto.html" aria-current="page">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="contenido-principal">
+<section class="hero hero-interior">
             <div class="contenedor">
                 <p class="sobrelinea">Estamos aquí</p>
                 <h1>Contacto</h1>
-                <p>Escríbenos. Te responderemos tan pronto como nos sea posible.</p>
+                <p>Llámanos, escríbenos o pásate por la sede. Como te resulte más fácil.</p>
             </div>
         </section>
+
+        <!-- Vías de contacto directo, antes del formulario: mucha gente que
+             llega aquí prefiere llamar a escribir, y antes tenía que bajar
+             hasta el pie de página para encontrar el teléfono. -->
         <section class="seccion">
+            <div class="contenedor">
+                <ul class="vias-contacto">
+                    <li>
+                        <span class="via-contacto-icono" aria-hidden="true">📞</span>
+                        <p class="via-contacto-etiqueta">Llámanos</p>
+                        <a class="via-contacto-dato" href="tel:+34976297764">976 297 764</a>
+                        <p class="nota">Lunes a viernes</p>
+                    </li>
+                    <li>
+                        <span class="via-contacto-icono" aria-hidden="true">✉️</span>
+                        <p class="via-contacto-etiqueta">Escríbenos</p>
+                        <a class="via-contacto-dato" href="mailto:amacgema@gmail.com">amacgema@gmail.com</a>
+                        <p class="nota">Te respondemos lo antes posible</p>
+                    </li>
+                    <li>
+                        <span class="via-contacto-icono" aria-hidden="true">📍</span>
+                        <p class="via-contacto-etiqueta">Visítanos</p>
+                        <a class="via-contacto-dato" href="#como-llegar">Plaza del Pilar, 14</a>
+                        <p class="nota">50003 Zaragoza · <a href="#como-llegar">Ver cómo llegar</a></p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="seccion seccion-alt">
             <div class="contenedor dos-columnas">
                 <div>
-                    <h2>Hablemos</h2>
-                    <p>Si necesitas información, deseas colaborar o simplemente quieres dar el primer paso, deja tu mensaje.</p>
+                    <h2>O déjanos un mensaje</h2>
+                    <p>Si prefieres escribir, cuéntanos qué necesitas y nos pondremos en contacto contigo. No hace falta que des detalles: con saber cómo localizarte es suficiente.</p>
                     <p class="nota">No incluyas información médica sensible. Para una urgencia sanitaria, contacta con los servicios de emergencia.</p>
                 </div>
                 <form class="formulario" action="#" method="post">
                     <label for="nombre">Nombre</label>
                     <input id="nombre" name="nombre" type="text" autocomplete="name" required>
-                    <label for="correo">Correo electrónico</label>
-                    <input id="correo" name="correo" type="email" autocomplete="email" required>
+
+                    <label for="correo">Correo electrónico <span class="etiqueta-opcional">(opcional si nos dejas el teléfono)</span></label>
+                    <input id="correo" name="correo" type="email" autocomplete="email">
+
+                    <label for="telefono">Teléfono <span class="etiqueta-opcional">(opcional si nos dejas el correo)</span></label>
+                    <input id="telefono" name="telefono" type="tel" autocomplete="tel">
+
                     <label for="mensaje">Mensaje</label>
                     <textarea id="mensaje" name="mensaje" rows="6" required></textarea>
+
                     <button class="boton boton-primario" type="submit">Enviar mensaje</button>
                 </form>
             </div>
         </section>
 
-        <section class="seccion seccion-alt">
+        <section class="seccion">
             <div class="contenedor">
                 <div class="seccion-titulo">
-                    <h2>Cómo llegar</h2>
-                    <p>Nuestra sede está en Plaza del Pilar, 14, en pleno centro de Zaragoza.</p>
+                    <h2 id="como-llegar">Cómo llegar</h2>
+                    <p>Nuestra sede está en pleno centro de Zaragoza, en la Plaza del Pilar.</p>
                 </div>
+
+                <!-- Los enlaces "maps/search" y "maps/dir" con api=1 son el formato
+                     oficial de Google Maps para enlazar: en el móvil abren la app
+                     si está instalada, y si no, la web. -->
+                <div class="como-llegar">
+                    <p class="como-llegar-direccion">
+                        <strong>AMAC-GEMA</strong><br>
+                        Plaza del Pilar, 14<br>
+                        50003 Zaragoza
+                    </p>
+                    <div class="como-llegar-acciones">
+                        <a class="boton boton-primario" href="https://www.google.com/maps/dir/?api=1&amp;destination=Plaza+del+Pilar+14%2C+50003+Zaragoza" target="_blank" rel="noopener noreferrer">Cómo llegar desde aquí<span class="sr-only"> (se abre en otra pestaña)</span></a>
+                        <a class="boton boton-secundario" href="https://www.google.com/maps/search/?api=1&amp;query=Plaza+del+Pilar+14%2C+50003+Zaragoza" target="_blank" rel="noopener noreferrer">Abrir en Google Maps<span class="sr-only"> (se abre en otra pestaña)</span></a>
+                    </div>
+                </div>
+
                 <div class="mapa-contenedor">
                     <iframe
-                        src="https://www.google.com/maps?q=Plaza+del+Pilar+14,+50003+Zaragoza&output=embed"
+                        src="https://www.google.com/maps?q=Plaza+del+Pilar+14,+50003+Zaragoza&amp;z=18&amp;hl=es&amp;output=embed"
                         width="100%"
                         height="400"
                         style="border:0;"
@@ -105,22 +182,35 @@
                     <div class="tarjeta tarjeta-red tarjeta-instagram">
                         <h3>Instagram</h3>
                         <p>Síguenos en Instagram para ver fotos de nuestras actividades, talleres y encuentros.</p>
-                        <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer" class="boton boton-secundario">Ver nuestro Instagram</a>
+                        <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer" class="boton boton-secundario">Ver nuestro Instagram<span class="sr-only"> (se abre en otra pestaña)</span></a>
                     </div>
                 </div>
             </div>
         </section>
-    <footer class="pie">
-        <div class="contenedor">
-            <p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p>
-            <p>Zaragoza, Aragón</p>
-            <div class="redes" aria-label="Redes sociales">
-                <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook</a>
-                <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram</a>
-            </div>
-            <small>© <span id="anio"></span> AMAC-GEMA.</small>
+  </main>
+  <footer class="pie">
+    <div class="contenedor pie-grid">
+      <div class="pie-columna">
+        <p class="pie-marca"><strong>AMAC-GEMA</strong></p>
+        <p>Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama. Acompañando desde 1994.</p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Contacto</p>
+        <p>Plaza del Pilar, 14 · 50003 Zaragoza</p>
+        <p><a href="tel:+34976297764">976 297 764</a></p>
+        <p><a href="mailto:amacgema@gmail.com">amacgema@gmail.com</a></p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Síguenos</p>
+        <div class="redes" aria-label="Redes sociales">
+          <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (se abre en otra pestaña)</span></a>
+          <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (se abre en otra pestaña)</span></a>
         </div>
-    </footer>
-    <script src="js/script.js"></script>
+        <p><a href="contacto.html">Contacta con nosotras →</a></p>
+      </div>
+    </div>
+    <small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small>
+  </footer>
+  <script src="js/script.js"></script>
 </body>
 </html>

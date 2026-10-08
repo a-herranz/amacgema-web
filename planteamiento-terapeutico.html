@@ -1,48 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Planteamiento terapéutico | Hablando de Cáncer | AMAC-GEMA</title>
-        <meta name="description" content="¿Cómo se trata el cáncer? Abordaje local (cirugía, radioterapia) y general (quimioterapia, hormonoterapia, medicamentos diana).">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body>
-        <a class="enlace-saltar" href="#contenido-principal">Saltar al contenido principal</a>
-        <header class="cabecera">
-            <div class="contenedor">
-                <a class="logo" href="index.html">
-                    <img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA">
-                </a>
-                <nav class="nav-principal" aria-label="Menú principal">
-                    <ul>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="quienes-somos.html">Quiénes somos</a></li>
-                        <li><a href="que-hacemos.html">Qué hacemos</a></li>
-                        <li><a href="hablando-de-cancer.html" aria-current="page">Hablando de cáncer</a></li>
-                        <li><a href="como-ayudar.html">Cómo ayudar</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-
-        <!-- Submenú de navegación entre las páginas del apartado -->
-        <nav class="subnav" aria-label="Secciones de aspectos generales">
-            <div class="contenedor">
-                <ul>
-                    <li><a href="aspectos-generales.html">Aspectos generales</a></li>
-                    <li><a href="concepto.html">Concepto</a></li>
-                    <li><a href="itinerario-diagnostico.html">Itinerario diagnóstico</a></li>
-                    <li><a href="planteamiento-terapeutico.html" aria-current="page">Planteamiento terapéutico</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <main id="contenido-principal">
-            <section class="hero hero-interior">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planteamiento terapéutico | Hablando de Cáncer | AMAC-GEMA</title>
+  <meta name="description" content="¿Cómo se trata el cáncer? Abordaje local (cirugía, radioterapia) y general (quimioterapia, hormonoterapia, medicamentos diana).">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="AMAC-GEMA">
+  <meta property="og:title" content="Planteamiento terapéutico | Hablando de Cáncer | AMAC-GEMA">
+  <meta property="og:description" content="¿Cómo se trata el cáncer? Abordaje local (cirugía, radioterapia) y general (quimioterapia, hormonoterapia, medicamentos diana).">
+  <meta property="og:url" content="https://a-herranz.github.io/amacgema-web/planteamiento-terapeutico.html">
+  <meta property="og:image" content="https://a-herranz.github.io/amacgema-web/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+      <!-- Solo visible en móvil (ver sección 17 RESPONSIVE del CSS): en
+           escritorio el menú está siempre visible y este botón no se
+           muestra. -->
+      <!-- Solo en móvil: con el menú plegado, llamar debe seguir estando a un
+           toque, no dentro de la hamburguesa ni al final de la página. -->
+      <a class="boton-llamar-movil" href="tel:+34976297764"><span aria-hidden="true">📞</span> Llamar</a>
+      <button class="boton-menu-movil" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="icono-menu-movil" aria-hidden="true">☰</span>
+      </button>
+      <nav class="nav-principal" id="menu-principal" aria-label="Menú principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a href="que-hacemos.html">Qué hacemos</a></li>
+          <li><a href="hablando-de-cancer.html" aria-current="page">Hablando de cáncer</a></li>
+          <li><a href="como-ayudar.html">Cómo ayudar</a></li>
+          <!-- Botón distinto del resto: en cualquier página, la acción de
+               contactar debe ser la más visible, no un enlace más entre
+               otros seis. -->
+          <li class="nav-cta"><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <nav class="subnav" aria-label="Secciones de aspectos generales">
+    <div class="contenedor">
+      <ul>
+        <li class="subnav-nivel"><a href="hablando-de-cancer.html">Hablando de cáncer</a></li>
+        <li class="subnav-nivel"><a href="aspectos-generales.html">Aspectos generales</a></li>
+        <li><a href="concepto.html">Concepto</a></li>
+        <li><a href="itinerario-diagnostico.html">Itinerario diagnóstico</a></li>
+        <li><a href="planteamiento-terapeutico.html" aria-current="page">Planteamiento terapéutico</a></li>
+        <li class="subnav-aparte"><a href="glosario.html"><span aria-hidden="true">📖</span> Glosario</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main id="contenido-principal">
+<section class="hero hero-interior">
                 <div class="contenedor">
                     <p class="sobrelinea">Hablando de Cáncer · Aspectos generales</p>
                     <h1>Planteamiento terapéutico</h1>
@@ -51,7 +73,12 @@
             </section>
 
             <section class="seccion">
-                <div class="contenedor">
+                <div class="contenedor contenido-lectura">
+
+                    <div class="bloque-destacado" style="border-left-color: var(--color-primario); margin-bottom: 2rem;">
+                        <p class="etiqueta">Lo esencial</p>
+                        <p>El tratamiento del cáncer se aborda desde dos frentes: local (cirugía y <a class="termino-glosario" href="glosario.html#radioterapia" title="Ver en el glosario">radioterapia</a>) y general (<a class="termino-glosario" href="glosario.html#quimioterapia" title="Ver en el glosario">quimioterapia</a>, <a class="termino-glosario" href="glosario.html#hormonoterapia" title="Ver en el glosario">hormonoterapia</a> y medicamentos diana). Esta página explica en qué consiste cada técnica. No todas se aplican en todos los casos: depende del tipo de tumor y de cada situación personal. Puedes consultar el <a href="glosario.html">glosario</a> si hay algún término que no reconozcas.</p>
+                    </div>
 
                     <div class="dos-columnas" style="grid-template-columns: 1fr; margin-bottom: 3rem;">
                         <div class="bloque-destacado">
@@ -70,8 +97,8 @@
 
                     <p><strong>Tipos de cirugía según el grado de tejido extirpado:</strong></p>
                     <ul class="lista-apoyo">
-                        <li><strong>Agresiva:</strong> mastectomía simple, mastectomía radical modificada, mastectomía radical, vaciamiento axilar.</li>
-                        <li><strong>Conservadora:</strong> elimina la enfermedad con el mínimo daño posible — tumerectomía, cuadrantectomía, biopsia selectiva del ganglio centinela (BSGC).</li>
+                        <li><strong>Agresiva:</strong> <a class="termino-glosario" href="glosario.html#mastectomia" title="Ver en el glosario">mastectomía</a> simple, mastectomía radical modificada, mastectomía radical, vaciamiento axilar.</li>
+                        <li><strong>Conservadora:</strong> elimina la enfermedad con el mínimo daño posible — tumerectomía, <a class="termino-glosario" href="glosario.html#cuadrantectomia" title="Ver en el glosario">cuadrantectomía</a>, <a class="termino-glosario" href="glosario.html#biopsia" title="Ver en el glosario">biopsia</a> selectiva del <a class="termino-glosario" href="glosario.html#ganglio-centinela" title="Ver en el glosario">ganglio centinela</a> (BSGC).</li>
                     </ul>
 
                     <p><strong>Tipos de cirugía según el objetivo:</strong></p>
@@ -128,7 +155,7 @@
                     <p>Puede ser externa o interna:</p>
                     <ul class="lista-apoyo">
                         <li><strong>Externa:</strong> administración de las radiaciones desde el exterior mediante equipos que generan la radiación (aceleradores lineales), formados por un generador de electrones, acelerador lineal, emisor y colimadores (laminillas que ajustan la ventana de salida a la forma del tumor). Antes de iniciar el tratamiento es preciso realizar una planificación o simulación, en la que se determina la zona de tratamiento, la dosis total, el número de sesiones y la postura más correcta para el paciente.</li>
-                        <li><strong>Interna (braquiterapia):</strong> administración de la radiación a través de materiales radiactivos (isótopos) que se introducen en el organismo muy próximos o en contacto con el tumor. Para el implante es preciso administrar algún tipo de anestesia.</li>
+                        <li><strong>Interna (<a class="termino-glosario" href="glosario.html#braquiterapia" title="Ver en el glosario">braquiterapia</a>):</strong> administración de la radiación a través de materiales radiactivos (isótopos) que se introducen en el organismo muy próximos o en contacto con el tumor. Para el implante es preciso administrar algún tipo de anestesia.</li>
                     </ul>
 
                     <h2>2. Abordaje general</h2>
@@ -136,15 +163,15 @@
 
                     <h3>2.1. Quimioterapia</h3>
                     <p>Su objetivo es destruir, empleando una gran variedad de fármacos, las células que componen el tumor, con el fin de reducir y/o eliminar la enfermedad.</p>
-                    <p>A los fármacos empleados en este tratamiento se les denomina antineoplásicos o quimioterápicos, y están diseñados para destruir las células mientras se dividen: cuanto más rápido se dividen, más sensibles son al tratamiento. Atacan a células en proceso de división, tanto malignas como benignas (mucosas, folículo piloso, células sanguíneas...), lo que produce efectos secundarios por la destrucción de estas últimas.</p>
+                    <p>A los fármacos empleados en este tratamiento se les denomina <a class="termino-glosario" href="glosario.html#antineoplasico" title="Ver en el glosario">antineoplásicos</a> o quimioterápicos, y están diseñados para destruir las células mientras se dividen: cuanto más rápido se dividen, más sensibles son al tratamiento. Atacan a células en proceso de división, tanto malignas como benignas (mucosas, folículo piloso, células sanguíneas...), lo que produce efectos secundarios por la destrucción de estas últimas.</p>
                     <p>Este tratamiento se administra en forma de ciclos: la administración de los fármacos durante uno o varios días, seguida de un tiempo variable de descanso, que suele oscilar entre una y cuatro semanas.</p>
                     <p>Dependiendo del tipo de cáncer y de los fármacos empleados, la quimioterapia puede administrarse en pastillas (vía oral) o inyectada en una vena (vía intravenosa). Generalmente, cuando se administra por vía intravenosa, la paciente acude al hospital de día y, tras unas horas, puede volver a su domicilio hasta el próximo ciclo, siguiendo el mismo tipo de vida que antes de iniciar el tratamiento.</p>
                     <p>La duración total del tratamiento y sus efectos secundarios dependen de factores como el tipo de tumor, su respuesta al tratamiento y el tipo de quimioterapia empleada.</p>
-                    <p>Puede administrarse antes de la cirugía (neo-adyuvante) o después (adyuvante). La neo-adyuvante, cuando está indicada, presenta ventajas: permite observar de forma rápida la respuesta biológica del tumor al tratamiento y modificarlo en consecuencia, además de posibilitar intervenciones menos agresivas.</p>
+                    <p>Puede administrarse antes de la cirugía (<a class="termino-glosario" href="glosario.html#neo-adyuvante" title="Ver en el glosario">neo-adyuvante</a>) o después (<a class="termino-glosario" href="glosario.html#adyuvante" title="Ver en el glosario">adyuvante</a>). La neo-adyuvante, cuando está indicada, presenta ventajas: permite observar de forma rápida la respuesta biológica del tumor al tratamiento y modificarlo en consecuencia, además de posibilitar intervenciones menos agresivas.</p>
 
                     <h3>2.2. Hormonoterapia</h3>
                     <p>El 66% de los cánceres de mama tienen receptores hormonales que, al unirse a los estrógenos, hacen que aumente el crecimiento y la multiplicación de la célula. Son tratamientos que detienen la formación de hormonas o bloquean sus efectos sobre las células.</p>
-                    <p><strong>Tratamiento antiestrogénico:</strong> medicamentos que se «disfrazan» de estrógenos y se unen a los receptores hormonales de la célula tumoral, pero que, al contrario que los estrógenos, no aumentan el crecimiento ni la multiplicación de las células, evitando así las recidivas.</p>
+                    <p><strong>Tratamiento antiestrogénico:</strong> medicamentos que se «disfrazan» de estrógenos y se unen a los receptores hormonales de la célula tumoral, pero que, al contrario que los estrógenos, no aumentan el crecimiento ni la multiplicación de las células, evitando así las <a class="termino-glosario" href="glosario.html#recidiva" title="Ver en el glosario">recidivas</a>.</p>
 
                     <p><strong>Posibles efectos secundarios:</strong></p>
                     <ul class="lista-apoyo">
@@ -157,29 +184,51 @@
                         <li>Debilidad del cabello.</li>
                     </ul>
 
-                    <p><strong>Tratamiento con inhibidores de la aromatasa:</strong> inhibe la enzima aromatasa, clave en la síntesis de los estrógenos.</p>
+                    <p><strong>Tratamiento con inhibidores de la <a class="termino-glosario" href="glosario.html#aromatasa" title="Ver en el glosario">aromatasa</a>:</strong> inhibe la enzima aromatasa, clave en la síntesis de los estrógenos.</p>
 
                     <h3>2.3. Medicamentos diana</h3>
                     <p>Son fármacos inteligentes, agentes biológicos (anticuerpos monoclonales) que actúan sobre mecanismos concretos de las células tumorales, impidiendo su crecimiento y replicación sin producir los efectos secundarios de otros tratamientos.</p>
                     <ul class="lista-apoyo">
-                        <li><strong>Trastuzumab:</strong> anticuerpos monoclonales dirigidos contra la proteína HER2, que se unen a los receptores HER2 de la membrana celular y disminuyen la velocidad de crecimiento de la célula.</li>
+                        <li><strong><a class="termino-glosario" href="glosario.html#trastuzumab" title="Ver en el glosario">Trastuzumab</a>:</strong> anticuerpos monoclonales dirigidos contra la proteína <a class="termino-glosario" href="glosario.html#her2" title="Ver en el glosario">HER2</a>, que se unen a los receptores HER2 de la membrana celular y disminuyen la velocidad de crecimiento de la célula.</li>
                         <li><strong>Lapatinib:</strong> también es un medicamento diana.</li>
                     </ul>
 
                 </div>
             </section>
-        </main>
-
-        <footer class="pie">
-            <div class="contenedor">
-                <p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p>
-                <div class="redes">
-                    <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook</a>
-                    <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram</a>
-                </div>
-                <small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small>
-            </div>
-        </footer>
-        <script src="js/script.js"></script>
-    </body>
+    <section class="seccion seccion-alt cierre-apoyo">
+      <div class="contenedor centrado">
+        <h2>¿Te preocupa algo de lo que acabas de leer?</h2>
+        <p>No tienes que resolverlo sola. Escríbenos o llámanos: te escuchamos y te orientamos.</p>
+        <div class="cierre-apoyo-acciones">
+          <a class="boton boton-primario" href="contacto.html">Habla con nosotras</a>
+          <a class="enlace-telefono" href="tel:+34976297764"><span aria-hidden="true">📞</span> 976 297 764</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="pie">
+    <div class="contenedor pie-grid">
+      <div class="pie-columna">
+        <p class="pie-marca"><strong>AMAC-GEMA</strong></p>
+        <p>Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama. Acompañando desde 1994.</p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Contacto</p>
+        <p>Plaza del Pilar, 14 · 50003 Zaragoza</p>
+        <p><a href="tel:+34976297764">976 297 764</a></p>
+        <p><a href="mailto:amacgema@gmail.com">amacgema@gmail.com</a></p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Síguenos</p>
+        <div class="redes" aria-label="Redes sociales">
+          <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (se abre en otra pestaña)</span></a>
+          <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (se abre en otra pestaña)</span></a>
+        </div>
+        <p><a href="contacto.html">Contacta con nosotras →</a></p>
+      </div>
+    </div>
+    <small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
 </html>

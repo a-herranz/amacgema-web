@@ -5,6 +5,70 @@ document.addEventListener('DOMContentLoaded', function () {
     anioSpan.textContent = new Date().getFullYear();
   }
 
+  // Menú de hamburguesa en móvil: el botón muestra u oculta el panel del
+  // menú principal. En escritorio el botón está oculto por CSS y este
+  // código no tiene efecto visible.
+  var botonMenuMovil = document.querySelector('.boton-menu-movil');
+  var navPrincipal = document.getElementById('menu-principal');
+  if (botonMenuMovil && navPrincipal) {
+    var iconoMenuMovil = botonMenuMovil.querySelector('.icono-menu-movil');
+
+    var cerrarMenuMovil = function () {
+      navPrincipal.classList.remove('menu-abierto');
+      botonMenuMovil.setAttribute('aria-expanded', 'false');
+      if (iconoMenuMovil) {
+        iconoMenuMovil.textContent = '☰';
+      }
+    };
+
+    botonMenuMovil.addEventListener('click', function () {
+      var abierto = navPrincipal.classList.toggle('menu-abierto');
+      botonMenuMovil.setAttribute('aria-expanded', abierto);
+      if (iconoMenuMovil) {
+        iconoMenuMovil.textContent = abierto ? '✕' : '☰';
+      }
+    });
+
+    // Si la ventana pasa a tamaño de escritorio con el panel abierto
+    // (p. ej. al girar una tablet), se cierra para no dejarlo "forzado
+    // abierto" por el estilo de móvil.
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) {
+        cerrarMenuMovil();
+      }
+    });
+
+    // Cierra con Escape y devuelve el foco al botón, para quien navega
+    // con teclado.
+    document.addEventListener('keydown', function (evento) {
+      if (evento.key === 'Escape' && navPrincipal.classList.contains('menu-abierto')) {
+        cerrarMenuMovil();
+        botonMenuMovil.focus();
+      }
+    });
+  }
+
+  // Submenú de sección: en móvil la barra es más ancha que la pantalla.
+  // Se desplaza sola hasta la página actual (que si no podría quedar fuera
+  // de la vista) y marca con una clase en qué lados quedan más opciones,
+  // para que el CSS muestre un degradado como pista de que se puede deslizar.
+  var barraSubnav = document.querySelector('.subnav .contenedor');
+  if (barraSubnav) {
+    var actualSubnav = barraSubnav.querySelector('[aria-current="page"]');
+    if (actualSubnav) {
+      var izquierda = actualSubnav.getBoundingClientRect().left - barraSubnav.getBoundingClientRect().left;
+      barraSubnav.scrollLeft += izquierda - (barraSubnav.clientWidth - actualSubnav.offsetWidth) / 2;
+    }
+    var marcarDesplazamiento = function () {
+      var resto = barraSubnav.scrollWidth - barraSubnav.clientWidth - barraSubnav.scrollLeft;
+      barraSubnav.parentElement.classList.toggle('subnav-hay-mas', resto > 4);
+      barraSubnav.parentElement.classList.toggle('subnav-hay-antes', barraSubnav.scrollLeft > 4);
+    };
+    marcarDesplazamiento();
+    barraSubnav.addEventListener('scroll', marcarDesplazamiento, { passive: true });
+    window.addEventListener('resize', marcarDesplazamiento);
+  }
+
   // Añade el submenú de "Quiénes somos" de forma coherente en todas las páginas.
   var enlaceQuienes = document.querySelector('.nav-principal a[href="quienes-somos.html"]');
   if (enlaceQuienes) {
@@ -94,9 +158,11 @@ document.addEventListener('DOMContentLoaded', function () {
       '<button class="boton-submenu" type="button" aria-expanded="false" aria-controls="' + idSubmenuAyudas + '">' +
       '<span class="sr-only">Abrir submenú de Qué hacemos</span><span aria-hidden="true">⌄</span></button>' +
       '<ul class="submenu" id="' + idSubmenuAyudas + '">' +
+      '<li class="submenu-frente">Asistencia a población afectada</li>' +
       '<li><a href="ayuda-profesional.html">Ayuda profesional</a></li>' +
       '<li><a href="ayuda-testimonial.html">Ayuda testimonial</a></li>' +
       '<li><a href="actividades-guiadas.html">Actividades guiadas</a></li>' +
+      '<li class="submenu-frente">Sensibilización</li>' +
       '<li><a href="sensibilizacion.html">Educación y divulgación</a></li>' +
       '<li><a href="investigacion.html">Solidaridad e investigación</a></li></ul>'
     );
@@ -107,49 +173,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Barra de pestañas con todas las secciones de "Quiénes somos", visible en
-  // la propia página (no solo al desplegar el menú), para moverse fácilmente
-  // entre Propósito, Historia, Sede social y Gobierno. Se coloca justo debajo
-  // del menú principal, antes del título de la página (el hero).
-  function insertarSubnav(paginasDelGrupo, enlaces, etiquetaAria) {
-    var pagina = window.location.pathname.split('/').pop() || 'index.html';
-    if (paginasDelGrupo.indexOf(pagina) === -1) return;
-
-    var hero = document.querySelector('.hero');
-    if (!hero || document.querySelector('.subnav')) return;
-
-    var html = '<nav class="subnav" aria-label="' + etiquetaAria + '"><div class="contenedor"><ul>';
-    enlaces.forEach(function (enlace) {
-      var esActual = enlace.href === pagina;
-      html += '<li><a href="' + enlace.href + '"' + (esActual ? ' aria-current="page"' : '') + '>' + enlace.texto + '</a></li>';
-    });
-    html += '</ul></div></nav>';
-
-    hero.insertAdjacentHTML('beforebegin', html);
-  }
-
-  insertarSubnav(
-    ['quienes-somos.html', 'proposito.html', 'historia.html', 'sede-social.html', 'estructura.html'],
-    [
-      { href: 'quienes-somos.html', texto: 'Resumen' },
-      { href: 'proposito.html', texto: 'Propósito' },
-      { href: 'historia.html', texto: 'Historia' },
-      { href: 'sede-social.html', texto: 'Sede social' },
-      { href: 'estructura.html', texto: 'Estructura' }
-    ],
-    'Secciones de Quiénes somos'
-  );
-
-  insertarSubnav(
-    ['que-hacemos.html', 'ayuda-profesional.html', 'ayuda-testimonial.html', 'actividades-guiadas.html', 'sensibilizacion.html', 'investigacion.html'],
-    [
-      { href: 'que-hacemos.html', texto: 'Resumen' },
-      { href: 'ayuda-profesional.html', texto: 'Ayuda profesional' },
-      { href: 'ayuda-testimonial.html', texto: 'Ayuda testimonial' },
-      { href: 'actividades-guiadas.html', texto: 'Actividades guiadas' },
-      { href: 'sensibilizacion.html', texto: 'Educación y divulgación' },
-      { href: 'investigacion.html', texto: 'Solidaridad e investigación' }
-    ],
-    'Secciones de Qué hacemos'
-  );
 });

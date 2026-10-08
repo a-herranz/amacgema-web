@@ -5,29 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sede social | AMAC-GEMA</title>
   <meta name="description" content="Información práctica para llegar a la sede social de AMAC-GEMA.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="AMAC-GEMA">
+  <meta property="og:title" content="Sede social | AMAC-GEMA">
+  <meta property="og:description" content="Información práctica para llegar a la sede social de AMAC-GEMA.">
+  <meta property="og:url" content="https://a-herranz.github.io/amacgema-web/sede-social.html">
+  <meta property="og:image" content="https://a-herranz.github.io/amacgema-web/img/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <a class="enlace-saltar" href="#contenido-principal">Saltar al contenido principal</a>
+  <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>
   <header class="cabecera">
     <div class="contenedor">
       <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
-      <nav class="nav-principal" aria-label="Menú principal">
+      <!-- Solo visible en móvil (ver sección 17 RESPONSIVE del CSS): en
+           escritorio el menú está siempre visible y este botón no se
+           muestra. -->
+      <!-- Solo en móvil: con el menú plegado, llamar debe seguir estando a un
+           toque, no dentro de la hamburguesa ni al final de la página. -->
+      <a class="boton-llamar-movil" href="tel:+34976297764"><span aria-hidden="true">📞</span> Llamar</a>
+      <button class="boton-menu-movil" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="sr-only">Abrir menú</span>
+        <span class="icono-menu-movil" aria-hidden="true">☰</span>
+      </button>
+      <nav class="nav-principal" id="menu-principal" aria-label="Menú principal">
         <ul>
           <li><a href="index.html">Inicio</a></li>
           <li><a href="quienes-somos.html" aria-current="page">Quiénes somos</a></li>
           <li><a href="que-hacemos.html">Qué hacemos</a></li>
           <li><a href="hablando-de-cancer.html">Hablando de cáncer</a></li>
           <li><a href="como-ayudar.html">Cómo ayudar</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <!-- Botón distinto del resto: en cualquier página, la acción de
+               contactar debe ser la más visible, no un enlace más entre
+               otros seis. -->
+          <li class="nav-cta"><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
     </div>
   </header>
+  <nav class="subnav" aria-label="Secciones de quiénes somos">
+    <div class="contenedor">
+      <ul>
+        <li class="subnav-nivel"><a href="quienes-somos.html">Quiénes somos</a></li>
+        <li><a href="proposito.html">Propósito</a></li>
+        <li><a href="historia.html">Historia</a></li>
+        <li><a href="sede-social.html" aria-current="page">Sede social</a></li>
+        <li><a href="estructura.html">Estructura</a></li>
+      </ul>
+    </div>
+  </nav>
   <main id="contenido-principal">
-    <section class="hero hero-interior">
+<section class="hero hero-interior">
       <div class="contenedor">
         <p class="sobrelinea">Quiénes somos</p>
         <h1>Sede social</h1>
@@ -47,7 +83,7 @@
           <p><strong>Teléfono:</strong><br><a href="tel:+34976297764">976 297 764</a></p>
           <p><strong>Correo electrónico:</strong><br><a href="mailto:amacgema@gmail.com">amacgema@gmail.com</a></p>
           <p><strong>Horario de atención:</strong><br>Lunes a viernes, de 9:00 a 14:00 y de 16:00 a 20:00.<br>Los viernes por la tarde no hay atención. Te recomendamos llamar antes de venir para confirmar disponibilidad.</p>
-          <p class="acciones-contacto"><a class="boton boton-secundario" href="https://www.google.com/maps?q=Plaza+del+Pilar+14,+50003+Zaragoza" target="_blank" rel="noopener noreferrer">Cómo llegar</a></p>
+          <p class="acciones-contacto"><a class="boton boton-secundario" href="https://www.google.com/maps?q=Plaza+del+Pilar+14,+50003+Zaragoza" target="_blank" rel="noopener noreferrer">Cómo llegar<span class="sr-only"> (se abre en otra pestaña)</span></a></p>
         </aside>
       </div>
     </section>
@@ -61,7 +97,7 @@
 
               <article class="espacio-fila">
                 <!-- PLACEHOLDER: sustituye por <img src="img/sala-acogida.jpg" alt="Sala de acogida de AMAC-GEMA"> -->
-                <div class="espacio-imagen" aria-hidden="true"></div>
+                <!-- Foto pendiente: cuando la haya, colócala aquí como <img class="espacio-imagen" src="img/..." alt="..."> -->
                 <div class="espacio-texto">
                   <h3>Sala de acogida y atención</h3>
                   <p>Espacio de recepción donde se atiende a las personas que llegan por primera vez y se resuelven dudas o necesidades puntuales.</p>
@@ -75,12 +111,12 @@
                   <p>Dos salas incorporadas en la ampliación de 2019, pensadas para actividades como suelo pélvico, relajación e hipopresivos, además de otros talleres grupales.</p>
                 </div>
                 <!-- PLACEHOLDER: sustituye por <img src="img/salas-polivalentes.jpg" alt="Sala polivalente de AMAC-GEMA"> -->
-                <div class="espacio-imagen" aria-hidden="true"></div>
+                <!-- Foto pendiente: cuando la haya, colócala aquí como <img class="espacio-imagen" src="img/..." alt="..."> -->
               </article>
 
               <article class="espacio-fila">
                 <!-- PLACEHOLDER: sustituye por <img src="img/apoyo-biopsicosocial.jpg" alt="Espacio de apoyo biopsicosocial de AMAC-GEMA"> -->
-                <div class="espacio-imagen" aria-hidden="true"></div>
+                <!-- Foto pendiente: cuando la haya, colócala aquí como <img class="espacio-imagen" src="img/..." alt="..."> -->
                 <div class="espacio-texto">
                   <h3>Espacio de apoyo biopsicosocial</h3>
                   <p>Zona destinada al acompañamiento psicológico y social individual o en grupo para pacientes y familiares.</p>
@@ -95,7 +131,34 @@
                   <p class="nota">[PLACEHOLDER: confirma nombre y aforo si procede.]</p>
                 </div>
                 <!-- PLACEHOLDER: sustituye por <img src="img/zona-encuentro.jpg" alt="Zona de encuentro de AMAC-GEMA"> -->
-                <div class="espacio-imagen" aria-hidden="true"></div>
+                <!-- Foto pendiente: cuando la haya, colócala aquí como <img class="espacio-imagen" src="img/..." alt="..."> -->
               </article>
 
-            </div></div></section></main><footer class="pie"><div class="contenedor"><p><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama</p><p>Zaragoza, Aragón</p><div class="redes" aria-label="Redes sociales"><a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram</a></div><p><a href="contacto.html">Contacta con nosotras</a></p><small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small></div></footer><script src="js/script.js"></script></body></html>
+            </div></div></section>
+  </main>
+  <footer class="pie">
+    <div class="contenedor pie-grid">
+      <div class="pie-columna">
+        <p class="pie-marca"><strong>AMAC-GEMA</strong></p>
+        <p>Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama. Acompañando desde 1994.</p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Contacto</p>
+        <p>Plaza del Pilar, 14 · 50003 Zaragoza</p>
+        <p><a href="tel:+34976297764">976 297 764</a></p>
+        <p><a href="mailto:amacgema@gmail.com">amacgema@gmail.com</a></p>
+      </div>
+      <div class="pie-columna">
+        <p class="pie-titulo">Síguenos</p>
+        <div class="redes" aria-label="Redes sociales">
+          <a href="https://www.facebook.com/amac.gema/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (se abre en otra pestaña)</span></a>
+          <a href="https://www.instagram.com/amacgema/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (se abre en otra pestaña)</span></a>
+        </div>
+        <p><a href="contacto.html">Contacta con nosotras →</a></p>
+      </div>
+    </div>
+    <small>© <span id="anio"></span> AMAC-GEMA. Todos los derechos reservados.</small>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>

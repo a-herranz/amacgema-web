@@ -846,6 +846,26 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   min-height: 300px;
 }
 
+/* Noticias de prensa (Sensibilización): medio y fecha sobre el titular */
+.lista-medios {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.lista-medios li {
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-borde);
+}
+
+.lista-medios li:last-child {
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.lista-medios a {
+  font-weight: 700;
+}
+
 .etiqueta {
   color: var(--color-secundario-oscuro);
   font-family: var(--fuente-titulos);
@@ -1740,6 +1760,12 @@ a.via-contacto-dato:focus-visible {
 
 .pie-marca {
   font-family: var(--fuente-titulos);
+}
+
+.pie-reconocimientos {
+  font-family: var(--fuente-titulos);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .pie-columna .pie-titulo {

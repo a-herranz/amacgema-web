@@ -1035,6 +1035,36 @@ a[target="_blank"]:not(.logo-colaborador)::after {
    página; con dos tarjetas por bloque alternan rosa/teal a propósito. */
 .tarjeta--primario { border-top-color: var(--color-primario); }
 .tarjeta--secundario { border-top-color: var(--color-secundario); }
+.tarjeta--acento { border-top-color: var(--color-acento); }
+.tarjeta--oscuro { border-top-color: var(--color-primario-oscuro); }
+
+/* Variantes del recuadro destacado (páginas de "Hablando de cáncer") */
+.bloque-rosa { border-left-color: var(--color-primario); }
+.bloque-esencial { margin-bottom: 2rem; }
+.bloque-nota { margin: 2rem 0; }
+.bloque-entrada { margin-bottom: 3rem; }
+
+/* Rejilla de dos columnas en escritorio; en móvil, una (ver sección 16) */
+.rejilla-dos {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 3rem;
+}
+
+/* Sublista dentro de una lista-apoyo */
+.lista-anidada {
+  list-style-type: circle;
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.lista-apoyo .lista-anidada li {
+  border-top: 0;
+  padding-left: 0;
+}
+
+.lista-apoyo .lista-anidada li::before {
+  content: none;
+}
 
 .nota { color: var(--color-texto-suave); font-size: 0.92rem; }
 
@@ -1732,6 +1762,10 @@ img.foto-proyecto-grande {
   line-height: 0; /* evita el hueco extra bajo el iframe */
 }
 
+.mapa-contenedor iframe {
+  border: 0;
+}
+
 .rejilla-redes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -2092,6 +2126,10 @@ a.via-contacto-dato:focus-visible {
     gap: 2rem;
   }
 
+  .rejilla-dos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   /* Los dos árboles de Qué hacemos, uno debajo del otro */
   .arboles {
     grid-template-columns: minmax(0, 1fr);
@@ -2202,6 +2240,69 @@ a.via-contacto-dato:focus-visible {
 
   .tarjetas-indice .tarjeta-enlace > span {
     margin-top: 0.6rem;
+  }
+
+  /* Tarjetas enlazadas (índices de sección): sin el hueco grande antes
+     del "Leer más →" */
+  .tarjeta-enlace > span {
+    margin-top: 0.6rem;
+  }
+
+  .tarjeta-enlace p {
+    margin-bottom: 0.3rem;
+  }
+
+  /* "¿Qué necesitas ahora mismo?": el icono a la izquierda y el texto a
+     la derecha. Las tres opciones caben casi en una pantalla en lugar de
+     ocupar tres. */
+  .opciones-ahora {
+    gap: 0.9rem;
+  }
+
+  .opcion-ahora {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    column-gap: 0.9rem;
+    align-items: start;
+    padding: 1.2rem 1.2rem;
+    text-align: left;
+  }
+
+  .opcion-ahora .opcion-icono {
+    grid-row: span 3;
+    font-size: 1.9rem;
+    margin: 0;
+  }
+
+  .opcion-ahora h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .opcion-ahora p {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Cita de la portada: a 1,5rem ocupaba siete líneas */
+  .cita-cercania blockquote {
+    font-size: 1.2rem;
+  }
+
+  /* Vías de contacto más compactas */
+  .vias-contacto {
+    gap: 0.9rem;
+  }
+
+  .vias-contacto li {
+    padding: 1.3rem 1.2rem;
+  }
+
+  /* Botones de Google Maps: a todo lo ancho, uno debajo del otro */
+  .como-llegar-acciones .boton {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
 
   /* Cifras: siempre de dos en dos y más compactas */

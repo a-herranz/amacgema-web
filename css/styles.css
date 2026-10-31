@@ -37,7 +37,7 @@
      9.  Tarjetas y bloques
      10. Portada: opciones y cita
      11. Listas, índices y anclas
-     12. Constelaciones ("Qué hacemos")
+     12. Árboles ("Qué hacemos")
      13. Cronología ("Historia")
      14. Espacios, proyectos y redes
      15. Pie de página
@@ -1266,7 +1266,7 @@ ol.lista-apoyo li::before {
 /* Compensa la cabecera y el subnav fijos al saltar a un ancla, para que el
    título no quede tapado justo debajo del menú */
 h2[id],
-.constelacion[id] {
+.arbol[id] {
   scroll-margin-top: 7rem;
 }
 
@@ -1310,279 +1310,217 @@ h2[id],
 }
 
 /* ==========================================================================
-   12. CONSTELACIONES ("Qué hacemos")
-   Un óvalo grande con la categoría y sus subcategorías orbitando a los
-   lados sobre un anillo elíptico. Cada constelación tiñe sus piezas a
-   través de tres variables locales, que salen siempre de la paleta.
+   12. ÁRBOLES ("Qué hacemos")
+   Cada frente de trabajo es un árbol: el título arriba con un punto
+   grande, una línea vertical que baja y una rama por cada servicio. Los
+   servicios que cuelgan de otro (p. ej. los de Ayuda profesional) son
+   hojas con su propia rama, más fina. Sin cajas: solo línea, punto y
+   texto enlazado, igual en escritorio que en móvil.
    ========================================================================== */
 
-.constelacion-asistencia {
-  --constelacion-acento: var(--color-primario);
-  --constelacion-fondo: var(--color-primario-claro);
-  --constelacion-titulo: var(--color-acento);
+.arbol {
+  --arbol-color: var(--color-primario);
+  --arbol-titulo: var(--color-acento);
+  /* Distancia de la línea vertical al borde y altura de cada codo */
+  --arbol-eje: 0.6rem;
+  --arbol-codo: 1.05rem;
 }
 
-.constelacion-sensibilizacion {
-  --constelacion-acento: var(--color-secundario);
-  --constelacion-fondo: var(--color-secundario-claro);
-  --constelacion-titulo: var(--color-secundario-oscuro);
+.arbol-sensibilizacion {
+  --arbol-color: var(--color-secundario);
+  --arbol-titulo: var(--color-secundario-oscuro);
 }
 
-.constelacion {
-  position: relative;
+.arboles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem 4rem;
   max-width: 1000px;
-  min-height: 500px;
-  aspect-ratio: 16 / 9;
-  margin: 0 auto 3.5rem;
+  margin: 0 auto;
 }
 
-.constelacion:last-child {
-  margin-bottom: 0;
+.arboles-uno {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 600px;
 }
 
-/* Anillo elíptico sobre el que "orbitan" las subcategorías */
-.orbita {
+/* --- Cabecera: punto grande y título del frente --- */
+.arbol-cabecera {
+  position: relative;
+  padding: 0 0 1.2rem calc(var(--arbol-eje) + 2.5rem);
+}
+
+.arbol-cabecera::before {
+  content: '';
   position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 7.4%;
-  bottom: 7.4%;
-  border: 2px dashed var(--constelacion-acento);
+  left: calc(var(--arbol-eje) + 1.5px - 10px);
+  top: 0.3rem;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  opacity: 0.55;
+  background-color: var(--arbol-color);
+  box-shadow: 0 0 0 5px var(--color-fondo);
 }
 
-/* Óvalo central con la categoría */
-.oval {
+/* Tramo de línea desde el punto grande hasta la primera rama */
+.arbol-cabecera::after {
+  content: '';
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 38%;
-  height: 52%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 2.4rem;
-  border-radius: 50%;
-  background-color: var(--constelacion-fondo);
-  border: 4px solid var(--constelacion-acento);
-  box-shadow: var(--sombra-suave);
+  left: var(--arbol-eje);
+  top: 1rem;
+  bottom: 0;
+  border-left: 3px solid var(--arbol-color);
 }
 
-.oval h3 {
+.arbol-cabecera h3 {
+  color: var(--arbol-titulo);
   font-size: 1.35rem;
-  color: var(--constelacion-titulo);
-  margin-bottom: 0.4rem;
+  margin: 0 0 0.3rem;
 }
 
-.oval p {
-  margin: 0;
+.arbol-cabecera p {
+  color: var(--color-texto-suave);
   font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--color-texto);
+  margin: 0;
 }
 
-/* --- Satélites (subcategorías) --- */
-.satelites {
+/* --- Ramas: un servicio por rama --- */
+.arbol-ramas,
+.arbol-hojas {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.satelite {
-  position: absolute;
-  left: var(--x);
-  top: var(--y);
-  width: 24%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.arbol-ramas {
+  margin-left: var(--arbol-eje);
 }
 
-/* Posiciones sobre el anillo */
-.pos-izq     { --x: 12%; --y: 50%; }
-.pos-der     { --x: 88%; --y: 50%; }
-.pos-der-sup { --x: 82%; --y: 27%; }
-.pos-der-inf { --x: 82%; --y: 73%; }
-
-.satelite a {
-  display: block;
-  background-color: var(--color-blanco);
-  color: var(--color-texto);
-  border-radius: var(--radio-borde);
-  border-top: 4px solid var(--constelacion-acento);
-  padding: 1rem 1.1rem;
-  box-shadow: var(--sombra-suave);
-  transition: transform var(--transicion), box-shadow var(--transicion);
-}
-
-.satelite a:hover,
-.satelite a:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: var(--sombra-elevada);
-  text-decoration: none;
-  color: var(--color-texto);
-}
-
-.satelite h4 {
-  font-family: var(--fuente-titulos);
-  font-size: 1rem;
-  line-height: 1.3;
-  color: var(--constelacion-titulo);
-  margin: 0 0 0.3rem;
-}
-
-.satelite p {
-  margin: 0 0 0.5rem;
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: var(--color-texto-suave);
-}
-
-.satelite-mas {
-  font-family: var(--fuente-titulos);
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: var(--constelacion-titulo);
-}
-
-/* Anillo pequeño detrás de cada satélite, del mismo estilo que el grande */
-.satelite-orbita {
-  position: absolute;
-  inset: -14px;
-  border: 2px dashed var(--constelacion-acento);
-  border-radius: 50%;
-  opacity: 0.45;
-  z-index: 0;
-}
-
-/* Variante del satélite cuando es un enlace con caja propia */
-.satelite-caja {
+.arbol-ramas > li {
   position: relative;
-  z-index: 1;
-  display: block;
-  width: 100%;
-  background-color: var(--color-blanco);
-  color: var(--color-texto);
-  border-radius: var(--radio-borde);
-  border-top: 4px solid var(--constelacion-acento);
-  padding: 1rem 1.1rem;
-  box-shadow: var(--sombra-suave);
-  text-align: center;
-  transition: transform var(--transicion), box-shadow var(--transicion);
+  padding: 0 0 1.5rem 2.5rem;
 }
 
-a.satelite-caja:hover,
-a.satelite-caja:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: var(--sombra-elevada);
-  text-decoration: none;
-  color: var(--color-texto);
+.arbol-ramas > li:last-child {
+  padding-bottom: 0;
 }
 
-.satelite-caja h4 {
-  font-family: var(--fuente-titulos);
-  font-size: 1rem;
-  line-height: 1.3;
-  color: var(--constelacion-titulo);
-  margin: 0 0 0.3rem;
-}
-
-.satelite-caja p {
-  margin: 0 0 0.5rem;
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: var(--color-texto-suave);
-}
-
-/* --- Segundo nivel: los servicios que cuelgan de un satélite concreto --- */
-
-/* Insignia "3 servicios" en el satélite que tiene hijos */
-.satelite-badge {
-  display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--constelacion-titulo);
-  background-color: var(--color-fondo-alt);
-  border: 1px solid var(--constelacion-acento);
-  border-radius: var(--radio-pill);
-  padding: 0.1rem 0.55rem;
-  margin-left: 0.4rem;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
-.satelite-con-hijos a {
-  border-style: dashed;
-}
-
-.subnivel {
-  position: relative;
-  max-width: 620px;
-  margin: 3.5rem auto 0 12%;
-  padding-top: 1.6rem;
-}
-
-/* Línea de conexión vertical hacia el satélite del que cuelga */
-.subnivel::before {
+/* Línea vertical; en la última rama se corta en el codo */
+.arbol-ramas > li::before {
   content: '';
   position: absolute;
   left: 0;
   top: 0;
-  height: 1.6rem;
-  border-left: 2px dashed var(--constelacion-acento);
+  bottom: 0;
+  border-left: 3px solid var(--arbol-color);
 }
 
-.subnivel-titulo {
-  font-family: var(--fuente-titulos);
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: var(--color-texto-suave);
-  margin: 0 0 0.8rem;
+.arbol-ramas > li:last-child::before {
+  bottom: auto;
+  height: calc(var(--arbol-codo) + 3px);
 }
 
-.subnivel-satelites {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+/* Codo horizontal hacia el título del servicio */
+.arbol-ramas > li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: var(--arbol-codo);
+  width: 1.4rem;
+  border-top: 3px solid var(--arbol-color);
 }
 
-.mini-satelite {
-  flex: 0 1 auto;
-  background-color: var(--color-blanco);
-  border-radius: var(--radio-borde);
-  border-top: 2px solid var(--constelacion-acento);
-  padding: 0.4rem 0.7rem;
-  box-shadow: var(--sombra-suave);
-  opacity: 0.92;
-}
-
-.mini-satelite h5 {
-  font-family: var(--fuente-titulos);
-  font-size: 0.85rem;
-  color: var(--constelacion-titulo);
-  margin: 0;
-  white-space: nowrap;
-}
-
-/* Cada servicio enlaza a su página: parecían botones y no lo eran */
-.mini-satelite a {
-  color: inherit;
+.arbol-nodo {
   display: block;
+  color: var(--color-texto);
   text-decoration: none;
 }
 
-.mini-satelite:hover,
-.mini-satelite:focus-within {
-  opacity: 1;
-  transform: translateY(-2px);
+/* Punto al final del codo */
+.arbol-nodo::before {
+  content: '';
+  position: absolute;
+  left: calc(1.4rem - 3px);
+  top: calc(var(--arbol-codo) + 1.5px - 6.5px);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: var(--arbol-color);
+}
+
+.arbol-titulo {
+  display: block;
+  color: var(--arbol-titulo);
+  font-family: var(--fuente-titulos);
+  font-size: 1.1rem;
+  font-weight: 700;
+  /* El centro de la primera línea coincide con el codo */
+  line-height: calc(var(--arbol-codo) * 2);
+}
+
+.arbol-titulo::after {
+  content: "\00a0→";
+  font-weight: 600;
+}
+
+.arbol-desc {
+  display: block;
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.arbol-nodo:hover,
+.arbol-nodo:focus-visible {
+  color: var(--color-texto);
+  text-decoration: none;
+}
+
+.arbol-nodo:hover .arbol-titulo,
+.arbol-nodo:focus-visible .arbol-titulo {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Hojas: servicios que cuelgan de una rama --- */
+.arbol-hojas {
+  margin: 0.5rem 0 0 0.2rem;
+}
+
+.arbol-hojas li {
+  position: relative;
+  padding: 0.2rem 0 0.2rem 1.3rem;
+}
+
+.arbol-hojas li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-left: 2px solid var(--arbol-color);
+}
+
+.arbol-hojas li:last-child::before {
+  bottom: auto;
+  height: 1.05rem;
+}
+
+.arbol-hojas li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 0.9rem;
+  border-top: 2px solid var(--arbol-color);
+}
+
+.arbol-hojas a {
+  color: var(--arbol-titulo);
+  font-family: var(--fuente-titulos);
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.7rem;
 }
 
 /* ==========================================================================
@@ -1992,95 +1930,6 @@ a.via-contacto-dato:focus-visible {
    Un único bloque por punto de ruptura, de mayor a menor.
    ========================================================================== */
 
-@media (max-width: 960px) {
-  /* La constelación deja de ser órbita: el óvalo arriba y las
-     subcategorías apiladas debajo */
-  .constelacion {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    aspect-ratio: auto;
-    min-height: 0;
-    margin-bottom: 3rem;
-  }
-
-  .orbita {
-    display: none;
-  }
-
-  .oval {
-    position: static;
-    transform: none;
-    width: 100%;
-    max-width: 440px;
-    height: auto;
-    padding: 2.2rem 2.5rem;
-    border-radius: 50% / 42%;
-  }
-
-  /* En móvil el óvalo ocupaba casi media pantalla: pasa a una cápsula
-     redondeada, más baja, que mantiene la idea de "centro" del grupo. */
-  @media (max-width: 640px) {
-    .oval {
-      padding: 1.3rem 1.4rem;
-      border-radius: 2rem;
-    }
-
-    .oval h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .oval p {
-      font-size: 0.95rem;
-    }
-  }
-
-  .satelites {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    width: 100%;
-    max-width: 440px;
-    margin-top: 1.8rem;
-  }
-
-  /* Conector entre el óvalo y las subcategorías */
-  .satelites::before {
-    content: '';
-    position: absolute;
-    top: -1.8rem;
-    left: 50%;
-    height: 1.8rem;
-    border-left: 2px dashed var(--constelacion-acento);
-  }
-
-  .satelite {
-    position: static;
-    transform: none;
-    width: 100%;
-  }
-
-  /* Con todo apilado, el anillo pequeño ya no aporta */
-  .satelite-orbita {
-    display: none;
-  }
-
-  .subnivel {
-    margin: 2.5rem auto 0;
-    max-width: 440px;
-  }
-
-  .subnivel::before {
-    left: 50%;
-  }
-
-  .subnivel-titulo {
-    text-align: center;
-  }
-}
-
 @media (max-width: 768px) {
   /* ---------- Menú principal como panel desplegable ----------
      Un header fijo con 6 enlaces en fila ocupaba más de un tercio de la
@@ -2243,6 +2092,12 @@ a.via-contacto-dato:focus-visible {
     gap: 2rem;
   }
 
+  /* Los dos árboles de Qué hacemos, uno debajo del otro */
+  .arboles {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.8rem;
+  }
+
   .ayuda-destacada {
     padding: 2rem 1.2rem;
   }
@@ -2379,9 +2234,7 @@ a.via-contacto-dato:focus-visible {
   }
 
   .nav-cta a,
-  .opcion-ahora,
-  .satelite a,
-  a.satelite-caja {
+  .opcion-ahora {
     transition: none;
   }
 }

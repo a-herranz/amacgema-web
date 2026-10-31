@@ -75,54 +75,78 @@
         <li><span class="cifra-numero">2.500</span><span class="cifra-texto">personas al año, de media</span></li>
       </ul>
 
-      <!-- ============ 1. ASISTENCIA A POBLACIÓN AFECTADA ============ -->
-      <div class="constelacion constelacion-asistencia" id="asistencia">
-        <div class="orbita" aria-hidden="true"></div>
-        <div class="oval">
-          <h3>Asistencia a población afectada</h3>
-          <p>Acompañamos a las mujeres afectadas y a sus familias en cada etapa del proceso.</p>
-        </div>
-        <ul class="satelites">
-          <li class="satelite pos-izq satelite-con-hijos">
-            <a href="ayuda-profesional.html">
-              <h4>Ayuda profesional <span class="satelite-badge" aria-hidden="true">3 servicios</span></h4>
-              <p>Atención especializada para cuidar el cuerpo, las emociones y la vida cotidiana.</p>
-              <span class="satelite-mas">Conocer este apoyo →</span>
-            </a>
-          </li>
-          <li class="satelite pos-der-sup"><a href="ayuda-testimonial.html"><h4>Ayuda testimonial</h4><p>Acogida, voluntariado en hospitales y grupos de ayuda mutua.</p><span class="satelite-mas">Conocer este apoyo →</span></a></li>
-          <li class="satelite pos-der-inf"><a href="actividades-guiadas.html"><h4>Actividades guiadas</h4><p>Ejercicio físico, danzaterapia, mindfulness, remo en barco dragón, tiro con arco y manualidades.</p><span class="satelite-mas">Conocer las actividades →</span></a></li>
-        </ul>
+      <!-- Cada frente es un árbol (ver la sección 12 de styles.css): una rama
+           por servicio y, debajo, las hojas con sus páginas concretas. -->
+      <div class="arboles">
 
-        <!-- Nivel 2: servicios que cuelgan únicamente de "Ayuda profesional",
-             un escalón por debajo de los satélites de arriba. -->
-        <div class="subnivel">
-          <p class="subnivel-titulo">Dentro de Ayuda profesional</p>
-          <ul class="subnivel-satelites">
-            <li class="mini-satelite">
-              <a href="ayuda-profesional-fisioterapeuta.html"><h5>Fisioterapia</h5></a>
+        <section class="arbol arbol-asistencia" id="asistencia" aria-labelledby="titulo-asistencia">
+          <div class="arbol-cabecera">
+            <h3 id="titulo-asistencia">Asistencia a población afectada</h3>
+            <p>Acompañamos a las mujeres afectadas y a sus familias en cada etapa del proceso.</p>
+          </div>
+          <ul class="arbol-ramas">
+            <li>
+              <a class="arbol-nodo" href="ayuda-profesional.html">
+                <span class="arbol-titulo">Ayuda profesional</span>
+                <span class="arbol-desc">Atención especializada para cuidar el cuerpo, las emociones y la vida cotidiana.</span>
+              </a>
+              <ul class="arbol-hojas">
+                <li><a href="ayuda-profesional-psicooncologa.html">Psicooncología</a></li>
+                <li><a href="ayuda-profesional-fisioterapeuta.html">Fisioterapia y linfedema</a></li>
+                <li><a href="ayuda-profesional-trabajadorasocial.html">Trabajo social</a></li>
+              </ul>
             </li>
-            <li class="mini-satelite">
-              <a href="ayuda-profesional-psicooncologa.html"><h5>Psicooncología</h5></a>
+            <li>
+              <a class="arbol-nodo" href="ayuda-testimonial.html">
+                <span class="arbol-titulo">Ayuda testimonial</span>
+                <span class="arbol-desc">Mujeres que han vivido la enfermedad acompañan a quienes empiezan el camino.</span>
+              </a>
+              <ul class="arbol-hojas">
+                <li><a href="ayuda-testimonial-acogida.html">Acogida en la sede</a></li>
+                <li><a href="ayuda-testimonial-voluntariado.html">Voluntariado en hospitales</a></li>
+                <li><a href="ayuda-testimonial-cafes.html">Cafés de los martes</a></li>
+              </ul>
             </li>
-            <li class="mini-satelite">
-              <a href="ayuda-profesional-trabajadorasocial.html"><h5>Trabajo social</h5></a>
+            <li>
+              <a class="arbol-nodo" href="actividades-guiadas.html">
+                <span class="arbol-titulo">Actividades guiadas</span>
+                <span class="arbol-desc">Ejercicio físico, danzaterapia, mindfulness, remo en barco dragón, tiro con arco y manualidades.</span>
+              </a>
             </li>
           </ul>
-        </div>
-      </div>
+        </section>
 
-      <!-- ============ 2. SENSIBILIZACIÓN ============ -->
-      <div class="constelacion constelacion-sensibilizacion" id="sensibilizacion">
-        <div class="orbita" aria-hidden="true"></div>
-        <div class="oval">
-          <h3>Sensibilización</h3>
-          <p>Informamos a la sociedad, promovemos la prevención y reclamamos más investigación.</p>
-        </div>
-        <ul class="satelites">
-          <li class="satelite pos-izq"><a href="sensibilizacion.html"><h4>Educación y divulgación</h4><p>Proyecto «Contigo» en institutos, jornadas aragonesas de cáncer y mesas informativas.</p><span class="satelite-mas">Conocer las acciones →</span></a></li>
-          <li class="satelite pos-der"><a href="investigacion.html"><h4>Solidaridad e investigación</h4><p>Marcha por la Salud, iniciativas solidarias y participación en estudios con pacientes.</p><span class="satelite-mas">Conocer la iniciativa →</span></a></li>
-        </ul>
+        <section class="arbol arbol-sensibilizacion" id="sensibilizacion" aria-labelledby="titulo-sensibilizacion">
+          <div class="arbol-cabecera">
+            <h3 id="titulo-sensibilizacion">Sensibilización</h3>
+            <p>Informamos a la sociedad, promovemos la prevención y reclamamos más investigación.</p>
+          </div>
+          <ul class="arbol-ramas">
+            <li>
+              <a class="arbol-nodo" href="sensibilizacion.html">
+                <span class="arbol-titulo">Educación y divulgación</span>
+                <span class="arbol-desc">Charlas en institutos, jornadas, mesas informativas y presencia en congresos.</span>
+              </a>
+              <ul class="arbol-hojas">
+                <li><a href="proyecto-contigo.html">Proyecto «Contigo»</a></li>
+                <li><a href="proyecto-jornada-cancer-mama.html">Jornadas de Cáncer de Mama</a></li>
+                <li><a href="proyecto-jornada-cancer-ginecologico.html">Jornada de Cáncer Ginecológico</a></li>
+                <li><a href="proyecto-yo-me-muevo.html">«Yo me muevo por…»</a></li>
+                <li><a href="proyecto-espacio-cuerpo.html">El espacio del cuerpo</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="arbol-nodo" href="investigacion.html">
+                <span class="arbol-titulo">Solidaridad e investigación</span>
+                <span class="arbol-desc">Iniciativas solidarias a favor de la asociación y participación en estudios con pacientes.</span>
+              </a>
+              <ul class="arbol-hojas">
+                <li><a href="proyecto-marcha-por-la-salud.html">Marcha por la Salud</a></li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
       </div>
     </div></section>
 

@@ -25,7 +25,7 @@
   <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>
   <header class="cabecera">
     <div class="contenedor">
-      <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.jpg" alt="Logo de AMAC-GEMA"></a>
+      <a class="logo" href="index.html" aria-label="AMAC-GEMA, inicio"><img src="img/amac-gema-logo.png" alt="Logo de AMAC-GEMA"></a>
       <!-- Solo en móvil: con el menú plegado, llamar debe seguir estando a un
            toque, no dentro de la hamburguesa ni al final de la página. -->
       <a class="boton-llamar-movil" href="tel:+34976297764"><span aria-hidden="true">📞</span> Llamar</a>
@@ -79,22 +79,34 @@
                 </div>
                 <aside class="bloque-destacado">
                     <h3>Junta directiva</h3>
-                    <p><strong>Presidencia:</strong> [PLACEHOLDER: NOMBRE O CARGO]</p>
-                    <p><strong>Secretaría:</strong> [PLACEHOLDER: NOMBRE O CARGO]</p>
-                    <p><strong>Tesorería:</strong> [PLACEHOLDER: NOMBRE O CARGO]</p>
-                    <p><strong>Vocalías:</strong> [PLACEHOLDER: NOMBRES O NÚMERO DE VOCALÍAS]</p>
+                    <!-- Presidencia y secretaría: firmantes de los estatutos (2023);
+                         la presidencia la confirma también la Memoria 2025. -->
+                    <p><strong>Presidencia:</strong> María José Rivas Rubio</p>
+                    <p><strong>Secretaría:</strong> María Jesús García Úbide</p>
+                    <p><strong>Tesorería:</strong> <mark class="pendiente">[PENDIENTE: nombre]</mark></p>
+                    <p><strong>Vocalías:</strong> <mark class="pendiente">[PENDIENTE: nombres o número de vocalías]</mark></p>
                 </aside>
             </div>
         </section>
         <section class="seccion seccion-alt">
             <div class="contenedor">
                 <div class="seccion-titulo">
-                    <h2>Estatutos de la asociación</h2>
-                    <p>Puedes consultar el documento que recoge nuestros fines, funcionamiento y organización interna.</p>
+                    <h2 id="documentos">Estatutos y memoria de actividades</h2>
+                    <p>Por transparencia, publicamos los documentos que recogen nuestros fines, nuestro funcionamiento y lo que hacemos cada año.</p>
                 </div>
-                <div class="centrado">
-                    <p><a class="boton boton-primario" href="docs/estatutos-amac-gema.pdf" target="_blank" rel="noopener noreferrer">Descargar estatutos (PDF)<span class="sr-only"> (se abre en otra pestaña)</span></a></p>
-                    <p class="nota">[PLACEHOLDER: sube el PDF real de los estatutos a una carpeta "docs" en tu proyecto, con ese mismo nombre de archivo, o cambia la ruta del enlace por la que corresponda.]</p>
+                <div class="rejilla-tarjetas">
+                    <article class="tarjeta">
+                        <p class="etiqueta">Estatutos vigentes</p>
+                        <h3>Estatutos de AMAC-GEMA</h3>
+                        <p>Fines, órganos de gobierno y funcionamiento de la asociación, constituida en Zaragoza el 6 de junio de 1994. Versión aprobada por la Asamblea General Extraordinaria del 25 de mayo de 2023 e inscrita en el registro del Gobierno de Aragón el 26 de septiembre de 2023.</p>
+                        <p><a class="boton boton-primario" href="docs/estatutos-amac-gema.pdf" target="_blank" rel="noopener noreferrer">Ver estatutos (PDF, 2,7 MB)<span class="sr-only"> (se abre en otra pestaña)</span></a></p>
+                    </article>
+                    <article class="tarjeta">
+                        <p class="etiqueta">Memoria 2025</p>
+                        <h3>Memoria de actividades 2025</h3>
+                        <p>Los servicios, talleres, jornadas y campañas del año, con sus cifras: 88 nuevas acogidas, 428 visitas en hospitales y 842 estudiantes en las charlas del proyecto «Contigo».</p>
+                        <p><a class="boton boton-primario" href="docs/memoria-actividades-2025.pdf" target="_blank" rel="noopener noreferrer">Ver memoria (PDF, 0,7 MB)<span class="sr-only"> (se abre en otra pestaña)</span></a></p>
+                    </article>
                 </div>
             </div>
         </section>

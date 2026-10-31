@@ -4,7 +4,9 @@
 
    EJE DE COLOR
    Los dos colores de esta web son los dos colores del logo, muestreados
-   directamente del archivo img/amac-gema-logo.jpg:
+   del primer archivo del logo (un .jpg de baja resolución, ya retirado).
+   El logo en alta resolución (img/amac-gema-logo-original.png) los tiene
+   algo más apagados (#CE8CAD y #58998D); la paleta mantiene los de abajo:
 
        rosa de la "M"        #E38DB0   (H 335.6)
        teal del triángulo    #119B8E   (H 174.3)
@@ -291,10 +293,6 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 .logo img {
   height: 55px;
   width: auto;
-  /* El archivo actual es un .jpg con fondo blanco: al estar la cabecera
-     también en blanco, se integra sin bordes visibles. Si en el futuro
-     tienes el logo en .png con fondo transparente, esta regla no molesta. */
-  mix-blend-mode: multiply;
 }
 
 .logo span {

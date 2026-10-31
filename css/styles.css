@@ -879,6 +879,10 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   font-size: 0.95rem;
 }
 
+.cifras-portada {
+  margin-top: 2.5rem;
+}
+
 .cifras + .nota {
   margin-top: 1rem;
   text-align: center;

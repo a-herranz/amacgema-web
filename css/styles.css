@@ -844,6 +844,46 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   min-height: 300px;
 }
 
+/* Cifras de la asociación (Inicio, Quiénes somos): número grande y una
+   línea que lo explica. Es una lista: cada cifra se lee como una frase. */
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.cifras li {
+  background: var(--color-blanco);
+  border-top: 4px solid var(--color-primario);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+  padding: 1.4rem 1rem;
+}
+
+.cifra-numero {
+  display: block;
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.cifra-texto {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.cifras + .nota {
+  margin-top: 1rem;
+  text-align: center;
+}
+
 /* Noticias de prensa (Sensibilización): medio y fecha sobre el titular */
 .lista-medios {
   list-style: none;
@@ -1077,6 +1117,21 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   content: "✓";
   left: 0;
   position: absolute;
+}
+
+/* En una lista numerada (<ol class="lista-apoyo">) el orden importa: se
+   cambia el ✓ por el número. */
+ol.lista-apoyo {
+  counter-reset: lista-apoyo;
+}
+
+ol.lista-apoyo li {
+  counter-increment: lista-apoyo;
+}
+
+ol.lista-apoyo li::before {
+  content: counter(lista-apoyo) ".";
+  font-weight: 700;
 }
 
 .indice-rapido {

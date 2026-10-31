@@ -11,22 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
   var botonMenuMovil = document.querySelector('.boton-menu-movil');
   var navPrincipal = document.getElementById('menu-principal');
   if (botonMenuMovil && navPrincipal) {
-    var iconoMenuMovil = botonMenuMovil.querySelector('.icono-menu-movil');
-
+    // El icono (rayas o X) lo dibuja el CSS a partir de aria-expanded.
     var cerrarMenuMovil = function () {
       navPrincipal.classList.remove('menu-abierto');
       botonMenuMovil.setAttribute('aria-expanded', 'false');
-      if (iconoMenuMovil) {
-        iconoMenuMovil.textContent = '☰';
-      }
     };
 
     botonMenuMovil.addEventListener('click', function () {
       var abierto = navPrincipal.classList.toggle('menu-abierto');
       botonMenuMovil.setAttribute('aria-expanded', abierto);
-      if (iconoMenuMovil) {
-        iconoMenuMovil.textContent = abierto ? '✕' : '☰';
-      }
     });
 
     // Si la ventana pasa a tamaño de escritorio con el panel abierto

@@ -333,9 +333,47 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
   color: var(--color-texto);
-  line-height: 1;
+}
+
+/* Icono de menú dibujado con CSS: la raya central es el propio span y
+   las otras dos, ::before y ::after. Al abrir, la central desaparece y
+   las otras giran para formar una X. */
+.icono-menu-movil,
+.icono-menu-movil::before,
+.icono-menu-movil::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: transform var(--transicion), background-color var(--transicion);
+}
+
+.icono-menu-movil {
+  position: relative;
+}
+
+.icono-menu-movil::before,
+.icono-menu-movil::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.icono-menu-movil::before { top: -7px; }
+.icono-menu-movil::after { top: 7px; }
+
+.boton-menu-movil[aria-expanded="true"] .icono-menu-movil {
+  background-color: transparent;
+}
+
+.boton-menu-movil[aria-expanded="true"] .icono-menu-movil::before {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.boton-menu-movil[aria-expanded="true"] .icono-menu-movil::after {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .nav-principal ul {
@@ -907,10 +945,6 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   padding: 0.35rem 0.9rem;
 }
 
-.sellos li::before {
-  content: "★\00a0";
-  color: var(--color-primario);
-}
 
 /* Cifras de la asociación (Inicio, Quiénes somos): número grande y una
    línea que lo explica. Es una lista: cada cifra se lee como una frase. */
@@ -1176,12 +1210,6 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   box-shadow: var(--sombra-elevada);
   text-decoration: none;
   color: var(--color-texto);
-}
-
-.opcion-ahora .opcion-icono {
-  font-size: 2.2rem;
-  display: block;
-  margin-bottom: 0.8rem;
 }
 
 .opcion-ahora h3 {
@@ -1834,12 +1862,6 @@ img.foto-proyecto-grande {
   text-align: center;
 }
 
-.via-contacto-icono {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 0.6rem;
-}
-
 .via-contacto-etiqueta {
   font-family: var(--fuente-titulos);
   font-weight: 700;
@@ -2252,26 +2274,15 @@ a.via-contacto-dato:focus-visible {
     margin-bottom: 0.3rem;
   }
 
-  /* "¿Qué necesitas ahora mismo?": el icono a la izquierda y el texto a
-     la derecha. Las tres opciones caben casi en una pantalla en lugar de
-     ocupar tres. */
+  /* "¿Qué necesitas ahora mismo?": compactas y alineadas a la izquierda,
+     para que las tres opciones quepan casi en una pantalla. */
   .opciones-ahora {
     gap: 0.9rem;
   }
 
   .opcion-ahora {
-    display: grid;
-    grid-template-columns: 2.6rem 1fr;
-    column-gap: 0.9rem;
-    align-items: start;
-    padding: 1.2rem 1.2rem;
+    padding: 1.2rem 1.25rem;
     text-align: left;
-  }
-
-  .opcion-ahora .opcion-icono {
-    grid-row: span 3;
-    font-size: 1.9rem;
-    margin: 0;
   }
 
   .opcion-ahora h3 {
@@ -2335,7 +2346,10 @@ a.via-contacto-dato:focus-visible {
   }
 
   .nav-cta a,
-  .opcion-ahora {
+  .opcion-ahora,
+  .icono-menu-movil,
+  .icono-menu-movil::before,
+  .icono-menu-movil::after {
     transition: none;
   }
 }

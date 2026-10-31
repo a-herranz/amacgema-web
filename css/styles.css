@@ -844,6 +844,55 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   min-height: 300px;
 }
 
+/* Cargos de la junta directiva: el cargo, pequeño, encima del nombre */
+.lista-cargos {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.lista-cargos li {
+  border-top: 1px solid var(--color-borde);
+  padding: 0.7rem 0;
+}
+
+.lista-cargos strong {
+  display: block;
+  color: var(--color-secundario-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Sellos de reconocimiento bajo el título (Quiénes somos): pastillas
+   discretas en lugar de una línea de texto en negrita. */
+.sellos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 1.2rem 0 0;
+  padding: 0;
+}
+
+.sellos li {
+  background: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pill);
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+}
+
+.sellos li::before {
+  content: "★\00a0";
+  color: var(--color-primario);
+}
+
 /* Cifras de la asociación (Inicio, Quiénes somos): número grande y una
    línea que lo explica. Es una lista: cada cifra se lee como una frase. */
 .cifras {
@@ -2078,8 +2127,23 @@ a.via-contacto-dato:focus-visible {
     font-size: 1.75rem;
   }
 
+  h2 {
+    font-size: 1.5rem;
+  }
+
   .seccion {
     padding: 2.5rem 0;
+  }
+
+  /* Menos relleno interior: en 390 px, 2rem por lado dejaban el texto de
+     las tarjetas en una columna de menos de 280 px. */
+  .tarjeta,
+  .bloque-destacado {
+    padding: 1.4rem 1.25rem;
+  }
+
+  .rejilla-tarjetas {
+    gap: 1.2rem;
   }
 
   .dos-columnas {
@@ -2103,29 +2167,52 @@ a.via-contacto-dato:focus-visible {
 }
 
 @media (max-width: 700px) {
-  /* Cronología: todo a la derecha de la línea */
+  /* Cronología: la línea pegada a la izquierda y cada hito a todo lo
+     ancho, con el año como pastilla encima de la tarjeta. Antes el año
+     ocupaba una columna propia y el texto quedaba en unos 220 px. */
   .cronologia::before {
-    left: 28px;
+    left: 11px;
+    transform: none;
   }
 
   .cronologia-item,
   .cronologia-izquierda,
   .cronologia-derecha {
-    grid-template-columns: 56px 1fr;
-    column-gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 2.2rem;
+    margin-bottom: 1.6rem;
   }
 
   .cronologia-fecha {
-    grid-column: 1;
-    grid-row: 1;
+    order: -1;
+    position: relative;
     font-size: 0.85rem;
-    padding: 0.5rem 0.3rem;
+    padding: 0.3rem 0.9rem;
+    border: 0;
+    box-shadow: none;
+  }
+
+  /* Punto sobre la línea, a la altura del año */
+  .cronologia-fecha::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--color-accion);
+    border: 3px solid var(--color-fondo-alt);
+    transform: translateY(-50%);
   }
 
   .cronologia-izquierda .cronologia-contenido,
   .cronologia-derecha .cronologia-contenido {
-    grid-column: 2;
-    grid-row: 1;
+    width: 100%;
+    margin-top: 0.6rem;
+    padding: 1.2rem 1.25rem;
     text-align: left;
   }
 
@@ -2144,6 +2231,48 @@ a.via-contacto-dato:focus-visible {
 @media (max-width: 640px) {
   .tarjetas-indice {
     grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  /* Índice de sección compacto: en móvil las cuatro tarjetas a tamaño
+     completo ocupaban más de dos pantallas para cuatro enlaces. */
+  .tarjetas-indice .tarjeta {
+    padding: 1.1rem 1.25rem;
+  }
+
+  .tarjetas-indice .etiqueta {
+    display: none;
+  }
+
+  .tarjetas-indice h3 {
+    margin-bottom: 0.3rem;
+  }
+
+  .tarjetas-indice p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+  }
+
+  .tarjetas-indice .tarjeta-enlace > span {
+    margin-top: 0.6rem;
+  }
+
+  /* Cifras: siempre de dos en dos y más compactas */
+  .cifras {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  .cifras li {
+    padding: 1rem 0.6rem;
+  }
+
+  .cifra-numero {
+    font-size: 1.8rem;
+  }
+
+  .cifra-texto {
+    font-size: 0.85rem;
   }
 }
 

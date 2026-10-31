@@ -1271,9 +1271,15 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   position: absolute;
 }
 
-/* Un párrafo justo después de una lista no debe quedar pegado a ella */
+/* Un párrafo o un título justo después de una lista no deben quedar
+   pegados a ella */
 .lista-apoyo + p {
   margin-top: 1rem;
+}
+
+.lista-apoyo + h2,
+.lista-apoyo + h3 {
+  margin-top: 2rem;
 }
 
 /* En una lista numerada (<ol class="lista-apoyo">) el orden importa: se
@@ -1297,6 +1303,16 @@ ol.lista-apoyo li::before {
   border-radius: var(--radio-borde);
   padding: 1.2rem 1.5rem;
   margin-bottom: 2.5rem;
+}
+
+.indice-rapido-titulo {
+  color: var(--color-secundario-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
 }
 
 .indice-rapido ul {

@@ -112,6 +112,46 @@ def avisar_pestana_nueva(html):
     return re.sub(r'(<a\b[^>]*\btarget="_blank"[^>]*>)(.*?)(</a>)', poner, html, flags=re.S)
 
 
+# ---------- Índice de página ----------
+# En una página larga, el marcador {{INDICE}} se sustituye por un índice de
+# salto con sus títulos <h2>. Los <h2> sin id reciben uno a partir del texto,
+# así que basta con escribir el marcador donde deba aparecer el índice.
+def _slug(texto):
+    texto = re.sub(r"<[^>]+>", "", texto).lower()
+    for origen, destino in zip("áéíóúüñ", "aeiouun"):
+        texto = texto.replace(origen, destino)
+    return re.sub(r"[^a-z0-9]+", "-", texto).strip("-")
+
+
+def generar_indice(content):
+    if "{{INDICE}}" not in content:
+        return content
+    antes, despues = content.split("{{INDICE}}", 1)
+    entradas, usados = [], set()
+
+    def poner_id(m):
+        attrs, texto = m.group(1), m.group(2)
+        ident = re.search(r'\bid="([^"]+)"', attrs)
+        if ident:
+            ident = ident.group(1)
+        else:
+            ident = base = _slug(texto) or "seccion"
+            n = 2
+            while ident in usados:
+                ident, n = "%s-%d" % (base, n), n + 1
+            attrs += ' id="%s"' % ident
+        usados.add(ident)
+        entradas.append((ident, re.sub(r"<[^>]+>", "", texto).strip()))
+        return "<h2%s>%s</h2>" % (attrs, texto)
+
+    despues = re.sub(r"<h2([^>]*)>(.*?)</h2>", poner_id, despues, flags=re.S)
+    enlaces = "\n".join('      <li><a href="#%s">%s</a></li>' % e for e in entradas)
+    indice = ('<nav class="indice-rapido" aria-label="Índice de esta página">\n'
+              '    <p class="indice-rapido-titulo">En esta página</p>\n'
+              '    <ul>\n%s\n    </ul>\n  </nav>' % enlaces)
+    return antes + indice + despues
+
+
 def read(path):
     with open(path, encoding="utf-8") as fh:
         return fh.read()
@@ -178,6 +218,8 @@ def build():
         if subnav_key:
             tpl = subnav_templates[subnav_key]
             subnav_html = apply_active(tpl, SUBNAV_LINKS[subnav_key], fname)
+
+        content = generar_indice(content)
 
         en_hablando = os.path.normpath(page_path).split(os.sep)[1] == "hablando-de-cancer"
         if en_hablando and fname not in GLOSARIO_SIN_ENLACE:

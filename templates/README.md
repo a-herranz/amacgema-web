@@ -170,6 +170,12 @@ Después de editar, ejecuta `python scripts/build.py` para regenerar.
 - **Página 404**: `pages/404.html` se publica con una etiqueta `<base>`
   para que funcione en cualquier ruta inexistente.
 
+- **Índice de página**: en una página larga, escribe `{{INDICE}}` donde deba
+  ir el índice (normalmente justo después del recuadro "Lo esencial"). El
+  build lo sustituye por un índice "En esta página" con todos los `<h2>` que
+  vienen detrás, y pone un `id` a los que no lo tengan. No hace falta
+  mantener el índice a mano: si añades o cambias un `<h2>`, se actualiza solo.
+
 - **Aviso de datos pendientes**: si una página contiene un
   `<mark class="pendiente">`, el build lo indica al terminar. Se usa en los
   textos legales (`pages/legal/`) para los datos de la asociación que

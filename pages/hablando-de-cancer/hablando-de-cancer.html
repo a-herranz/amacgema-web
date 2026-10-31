@@ -1,6 +1,6 @@
 ---
-title: Hablando de Cáncer | AMAC-GEMA
-description: Información sobre cáncer de mama, cáncer ginecológico, linfedema, y aspectos generales, sociales y psicológicos.
+title: Hablando de cáncer | AMAC-GEMA
+description: Información clara sobre el cáncer de mama y ginecológico, sus pruebas y tratamientos, el linfedema y los aspectos psicológicos y sociales de la enfermedad.
 nav: hablando-de-cancer.html
 subnav: hablando-de-cancer
 ---
@@ -15,40 +15,85 @@ subnav: hablando-de-cancer
             <section class="seccion">
                 <div class="contenedor">
                     <div class="seccion-titulo">
-                        <h2>Elige un apartado</h2>
-                        <p>Cada categoría reúne la información específica sobre ese tema.</p>
+                        <h2>Elige un tema</h2>
+                        <p>Puedes leer cada apartado por separado, en el orden que necesites.</p>
                     </div>
-                    <div class="rejilla-tarjetas">
-                        <a class="tarjeta tarjeta-enlace" href="aspectos-generales.html">
-                            <h3>Aspectos generales</h3>
-                            <p>Concepto, itinerario diagnóstico, planteamiento terapéutico.</p>
-                            <span>Leer más →</span>
-                        </a>
-                        <a class="tarjeta tarjeta-enlace" href="cancer-de-mama.html">
-                            <h3>Cáncer de mama</h3>
-                            <p>Anatomía, factores asociados, síntomas, diagnóstico, tratamiento y prevención.</p>
-                            <span>Leer más →</span>
-                        </a>
-                        <a class="tarjeta tarjeta-enlace" href="cancer-ginecologico.html">
-                            <h3>Cáncer ginecológico</h3>
-                            <p>Anatomía, cáncer por localización, prevención y diagnóstico precoz.</p>
-                            <span>Leer más →</span>
-                        </a>
-                        <a class="tarjeta tarjeta-enlace" href="linfedema.html">
-                            <h3>Linfedema</h3>
-                            <p>Qué es, por qué se produce, prevención y tratamiento.</p>
-                            <span>Leer más →</span>
-                        </a>
-                        <a class="tarjeta tarjeta-enlace" href="aspectos-sociales.html">
-                            <h3>Aspectos sociales</h3>
-                            <p>Impacto en el entorno personal, familiar, laboral y social, y recursos disponibles.</p>
-                            <span>Leer más →</span>
-                        </a>
-                        <a class="tarjeta tarjeta-enlace" href="aspectos-psicologicos.html">
-                            <h3>Aspectos psicológicos</h3>
-                            <p>El impacto emocional de la enfermedad y cómo afrontarlo.</p>
-                            <span>Leer más →</span>
-                        </a>
+
+                    <!-- Mismo árbol que en Qué hacemos (sección 12 de styles.css) -->
+                    <div class="arboles">
+
+                        <section class="arbol arbol-asistencia" aria-labelledby="titulo-enfermedad">
+                            <div class="arbol-cabecera">
+                                <h3 id="titulo-enfermedad">La enfermedad</h3>
+                                <p>Qué es el cáncer, cómo se diagnostica y cómo se trata.</p>
+                            </div>
+                            <ul class="arbol-ramas">
+                                <li>
+                                    <a class="arbol-nodo" href="aspectos-generales.html">
+                                        <span class="arbol-titulo">Aspectos generales</span>
+                                        <span class="arbol-desc">Lo básico sobre cualquier cáncer.</span>
+                                    </a>
+                                    <ul class="arbol-hojas">
+                                        <li><a href="concepto.html">Qué es el cáncer</a></li>
+                                        <li><a href="itinerario-diagnostico.html">Cómo se diagnostica</a></li>
+                                        <li><a href="planteamiento-terapeutico.html">Cómo se trata</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="arbol-nodo" href="cancer-de-mama.html">
+                                        <span class="arbol-titulo">Cáncer de mama</span>
+                                        <span class="arbol-desc">De la anatomía a la prevención.</span>
+                                    </a>
+                                    <ul class="arbol-hojas">
+                                        <li><a href="anatomia.html">Anatomía</a></li>
+                                        <li><a href="factores-asociados.html">Factores asociados</a></li>
+                                        <li><a href="sintomas.html">Síntomas</a></li>
+                                        <li><a href="diagnostico.html">Diagnóstico</a></li>
+                                        <li><a href="tratamiento.html">Tratamiento</a></li>
+                                        <li><a href="prevencion-diagnostico-precoz.html">Prevención y diagnóstico precoz</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="arbol-nodo" href="cancer-ginecologico.html">
+                                        <span class="arbol-titulo">Cáncer ginecológico</span>
+                                        <span class="arbol-desc">Ovario, útero, vagina y vulva.</span>
+                                    </a>
+                                    <ul class="arbol-hojas">
+                                        <li><a href="anatomia-genital.html">Anatomía</a></li>
+                                        <li><a href="cancer-por-localizacion.html">Cáncer por localización</a></li>
+                                        <li><a href="prevencion-diagnostico-precoz-ginecologico.html">Prevención y diagnóstico precoz</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="arbol arbol-sensibilizacion" aria-labelledby="titulo-vivir">
+                            <div class="arbol-cabecera">
+                                <h3 id="titulo-vivir">Vivir con la enfermedad</h3>
+                                <p>Lo que el cáncer cambia en el cuerpo, en las emociones y en la vida diaria.</p>
+                            </div>
+                            <ul class="arbol-ramas">
+                                <li>
+                                    <a class="arbol-nodo" href="linfedema.html">
+                                        <span class="arbol-titulo">Linfedema</span>
+                                        <span class="arbol-desc">Qué es, por qué se produce y cómo prevenirlo y tratarlo.</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="arbol-nodo" href="aspectos-psicologicos.html">
+                                        <span class="arbol-titulo">Aspectos psicológicos</span>
+                                        <span class="arbol-desc">Las emociones más frecuentes y cómo hablar con tu médico, tu familia y los más pequeños.</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="arbol-nodo" href="aspectos-sociales.html">
+                                        <span class="arbol-titulo">Aspectos sociales</span>
+                                        <span class="arbol-desc">Cambios en el trabajo, la familia y la vida social, y los recursos y ayudas disponibles.</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
                     </div>
                 </div>
             </section>

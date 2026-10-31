@@ -844,6 +844,25 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   min-height: 300px;
 }
 
+/* La foto es un <span> hijo directo de la tarjeta enlazada: sin esto
+   heredaría el inline-block de ".tarjeta-enlace > span" (pensado para el
+   "Leer proyecto →") y quedaría como una miniatura a la izquierda. */
+.tarjeta-enlace > .foto-proyecto {
+  display: flex;
+  margin-top: -0.5rem;
+}
+
+/* Carteles de proyecto en las tarjetas: altura fija y centrados sobre
+   el fondo degradado, sin recortar el cartel. */
+.foto-proyecto img {
+  height: 200px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: var(--sombra-suave);
+}
+
 /* Cargos de la junta directiva: el cargo, pequeño, encima del nombre */
 .lista-cargos {
   list-style: none;
@@ -930,6 +949,28 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 
 .cifras-portada {
   margin-top: 2.5rem;
+}
+
+/* Cifras bajo un título de sección, antes del contenido (Qué hacemos) */
+.cifras-intro {
+  max-width: 720px;
+  margin: 0 auto 3rem;
+}
+
+@media (max-width: 640px) {
+  /* Tres cifras caben en una fila incluso en móvil */
+  .cifras.cifras-intro {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .cifras-intro .cifra-numero {
+    font-size: 1.5rem;
+  }
+
+  .cifras.cifras-intro li {
+    padding: 0.8rem 0.3rem;
+  }
 }
 
 .cifras + .nota {
@@ -1170,6 +1211,11 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   content: "✓";
   left: 0;
   position: absolute;
+}
+
+/* Un párrafo justo después de una lista no debe quedar pegado a ella */
+.lista-apoyo + p {
+  margin-top: 1rem;
 }
 
 /* En una lista numerada (<ol class="lista-apoyo">) el orden importa: se
@@ -1526,6 +1572,19 @@ a.satelite-caja:focus-visible {
   white-space: nowrap;
 }
 
+/* Cada servicio enlaza a su página: parecían botones y no lo eran */
+.mini-satelite a {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
+.mini-satelite:hover,
+.mini-satelite:focus-within {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
 /* ==========================================================================
    13. CRONOLOGÍA ("Historia")
    ========================================================================== */
@@ -1681,6 +1740,14 @@ img.foto-proyecto-grande {
 .layout-jornada h2 {
   margin-top: 0;
   font-size: 1.75rem;
+}
+
+.subtitulo-proyecto {
+  margin-top: 1.5rem;
+}
+
+.acciones-proyecto {
+  margin-top: 2rem;
 }
 
 .bloque-info {
@@ -1951,6 +2018,24 @@ a.via-contacto-dato:focus-visible {
     border-radius: 50% / 42%;
   }
 
+  /* En móvil el óvalo ocupaba casi media pantalla: pasa a una cápsula
+     redondeada, más baja, que mantiene la idea de "centro" del grupo. */
+  @media (max-width: 640px) {
+    .oval {
+      padding: 1.3rem 1.4rem;
+      border-radius: 2rem;
+    }
+
+    .oval h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .oval p {
+      font-size: 0.95rem;
+    }
+  }
+
   .satelites {
     position: relative;
     display: flex;
@@ -2140,6 +2225,13 @@ a.via-contacto-dato:focus-visible {
   .tarjeta,
   .bloque-destacado {
     padding: 1.4rem 1.25rem;
+  }
+
+  /* El botón de un recuadro destacado, a todo lo ancho: así un texto
+     largo que salta de línea se ve intencionado y es más fácil de tocar. */
+  .bloque-destacado .boton {
+    display: block;
+    text-align: center;
   }
 
   .rejilla-tarjetas {

@@ -140,10 +140,30 @@ cuestionario para la junta).
       en la raíz de un dominio).
 - [ ] **Correo propio** con el mismo dominio (hoy es un Gmail). Al cambiarlo,
       actualizar `CORREO_DESTINO` en el build y el pie.
-- [ ] **Google Search Console**: dar de alta la web y enviar `sitemap.xml`.
+- [ ] **Google Search Console**: la web ya está preparada (fase 5).
+      1. En https://search.google.com/search-console, «Añadir propiedad» →
+         «Prefijo de la URL» → la dirección de la web.
+      2. Elegir verificar con «Etiqueta HTML» y copiar solo el valor de
+         `content="..."`.
+      3. Ponerlo en `VERIFICACION_GOOGLE` en [scripts/build.py](scripts/build.py),
+         publicar y pulsar «Verificar».
+      4. En «Sitemaps», enviar `sitemap.xml`.
+      Con dominio propio, repetir con la nueva dirección.
 - [ ] **Google Business Profile**: crear o reclamar la ficha de la sede
       (dirección, horario, teléfono, fotos) para aparecer en Maps al buscar
       «asociación cáncer de mama Zaragoza».
+- [ ] **Estadísticas de visitas (GoatCounter)**: preparadas y desactivadas
+      (fase 5). Crear la cuenta gratuita en https://www.goatcounter.com (es
+      gratis para asociaciones), poner su código en `GOATCOUNTER` en
+      [scripts/build.py](scripts/build.py) y publicar. Al activarlo, la
+      política de cookies y la de privacidad lo mencionan solas, y se cuentan
+      también los clics en «Llamar», los correos y las descargas del tríptico.
+- [x] **Velocidad y accesibilidad** (fase 5, nov. 2026): imágenes en WebP y
+      a su tamaño, tipografías alojadas en la propia web (ya no se usa Google
+      Fonts), enlaces subrayados dentro del texto. Lighthouse en móvil: 98-99
+      en velocidad y 100 en accesibilidad, buenas prácticas y SEO. El
+      workflow «Revisar calidad» lo repite el día 1 de cada mes; mirar el
+      resumen de esa ejecución en la pestaña Actions de GitHub.
 
 ## Descartado por ahora
 

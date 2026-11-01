@@ -74,8 +74,22 @@ No hay ninguna forma de donar: todo pasa por «contacta».
       logotipo europeo de Lectura Fácil.
 - [ ] **Historias**: la página ya existe
       ([Historias](pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html)),
-      con la fundación y dos citas de la presidenta. Falta recoger historias
-      de socias, siempre con permiso por escrito.
+      con la fundación, la historia de la presidenta y citas suyas en prensa
+      (COPE 2026, Aragón Digital 2026, Aragón TV 2024). Falta:
+  - [ ] Que María José Rivas confirme que está de acuerdo con que su historia
+        personal (diagnóstico y tratamientos, tal como los contó en Aragón
+        Digital) aparezca en la web de la asociación.
+  - [ ] Recoger historias de socias, siempre con permiso por escrito.
+  - [ ] Entrevista de Karicia (20/10/2022,
+        [enlace](https://karicia.com/maria-jose-aybar-presidenta-de-la-asociacion-amac-gema-de-apoyo-a-las-mujeres-con-cancer-de-mama-y-genital/)):
+        tiene respuestas muy buenas sobre la fundación y el voluntariado,
+        pero la página no deja claro si habla María José Rivas o María José
+        Aybar. Confirmar quién respondió antes de usarla.
+  - [ ] Webinar de Atfísica sobre radioterapia intraoperatoria con el
+        testimonio de paciente de María José Rivas: solo en vídeo; si hay
+        transcripción o se puede ver, sacar de ahí alguna cita.
+  - [ ] La AECC (presentación de «Me voy a casa», 27/02/2026) cita a una
+        paciente, pero no dice si es de AMAC-GEMA: no se ha usado.
 - [ ] **Fotos de la sede**: hacer fotos de los espacios para
       [Sede social](pages/quienes-somos/sede-social.html), que hoy no tiene
       ninguna: sala de acogida y atención, las dos salas polivalentes de la
@@ -154,7 +168,7 @@ registrada aquí.
 | Sexualidad | `pages/hablando-de-cancer/sexualidad.html` | SEOM, AECC | Psicooncóloga y ginecología u oncología | Pendiente | | |
 | Folleto «Primeros pasos» | `pages/folleto-primeros-pasos.html` | Resumen de Me acaban de diagnosticar | Oncología (junto con esa página) | Pendiente | | |
 | Lectura fácil | `pages/lectura-facil.html` | Web de AMAC-GEMA | Validación de lectura fácil (entidad especializada y personas lectoras) | Pendiente | | |
-| Historias | `pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html` | Web de AMAC-GEMA, entrevista de COPE Aragón (19/10/2026) | Junta directiva (textos y citas de la presidenta) | Pendiente | | |
+| Historias | `pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html` | Web de AMAC-GEMA; entrevistas a la presidenta en COPE Aragón (19/10/2026), Aragón Digital (19/10/2026) y Aragón TV (18/10/2024) | Junta directiva y la propia María José Rivas (su historia personal y sus citas) | Pendiente | | Por decisión de nov. 2026, esta página no muestra el aviso de IA |
 
 **Cuando una página quede revisada:**
 

@@ -5,7 +5,7 @@
    EJE DE COLOR
    Los dos colores de esta web son los dos colores del logo, muestreados
    del primer archivo del logo (un .jpg de baja resolución, ya retirado).
-   El logo en alta resolución (img/amac-gema-logo-original.png) los tiene
+   El logo en alta resolución (originales/amac-gema-logo-original.png) los tiene
    algo más apagados (#CE8CAD y #58998D); la paleta mantiene los de abajo:
 
        rosa de la "M"        #E38DB0   (H 335.6)
@@ -49,6 +49,34 @@
 /* ==========================================================================
    1. TOKENS
    ========================================================================== */
+
+/* Tipografías alojadas en la propia web (fonts/), no en Google Fonts: carga
+   antes y no envía la IP de cada visita a Google. Solo el alfabeto latino,
+   que cubre el español. Licencia SIL Open Font License (fonts/LICENCIA.txt).
+   Lora es variable: un solo archivo para los pesos 400 y 500. */
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('../fonts/lora-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/poppins-600-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/poppins-700-latin.woff2') format('woff2');
+}
 
 :root {
   /* --- Los dos colores del logo, tal cual --- */
@@ -128,6 +156,15 @@ a:hover,
 a:focus {
   color: var(--color-acento-oscuro);
   text-decoration: underline;
+}
+
+/* Enlaces dentro de un texto: subrayados, para que no se distingan solo
+   por el color (WCAG 1.4.1). Los enlaces con clase propia (botones,
+   flechas, teléfono, glosario...) ya tienen su propio aspecto. */
+main :is(p, li, dd, td, figcaption) a:not([class]) {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
 }
 
 h1, h2, h3, h4 {

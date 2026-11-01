@@ -1,10 +1,14 @@
-# Repaso automático de la web publicada con Lighthouse (Google): velocidad,
-# accesibilidad, buenas prácticas y SEO, en versión móvil.
+# Repaso automático con Lighthouse (Google): velocidad, accesibilidad,
+# buenas prácticas y SEO, en versión móvil.
 #
-# Se lanza a mano desde la pestaña Actions ("Run workflow") y además el
-# primer día de cada mes. No cambia nada de la web: deja una tabla con las
-# notas en el resumen de la ejecución y los informes completos (HTML y JSON)
-# como artefacto descargable.
+# Genera la web de la rama elegida (scripts/build.py), la sirve dentro de la
+# propia máquina de GitHub y pasa Lighthouse por las páginas clave. Así se
+# puede medir una rama antes de publicarla. No cambia nada de la web: deja
+# una tabla con las notas en el resumen de la ejecución y los informes
+# completos (HTML y JSON) como artefacto descargable.
+#
+# Se lanza a mano desde la pestaña Actions ("Run workflow", eligiendo la
+# rama) y además el primer día de cada mes, sobre main.
 
 name: Revisar calidad
 
@@ -20,7 +24,6 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     env:
-      WEB: https://a-herranz.github.io/amacgema-web/
       PAGINAS: >-
         index.html
         me-acaban-de-diagnosticar.html
@@ -31,16 +34,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
 
-      - name: Pasar Lighthouse por cada página
+      - name: Generar la web
+        run: python scripts/build.py
+
+      - name: Servir la web y pasar Lighthouse por cada página
         run: |
+          python -m http.server 8000 -d publicar >/dev/null 2>&1 &
+          sleep 2
           mkdir -p informes
           for pagina in $PAGINAS; do
             nombre="${pagina%.html}"
-            npx -y lighthouse@12.2.1 "$WEB$pagina" --quiet \
+            npx -y lighthouse@12.2.1 "http://localhost:8000/$pagina" --quiet \
               --chrome-flags="--headless=new --no-sandbox" \
               --output=json --output=html \
               --output-path="informes/$nombre" || echo "::warning::Lighthouse falló en $pagina"

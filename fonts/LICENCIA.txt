@@ -1,0 +1,11 @@
+Tipografías de esta carpeta, descargadas de Google Fonts (subconjunto latino)
+para alojarlas en la propia web:
+
+- Lora (lora-latin.woff2), de Cyreal.
+  https://fonts.google.com/specimen/Lora
+- Poppins (poppins-600-latin.woff2, poppins-700-latin.woff2), de Indian Type Foundry.
+  https://fonts.google.com/specimen/Poppins
+
+Ambas se distribuyen con la licencia SIL Open Font License, versión 1.1,
+que permite usarlas, alojarlas y distribuirlas libremente:
+https://openfontlicense.org/open-font-license-official-text/

@@ -28,6 +28,17 @@ os.chdir(ROOT)
 # Si la web pasa a un dominio propio, cambia solo esta línea.
 SITE_URL = "https://a-herranz.github.io/amacgema-web/"
 
+# Estadísticas de visitas con GoatCounter (gratuito para asociaciones, sin
+# cookies ni datos personales). Vacío = desactivadas. Para activarlas, crea
+# la cuenta en https://www.goatcounter.com y pon aquí su código: si el panel
+# es https://amacgema.goatcounter.com, el código es "amacgema". Al activarlo,
+# la política de cookies y la de privacidad lo mencionan solas.
+GOATCOUNTER = ""
+
+# Verificación de la web en Google Search Console (método «etiqueta HTML»):
+# el valor de content="..." que da Google. Vacío = sin verificar.
+VERIFICACION_GOOGLE = ""
+
 NAV_LINKS = [
     "index.html", "quienes-somos.html", "que-hacemos.html",
     "hablando-de-cancer.html", "como-ayudar.html", "buscar.html", "contacto.html",
@@ -38,7 +49,7 @@ NAV_LINKS = [
 SALIDA = "publicar"
 
 # Carpetas que se copian tal cual a la web publicada
-ESTATICOS = ["css", "js", "img", "docs"]
+ESTATICOS = ["css", "js", "img", "docs", "fonts"]
 
 # En GitHub Actions (variable CI), un fallo del buscador detiene la
 # publicación; en local solo avisa.
@@ -363,6 +374,48 @@ def generar_indice(content):
     return antes + indice + despues
 
 
+# ---------- Estadísticas y verificación de Google ----------
+TEXTO_ANALITICA = {
+    False: "ni utiliza herramientas de analítica o publicidad.",
+    True: ("ni utiliza publicidad. Para saber qué páginas se visitan usamos "
+           "GoatCounter, un servicio de estadísticas que no instala cookies ni "
+           "recoge datos personales: solo cuenta visitas de forma anónima."),
+}
+PROVEEDOR_ESTADISTICAS = (
+    "      <li><strong>GoatCounter (estadísticas de visitas):</strong> cuenta las "
+    "páginas visitadas de forma anónima, sin cookies y sin guardar la dirección IP.</li>\n")
+
+# Clics que interesa contar en las estadísticas: cuántas personas llaman,
+# escriben o descargan el tríptico desde la web.
+CLICS_CONTADOS = [
+    (r'href="tel:', "llamar"),
+    (r'href="mailto:', "escribir-correo"),
+    (r'href="docs/triptico-primeros-pasos\.pdf"', "descargar-triptico"),
+]
+
+
+def cabecera_extra():
+    partes = []
+    if VERIFICACION_GOOGLE:
+        partes.append('  <meta name="google-site-verification" content="%s">\n'
+                      % VERIFICACION_GOOGLE)
+    if GOATCOUNTER:
+        partes.append('  <script data-goatcounter="https://%s.goatcounter.com/count" '
+                      'async src="https://gc.zgo.at/count.js"></script>\n' % GOATCOUNTER)
+    return "".join(partes)
+
+
+def marcar_clics(html):
+    """Con GoatCounter activo, cada enlace de CLICS_CONTADOS lleva
+    data-goatcounter-click y su clic se cuenta como un evento."""
+    if not GOATCOUNTER:
+        return html
+    for patron, evento in CLICS_CONTADOS:
+        html = re.sub(r"<a (?=[^>]*%s)" % patron,
+                      '<a data-goatcounter-click="%s" ' % evento, html)
+    return html
+
+
 # ---------- Datos para buscadores (Google y similares) ----------
 # Ficha de la asociación en formato schema.org, solo en la portada: es lo
 # que permite a Google mostrar nombre, logo, dirección y redes juntos.
@@ -618,6 +671,10 @@ def build():
             .replace("{{FOOTER}}", footer)
             .replace("{{DATOS_ESTRUCTURADOS}}",
                      datos_estructurados() if fname == "index.html" else "")
+            .replace("{{CABECERA_EXTRA}}", cabecera_extra())
+            .replace("{{TEXTO_ANALITICA}}", TEXTO_ANALITICA[bool(GOATCOUNTER)])
+            .replace("{{PROVEEDOR_ESTADISTICAS}}",
+                     PROVEEDOR_ESTADISTICAS if GOATCOUNTER else "")
         )
 
         if fname in SIN_INDEXAR:
@@ -625,6 +682,7 @@ def build():
 
         page_html = avisar_pestana_nueva(page_html)
         page_html = poner_correos(page_html, correos, fname)
+        page_html = marcar_clics(page_html)
 
         # GitHub Pages sirve 404.html para cualquier ruta inexistente, incluso
         # a varias carpetas de profundidad: sin <base>, sus rutas relativas

@@ -264,6 +264,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Tríptico: cada cara mide lo mismo que el papel (297 mm = 1122,5 px). Si
+  // la ventana es más estrecha, se reduce la hoja entera con «zoom», para
+  // que se vea igual que impresa en vez de apretar el texto.
+  var triptico = document.querySelector('.triptico');
+  if (triptico) {
+    var carasTriptico = triptico.querySelectorAll('.triptico-cara');
+    var ajustarTriptico = function () {
+      var estilo = window.getComputedStyle(triptico);
+      var disponible = triptico.clientWidth - parseFloat(estilo.paddingLeft) - parseFloat(estilo.paddingRight);
+      var escala = Math.min(1, disponible / 1122.5);
+      carasTriptico.forEach(function (cara) {
+        cara.style.zoom = escala;
+      });
+    };
+    ajustarTriptico();
+    window.addEventListener('resize', ajustarTriptico);
+  }
+
   // Botones «Imprimir» (folleto Primeros pasos)
   document.querySelectorAll('[data-imprimir]').forEach(function (boton) {
     boton.addEventListener('click', function () {

@@ -88,7 +88,7 @@ def main():
             partes = urlparse(url)
             destino = unquote(partes.path) or fname
             # Sin Node (build con --sin-buscador) no hay buscador ni QR
-            if destino.startswith(("pagefind/", "img/qr-")) and not hay_buscador:
+            if destino.startswith(("pagefind/", "img/qr-", "docs/triptico-")) and not hay_buscador:
                 continue
             ruta = os.path.join(SALIDA, *destino.split("/"))
             if destino.endswith("/"):

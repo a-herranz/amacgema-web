@@ -456,6 +456,47 @@ def generar_qr():
                  "el código QR del folleto")
 
 
+# Navegadores con los que se puede «imprimir» el tríptico a PDF sin abrir
+# ventana: en GitHub Actions (Ubuntu) viene Google Chrome; en Windows, Chrome
+# o Edge en su ruta habitual.
+NAVEGADORES_PDF = [
+    "google-chrome", "google-chrome-stable", "chromium", "chromium-browser", "chrome",
+    r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+    r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+]
+PDF_TRIPTICO = os.path.join("docs", "triptico-primeros-pasos.pdf")
+
+
+def generar_pdf_triptico():
+    """PDF del tríptico, listo para imprimir: A4 apaisado, dos caras y con
+    los colores, igual en cualquier ordenador (imprimir directamente desde
+    el navegador depende de sus opciones). Necesita el QR ya generado."""
+    navegador = None
+    for nombre in NAVEGADORES_PDF:
+        navegador = shutil.which(nombre) or (nombre if os.path.isfile(nombre) else None)
+        if navegador:
+            break
+    if not navegador:
+        print("AVISO: sin Chrome ni Edge no se ha generado el PDF del tríptico.")
+        if EN_CI:
+            sys.exit(1)
+        return
+    pagina = "file:///" + os.path.abspath(
+        os.path.join(SALIDA, "folleto-primeros-pasos.html")).replace(os.sep, "/").lstrip("/")
+    destino = os.path.abspath(os.path.join(SALIDA, PDF_TRIPTICO))
+    resultado = subprocess.run(
+        [navegador, "--headless=new", "--disable-gpu", "--no-sandbox",
+         "--no-pdf-header-footer", "--print-to-pdf=" + destino, pagina],
+        capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if resultado.returncode != 0 or not os.path.isfile(destino):
+        print("AVISO: no se ha podido generar el PDF del tríptico:\n"
+              + resultado.stderr[-1500:])
+        if EN_CI:
+            sys.exit(1)
+    else:
+        print("Generado el PDF del tríptico.")
+
+
 def avisar(mensaje):
     """Aviso en la consola y, en GitHub Actions, también en el resumen de
     la publicación (formato ::warning::)."""
@@ -612,10 +653,11 @@ def build():
     escribir_sitemap(built)
     escribir_cname()
     if "--sin-buscador" in sys.argv:
-        print("AVISO: sin buscador ni QR del folleto (--sin-buscador).")
+        print("AVISO: sin buscador, QR ni PDF del tríptico (--sin-buscador).")
     else:
         generar_buscador()
         generar_qr()
+        generar_pdf_triptico()
 
 
 if __name__ == "__main__":

@@ -1364,6 +1364,8 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   align-items: center;
   gap: 0.6rem;
   padding: 0 1rem 4rem;
+  /* Sin JavaScript, la hoja no se reduce: se desplaza en horizontal */
+  overflow-x: auto;
 }
 
 .triptico-etiqueta {
@@ -1374,11 +1376,25 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   margin: 1.5rem 0 0;
 }
 
+/* Botón con aspecto de enlace, dentro de un párrafo */
+.boton-texto {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--color-acento);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .triptico-cara {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  width: min(297mm, 100%);
-  aspect-ratio: 297 / 210;
+  /* Siempre al tamaño real del papel: en pantallas más estrechas,
+     js/script.js reduce la hoja entera con «zoom», sin recolocar nada */
+  flex: none;
+  width: 297mm;
+  height: 210mm;
   overflow: hidden;
   background-color: var(--color-blanco);
   box-shadow: var(--sombra-elevada);
@@ -1411,6 +1427,7 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 }
 
 .panel h3 {
+  color: var(--color-acento);
   font-size: 11pt;
   margin: 5mm 0 2mm;
 }
@@ -1644,24 +1661,6 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   border-left: 3px solid var(--color-accion);
   background-color: var(--color-blanco);
   font-size: 9pt;
-}
-
-/* En el móvil, los paneles uno debajo de otro */
-@media (max-width: 700px) {
-  .triptico-cara {
-    grid-template-columns: minmax(0, 1fr);
-    aspect-ratio: auto;
-  }
-
-  .panel + .panel {
-    border-left: 0;
-    border-top: 1px dashed var(--color-borde);
-  }
-
-  .panel-notas {
-    flex: none;
-    height: 30mm;
-  }
 }
 
 /* Lectura fácil (lectura-facil.html): letra grande sin serifa, mucho
@@ -3057,14 +3056,14 @@ a.via-contacto-dato:focus-visible {
   .triptico {
     display: block;
     padding: 0;
+    overflow: visible;
   }
 
   .triptico-cara {
     page: triptico;
-    width: 297mm;
     height: 209.5mm;
-    aspect-ratio: auto;
     box-shadow: none;
+    zoom: 1 !important;
     break-after: page;
   }
 

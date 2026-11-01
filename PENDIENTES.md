@@ -1,0 +1,135 @@
+# Pendientes de la web de AMAC-GEMA
+
+Lista de lo que falta por hacer tras la revisión de la web (noviembre de 2026).
+Casi todo depende de datos o decisiones de la asociación; cuando estén, el
+cambio en la web es rápido.
+
+## Prioridad 1: lo que hoy frena a la gente
+
+### 1. Hacerse socia
+
+Los servicios de la asociación son solo para socias, pero la página
+[Hazte socia](pages/como-ayudar/como-ayudar-socias.html) está pensada para
+quien quiere colaborar: no da la cuota, no dice que ser socia da acceso a los
+servicios y habla de «talleres gratuitos».
+
+- [ ] Cuota de socia: importe y periodicidad (mensual, trimestral, anual…).
+      Referencia: ASACO publica 30 €/año, 9 € al trimestre o 18 € al semestre.
+- [ ] Qué incluye ser socia: qué servicios y actividades son solo para socias
+      y si alguno tiene coste aparte.
+- [ ] Pasos para darse de alta y ficha de inscripción (PDF) si la hay.
+- [ ] Rehacer la página en dos partes: «Si estás afectada» y «Si quieres
+      colaborar». Quitar o aclarar «talleres gratuitos».
+
+### 2. Donaciones
+
+No hay ninguna forma de donar: todo pasa por «contacta».
+
+- [ ] IBAN de la asociación (se publicará visible, sin formulario previo).
+- [ ] ¿Hay Bizum solidario? Código ONG.
+- [ ] ¿Está la asociación acogida a la Ley 49/2002? Si lo está, las donaciones
+      desgravan en el IRPF (80 % de los primeros 250 €). Confirmarlo con la
+      gestoría antes de publicarlo.
+- [ ] Dos o tres ejemplos de impacto con costes reales («con X € pagamos…»).
+- [ ] Crear la página «Dona» y enlazarla desde Cómo ayudar y el pie.
+
+### 3. Horario unificado
+
+- [ ] Poner el mismo horario en Contacto (hoy solo dice «Lunes a viernes»),
+      el pie de todas las páginas y la portada:
+      lunes a jueves de 9:00 a 14:00 y de 16:00 a 20:00; viernes de 9:00 a 14:00.
+
+### 4. Revisión médica de Hablando de cáncer
+
+- [ ] Encontrar a un oncólogo/a (por ejemplo, de los que participan en las
+      Jornadas) que revise los textos médicos.
+- [ ] Revisar con prioridad las páginas elaboradas con IA: ver el
+      [registro de revisión](#registro-de-revisión-de-contenido-elaborado-con-ia)
+      al final de este documento.
+- [ ] Actualizar los textos antiguos: Tratamiento no menciona la inmunoterapia
+      y hay expresiones imprecisas («células malas y buenas»).
+- [ ] Añadir al final de cada página «Revisado por… · Última revisión: mes y año».
+
+## Prioridad 2: contenidos que quedan
+
+- [ ] **Agenda**: una página «Próximas citas» (Jornadas, cafés de los martes,
+      talleres del trimestre) que se actualice cada trimestre. Mejor que un
+      blog, que acaba abandonado.
+- [ ] **Sexualidad**: página propia en Hablando de cáncer; podría escribirla la
+      psicooncóloga. Hoy no se menciona en ninguna página.
+- [ ] **Historias**: la página ya existe
+      ([Historias](pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html)),
+      con la fundación y dos citas de la presidenta. Falta recoger historias
+      de socias, siempre con permiso por escrito.
+- [ ] **Fotos de la sede**: hacer fotos de los espacios para
+      [Sede social](pages/quienes-somos/sede-social.html), que hoy no tiene
+      ninguna: sala de acogida y atención, las dos salas polivalentes de la
+      ampliación de 2019, el espacio de apoyo biopsicosocial y la zona de
+      encuentro. De paso, confirmar el nombre y el uso de cada sala (hay notas
+      pendientes en el código de la página). Cada foto va en su hueco, marcado
+      con un comentario «Foto pendiente», como
+      `<img class="espacio-imagen" src="img/..." alt="...">`.
+- [ ] **Fotos de los regalos solidarios**: hacer fotos de los detalles para
+      [Regalos solidarios](pages/como-ayudar/como-ayudar-regalos.html) y
+      añadir una sección «Nuestros detalles». Faltan también los tipos de
+      detalle, si llevan tarjeta o mensaje personalizado, el donativo
+      orientativo y con cuánta antelación conviene encargarlos (hay un
+      comentario «PENDIENTE» en el código de la página).
+- [ ] Para las fotos, en general: fotos reales y luminosas, con permiso por
+      escrito de cualquier persona que salga en ellas; nada de imágenes de
+      banco de imágenes.
+- [ ] **Guías en PDF** de alimentación y ejercicio, si hay subvención para
+      maquetarlas (como hace ASAMMA en Málaga).
+- [ ] **Entrevista del Heraldo** (19/10/2025): no se pudo leer automáticamente.
+      Si tiene una cita mejor para la portada, pegar el fragmento.
+
+## Prioridad 3: técnica y visibilidad
+
+- [ ] **Índice del buscador**: el buscador ya está montado, pero falta generar
+      su índice una vez con `python scripts/build.py` (necesita Node.js; usa
+      `npx pagefind`). Sin índice, la página Buscar no devuelve resultados.
+- [ ] **Dominio propio** (por ejemplo amacgema.org): comprarlo, cambiar
+      `SITE_URL` en [scripts/build.py](scripts/build.py), volver a generar la
+      web (crea el archivo CNAME solo) y configurar el dominio en GitHub Pages.
+      Hasta entonces, robots.txt no tiene efecto (los buscadores solo lo leen
+      en la raíz de un dominio).
+- [ ] **Correo propio** con el mismo dominio (hoy es un Gmail). Al cambiarlo,
+      actualizar `CORREO_DESTINO` en el build y el pie.
+- [ ] **Google Search Console**: dar de alta la web y enviar `sitemap.xml`.
+- [ ] **Google Business Profile**: crear o reclamar la ficha de la sede
+      (dirección, horario, teléfono, fotos) para aparecer en Maps al buscar
+      «asociación cáncer de mama Zaragoza».
+
+## Descartado por ahora
+
+- Formulario «¿Prefieres que te llamemos?»: necesitaría un servicio externo y
+  guardar datos de salud.
+- Más transparencia (cuentas anuales, subvenciones recibidas).
+
+## Registro de revisión de contenido elaborado con IA
+
+Estas páginas se redactaron con ayuda de inteligencia artificial en
+noviembre de 2026 y muestran un aviso al principio que lo dice. Ninguna
+debería darse por buena sin la revisión de un profesional, que queda
+registrada aquí.
+
+| Página | Fuente | Fuentes usadas | Profesional que debe revisarla | Revisado por (nombre y cargo) | Fecha | Resultado y cambios |
+|---|---|---|---|---|---|---|
+| Me acaban de diagnosticar | `pages/hablando-de-cancer/me-acaban-de-diagnosticar.html` | AECC, SEOM | Oncología | Pendiente | | |
+| Cáncer de mama avanzado | `pages/hablando-de-cancer/cancer-de-mama/cancer-de-mama-avanzado.html` | SEOM, GEICAM, AECC | Oncología | Pendiente | | |
+| Después del tratamiento | `pages/hablando-de-cancer/despues-del-tratamiento.html` | SEOM, AECC | Oncología; la parte laboral, trabajadora social | Pendiente | | |
+| Mujeres jóvenes | `pages/hablando-de-cancer/mujeres-jovenes.html` | SEOM, GEICAM, AECC | Oncología o ginecología | Pendiente | | |
+| Alimentación y ejercicio | `pages/hablando-de-cancer/alimentacion-y-ejercicio.html` | SEOM, AECC, OMS | Oncología o nutrición; la parte de ejercicio, fisioterapeuta | Pendiente | | |
+| Historias | `pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html` | Web de AMAC-GEMA, entrevista de COPE Aragón (19/10/2026) | Junta directiva (textos y citas de la presidenta) | Pendiente | | |
+
+**Cuando una página quede revisada:**
+
+1. Rellena su fila: quién la revisó, la fecha y qué se cambió.
+2. Añade a los metadatos de la página una línea con quien la revisó y cuándo,
+   por ejemplo `revision: Dra. Nombre Apellido, oncóloga · marzo de 2027`.
+   El aviso de la página pasará de «Pendiente de revisión por un
+   profesional» a «Revisado por Dra. Nombre Apellido, oncóloga · marzo de 2027».
+3. Vuelve a generar la web con `python scripts/build.py`.
+
+El aviso de que el contenido se elaboró con IA se mantiene siempre, también
+después de la revisión.

@@ -44,6 +44,9 @@
           <li><a href="que-hacemos.html" aria-current="page">Qué hacemos</a></li>
           <li><a href="hablando-de-cancer.html">Hablando de cáncer</a></li>
           <li><a href="como-ayudar.html">Cómo ayudar</a></li>
+          <!-- En escritorio, solo la lupa (el texto queda para lectores de
+               pantalla); en el menú de móvil se ve también el texto. -->
+          <li class="nav-buscar"><a href="buscar.html"><svg class="icono-buscar" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5 21 21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span class="nav-buscar-texto">Buscar</span></a></li>
           <!-- Botón distinto del resto: en cualquier página, la acción de
                contactar debe ser la más visible, no un enlace más entre
                otros seis. -->
@@ -60,10 +63,11 @@
         <li><a href="ayuda-testimonial-acogida.html">Acogida</a></li>
         <li><a href="ayuda-testimonial-cafes.html">Cafés tertulia</a></li>
         <li><a href="ayuda-testimonial-voluntariado.html" aria-current="page">Voluntariado</a></li>
+        <li><a href="ayuda-testimonial-historias.html">Historias</a></li>
       </ul>
     </div>
   </nav>
-  <main id="contenido-principal">
+  <main id="contenido-principal" data-pagefind-body>
 <section class="hero hero-interior">
                 <div class="contenedor">
                     <p class="sobrelinea">Ayuda testimonial</p>

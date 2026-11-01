@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Añade el desplegable de "Hablando de cáncer" con sus 6 categorías.
+  // Añade el desplegable de "Hablando de cáncer" con sus categorías.
   var enlaceHablando = document.querySelector('.nav-principal a[href="hablando-de-cancer.html"]');
   if (enlaceHablando) {
     var elementoHablando = enlaceHablando.closest('li');
@@ -189,12 +189,16 @@ document.addEventListener('DOMContentLoaded', function () {
       '<span class="sr-only">Abrir submenú de Hablando de cáncer</span><span aria-hidden="true">⌄</span></button>' +
       '<ul class="submenu" id="' + idSubmenuHablando + '">' +
       '<li><a href="hablando-de-cancer.html">Resumen</a></li>' +
+      '<li><a href="me-acaban-de-diagnosticar.html">Primeros pasos</a></li>' +
       '<li><a href="aspectos-generales.html">Aspectos generales</a></li>' +
       '<li><a href="cancer-de-mama.html">Cáncer de mama</a></li>' +
       '<li><a href="cancer-ginecologico.html">Cáncer ginecológico</a></li>' +
       '<li><a href="linfedema.html">Linfedema</a></li>' +
       '<li><a href="aspectos-sociales.html">Aspectos sociales</a></li>' +
-      '<li><a href="aspectos-psicologicos.html">Aspectos psicológicos</a></li></ul>'
+      '<li><a href="aspectos-psicologicos.html">Aspectos psicológicos</a></li>' +
+      '<li><a href="despues-del-tratamiento.html">Después del tratamiento</a></li>' +
+      '<li><a href="mujeres-jovenes.html">Mujeres jóvenes</a></li>' +
+      '<li><a href="alimentacion-y-ejercicio.html">Alimentación y ejercicio</a></li></ul>'
     );
 
     // Marca como activa la categoría a la que pertenece la página actual,
@@ -202,11 +206,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Aspectos generales; sintomas.html pertenece a Cáncer de mama).
     var categoriasHablando = {
       'aspectos-generales.html': ['aspectos-generales.html', 'concepto.html', 'itinerario-diagnostico.html', 'planteamiento-terapeutico.html'],
-      'cancer-de-mama.html': ['cancer-de-mama.html', 'anatomia.html', 'factores-asociados.html', 'sintomas.html', 'diagnostico.html', 'tratamiento.html', 'prevencion-diagnostico-precoz.html'],
+      'me-acaban-de-diagnosticar.html': ['me-acaban-de-diagnosticar.html'],
+      'cancer-de-mama.html': ['cancer-de-mama.html', 'anatomia.html', 'factores-asociados.html', 'sintomas.html', 'diagnostico.html', 'tratamiento.html', 'cancer-de-mama-avanzado.html', 'prevencion-diagnostico-precoz.html'],
       'cancer-ginecologico.html': ['cancer-ginecologico.html', 'anatomia-genital.html', 'cancer-por-localizacion.html', 'prevencion-diagnostico-precoz-ginecologico.html'],
       'linfedema.html': ['linfedema.html'],
       'aspectos-sociales.html': ['aspectos-sociales.html'],
-      'aspectos-psicologicos.html': ['aspectos-psicologicos.html']
+      'aspectos-psicologicos.html': ['aspectos-psicologicos.html'],
+      'despues-del-tratamiento.html': ['despues-del-tratamiento.html'],
+      'mujeres-jovenes.html': ['mujeres-jovenes.html'],
+      'alimentacion-y-ejercicio.html': ['alimentacion-y-ejercicio.html']
     };
     var paginaActualHablando = window.location.pathname.split('/').pop() || 'index.html';
     var hrefCategoriaActual = null;
@@ -252,6 +260,24 @@ document.addEventListener('DOMContentLoaded', function () {
       var abiertoAyudas = elementoAyudas.classList.toggle('submenu-abierto');
       botonSubmenuAyudas.setAttribute('aria-expanded', abiertoAyudas);
     });
+  }
+
+  // Buscador (página Buscar): Pagefind trae su propia interfaz, que se
+  // traduce sola al español por el lang="es" de la página. Si se llega con
+  // ?q=..., por ejemplo desde el formulario de Hablando de cáncer, se
+  // lanza esa búsqueda directamente.
+  var contenedorBuscador = document.getElementById('buscador');
+  if (contenedorBuscador && window.PagefindUI) {
+    var buscador = new PagefindUI({
+      element: '#buscador',
+      showImages: false,
+      showSubResults: true,
+      autofocus: true
+    });
+    var consulta = new URLSearchParams(window.location.search).get('q');
+    if (consulta) {
+      buscador.triggerSearch(consulta);
+    }
   }
 
 });

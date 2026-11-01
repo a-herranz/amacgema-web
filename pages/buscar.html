@@ -1,0 +1,27 @@
+---
+title: Buscar | AMAC-GEMA
+description: Busca en toda la web de AMAC-GEMA: información sobre el cáncer de mama y ginecológico, servicios, actividades y formas de colaborar.
+nav: buscar.html
+---
+<section class="hero hero-interior">
+  <div class="contenedor">
+    <p class="sobrelinea">AMAC-GEMA</p>
+    <h1>Buscar</h1>
+    <p>Escribe una palabra y verás todas las páginas de la web en las que aparece.</p>
+  </div>
+</section>
+
+<!-- El índice lo genera Pagefind al final de scripts/build.py (carpeta
+     pagefind/). js/script.js monta aquí el buscador y, si la página llega
+     con ?q=..., lanza esa búsqueda (el formulario de Hablando de cáncer
+     envía aquí). Sin JavaScript, el aviso de abajo ofrece otras vías. -->
+<section class="seccion">
+  <div class="contenedor contenido-lectura">
+    <link rel="stylesheet" href="pagefind/pagefind-ui.css">
+    <div id="buscador" class="buscador"></div>
+    <noscript>
+      <p>El buscador necesita JavaScript. Puedes moverte por la web desde el menú o empezar por <a href="hablando-de-cancer.html">Hablando de cáncer</a>.</p>
+    </noscript>
+    <script src="pagefind/pagefind-ui.js"></script>
+  </div>
+</section>

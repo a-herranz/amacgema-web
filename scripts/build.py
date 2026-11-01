@@ -1,14 +1,20 @@
 """Genera los .html de la raíz del sitio a partir de templates/ + pages/.
 
 Uso:
-    python scripts/build.py
+    python scripts/build.py                  (web + índice del buscador)
+    python scripts/build.py --sin-buscador   (solo la web, sin Node.js)
 
 Cada vez que cambies el navbar, el footer, un submenú de contenido
 (templates/*.html) o el contenido de una página (pages/*.html), vuelve a
 ejecutar este script para regenerar los archivos finales antes de hacer commit.
 """
-import re
+import json
 import os
+import re
+import shutil
+import subprocess
+import sys
+from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
@@ -20,8 +26,15 @@ SITE_URL = "https://a-herranz.github.io/amacgema-web/"
 
 NAV_LINKS = [
     "index.html", "quienes-somos.html", "que-hacemos.html",
-    "hablando-de-cancer.html", "como-ayudar.html", "contacto.html",
+    "hablando-de-cancer.html", "como-ayudar.html", "buscar.html", "contacto.html",
 ]
+
+# Páginas que no deben aparecer en el buscador ni en el sitemap
+SIN_INDEXAR = {"404.html", "buscar.html"}
+
+# Versión fija de Pagefind (el buscador): una versión nueva podría cambiar
+# el formato del índice o de la interfaz sin avisar.
+PAGEFIND = "pagefind@1.3.0"
 
 # Bloques de cierre opcionales: una pieza común que se añade al final del
 # contenido de una página (dentro de <main>, después de {{CONTENT}}), antes
@@ -31,6 +44,23 @@ NAV_LINKS = [
 CIERRE_FILES = {
     "apoyo": "templates/cierre-apoyo.html",
 }
+
+# Aviso de contenido elaborado con IA, al principio de <main>. Lo activa
+# "aviso: ia" en los metadatos de la página. Mientras la página no tenga
+# "revision: <quién> · <cuándo>", el aviso dice que está pendiente de
+# revisión profesional. Cada revisión se anota también en el registro de
+# PENDIENTES.md.
+AVISO_IA_FILE = "templates/aviso-ia.html"
+
+
+def aviso_ia(plantilla, revision, en_hablando):
+    if revision:
+        estado = "Revisado por %s." % revision
+    else:
+        estado = "Pendiente de revisión por un profesional."
+    nota = " No sustituye la consulta con tu equipo médico." if en_hablando else ""
+    return (plantilla.replace("{{ESTADO_REVISION}}", estado)
+            .replace("{{NOTA_MEDICA}}", nota))
 
 # Cada submenú de sección es una plantilla en templates/subnav/<grupo>.html.
 # Las páginas lo eligen con "subnav: <grupo>" en su bloque de metadatos.
@@ -198,10 +228,85 @@ def generar_indice(content):
 
     despues = re.sub(r"<h2([^>]*)>(.*?)</h2>", poner_id, despues, flags=re.S)
     enlaces = "\n".join('      <li><a href="#%s">%s</a></li>' % e for e in entradas)
-    indice = ('<nav class="indice-rapido" aria-label="Índice de esta página">\n'
+    indice = ('<nav class="indice-rapido" aria-label="Índice de esta página" data-pagefind-ignore>\n'
               '    <p class="indice-rapido-titulo">En esta página</p>\n'
               '    <ul>\n%s\n    </ul>\n  </nav>' % enlaces)
     return antes + indice + despues
+
+
+# ---------- Datos para buscadores (Google y similares) ----------
+# Ficha de la asociación en formato schema.org, solo en la portada: es lo
+# que permite a Google mostrar nombre, logo, dirección y redes juntos.
+def datos_estructurados():
+    datos = {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "AMAC-GEMA",
+        "alternateName": "Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama",
+        "url": SITE_URL,
+        "logo": SITE_URL + "img/amac-gema-logo.png",
+        "foundingDate": "1994-06-06",
+        "telephone": "+34 976 297 764",
+        "email": CORREO_DESTINO,
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Plaza del Pilar, 14, 1º izq.",
+            "postalCode": "50003",
+            "addressLocality": "Zaragoza",
+            "addressRegion": "Aragón",
+            "addressCountry": "ES",
+        },
+        "areaServed": {"@type": "AdministrativeArea", "name": "Aragón"},
+        "sameAs": [
+            "https://www.facebook.com/amac.gema/",
+            "https://www.instagram.com/amacgema/",
+        ],
+    }
+    return ('  <script type="application/ld+json">\n%s\n  </script>\n'
+            % json.dumps(datos, ensure_ascii=False, indent=2))
+
+
+def escribir_sitemap(paginas):
+    """sitemap.xml para Google Search Console y robots.txt que lo anuncia.
+    Ojo: los buscadores solo leen robots.txt en la raíz de un dominio, así
+    que en github.io/amacgema-web/ no tiene efecto hasta tener dominio
+    propio; el sitemap sí se puede enviar a mano en Search Console."""
+    urls = "\n".join(
+        "  <url><loc>%s</loc></url>" % (SITE_URL + ("" if p == "index.html" else p))
+        for p in sorted(paginas) if p not in SIN_INDEXAR)
+    with open("sitemap.xml", "w", encoding="utf-8") as fh:
+        fh.write('<?xml version="1.0" encoding="UTF-8"?>\n'
+                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                 '%s\n</urlset>\n' % urls)
+    with open("robots.txt", "w", encoding="utf-8") as fh:
+        fh.write("User-agent: *\nAllow: /\n\nSitemap: %ssitemap.xml\n" % SITE_URL)
+
+
+def escribir_cname():
+    """Con dominio propio, GitHub Pages necesita un archivo CNAME con él."""
+    dominio = urlparse(SITE_URL).hostname
+    if not dominio.endswith("github.io"):
+        with open("CNAME", "w", encoding="utf-8") as fh:
+            fh.write(dominio + "\n")
+
+
+def generar_buscador():
+    """Índice del buscador (carpeta pagefind/), con Pagefind vía npx. Solo
+    indexa las páginas de la raíz y, en cada una, lo que va dentro de
+    <main data-pagefind-body>. Si no hay Node instalado, la web se genera
+    igual y el buscador conserva el índice anterior."""
+    npx = shutil.which("npx")
+    if not npx:
+        print("AVISO: sin Node.js (npx) no se ha actualizado el índice del buscador.")
+        return
+    resultado = subprocess.run(
+        [npx, "-y", PAGEFIND, "--site", ".", "--glob", "*.html"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if resultado.returncode != 0:
+        print("AVISO: no se ha podido actualizar el índice del buscador:\n"
+              + resultado.stdout[-1500:] + resultado.stderr[-1500:])
+    else:
+        print("Índice del buscador actualizado.")
 
 
 def read(path):
@@ -241,6 +346,7 @@ def build():
 
     subnav_templates = {key: read(path) for key, path in SUBNAV_FILES.items()}
     cierre_templates = {key: read(path) for key, path in CIERRE_FILES.items()}
+    aviso_ia_tpl = read(AVISO_IA_FILE)
     terminos_glosario = leer_terminos_glosario()
     correos = leer_correos()
 
@@ -278,6 +384,9 @@ def build():
         if en_hablando and fname not in GLOSARIO_SIN_ENLACE:
             content = enlazar_glosario(content, fname, terminos_glosario)
 
+        if meta.get("aviso") == "ia":
+            content = aviso_ia(aviso_ia_tpl, meta.get("revision", ""), en_hablando) + content
+
         cierre_html = ""
         cierre_key = meta.get("cierre", "")
         if cierre_key:
@@ -294,7 +403,12 @@ def build():
             .replace("{{CONTENT}}", content)
             .replace("{{CIERRE}}", cierre_html)
             .replace("{{FOOTER}}", footer)
+            .replace("{{DATOS_ESTRUCTURADOS}}",
+                     datos_estructurados() if fname == "index.html" else "")
         )
+
+        if fname in SIN_INDEXAR:
+            page_html = page_html.replace(" data-pagefind-body", "", 1)
 
         page_html = avisar_pestana_nueva(page_html)
         page_html = poner_correos(page_html, correos, fname)
@@ -327,6 +441,13 @@ def build():
         print("AVISO: datos marcados como pendientes en: " + ", ".join(pendientes))
     if removed:
         print(f"Eliminadas {len(removed)} páginas huérfanas: {', '.join(sorted(removed))}")
+
+    escribir_sitemap(built)
+    escribir_cname()
+    if "--sin-buscador" in sys.argv:
+        print("AVISO: índice del buscador sin actualizar (--sin-buscador).")
+    else:
+        generar_buscador()
 
 
 if __name__ == "__main__":

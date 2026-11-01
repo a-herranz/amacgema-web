@@ -35,7 +35,7 @@
      7.  Hero
      8.  Botones y enlaces
      9.  Tarjetas y bloques
-     10. Portada: opciones y cita
+     10. Portada: opciones y testimonio
      11. Listas, índices y anclas
      12. Árboles ("Qué hacemos")
      13. Cronología ("Historia")
@@ -426,6 +426,24 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   color: var(--color-blanco);
 }
 
+/* Buscar: en escritorio solo la lupa; el texto, oculto a la vista pero no
+   a los lectores de pantalla (mismas reglas que .sr-only). En móvil se
+   muestra (sección 16). */
+.nav-buscar a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-buscar-texto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 /* --- Desplegables inyectados por js/script.js --- */
 .boton-submenu {
   background: transparent;
@@ -698,6 +716,26 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   margin-bottom: 0;
 }
 
+/* Aviso de contenido elaborado con IA (templates/aviso-ia.html): franja
+   blanca encima del hero, distinta del rosa del subnav y del hero para que
+   se lea antes que el contenido. */
+.aviso-ia {
+  background-color: var(--color-blanco);
+  border-bottom: 1px solid var(--color-borde);
+  border-left: 5px solid var(--color-acento);
+  padding: 0.8rem 0;
+}
+
+.aviso-ia p {
+  color: var(--color-texto);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.aviso-ia strong {
+  color: var(--color-acento);
+}
+
 .sobrelinea {
   color: var(--color-secundario-oscuro);
   font-family: var(--fuente-titulos);
@@ -741,22 +779,34 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   margin-top: 0.5rem;
 }
 
-.hero-imagen-placeholder {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2.5rem;
+/* Cuándo y dónde (portada): horario y sede al lado del mensaje, para que
+   nadie llame un viernes por la tarde sin saber que no hay atención. */
+.hero-info {
+  background-color: var(--color-blanco);
   border-radius: var(--radio-borde);
-  background: var(--color-fondo-alt);
-  border: 2px dashed var(--color-borde);
+  border-top: 5px solid var(--color-primario);
+  box-shadow: var(--sombra-suave);
+  padding: 2rem;
+  text-align: left;
 }
 
-.hero-imagen-placeholder img {
-  width: 100%;
-  max-width: 260px;
-  height: auto;
+.hero-info h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+/* Anula el texto grande y suave de .hero p, pensado para la entradilla */
+.hero-info p {
+  color: var(--color-texto);
+  font-size: 1rem;
+  max-width: none;
+  margin: 0 0 1rem;
+}
+
+.hero-info .nota {
+  color: var(--color-texto-suave);
+  font-size: 0.92rem;
+  margin-bottom: 0;
 }
 
 /* ==========================================================================
@@ -1123,6 +1173,11 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   margin-bottom: 3rem;
 }
 
+/* Con un "Ver más" debajo (portada), el margen ya lo pone .ver-mas */
+.rejilla-dos:has(+ .ver-mas) {
+  margin-bottom: 0;
+}
+
 /* Sublista dentro de una lista-apoyo */
 .lista-anidada {
   list-style-type: circle;
@@ -1219,8 +1274,37 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 }
 
 /* ==========================================================================
-   10. PORTADA: OPCIONES Y CITA
+   10. PORTADA: OPCIONES Y TESTIMONIO
    ========================================================================== */
+
+/* Testimonio: alineado a la izquierda y con una raya rosa, no centrado,
+   para que tres o cuatro líneas de cita se lean sin esfuerzo. */
+.testimonio {
+  max-width: 760px;
+  margin: 0 auto 3rem;
+  padding-left: 1.5rem;
+  border-left: 4px solid var(--color-primario);
+}
+
+/* Dentro de una página de texto (no como primer bloque de la sección),
+   separada de la lista o el párrafo de encima */
+* + .testimonio {
+  margin-top: 2rem;
+}
+
+.testimonio blockquote p {
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.testimonio figcaption {
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+}
 
 /* Deliberadamente distintas de .tarjeta: menos opciones, más grandes y un
    único acento de color, para no añadir carga de decisión a quien acaba de
@@ -1237,7 +1321,6 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   border-radius: var(--radio-borde);
   border-top: 5px solid var(--color-primario);
   padding: 2.2rem 1.8rem;
-  text-align: center;
   color: var(--color-texto);
   box-shadow: var(--sombra-suave);
   transition: transform var(--transicion), box-shadow var(--transicion);
@@ -1266,25 +1349,6 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   font-family: var(--fuente-titulos);
   font-weight: 600;
   font-size: 0.95rem;
-}
-
-.cita-cercania {
-  max-width: 760px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.cita-cercania blockquote {
-  font-family: var(--fuente-titulos);
-  font-size: 1.5rem;
-  line-height: 1.5;
-  color: var(--color-acento);
-  margin: 0 0 1.2rem;
-}
-
-.cita-cercania footer {
-  color: var(--color-texto-suave);
-  font-size: 1rem;
 }
 
 /* ==========================================================================
@@ -1420,6 +1484,62 @@ h2[id],
 .glosario-lista dd {
   margin: 0.2rem 0 0;
   color: var(--color-texto);
+}
+
+/* ---------- Buscador ---------- */
+
+/* Formulario corto (Hablando de cáncer) que envía a buscar.html?q=... */
+.buscador-rapido {
+  max-width: 760px;
+  margin: 0 auto 3rem;
+}
+
+.buscador-rapido label {
+  display: block;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  color: var(--color-acento);
+  margin-bottom: 0.5rem;
+}
+
+.buscador-rapido-fila {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.buscador-rapido input {
+  flex: 1 1 240px;
+  min-height: 48px;
+  padding: 0 1rem;
+  border: 2px solid var(--color-borde);
+  border-radius: var(--radio-chico);
+  background-color: var(--color-blanco);
+  color: var(--color-texto);
+  font: inherit;
+}
+
+.buscador-rapido input:focus {
+  border-color: var(--color-primario-oscuro);
+  outline: none;
+  box-shadow: var(--sombra-foco);
+}
+
+/* Interfaz de Pagefind (buscar.html) con los colores y letras de la web */
+.buscador {
+  --pagefind-ui-scale: 0.9;
+  --pagefind-ui-primary: var(--color-acento);
+  --pagefind-ui-text: var(--color-texto);
+  --pagefind-ui-background: var(--color-blanco);
+  --pagefind-ui-border: var(--color-borde);
+  --pagefind-ui-tag: var(--color-fondo-alt);
+  --pagefind-ui-border-width: 2px;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-font: var(--fuente-texto);
+}
+
+.buscador .pagefind-ui__result-link {
+  font-family: var(--fuente-titulos);
 }
 
 /* ==========================================================================
@@ -2148,6 +2268,22 @@ a.via-contacto-dato:focus-visible {
     text-align: center;
   }
 
+  /* En el menú de móvil hay sitio: lupa y texto, como un enlace más */
+  .nav-buscar a {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .nav-buscar-texto {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
   .hero h1 {
     font-size: 2.1rem;
   }
@@ -2161,11 +2297,8 @@ a.via-contacto-dato:focus-visible {
     justify-content: center;
   }
 
-  /* Mientras el hero muestre solo el logo (ya visible en la cabecera), en
-     móvil se oculta para que el mensaje y los botones salgan arriba. Una
-     foto real, sin esta clase, sí se muestra. */
-  .hero-imagen-placeholder {
-    display: none;
+  .hero-info {
+    padding: 1.4rem 1.25rem;
   }
 
   .hero-interior h1 {
@@ -2329,15 +2462,14 @@ a.via-contacto-dato:focus-visible {
     margin-bottom: 0.3rem;
   }
 
-  /* "¿Qué necesitas ahora mismo?": compactas y alineadas a la izquierda,
-     para que las tres opciones quepan casi en una pantalla. */
+  /* "¿Qué necesitas ahora mismo?": compactas, para que las tres opciones
+     quepan casi en una pantalla. */
   .opciones-ahora {
     gap: 0.9rem;
   }
 
   .opcion-ahora {
     padding: 1.2rem 1.25rem;
-    text-align: left;
   }
 
   .opcion-ahora h3 {
@@ -2350,9 +2482,14 @@ a.via-contacto-dato:focus-visible {
     margin-bottom: 0.4rem;
   }
 
-  /* Cita de la portada: a 1,5rem ocupaba siete líneas */
-  .cita-cercania blockquote {
-    font-size: 1.2rem;
+  /* Testimonio de la portada: a 1,3rem ocupaba ocho líneas */
+  .testimonio {
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
+
+  .testimonio blockquote p {
+    font-size: 1.1rem;
   }
 
   /* Vías de contacto más compactas */

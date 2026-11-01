@@ -44,6 +44,9 @@
           <li><a href="que-hacemos.html">Qué hacemos</a></li>
           <li><a href="hablando-de-cancer.html" aria-current="page">Hablando de cáncer</a></li>
           <li><a href="como-ayudar.html">Cómo ayudar</a></li>
+          <!-- En escritorio, solo la lupa (el texto queda para lectores de
+               pantalla); en el menú de móvil se ve también el texto. -->
+          <li class="nav-buscar"><a href="buscar.html"><svg class="icono-buscar" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16.5 16.5 21 21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span class="nav-buscar-texto">Buscar</span></a></li>
           <!-- Botón distinto del resto: en cualquier página, la acción de
                contactar debe ser la más visible, no un enlace más entre
                otros seis. -->
@@ -64,7 +67,7 @@
       </ul>
     </div>
   </nav>
-  <main id="contenido-principal">
+  <main id="contenido-principal" data-pagefind-body>
 <section class="hero hero-interior">
                 <div class="contenedor">
 
@@ -77,7 +80,7 @@
             <section class="seccion">
                 <div class="contenedor">
 
-                    <nav class="indice-rapido" aria-label="Índice de esta página">
+                    <nav class="indice-rapido" aria-label="Índice de esta página" data-pagefind-ignore>
     <p class="indice-rapido-titulo">En esta página</p>
     <ul>
       <li><a href="#la-clave-del-control-del-cancer-ginecologico">La clave del control del cáncer ginecológico</a></li>
@@ -125,7 +128,7 @@
 
                 </div>
             </section>
-    <section class="seccion seccion-alt cierre-apoyo">
+    <section class="seccion seccion-alt cierre-apoyo" data-pagefind-ignore>
       <div class="contenedor centrado">
         <h2>¿Te preocupa algo de lo que acabas de leer?</h2>
         <p>No tienes que resolverlo sola. Escríbenos o llámanos: te escuchamos y te orientamos.</p>

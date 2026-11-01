@@ -213,6 +213,20 @@ Mejor momento para llamarme (mañana o tarde):
 
 Un saludo.
 
+[contar-historia]
+asunto: Quiero contar mi historia
+
+Hola:
+
+Me gustaría compartir mi experiencia en la web de AMAC-GEMA.
+
+Nombre (o cómo quieres firmar):
+Teléfono:
+
+Si quieres, puedes escribir aquí un primer borrador. Te enviaremos el texto final antes de publicarlo y no se publicará nada sin tu permiso por escrito.
+
+Un saludo.
+
 [cafes]
 asunto: Cafés de los martes
 

@@ -42,6 +42,7 @@ pages/
       ayuda-testimonial-acogida.html
       ayuda-testimonial-cafes.html
       ayuda-testimonial-voluntariado.html
+      ayuda-testimonial-historias.html
     sensibilizacion/                (frente "Sensibilización")
       sensibilizacion.html  proyecto-contigo.html
       proyecto-jornada-cancer-mama.html
@@ -50,15 +51,17 @@ pages/
     investigacion/                  (frente "Sensibilización")
       investigacion.html  proyecto-marcha-por-la-salud.html
   hablando-de-cancer/
-    hablando-de-cancer.html  linfedema.html
-    aspectos-sociales.html  aspectos-psicologicos.html
+    hablando-de-cancer.html  me-acaban-de-diagnosticar.html
+    linfedema.html  aspectos-sociales.html  aspectos-psicologicos.html
+    despues-del-tratamiento.html  mujeres-jovenes.html
+    alimentacion-y-ejercicio.html
     aspectos-generales/
       aspectos-generales.html  concepto.html
       itinerario-diagnostico.html  planteamiento-terapeutico.html
     cancer-de-mama/
       cancer-de-mama.html  anatomia.html  factores-asociados.html
       sintomas.html  diagnostico.html  tratamiento.html
-      prevencion-diagnostico-precoz.html
+      cancer-de-mama-avanzado.html  prevencion-diagnostico-precoz.html
     cancer-ginecologico/
       cancer-ginecologico.html  anatomia-genital.html
       cancer-por-localizacion.html
@@ -69,6 +72,7 @@ pages/
     como-ayudar-empresas.html
   legal/
     aviso-legal.html  politica-privacidad.html  politica-cookies.html
+  buscar.html
   404.html
 ```
 
@@ -115,6 +119,13 @@ nav: contacto.html
   Para añadir una página a un submenú basta con añadir su enlace con
   el token `{{ACTIVE:pagina.html}}` en la plantilla: el build lee la
   lista de enlaces de ahí.
+- `aviso: ia` (opcional) → muestra al principio de la página el aviso de
+  contenido elaborado con inteligencia artificial
+  (`templates/aviso-ia.html`). Toda página redactada con IA debe llevarlo y
+  figurar en el registro de revisión de `PENDIENTES.md`.
+- `revision` (opcional, junto con `aviso: ia`) → quién revisó la página y
+  cuándo, por ejemplo `revision: Dra. Nombre Apellido, oncóloga · marzo de 2027`.
+  Sin esta línea, el aviso dice «Pendiente de revisión por un profesional».
 
 ### La sección "Qué hacemos" gira en torno a 2 frentes
 
@@ -192,10 +203,21 @@ Después de editar, ejecuta `python scripts/build.py` para regenerar.
   faltan por confirmar (NIF, registro, piso o local, plazos de
   conservación): no publiques la web sin rellenarlos.
 
+- **Buscador**: al terminar, el build genera con Pagefind el índice del
+  buscador en la carpeta `pagefind/` (súbela junto con los `.html`). Solo
+  indexa lo que va dentro de `<main>`; para que un bloque no salga en los
+  resultados, ponle `data-pagefind-ignore`. La página `buscar.html` y la 404
+  no se indexan (`SIN_INDEXAR` en el build).
+- **Datos para Google**: `sitemap.xml`, `robots.txt` y, solo en la portada,
+  la ficha de la asociación en formato schema.org. Si `SITE_URL` deja de ser
+  de github.io, el build crea también el archivo `CNAME` del dominio propio.
+
 La hoja de estilos incluye además una versión para imprimir (sección 18).
 
 ## Requisitos
 
-Solo hace falta Python 3 (sin librerías adicionales). No se necesita Node,
-Ruby ni ningún paso de build en el hosting: los archivos `.html` generados
-se suben tal cual, exactamente igual que antes.
+Python 3 (sin librerías adicionales) y, para el índice del buscador,
+Node.js (el build usa `npx pagefind`). Sin Node, ejecuta
+`python scripts/build.py --sin-buscador`: la web se genera igual y el
+buscador conserva su índice anterior. No hace falta ningún paso de build en
+el hosting: los archivos generados se suben tal cual.

@@ -36,7 +36,6 @@
 titulo: Charla informativa sobre el Cáncer Genital y de Mama
 hora: 18:00
 lugar: Salón de actos, casa cultura, Pinseque (Zaragoza)
-enlace: proyecto-jornada-cancer-ginecologico.html
 Ponte en su piel, el cáncer nos TOCA a todos. Público a partir de los 14 años
 
 [fecha: 2026-10-26]

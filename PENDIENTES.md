@@ -85,12 +85,15 @@ No hay ninguna forma de donar: todo pasa por «contacta».
 
 ## Prioridad 3: técnica y visibilidad
 
-- [x] **Índice del buscador**: generado (nov. 2026). Se regenera solo con cada
-      `python scripts/build.py` (necesita Node.js); acuérdate de subir también
-      la carpeta `pagefind/`.
+- [x] **Índice del buscador**: lo genera GitHub Actions en cada publicación.
+- [ ] **Publicación con GitHub Actions** (fase 1 del plan, nov. 2026): en
+      GitHub, Settings › Pages › Source: «GitHub Actions». Hasta que se haga,
+      la web no se actualiza con los pushes a main.
+- [ ] **Persona de la asociación que edite textos**: darle acceso al
+      repositorio en GitHub y pasarle [COMO-EDITAR.md](COMO-EDITAR.md).
 - [ ] **Dominio propio** (por ejemplo amacgema.org): comprarlo, cambiar
-      `SITE_URL` en [scripts/build.py](scripts/build.py), volver a generar la
-      web (crea el archivo CNAME solo) y configurar el dominio en GitHub Pages.
+      `SITE_URL` en [scripts/build.py](scripts/build.py) (el build crea el
+      archivo CNAME solo) y configurar el dominio en GitHub Pages.
       Hasta entonces, robots.txt no tiene efecto (los buscadores solo lo leen
       en la raíz de un dominio).
 - [ ] **Correo propio** con el mismo dominio (hoy es un Gmail). Al cambiarlo,

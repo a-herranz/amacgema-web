@@ -1,7 +1,12 @@
 # Cómo editar esta web
 
-Los archivos `.html` de la raíz (`index.html`, `que-hacemos.html`, etc.) ya
-**no se editan a mano**. Se generan automáticamente a partir de:
+> Si no eres técnica y solo quieres cambiar un texto desde el navegador,
+> lee mejor [COMO-EDITAR.md](../COMO-EDITAR.md).
+
+La web publicada (`index.html`, `que-hacemos.html`, etc.) **no está en el
+repositorio**: la genera `scripts/build.py` en la carpeta `publicar/` (que
+git ignora) y GitHub Actions la publica en cada push a `main`. Se genera a
+partir de:
 
 - `templates/layout.html` — el esqueleto común de toda página (doctype,
   `<head>`, body, orden de navbar/subnav/contenido/footer).
@@ -16,9 +21,9 @@ Los archivos `.html` de la raíz (`index.html`, `que-hacemos.html`, etc.) ya
 
 Importante: las subcarpetas de `pages/` son solo organización interna del
 código fuente. Da igual en qué subcarpeta esté un archivo: el resultado
-final siempre se genera en la raíz del sitio con su nombre de archivo
+final siempre se genera en la raíz de la web con su nombre de archivo
 (por ejemplo `pages/que-hacemos/ayuda-profesional/ayuda-profesional.html`
-genera `ayuda-profesional.html` en la raíz). **Las URLs públicas de la web
+genera `publicar/ayuda-profesional.html`). **Las URLs públicas de la web
 no cambian nunca por mover un archivo dentro de `pages/`.**
 
 ## Mapa de pages/
@@ -78,17 +83,19 @@ pages/
 
 ## Para cambiar el navbar o el footer
 
-Edita **una sola vez** `templates/navbar.html` o `templates/footer.html` y
-vuelve a generar el sitio:
+Edita **una sola vez** `templates/navbar.html` o `templates/footer.html`,
+haz commit y push: GitHub Actions regenera y publica todas las páginas.
+
+Para ver el resultado antes de subirlo:
 
 ```bash
 python scripts/build.py
+python scripts/comprobar.py
+python -m http.server -d publicar
 ```
 
-Esto regenera todos los archivos `.html` de la raíz, y borra cualquier
-`.html` de la raíz que ya no tenga una página fuente en `pages/` (por
-ejemplo, si borras o renombras una página). Haz commit tanto de la
-plantilla como de los `.html` regenerados.
+y abre http://localhost:8000. `publicar/` se rehace entera en cada build,
+así que una página borrada o renombrada en `pages/` desaparece sola.
 
 ## Para cambiar el contenido de una página
 
@@ -152,15 +159,15 @@ No existe una sección "Proyectos" aparte: cada proyecto vive dentro del
 grupo de subnav de la vía a la que pertenece (`sensibilizacion` o
 `investigacion`), no en un grupo propio.
 
-Después de editar, ejecuta `python scripts/build.py` para regenerar.
+Después de editar, haz commit y push (o genera en local para verlo antes).
 
 ## Para crear una página nueva
 
 1. Crea el archivo dentro de la subcarpeta de `pages/` que corresponda a su
    sección (o crea una subcarpeta nueva si es un grupo nuevo de páginas),
    con el bloque de metadatos + contenido.
-2. Ejecuta `python scripts/build.py` — generará la página en la raíz
-   automáticamente, con el mismo nombre de archivo.
+2. Al publicar, el build generará la página en la raíz de la web, con el
+   mismo nombre de archivo.
 3. Enlaza a ella desde donde corresponda (navbar si es una sección
    principal, o desde la página que la mencione).
 
@@ -204,7 +211,7 @@ Después de editar, ejecuta `python scripts/build.py` para regenerar.
   conservación): no publiques la web sin rellenarlos.
 
 - **Buscador**: al terminar, el build genera con Pagefind el índice del
-  buscador en la carpeta `pagefind/` (súbela junto con los `.html`). Solo
+  buscador en `publicar/pagefind/`. Solo
   indexa lo que va dentro de `<main>`; para que un bloque no salga en los
   resultados, ponle `data-pagefind-ignore`. La página `buscar.html` y la 404
   no se indexan (`SIN_INDEXAR` en el build).
@@ -212,12 +219,31 @@ Después de editar, ejecuta `python scripts/build.py` para regenerar.
   la ficha de la asociación en formato schema.org. Si `SITE_URL` deja de ser
   de github.io, el build crea también el archivo `CNAME` del dominio propio.
 
+- **Aviso de revisión pendiente**: el build avisa de cada página con
+  `aviso: ia` que aún no tiene `revision:`. En GitHub Actions, el aviso
+  aparece en el resumen de cada publicación.
+
 La hoja de estilos incluye además una versión para imprimir (sección 18).
 
-## Requisitos
+## Publicación y comprobaciones
+
+`.github/workflows/publicar.yml` se ejecuta en cada push:
+
+1. Genera la web con `scripts/build.py`.
+2. La comprueba con `scripts/comprobar.py`: enlaces internos y anclas
+   rotos, ids repetidos, imágenes sin `alt` y páginas sin `<title>` o
+   `<h1>`. Con un solo error, **no se publica nada** y la web sigue como
+   estaba; el error aparece en la pestaña Actions de GitHub.
+3. Solo en `main`, publica `publicar/` en GitHub Pages. En otras ramas
+   genera y comprueba, sin publicar.
+
+Requisito, una sola vez: en GitHub, Settings › Pages › Source: «GitHub
+Actions».
+
+## Requisitos para generar en local
 
 Python 3 (sin librerías adicionales) y, para el índice del buscador,
 Node.js (el build usa `npx pagefind`). Sin Node, ejecuta
-`python scripts/build.py --sin-buscador`: la web se genera igual y el
-buscador conserva su índice anterior. No hace falta ningún paso de build en
-el hosting: los archivos generados se suben tal cual.
+`python scripts/build.py --sin-buscador`: la web se genera igual, pero el
+buscador no funciona en local. Para publicar no hace falta nada de esto:
+lo hace GitHub Actions.

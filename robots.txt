@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://a-herranz.github.io/amacgema-web/sitemap.xml

@@ -1,0 +1,66 @@
+# Genera y publica la web en GitHub Pages.
+#
+# - En cada push a main: genera la web (scripts/build.py), la comprueba
+#   (scripts/comprobar.py) y, si no hay errores, la publica.
+# - En cualquier otra rama o pull request: solo genera y comprueba, para
+#   saber antes de unir los cambios si algo se ha roto.
+# - Se puede lanzar a mano desde la pestaña Actions ("Run workflow").
+#
+# Solo se publica la carpeta publicar/: el código fuente, las plantillas y
+# los documentos internos (PENDIENTES.md...) no llegan a la web.
+#
+# Requisito (una sola vez): en GitHub, Settings > Pages > Source, elegir
+# "GitHub Actions".
+
+name: Publicar web
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Si llegan dos pushes seguidos, la segunda publicación espera a la primera
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Generar la web
+        run: python scripts/build.py
+
+      - name: Comprobar enlaces, anclas, ids e imágenes
+        run: python scripts/comprobar.py
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        with:
+          path: publicar
+
+  publicar:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: generar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4

@@ -1,12 +1,14 @@
-"""Genera los .html de la raíz del sitio a partir de templates/ + pages/.
+"""Genera la web completa en la carpeta publicar/ a partir de templates/ +
+pages/ y los archivos estáticos (css/, js/, img/, docs/).
 
 Uso:
     python scripts/build.py                  (web + índice del buscador)
     python scripts/build.py --sin-buscador   (solo la web, sin Node.js)
 
-Cada vez que cambies el navbar, el footer, un submenú de contenido
-(templates/*.html) o el contenido de una página (pages/*.html), vuelve a
-ejecutar este script para regenerar los archivos finales antes de hacer commit.
+No hace falta ejecutarlo antes de hacer commit: al subir cambios a main,
+GitHub Actions (.github/workflows/publicar.yml) lo ejecuta y publica la
+carpeta publicar/. En local sirve para ver la web antes de subirla:
+    python -m http.server -d publicar
 """
 import json
 import os
@@ -28,6 +30,17 @@ NAV_LINKS = [
     "index.html", "quienes-somos.html", "que-hacemos.html",
     "hablando-de-cancer.html", "como-ayudar.html", "buscar.html", "contacto.html",
 ]
+
+# Carpeta con la web generada, la única que se publica. Se borra y se
+# rehace entera en cada build: nada de lo que hay dentro se edita a mano.
+SALIDA = "publicar"
+
+# Carpetas que se copian tal cual a la web publicada
+ESTATICOS = ["css", "js", "img", "docs"]
+
+# En GitHub Actions (variable CI), un fallo del buscador detiene la
+# publicación; en local solo avisa.
+EN_CI = bool(os.environ.get("CI"))
 
 # Páginas que no deben aparecer en el buscador ni en el sitemap
 SIN_INDEXAR = {"404.html", "buscar.html"}
@@ -274,11 +287,11 @@ def escribir_sitemap(paginas):
     urls = "\n".join(
         "  <url><loc>%s</loc></url>" % (SITE_URL + ("" if p == "index.html" else p))
         for p in sorted(paginas) if p not in SIN_INDEXAR)
-    with open("sitemap.xml", "w", encoding="utf-8") as fh:
+    with open(os.path.join(SALIDA, "sitemap.xml"), "w", encoding="utf-8") as fh:
         fh.write('<?xml version="1.0" encoding="UTF-8"?>\n'
                  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                  '%s\n</urlset>\n' % urls)
-    with open("robots.txt", "w", encoding="utf-8") as fh:
+    with open(os.path.join(SALIDA, "robots.txt"), "w", encoding="utf-8") as fh:
         fh.write("User-agent: *\nAllow: /\n\nSitemap: %ssitemap.xml\n" % SITE_URL)
 
 
@@ -286,27 +299,38 @@ def escribir_cname():
     """Con dominio propio, GitHub Pages necesita un archivo CNAME con él."""
     dominio = urlparse(SITE_URL).hostname
     if not dominio.endswith("github.io"):
-        with open("CNAME", "w", encoding="utf-8") as fh:
+        with open(os.path.join(SALIDA, "CNAME"), "w", encoding="utf-8") as fh:
             fh.write(dominio + "\n")
 
 
 def generar_buscador():
-    """Índice del buscador (carpeta pagefind/), con Pagefind vía npx. Solo
-    indexa las páginas de la raíz y, en cada una, lo que va dentro de
-    <main data-pagefind-body>. Si no hay Node instalado, la web se genera
-    igual y el buscador conserva el índice anterior."""
+    """Índice del buscador (publicar/pagefind/), con Pagefind vía npx. En
+    cada página indexa solo lo que va dentro de <main data-pagefind-body>.
+    Sin Node.js, la web se genera igual pero el buscador no funciona."""
     npx = shutil.which("npx")
     if not npx:
-        print("AVISO: sin Node.js (npx) no se ha actualizado el índice del buscador.")
+        print("AVISO: sin Node.js (npx) no se ha generado el índice del buscador.")
+        if EN_CI:
+            sys.exit(1)
         return
     resultado = subprocess.run(
-        [npx, "-y", PAGEFIND, "--site", ".", "--glob", "*.html"],
+        [npx, "-y", PAGEFIND, "--site", SALIDA],
         capture_output=True, text=True, encoding="utf-8", errors="replace")
     if resultado.returncode != 0:
-        print("AVISO: no se ha podido actualizar el índice del buscador:\n"
+        print("AVISO: no se ha podido generar el índice del buscador:\n"
               + resultado.stdout[-1500:] + resultado.stderr[-1500:])
+        if EN_CI:
+            sys.exit(1)
     else:
-        print("Índice del buscador actualizado.")
+        print("Índice del buscador generado.")
+
+
+def avisar(mensaje):
+    """Aviso en la consola y, en GitHub Actions, también en el resumen de
+    la publicación (formato ::warning::)."""
+    print("AVISO: " + mensaje)
+    if EN_CI:
+        print("::warning::" + mensaje)
 
 
 def read(path):
@@ -364,7 +388,16 @@ def build():
             raise ValueError(f"Nombre de página duplicado: {page_path} y {seen[fname]}")
         seen[fname] = page_path
 
+    # La salida se rehace desde cero: así una página borrada o renombrada en
+    # pages/ no deja un .html huérfano publicado.
+    if os.path.isdir(SALIDA):
+        shutil.rmtree(SALIDA)
+    os.makedirs(SALIDA)
+    for carpeta in ESTATICOS:
+        shutil.copytree(carpeta, os.path.join(SALIDA, carpeta))
+
     built = []
+    sin_revisar = []
 
     for page_path in page_paths:
         fname = os.path.basename(page_path)
@@ -421,26 +454,21 @@ def build():
                 '<meta charset="UTF-8">',
                 '<meta charset="UTF-8">\n  <base href="%s">' % SITE_URL, 1)
 
-        with open(fname, "w", encoding="utf-8") as fh:
+        with open(os.path.join(SALIDA, fname), "w", encoding="utf-8") as fh:
             fh.write(page_html)
         built.append(fname)
 
-    # Todo .html en la raíz es salida generada: si una página se borra o se
-    # renombra en pages/, su .html huérfano en la raíz debe desaparecer
-    # también, o quedaría publicado aunque ya no tenga fuente.
-    built_set = set(built)
-    removed = []
-    for fname in os.listdir("."):
-        if fname.endswith(".html") and fname not in built_set:
-            os.remove(fname)
-            removed.append(fname)
+        if meta.get("aviso") == "ia" and not meta.get("revision"):
+            sin_revisar.append(fname)
 
-    print(f"Generadas {len(built)} páginas.")
-    pendientes = sorted(f for f in built if 'class="pendiente"' in open(f, encoding="utf-8").read())
+    print(f"Generadas {len(built)} páginas en {SALIDA}/.")
+    pendientes = sorted(f for f in built
+                        if 'class="pendiente"' in read(os.path.join(SALIDA, f)))
     if pendientes:
-        print("AVISO: datos marcados como pendientes en: " + ", ".join(pendientes))
-    if removed:
-        print(f"Eliminadas {len(removed)} páginas huérfanas: {', '.join(sorted(removed))}")
+        avisar("datos marcados como pendientes en: " + ", ".join(pendientes))
+    if sin_revisar:
+        avisar("contenido elaborado con IA sin revisión profesional en: "
+               + ", ".join(sorted(sin_revisar)) + " (ver PENDIENTES.md)")
 
     escribir_sitemap(built)
     escribir_cname()

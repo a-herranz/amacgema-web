@@ -1,2 +1,13 @@
 __pycache__/
 *.pyc
+
+# Web generada por scripts/build.py: se publica desde GitHub Actions, no
+# desde el repositorio
+publicar/
+
+# Restos del sistema anterior, en el que la web generada vivía en la raíz
+/*.html
+/pagefind/
+/sitemap.xml
+/robots.txt
+/CNAME

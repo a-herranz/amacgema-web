@@ -9,12 +9,12 @@
 # --- Citas con fecha ---
 # Cada cita empieza con [fecha: AAAA-MM-DD] y debajo, una línea por dato:
 #
-#   [fecha: 2027-05-20]
-#   titulo: VII Jornada Aragonesa de Cáncer Ginecológico
-#   hora: 17:00
-#   lugar: Centro Joaquín Roncal, calle San Braulio, 5, Zaragoza
+#   [fecha: 2026-10-23]
+#   titulo: Charla informativa sobre el Cáncer Genital y de Mama
+#   hora: 18:00
+#   lugar: Salón de actos, casa cultura, Pinseque (Zaragoza)
 #   enlace: proyecto-jornada-cancer-ginecologico.html
-#   Una o varias líneas de texto, si hace falta.
+#   Ponte en su piel, el cáncer nos TOCA a todos. Público a partir de los 14 años
 #
 # Solo «titulo» es obligatorio. «enlace» puede ser una página de la web
 # (como arriba) o una dirección completa (https://...).
@@ -29,12 +29,19 @@
 # ---------- Citas con fecha ----------
 # (Pendiente: fechas de la próxima Jornada de Cáncer Ginecológico, la Marcha
 # por la Salud y los talleres del próximo trimestre.)
-[fecha: 2027-05-20]
-titulo: VII Jornada Aragonesa de Cáncer Ginecológico
-hora: 17:00
-lugar: Centro Joaquín Roncal, calle San Braulio, 5, Zaragoza
+[fecha: 2026-10-23]
+titulo: Charla informativa sobre el Cáncer Genital y de Mama
+hora: 18:00
+lugar: Salón de actos, casa cultura, Pinseque (Zaragoza)
 enlace: proyecto-jornada-cancer-ginecologico.html
-Texto opcional, en una o varias líneas.
+Ponte en su piel, el cáncer nos TOCA a todos. Público a partir de los 14 años
+
+[fecha: 2026-10-26]
+titulo: XXV Jornada Aragonesa de Cáncer de Mama
+hora: 17:30
+lugar: Salón de actos Centro Joaquín Roncal. Fundación CAI-ASC, c/San Braulio, 5-7 (Zaragoza)
+enlace: proyecto-jornada-cancer-mama.html
+Hablemos de grandes supervivientes. Necesidades y barreras, mesa debate
 
 # ---------- Cada mes ----------
 

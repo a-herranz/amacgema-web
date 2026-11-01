@@ -63,8 +63,8 @@ No hay ninguna forma de donar: todo pasa por «contacta».
       [Sexualidad](pages/hablando-de-cancer/sexualidad.html), con aviso de IA.
       Pendiente de revisión (ver registro).
 - [ ] **Folleto «Primeros pasos»** (fase 4, nov. 2026):
-      [folleto para imprimir](pages/folleto-primeros-pasos.html) con QR a la
-      web. **No imprimirlo para repartir hasta que se revise** Me acaban de
+      [tríptico para imprimir](pages/folleto-primeros-pasos.html) en A4
+      apaisado, con QR a la web. **No imprimirlo para repartir hasta que se revise** Me acaban de
       diagnosticar: el folleto resume esa página. Al revisarlo, quitar la
       línea «Texto elaborado con ayuda de inteligencia artificial…» del final.
 - [ ] **Lectura fácil** (fase 4, nov. 2026): página

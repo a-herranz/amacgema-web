@@ -29,6 +29,12 @@
 # ---------- Citas con fecha ----------
 # (Pendiente: fechas de la próxima Jornada de Cáncer Ginecológico, la Marcha
 # por la Salud y los talleres del próximo trimestre.)
+[fecha: 2027-05-20]
+titulo: VII Jornada Aragonesa de Cáncer Ginecológico
+hora: 17:00
+lugar: Centro Joaquín Roncal, calle San Braulio, 5, Zaragoza
+enlace: proyecto-jornada-cancer-ginecologico.html
+Texto opcional, en una o varias líneas.
 
 # ---------- Cada mes ----------
 

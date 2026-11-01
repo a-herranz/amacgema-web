@@ -283,6 +283,69 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', ajustarTriptico);
   }
 
+  // Galería (Agenda): al pulsar una miniatura se abre la foto grande en un
+  // visor, con anterior/siguiente (también con las flechas del teclado),
+  // Escape o un clic fuera para cerrar. Sin JavaScript, o en navegadores sin
+  // <dialog>, el enlace abre la foto grande sin más.
+  var fotosGaleria = Array.prototype.slice.call(document.querySelectorAll('.galeria-foto'));
+  if (fotosGaleria.length && typeof HTMLDialogElement === 'function') {
+    var visor = document.createElement('dialog');
+    visor.className = 'visor';
+    visor.setAttribute('aria-label', 'Foto ampliada');
+    visor.innerHTML =
+      '<figure><img alt=""><figcaption class="visor-pie"></figcaption></figure>' +
+      '<button class="visor-boton visor-cerrar" type="button" aria-label="Cerrar">×</button>' +
+      '<button class="visor-boton visor-anterior" type="button" aria-label="Foto anterior">‹</button>' +
+      '<button class="visor-boton visor-siguiente" type="button" aria-label="Foto siguiente">›</button>';
+    document.body.appendChild(visor);
+    var imagenVisor = visor.querySelector('img');
+    var pieVisor = visor.querySelector('.visor-pie');
+    var fotoActual = 0;
+
+    var mostrarFoto = function (indice) {
+      fotoActual = (indice + fotosGaleria.length) % fotosGaleria.length;
+      var enlace = fotosGaleria[fotoActual];
+      imagenVisor.src = enlace.getAttribute('href');
+      imagenVisor.alt = enlace.querySelector('img').alt;
+      pieVisor.textContent = enlace.getAttribute('data-pie');
+      var destino = enlace.getAttribute('data-enlace');
+      if (destino) {
+        var masInfo = document.createElement('a');
+        masInfo.href = destino;
+        masInfo.textContent = destino.indexOf('instagram.com') !== -1 ? 'Ver en Instagram' : 'Más información';
+        if (destino.indexOf('http') === 0) {
+          masInfo.target = '_blank';
+          masInfo.rel = 'noopener noreferrer';
+        }
+        pieVisor.appendChild(document.createTextNode(' · '));
+        pieVisor.appendChild(masInfo);
+      }
+    };
+
+    fotosGaleria.forEach(function (enlace, indice) {
+      enlace.addEventListener('click', function (evento) {
+        evento.preventDefault();
+        mostrarFoto(indice);
+        visor.showModal();
+      });
+    });
+    visor.querySelector('.visor-cerrar').addEventListener('click', function () { visor.close(); });
+    visor.querySelector('.visor-anterior').addEventListener('click', function () { mostrarFoto(fotoActual - 1); });
+    visor.querySelector('.visor-siguiente').addEventListener('click', function () { mostrarFoto(fotoActual + 1); });
+    visor.addEventListener('keydown', function (evento) {
+      if (evento.key === 'ArrowLeft') { mostrarFoto(fotoActual - 1); }
+      if (evento.key === 'ArrowRight') { mostrarFoto(fotoActual + 1); }
+    });
+    // Un clic en el fondo oscuro (fuera de la foto y los botones) cierra
+    visor.addEventListener('click', function (evento) {
+      if (evento.target === visor) { visor.close(); }
+    });
+    if (fotosGaleria.length === 1) {
+      visor.querySelector('.visor-anterior').hidden = true;
+      visor.querySelector('.visor-siguiente').hidden = true;
+    }
+  }
+
   // Botones «Imprimir» (folleto Primeros pasos)
   document.querySelectorAll('[data-imprimir]').forEach(function (boton) {
     boton.addEventListener('click', function () {

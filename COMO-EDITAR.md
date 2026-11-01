@@ -23,6 +23,8 @@ Algunos textos no están en una página sino en piezas comunes a todas:
 | Menú principal | `templates/navbar.html` |
 | Texto de los correos que se abren al pulsar «Escríbenos» y similares | `templates/correos.txt` |
 | Bloque final «¿Te preocupa algo de lo que acabas de leer?» | `templates/cierre-apoyo.html` |
+| Citas de la Agenda | `templates/agenda.txt` (las instrucciones están al principio del archivo) |
+| Fotos de la galería (al final de la Agenda) | Sube la foto a la carpeta `galeria/` («Add file» › «Upload files») y descríbela en `templates/galeria.txt` |
 
 ## 2. Editar
 

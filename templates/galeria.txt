@@ -1,0 +1,27 @@
+# GALERÍA DE FOTOS
+#
+# De aquí sale la galería que aparece al final de la página «Agenda». Si no
+# hay ninguna foto, la galería no se muestra.
+#
+# Cómo añadir una foto (también desde el navegador, ver COMO-EDITAR.md):
+#   1. Sube la foto a la carpeta galeria/ del proyecto (en GitHub: entra en
+#      la carpeta, «Add file» › «Upload files»). Sirve cualquier JPG o PNG,
+#      tal cual sale del móvil o de Instagram: la web la reduce sola.
+#   2. Añade aquí un bloque con su nombre de archivo:
+#
+#   [foto: 2026-10-26-jornada-mama.jpg]
+#   texto: XXV Jornada Aragonesa de Cáncer de Mama
+#   fecha: 2026-10-26
+#   enlace: https://www.instagram.com/p/CODIGO/
+#
+# Solo [foto: ...] y «texto» son obligatorios. «texto» describe la foto para
+# quien no puede verla (lectores de pantalla) y se muestra al ampliarla.
+# «enlace» puede llevar a la publicación de Instagram o a una página de la
+# web. Las fotos se ordenan por fecha, de la más reciente a la más antigua;
+# las que no tienen fecha van al final, en el orden de este archivo.
+#
+# IMPORTANTE: publica solo fotos en las que todas las personas que se
+# reconozcan hayan dado su permiso para salir en la web.
+#
+# Las líneas que empiezan por # son comentarios y no se publican.
+

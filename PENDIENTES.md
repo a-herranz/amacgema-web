@@ -125,6 +125,12 @@ cuestionario para la junta).
       servicio.
 - [ ] **Campaña de historias de socias** (19 de octubre o las Jornadas) y
       **modelo de autorización** por escrito para usar nombre, palabras y foto.
+- [ ] **Fotos de la galería de la Agenda** (preparada en nov. 2026, oculta
+      mientras no haya fotos): elegir fotos de Instagram de @amacgema y
+      subirlas a `galeria/` con su línea en `templates/galeria.txt`. Las
+      tiene quien gestiona la cuenta (en el móvil o con «Descargar tu
+      información» de Instagram); no se pueden sacar automáticamente porque
+      Instagram exige iniciar sesión. Solo fotos con permiso de quien salga.
 
 ## Prioridad 3: técnica y visibilidad
 

@@ -1,0 +1,8 @@
+Fotos originales de la galería de la página Agenda.
+
+Sube aquí las fotos tal cual (JPG o PNG, del móvil o de Instagram) y
+descríbelas en templates/galeria.txt. Esta carpeta no se publica: la web
+genera a partir de ellas una miniatura y una versión grande en WebP.
+
+Solo fotos en las que todas las personas que se reconozcan hayan dado su
+permiso para salir en la web.

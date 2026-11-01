@@ -43,6 +43,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Instalar Pillow (fotos de la galería)
+        run: pip install pillow==10.4.0
+
       - uses: actions/setup-node@v4
         with:
           node-version: "22"

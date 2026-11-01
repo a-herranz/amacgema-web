@@ -365,6 +365,102 @@ def proximas_citas_html(con_fecha):
             '</div>' % lista_citas(con_fecha[:CITAS_EN_PORTADA]))
 
 
+# ---------- Galería de fotos ----------
+# Las fotos originales se suben a galeria/ (no se publica) y se describen en
+# templates/galeria.txt. El build prepara de cada una una miniatura y una
+# versión grande en WebP (necesita Pillow) y {{GALERIA}} pinta la galería; si
+# no hay fotos, no pinta nada.
+GALERIA_ORIGENES = "galeria"
+GALERIA_FUENTE = os.path.join("templates", "galeria.txt")
+GALERIA_SALIDA = os.path.join("img", "galeria")
+GALERIA_MINIATURA = 600   # px del lado mayor
+GALERIA_GRANDE = 1600
+INSTAGRAM = "https://www.instagram.com/amacgema/"
+
+
+def leer_galeria():
+    fotos, actual = [], None
+    for numero, linea in enumerate(read(GALERIA_FUENTE).splitlines(), 1):
+        if linea.startswith("#") or not linea.strip():
+            continue
+        m = re.match(r"^\[foto:\s*(.+?)\]\s*$", linea)
+        if m:
+            actual = {"archivo": m.group(1), "linea": numero}
+            fotos.append(actual)
+            continue
+        campo = re.match(r"^(texto|fecha|enlace):\s*(.*)$", linea)
+        if actual is None or not campo:
+            raise ValueError("%s, línea %d: no se entiende «%s»" % (GALERIA_FUENTE, numero, linea))
+        actual[campo.group(1)] = campo.group(2).strip()
+    for foto in fotos:
+        donde = "%s, línea %d" % (GALERIA_FUENTE, foto["linea"])
+        if not foto.get("texto"):
+            raise ValueError("%s: la foto %s no tiene texto" % (donde, foto["archivo"]))
+        if not os.path.isfile(os.path.join(GALERIA_ORIGENES, foto["archivo"])):
+            raise ValueError("%s: no existe %s/%s" % (donde, GALERIA_ORIGENES, foto["archivo"]))
+        if foto.get("fecha"):
+            try:
+                foto["fecha"] = datetime.date.fromisoformat(foto["fecha"])
+            except ValueError:
+                raise ValueError("%s: la fecha debe ser AAAA-MM-DD" % donde)
+    # Más recientes primero; las que no tienen fecha, al final y en su orden
+    con_fecha = sorted((f for f in fotos if f.get("fecha")), key=lambda f: f["fecha"], reverse=True)
+    return con_fecha + [f for f in fotos if not f.get("fecha")]
+
+
+def preparar_fotos(fotos):
+    """Miniatura y versión grande de cada foto en publicar/img/galeria/."""
+    if not fotos:
+        return
+    try:
+        from PIL import Image, ImageOps
+    except ImportError:
+        raise SystemExit("La galería necesita Pillow: pip install pillow")
+    destino = os.path.join(SALIDA, GALERIA_SALIDA)
+    os.makedirs(destino, exist_ok=True)
+    for foto in fotos:
+        base = os.path.splitext(foto["archivo"])[0]
+        imagen = Image.open(os.path.join(GALERIA_ORIGENES, foto["archivo"]))
+        imagen = ImageOps.exif_transpose(imagen).convert("RGB")  # fotos de móvil giradas
+        for lado, sufijo, calidad in ((GALERIA_MINIATURA, "mini", 78), (GALERIA_GRANDE, "grande", 82)):
+            copia = imagen.copy()
+            copia.thumbnail((lado, lado), Image.LANCZOS)
+            nombre = "%s-%s.webp" % (base, sufijo)
+            copia.save(os.path.join(destino, nombre), "WEBP", quality=calidad, method=6)
+            foto[sufijo] = (GALERIA_SALIDA.replace(os.sep, "/") + "/" + nombre, copia.size)
+
+
+def galeria_html(fotos):
+    if not fotos:
+        return ""
+    esc = html.escape
+    elementos = []
+    for foto in fotos:
+        (mini, (ancho, alto)), (grande, _) = foto["mini"], foto["grande"]
+        pie = esc(foto["texto"])
+        if foto.get("fecha"):
+            pie += " · %d de %s de %d" % (foto["fecha"].day, MESES[foto["fecha"].month - 1],
+                                         foto["fecha"].year)
+        enlace = ' data-enlace="%s"' % esc(foto["enlace"]) if foto.get("enlace") else ""
+        elementos.append(
+            '    <li>\n'
+            '      <a class="galeria-foto" href="%s" data-pie="%s"%s>'
+            '<img src="%s" width="%d" height="%d" alt="%s" loading="lazy" decoding="async"></a>\n'
+            '      <p class="galeria-pie">%s</p>\n'
+            '    </li>' % (grande, pie, enlace, mini, ancho, alto, esc(foto["texto"]), pie))
+    return ('<section class="seccion seccion-alt" aria-labelledby="galeria-titulo">\n'
+            '  <div class="contenedor">\n'
+            '    <div class="seccion-titulo">\n'
+            '      <h2 id="galeria-titulo">Galería</h2>\n'
+            '      <p>Algunos momentos de nuestras actividades y encuentros.</p>\n'
+            '    </div>\n'
+            '    <ul class="galeria">\n%s\n    </ul>\n'
+            '    <p class="ver-mas"><a href="%s" class="enlace-flecha" target="_blank" '
+            'rel="noopener noreferrer">Más fotos en Instagram</a></p>\n'
+            '  </div>\n'
+            '</section>' % ("\n".join(elementos), INSTAGRAM))
+
+
 # ---------- Índice de página ----------
 # En una página larga, el marcador {{INDICE}} se sustituye por un índice de
 # salto con sus títulos <h2>. Los <h2> sin id reciben uno a partir del texto,
@@ -664,6 +760,8 @@ def build():
     os.makedirs(SALIDA)
     for carpeta in ESTATICOS:
         shutil.copytree(carpeta, os.path.join(SALIDA, carpeta))
+    fotos_galeria = leer_galeria()
+    preparar_fotos(fotos_galeria)
 
     built = []
     sin_revisar = []
@@ -683,6 +781,7 @@ def build():
         content = (content
                    .replace("{{AGENDA}}", agenda_html(citas_futuras, citas_pasadas, citas_repetidas))
                    .replace("{{PROXIMAS_CITAS}}", proximas_citas_html(citas_futuras))
+                   .replace("{{GALERIA}}", galeria_html(fotos_galeria))
                    .replace("{{URL_PRIMEROS_PASOS}}",
                             (SITE_URL + "me-acaban-de-diagnosticar.html").split("://", 1)[1]))
         content = generar_indice(content)

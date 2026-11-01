@@ -1,0 +1,55 @@
+# Repaso automático de la web publicada con Lighthouse (Google): velocidad,
+# accesibilidad, buenas prácticas y SEO, en versión móvil.
+#
+# Se lanza a mano desde la pestaña Actions ("Run workflow") y además el
+# primer día de cada mes. No cambia nada de la web: deja una tabla con las
+# notas en el resumen de la ejecución y los informes completos (HTML y JSON)
+# como artefacto descargable.
+
+name: Revisar calidad
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 1 * *"  # día 1 de cada mes a las 6:00 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    env:
+      WEB: https://a-herranz.github.io/amacgema-web/
+      PAGINAS: >-
+        index.html
+        me-acaban-de-diagnosticar.html
+        tratamiento.html
+        contacto.html
+        agenda.html
+        quienes-somos.html
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Pasar Lighthouse por cada página
+        run: |
+          mkdir -p informes
+          for pagina in $PAGINAS; do
+            nombre="${pagina%.html}"
+            npx -y lighthouse@12.2.1 "$WEB$pagina" --quiet \
+              --chrome-flags="--headless=new --no-sandbox" \
+              --output=json --output=html \
+              --output-path="informes/$nombre" || echo "::warning::Lighthouse falló en $pagina"
+          done
+
+      - name: Resumen de notas
+        run: python scripts/resumen_lighthouse.py informes >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: informes-lighthouse
+          path: informes

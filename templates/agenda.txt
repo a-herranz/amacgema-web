@@ -18,8 +18,11 @@
 #
 # Solo «titulo» es obligatorio. «enlace» puede ser una página de la web
 # (como arriba) o una dirección completa (https://...).
-# Las citas cuyo día ya ha pasado desaparecen solas: la web se vuelve a
-# generar cada lunes aunque nadie la toque.
+# Cuando el día de una cita pasa, se mueve sola al bloque «Últimas fechas»
+# de la página Agenda, y a los 6 meses deja de mostrarse. No hace falta
+# borrarla de aquí: la web se vuelve a generar cada lunes aunque nadie la
+# toque. (Si quieres limpiar el archivo, puedes borrar las de hace más de
+# 6 meses.)
 #
 # --- Citas que se repiten ---
 # Empiezan con [cada: ...] y el texto que se mostrará como cuándo,

@@ -226,12 +226,15 @@ def poner_correos(html, correos, fname):
 # Las citas viven en templates/agenda.txt (formato explicado en el propio
 # archivo). {{AGENDA}} pinta la página completa y {{PROXIMAS_CITAS}} el
 # bloque de la portada, que solo aparece si hay citas con fecha por venir.
-# Las citas pasadas se ocultan solas: el workflow regenera la web cada lunes.
+# Las citas pasadas pasan solas al bloque «Últimas fechas» de la página y,
+# tras MESES_ULTIMAS_FECHAS, desaparecen: el workflow regenera la web cada lunes.
 AGENDA_FUENTE = os.path.join("templates", "agenda.txt")
 DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
 MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
          "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 CITAS_EN_PORTADA = 3
+# Cuánto tiempo siguen visibles, en «Últimas fechas», las citas ya pasadas
+MESES_ULTIMAS_FECHAS = 6
 
 
 def leer_agenda():
@@ -305,7 +308,18 @@ def es_anual(cita):
     return re.match(r"(?i)cada (año|%s)" % "|".join(MESES), cita["cuando"]) is not None
 
 
-def agenda_html(con_fecha, repetidas):
+def hace_meses(fecha, meses):
+    """La misma fecha N meses antes (el 31 de agosto menos 6 meses es el
+    28 o 29 de febrero, el último día que existe)."""
+    total = fecha.year * 12 + fecha.month - 1 - meses
+    anio, mes = divmod(total, 12)
+    mes += 1
+    siguiente = datetime.date(anio + (mes == 12), mes % 12 + 1, 1)
+    ultimo_dia = (siguiente - datetime.timedelta(days=1)).day
+    return datetime.date(anio, mes, min(fecha.day, ultimo_dia))
+
+
+def agenda_html(con_fecha, pasadas, repetidas):
     if con_fecha:
         proximas = lista_citas(con_fecha)
     else:
@@ -315,6 +329,10 @@ def agenda_html(con_fecha, repetidas):
     mensuales = [c for c in repetidas if not es_anual(c)]
     anuales = [c for c in repetidas if es_anual(c)]
     bloques = ['<h2 id="proximas-fechas">Próximas fechas</h2>', proximas]
+    if pasadas:
+        bloques += ['<h2 id="ultimas-fechas">Últimas fechas</h2>',
+                    lista_citas(pasadas).replace('<ul class="citas">',
+                                                 '<ul class="citas citas-pasadas">', 1)]
     if mensuales:
         bloques += ['<h2 id="cada-mes">Durante el curso</h2>', lista_citas(mensuales)]
     if anuales:
@@ -601,6 +619,8 @@ def build():
     citas_con_fecha, citas_repetidas = leer_agenda()
     hoy = datetime.date.today()
     citas_futuras = [c for c in citas_con_fecha if c["fecha"] >= hoy]
+    desde = hace_meses(hoy, MESES_ULTIMAS_FECHAS)
+    citas_pasadas = [c for c in reversed(citas_con_fecha) if desde <= c["fecha"] < hoy]
 
     page_paths = []
     for dirpath, _dirnames, filenames in os.walk("pages"):
@@ -640,7 +660,7 @@ def build():
             subnav_html = apply_active(tpl, SUBNAV_LINKS[subnav_key], fname)
 
         content = (content
-                   .replace("{{AGENDA}}", agenda_html(citas_futuras, citas_repetidas))
+                   .replace("{{AGENDA}}", agenda_html(citas_futuras, citas_pasadas, citas_repetidas))
                    .replace("{{PROXIMAS_CITAS}}", proximas_citas_html(citas_futuras))
                    .replace("{{URL_PRIMEROS_PASOS}}",
                             (SITE_URL + "me-acaban-de-diagnosticar.html").split("://", 1)[1]))

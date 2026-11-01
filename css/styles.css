@@ -1386,6 +1386,17 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   margin-bottom: 2.5rem;
 }
 
+/* Últimas fechas: las citas ya pasadas, en tono más apagado que las próximas */
+.citas-pasadas .cita {
+  background-color: var(--color-fondo-alt);
+  border-left-color: var(--color-borde);
+  box-shadow: none;
+}
+
+.citas-pasadas .cita-cuando {
+  color: var(--color-texto-suave);
+}
+
 .citas-portada {
   max-width: 760px;
   margin: 0 auto 3.5rem;

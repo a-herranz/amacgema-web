@@ -170,6 +170,16 @@ Después de editar, ejecuta `python scripts/build.py` para regenerar.
 - **Página 404**: `pages/404.html` se publica con una etiqueta `<base>`
   para que funcione en cualquier ruta inexistente.
 
+- **Correos preparados**: los botones del tipo "Solicitar alta como socia" o
+  "Solicitar cita de acogida" abren un correo ya redactado, con asunto que
+  empieza siempre por `[Web]`. Los textos están en `templates/correos.txt`
+  (uno por bloque `[clave]`) y en la página se usa `href="{{CORREO:clave}}"`.
+  Para cambiar un asunto o un texto, edita solo ese archivo y recompila; para
+  un correo nuevo, añade un bloque y usa su clave. Si una página pide una
+  clave que no existe, el build se detiene con un error. Si al pulsar el
+  enlace no se abre ningún programa de correo, `js/script.js` muestra un aviso
+  con la dirección y la copia al portapapeles.
+
 - **Índice de página**: en una página larga, escribe `{{INDICE}}` donde deba
   ir el índice (normalmente justo después del recuadro "Lo esencial"). El
   build lo sustituye por un índice "En esta página" con todos los `<h2>` que

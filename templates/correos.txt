@@ -1,0 +1,391 @@
+# CORREOS PREPARADOS
+#
+# Cada bloque es un correo que se abre ya redactado al pulsar un enlace de
+# la web. En las páginas se usa como  href="{{CORREO:clave}}"  y el build lo
+# convierte en un enlace mailto: con el asunto y el texto codificados.
+#
+# Formato de cada bloque:
+#   [clave]            nombre que se usa en la página
+#   asunto: ...        el build le antepone siempre "[Web] "
+#   (línea en blanco)
+#   texto del correo, tal cual, hasta el siguiente [bloque]
+#
+# Las líneas que empiezan por # son comentarios y no se envían.
+# Si cambias algo aquí, vuelve a ejecutar scripts/build.py.
+
+[consulta]
+asunto: Consulta desde la página de contacto
+
+Hola:
+
+[Cuéntanos aquí qué necesitas]
+
+Nombre:
+Teléfono (si prefieres que te llamemos):
+
+(No hace falta que incluyas información médica: lo hablaremos en persona.)
+
+[consulta-breve]
+asunto: Consulta
+
+Hola:
+
+
+
+Un saludo.
+
+# ---------- Cómo ayudar ----------
+
+[hazte-socia]
+asunto: Quiero hacerme socia
+
+Hola:
+
+Me gustaría hacerme socia de AMAC-GEMA. ¿Podríais enviarme la información para darme de alta: las cuotas, las formas de pago y los pasos que tengo que seguir?
+
+Os dejo mis datos para que podáis contactar conmigo:
+
+Nombre y apellidos:
+Teléfono:
+Localidad:
+
+Muchas gracias. Un saludo.
+
+[voluntaria]
+asunto: Quiero ser voluntaria
+
+Hola:
+
+Me gustaría colaborar como voluntaria con AMAC-GEMA. ¿Podríais contarme qué posibilidades hay y cuándo es la próxima formación para nuevas voluntarias?
+
+Me interesa sobre todo (borra lo que no corresponda):
+- Acogida en la sede o voluntariado en hospitales (he pasado por la enfermedad)
+- Mesas informativas y eventos
+- Secretaría, tesorería o administración
+- Taller de manualidades
+- Lo que más falta os haga
+
+Mi disponibilidad aproximada:
+
+Nombre y apellidos:
+Teléfono:
+
+Muchas gracias. Un saludo.
+
+[quiero-ayudar]
+asunto: Quiero colaborar con AMAC-GEMA
+
+Hola:
+
+Me gustaría colaborar con AMAC-GEMA y no sé muy bien cómo. ¿Podríais contarme qué formas de ayudar hay ahora mismo?
+
+Nombre:
+Teléfono:
+
+Muchas gracias. Un saludo.
+
+[regalos-solidarios]
+asunto: Regalos solidarios para una celebración
+
+Hola:
+
+Me gustaría encargar detalles solidarios de AMAC-GEMA para una celebración. Os dejo los datos:
+
+Tipo de celebración (boda, bautizo, comunión...):
+Fecha:
+Número aproximado de invitados:
+
+¿Podríais enviarme información sobre los detalles disponibles y cómo hacer el encargo?
+
+Nombre:
+Teléfono:
+
+Muchas gracias. Un saludo.
+
+[empresa]
+asunto: Colaboración de empresa
+
+Hola:
+
+Escribo en nombre de una empresa que querría colaborar con AMAC-GEMA. Nos interesa conocer las posibilidades (patrocinio, donación, voluntariado corporativo...).
+
+Empresa:
+Persona de contacto:
+Cargo:
+Teléfono:
+
+Quedamos a la espera de vuestra respuesta. Un saludo.
+
+[empresa-colaboradora]
+asunto: Somos empresa colaboradora
+
+Hola:
+
+Nuestra empresa colabora con AMAC-GEMA y no aparecemos en la web. Os escribimos para que podáis incluirnos.
+
+Empresa:
+Persona de contacto:
+Teléfono:
+
+Un saludo.
+
+[difundir]
+asunto: Quiero difundir vuestra labor
+
+Hola:
+
+Me gustaría ayudar a dar a conocer AMAC-GEMA. ¿Podríais enviarme trípticos o material informativo para repartir?
+
+Dónde lo repartiría (centro de trabajo, asociación, charla...):
+Cantidad aproximada:
+
+Nombre:
+Teléfono:
+
+Muchas gracias. Un saludo.
+
+# ---------- Qué hacemos: atención ----------
+
+[acogida]
+asunto: Quiero pedir cita de acogida
+
+Hola:
+
+Me gustaría pedir una cita de acogida en la sede para conocer la asociación y el apoyo que ofrecéis.
+
+Nombre:
+Teléfono:
+Mejor momento para llamarme (mañana o tarde):
+
+(No hace falta que incluyas información médica: lo hablaremos en persona.)
+
+Un saludo.
+
+[psicooncologia]
+asunto: Solicitud de apoyo psicológico
+
+Hola:
+
+Me gustaría recibir información sobre el servicio de atención psicooncológica y, si es posible, pedir una cita.
+
+La cita sería para (borra lo que no corresponda): mí / un familiar.
+
+Nombre:
+Teléfono:
+Mejor momento para llamarme (mañana o tarde):
+
+(No hace falta que incluyas información médica: lo hablaremos en persona.)
+
+Un saludo.
+
+[fisioterapia]
+asunto: Cita de fisioterapia y linfedema
+
+Hola:
+
+Me gustaría pedir información o una cita con el servicio de fisioterapia y linfedema.
+
+Nombre:
+Teléfono:
+Mejor momento para llamarme (mañana o tarde):
+
+(No hace falta que incluyas información médica: lo hablaremos en persona.)
+
+Un saludo.
+
+[trabajo-social]
+asunto: Consulta de trabajo social
+
+Hola:
+
+Me gustaría hacer una consulta a la trabajadora social. El tema es (borra lo que no corresponda):
+- Ayudas y prestaciones
+- Incapacidad o discapacidad
+- Trabajo y bajas
+- Préstamo de peluca o prótesis
+- Otro:
+
+Nombre:
+Teléfono:
+Mejor momento para llamarme (mañana o tarde):
+
+(No hace falta que incluyas información médica: lo hablaremos en persona.)
+
+Un saludo.
+
+[cafes]
+asunto: Cafés de los martes
+
+Hola:
+
+Me gustaría participar en los cafés de los martes. ¿Cuándo es el próximo y cómo me apunto?
+
+Nombre:
+Teléfono:
+
+Un saludo.
+
+[visita-hospital]
+asunto: Visita del voluntariado en el hospital
+
+Hola:
+
+Me gustaría recibir información sobre las visitas de las voluntarias de AMAC-GEMA en el hospital.
+
+Nombre:
+Teléfono:
+Hospital:
+
+(No hace falta que incluyas información médica: lo hablaremos en persona.)
+
+Un saludo.
+
+[actividades]
+asunto: Información sobre actividades guiadas
+
+Hola:
+
+Me gustaría recibir información sobre las actividades guiadas: horarios, plazas y si son adecuadas para mi situación.
+
+Me interesa sobre todo:
+
+Nombre:
+Teléfono:
+
+Un saludo.
+
+# ---------- Qué hacemos: sensibilización y solidaridad ----------
+
+[contigo]
+asunto: Charla del proyecto Contigo en nuestro centro
+
+Hola:
+
+Escribo desde un centro educativo. Nos gustaría que AMAC-GEMA diera una charla del proyecto «Contigo» a nuestro alumnado.
+
+Centro:
+Curso o cursos (4.º de ESO, Bachillerato, FP...):
+Número aproximado de alumnos:
+Fechas que nos vendrían bien:
+
+Persona de contacto:
+Teléfono:
+
+Muchas gracias. Un saludo.
+
+[jornada-mama]
+asunto: Jornadas Aragonesas de Cáncer de Mama
+
+Hola:
+
+Me gustaría recibir información sobre la próxima Jornada Aragonesa de Cáncer de Mama: fecha, lugar y cómo asistir.
+
+Nombre:
+
+Un saludo.
+
+[jornada-gine]
+asunto: Jornada Aragonesa de Cáncer Ginecológico
+
+Hola:
+
+Me gustaría recibir información sobre la próxima Jornada Aragonesa de Cáncer Ginecológico: fecha, lugar y cómo asistir.
+
+Nombre:
+
+Un saludo.
+
+[yo-me-muevo]
+asunto: Participar en «Yo me muevo por…»
+
+Hola:
+
+Me gustaría participar en las acciones de «Yo me muevo por…» (Marcha por la Salud, 19 de octubre...). ¿Cómo puedo sumarme?
+
+Nombre:
+Teléfono:
+
+Un saludo.
+
+[espacio-cuerpo]
+asunto: Próximas actividades de El espacio del cuerpo
+
+Hola:
+
+Me gustaría conocer las próximas actividades de danza y movimiento de El espacio del cuerpo.
+
+Nombre:
+Teléfono:
+
+Un saludo.
+
+[accion-sensibilizacion]
+asunto: Propuesta de acción de sensibilización
+
+Hola:
+
+Me gustaría participar o proponer una acción de sensibilización con AMAC-GEMA.
+
+Mi idea:
+
+Nombre:
+Teléfono:
+
+Un saludo.
+
+[iniciativa-solidaria]
+asunto: Quiero organizar una iniciativa solidaria
+
+Hola:
+
+Me gustaría organizar una iniciativa solidaria a favor de AMAC-GEMA.
+
+Qué tipo de iniciativa (carrera, venta solidaria, evento...):
+Dónde y cuándo:
+Quién la organiza (particular, empresa, ayuntamiento, asociación...):
+
+Nombre:
+Teléfono:
+
+Muchas gracias. Un saludo.
+
+[marcha]
+asunto: Colaborar con la Marcha por la Salud
+
+Hola:
+
+Me gustaría colaborar con la Marcha por la Salud (borra lo que no corresponda): como voluntaria / como empresa patrocinadora / de otra forma.
+
+Nombre:
+Teléfono:
+
+Un saludo.
+
+# ---------- Textos legales ----------
+
+[proteccion-datos]
+asunto: Protección de datos
+
+Hola:
+
+Quiero ejercer mi derecho de (borra lo que no corresponda): acceso / rectificación / supresión / oposición / limitación del tratamiento / portabilidad / retirada del consentimiento, sobre los datos personales que AMAC-GEMA tiene sobre mí.
+
+Detalle de lo que solicito:
+
+Nombre y apellidos:
+Teléfono:
+
+Un saludo.
+
+# ---------- Hablando de cáncer ----------
+
+[glosario]
+asunto: Duda sobre un término del glosario
+
+Hola:
+
+He buscado un término en el glosario de la web y no lo he encontrado (o no me ha quedado claro):
+
+Término:
+
+Un saludo.

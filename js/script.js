@@ -41,6 +41,53 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Enlaces de correo preparados: si el ordenador no tiene un programa de
+  // correo configurado (muy habitual con Gmail o Outlook en el navegador),
+  // pulsar un mailto: no hace nada. Si al segundo y medio la página no ha
+  // perdido el foco (señal de que no se abrió nada), se muestra un aviso con
+  // la dirección y se copia al portapapeles.
+  var DIRECCION_CORREO = 'amacgema@gmail.com';
+  var avisoCorreo = null;
+  var mostrarAvisoCorreo = function () {
+    if (!avisoCorreo) {
+      avisoCorreo = document.createElement('div');
+      avisoCorreo.className = 'aviso-correo';
+      avisoCorreo.setAttribute('role', 'status');
+      document.body.appendChild(avisoCorreo);
+    }
+    var copiada = false;
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(DIRECCION_CORREO).then(function () { copiada = true; }, function () {});
+    }
+    avisoCorreo.innerHTML = '<p>¿No se ha abierto tu correo? Escríbenos a <strong>' + DIRECCION_CORREO +
+      '</strong><span class="aviso-correo-copiado"></span>.</p>' +
+      '<button type="button" class="aviso-correo-cerrar">Cerrar</button>';
+    avisoCorreo.querySelector('.aviso-correo-cerrar').addEventListener('click', function () {
+      avisoCorreo.classList.remove('visible');
+    });
+    setTimeout(function () {
+      if (copiada) {
+        avisoCorreo.querySelector('.aviso-correo-copiado').textContent = ' (ya la hemos copiado: solo tienes que pegarla)';
+      }
+    }, 200);
+    avisoCorreo.classList.add('visible');
+  };
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (enlace) {
+    enlace.addEventListener('click', function () {
+      var seFue = false;
+      var alSalir = function () { seFue = true; };
+      window.addEventListener('blur', alSalir, { once: true });
+      document.addEventListener('visibilitychange', alSalir, { once: true });
+      setTimeout(function () {
+        window.removeEventListener('blur', alSalir);
+        document.removeEventListener('visibilitychange', alSalir);
+        if (!seFue && document.visibilityState === 'visible') {
+          mostrarAvisoCorreo();
+        }
+      }, 1500);
+    });
+  });
+
   // Publicaciones de Facebook (página de Contacto): el widget instala
   // cookies de Meta, así que solo se carga cuando la persona lo pide.
   var botonFacebook = document.querySelector('.cargar-facebook');

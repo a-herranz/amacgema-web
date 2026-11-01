@@ -112,6 +112,58 @@ def avisar_pestana_nueva(html):
     return re.sub(r'(<a\b[^>]*\btarget="_blank"[^>]*>)(.*?)(</a>)', poner, html, flags=re.S)
 
 
+# ---------- Correos preparados ----------
+# Los enlaces del tipo "escríbenos" abren un correo ya redactado. Los textos
+# viven en templates/correos.txt y en las páginas se usa
+# href="{{CORREO:clave}}". Todos los asuntos empiezan por "[Web] " para que
+# la asociación distinga en su bandeja lo que llega desde la web.
+CORREO_DESTINO = "amacgema@gmail.com"
+CORREOS_FUENTE = os.path.join("templates", "correos.txt")
+
+
+def leer_correos():
+    correos, clave, lineas = {}, None, []
+
+    def guardar():
+        if clave is None:
+            return
+        cabecera = lineas[0] if lineas else ""
+        if not cabecera.startswith("asunto:"):
+            raise ValueError("El correo [%s] no empieza por 'asunto:'" % clave)
+        cuerpo = "\n".join(lineas[1:]).strip("\n")
+        correos[clave] = (cabecera[len("asunto:"):].strip(), cuerpo)
+
+    for linea in open(CORREOS_FUENTE, encoding="utf-8").read().splitlines():
+        if linea.startswith("#"):
+            continue
+        m = re.match(r"^\[([a-z0-9-]+)\]\s*$", linea)
+        if m:
+            guardar()
+            clave, lineas = m.group(1), []
+        elif clave is not None:
+            lineas.append(linea)
+    guardar()
+    return correos
+
+
+def enlace_correo(asunto, cuerpo):
+    from urllib.parse import quote
+    url = "mailto:%s?subject=%s" % (CORREO_DESTINO, quote("[Web] " + asunto, safe=""))
+    if cuerpo.strip():
+        url += "&body=" + quote(cuerpo.replace("\n", "\r\n") + "\r\n", safe="")
+    return url.replace("&", "&amp;")
+
+
+def poner_correos(html, correos, fname):
+    def cambiar(m):
+        clave = m.group(1)
+        if clave not in correos:
+            raise ValueError("%s usa {{CORREO:%s}}, que no está en %s"
+                             % (fname, clave, CORREOS_FUENTE))
+        return enlace_correo(*correos[clave])
+    return re.sub(r"\{\{CORREO:([a-z0-9-]+)\}\}", cambiar, html)
+
+
 # ---------- Índice de página ----------
 # En una página larga, el marcador {{INDICE}} se sustituye por un índice de
 # salto con sus títulos <h2>. Los <h2> sin id reciben uno a partir del texto,
@@ -190,6 +242,7 @@ def build():
     subnav_templates = {key: read(path) for key, path in SUBNAV_FILES.items()}
     cierre_templates = {key: read(path) for key, path in CIERRE_FILES.items()}
     terminos_glosario = leer_terminos_glosario()
+    correos = leer_correos()
 
     page_paths = []
     for dirpath, _dirnames, filenames in os.walk("pages"):
@@ -244,6 +297,7 @@ def build():
         )
 
         page_html = avisar_pestana_nueva(page_html)
+        page_html = poner_correos(page_html, correos, fname)
 
         # GitHub Pages sirve 404.html para cualquier ruta inexistente, incluso
         # a varias carpetas de profundidad: sin <base>, sus rutas relativas

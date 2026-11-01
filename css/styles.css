@@ -901,6 +901,45 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   box-shadow: var(--sombra-suave);
 }
 
+/* Aviso cuando un enlace de correo no abre nada (lo crea js/script.js) */
+.aviso-correo {
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  z-index: 50;
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  width: min(560px, calc(100% - 2rem));
+  padding: 1rem 1.2rem;
+  border-radius: var(--radio-borde);
+  background-color: var(--color-acento);
+  color: var(--color-blanco);
+  box-shadow: var(--sombra-elevada);
+  transform: translateX(-50%);
+}
+
+.aviso-correo.visible {
+  display: flex;
+}
+
+.aviso-correo p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.aviso-correo-cerrar {
+  flex: none;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: var(--radio-pill);
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+}
+
 /* Cargos de la junta directiva: el cargo, pequeño, encima del nombre */
 .lista-cargos {
   list-style: none;

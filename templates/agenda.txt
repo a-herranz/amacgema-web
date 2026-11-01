@@ -4,6 +4,11 @@
 # citas» de la portada. Se puede editar desde el navegador (ver
 # COMO-EDITAR.md); al guardar, la web se actualiza sola.
 #
+# IMPORTANTE: el apartado «Agenda» del menú solo aparece si aquí hay alguna
+# cita con fecha de los últimos 12 meses o futura. Si no la hay, se oculta
+# del menú, del pie y del buscador, para que la web no parezca abandonada.
+# Las citas que se repiten ([cada: ...]) no cuentan.
+#
 # Las líneas que empiezan por # son comentarios y no se publican.
 #
 # --- Citas con fecha ---

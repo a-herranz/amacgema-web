@@ -421,6 +421,50 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 
 .nav-principal li { position: relative; }
 
+/* Escritorio: cada elemento del menú en una sola línea, con la flecha del
+   desplegable al lado del texto. Con 7 elementos más la lupa y Contacto, sin
+   esto los textos largos («Hablando de cáncer») se partían en dos líneas. */
+@media (min-width: 1025px) {
+  .logo {
+    flex: none;
+    margin-right: 1.25rem;
+  }
+
+  .nav-principal > ul {
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-principal > ul > li {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+}
+
+/* Pantallas medianas (tablet en horizontal, portátil pequeño): más compacto */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .nav-principal > ul {
+    gap: 0.7rem;
+  }
+
+  .nav-principal a {
+    font-size: 0.88rem;
+  }
+
+  .boton-submenu {
+    margin-left: 0;
+  }
+
+  .nav-cta a {
+    padding: 0.45rem 0.9rem;
+  }
+
+  .logo img {
+    height: 46px;
+  }
+}
+
 .nav-principal a {
   font-family: var(--fuente-titulos);
   font-weight: 600;
@@ -2617,11 +2661,11 @@ a.via-contacto-dato:focus-visible {
    Un único bloque por punto de ruptura, de mayor a menor.
    ========================================================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   /* ---------- Menú principal como panel desplegable ----------
      Un header fijo con 6 enlaces en fila ocupaba más de un tercio de la
      pantalla en móvil, siempre pegado arriba (position: sticky). Por
-     debajo de 768px el menú se oculta tras un botón de hamburguesa, y se
+     debajo de 1024px el menú se oculta tras un botón de hamburguesa, y se
      despliega como un panel a toda la anchura, en columna. */
   .cabecera .contenedor {
     flex-wrap: wrap;
@@ -2629,11 +2673,6 @@ a.via-contacto-dato:focus-visible {
 
   .boton-llamar-movil {
     display: inline-flex;
-  }
-
-  /* Partes de una etiqueta que sobran en pantallas estrechas */
-  .solo-escritorio {
-    display: none;
   }
 
   .boton-menu-movil {
@@ -2738,6 +2777,13 @@ a.via-contacto-dato:focus-visible {
     overflow: visible;
     clip: auto;
     white-space: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Partes de una etiqueta que sobran en pantallas estrechas */
+  .solo-escritorio {
+    display: none;
   }
 
   .hero h1 {

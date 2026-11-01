@@ -17,6 +17,9 @@
           <li><a href="index.html"{{ACTIVE:index.html}}>Inicio</a></li>
           <li><a href="quienes-somos.html"{{ACTIVE:quienes-somos.html}}>Quiénes somos</a></li>
           <li><a href="que-hacemos.html"{{ACTIVE:que-hacemos.html}}>Qué hacemos</a></li>
+          <!-- Solo si hay citas recientes o próximas: ver AGENDA_VISIBLE_MESES
+               en scripts/build.py -->
+          {{SI_AGENDA}}<li><a href="agenda.html"{{ACTIVE:agenda.html}}>Agenda</a></li>{{FIN_SI_AGENDA}}
           <li><a href="hablando-de-cancer.html"{{ACTIVE:hablando-de-cancer.html}}>Hablando de cáncer</a></li>
           <li><a href="como-ayudar.html"{{ACTIVE:como-ayudar.html}}>Cómo ayudar</a></li>
           <!-- En escritorio, solo la lupa (el texto queda para lectores de

@@ -41,7 +41,8 @@ VERIFICACION_GOOGLE = ""
 
 NAV_LINKS = [
     "index.html", "quienes-somos.html", "que-hacemos.html",
-    "hablando-de-cancer.html", "como-ayudar.html", "buscar.html", "contacto.html",
+    "agenda.html", "hablando-de-cancer.html", "como-ayudar.html", "buscar.html",
+    "contacto.html",
 ]
 
 # Carpeta con la web generada, la única que se publica. Se borra y se
@@ -235,6 +236,18 @@ MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
 CITAS_EN_PORTADA = 3
 # Cuánto tiempo siguen visibles, en «Últimas fechas», las citas ya pasadas
 MESES_ULTIMAS_FECHAS = 6
+# La Agenda solo se enlaza (menú, pie, buscador, sitemap) si hay alguna cita
+# con fecha de los últimos AGENDA_VISIBLE_MESES meses o por venir: una agenda
+# sin fechas recientes da sensación de web abandonada. Las citas «cada...»
+# no cuentan, porque nunca caducan.
+AGENDA_VISIBLE_MESES = 12
+
+
+def solo_si(texto, marca, mostrar):
+    """Quita el bloque {{SI_MARCA}}...{{FIN_SI_MARCA}} si no hay que
+    mostrarlo; si hay que mostrarlo, quita solo las marcas."""
+    patron = r"\{\{SI_%s\}\}(.*?)\{\{FIN_SI_%s\}\}" % (marca, marca)
+    return re.sub(patron, (lambda m: m.group(1)) if mostrar else "", texto, flags=re.S)
 
 
 def leer_agenda():
@@ -466,14 +479,14 @@ def datos_estructurados():
             % json.dumps(datos, ensure_ascii=False, indent=2))
 
 
-def escribir_sitemap(paginas):
+def escribir_sitemap(paginas, sin_indexar):
     """sitemap.xml para Google Search Console y robots.txt que lo anuncia.
     Ojo: los buscadores solo leen robots.txt en la raíz de un dominio, así
     que en github.io/amacgema-web/ no tiene efecto hasta tener dominio
     propio; el sitemap sí se puede enviar a mano en Search Console."""
     urls = "\n".join(
         "  <url><loc>%s</loc></url>" % (SITE_URL + ("" if p == "index.html" else p))
-        for p in sorted(paginas) if p not in SIN_INDEXAR)
+        for p in sorted(paginas) if p not in sin_indexar)
     with open(os.path.join(SALIDA, "sitemap.xml"), "w", encoding="utf-8") as fh:
         fh.write('<?xml version="1.0" encoding="UTF-8"?>\n'
                  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -621,6 +634,14 @@ def build():
     citas_futuras = [c for c in citas_con_fecha if c["fecha"] >= hoy]
     desde = hace_meses(hoy, MESES_ULTIMAS_FECHAS)
     citas_pasadas = [c for c in reversed(citas_con_fecha) if desde <= c["fecha"] < hoy]
+    agenda_visible = any(c["fecha"] >= hace_meses(hoy, AGENDA_VISIBLE_MESES)
+                         for c in citas_con_fecha)
+    navbar_tpl = solo_si(navbar_tpl, "AGENDA", agenda_visible)
+    footer = solo_si(footer, "AGENDA", agenda_visible)
+    sin_indexar = set(SIN_INDEXAR) | (set() if agenda_visible else {"agenda.html"})
+    if not agenda_visible:
+        avisar("la Agenda está oculta: no hay citas con fecha de los últimos %d "
+               "meses ni próximas (templates/agenda.txt)." % AGENDA_VISIBLE_MESES)
 
     page_paths = []
     for dirpath, _dirnames, filenames in os.walk("pages"):
@@ -697,7 +718,7 @@ def build():
                      PROVEEDOR_ESTADISTICAS if GOATCOUNTER else "")
         )
 
-        if fname in SIN_INDEXAR:
+        if fname in sin_indexar:
             page_html = page_html.replace(" data-pagefind-body", "", 1)
 
         page_html = avisar_pestana_nueva(page_html)
@@ -728,7 +749,7 @@ def build():
         avisar("contenido elaborado con IA sin revisión profesional en: "
                + ", ".join(sorted(sin_revisar)) + " (ver PENDIENTES.md)")
 
-    escribir_sitemap(built)
+    escribir_sitemap(built, sin_indexar)
     escribir_cname()
     if "--sin-buscador" in sys.argv:
         print("AVISO: sin buscador, QR ni PDF del tríptico (--sin-buscador).")

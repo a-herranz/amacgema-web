@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // (p. ej. al girar una tablet), se cierra para no dejarlo "forzado
     // abierto" por el estilo de móvil.
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 768) {
+      // Mismo punto de ruptura que el menú en styles.css (sección 16)
+      if (window.innerWidth > 1024) {
         cerrarMenuMovil();
       }
     });

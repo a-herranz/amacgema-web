@@ -8,12 +8,19 @@
 # completos (HTML y JSON) como artefacto descargable.
 #
 # Se lanza a mano desde la pestaña Actions ("Run workflow", eligiendo la
-# rama) y además el primer día de cada mes, sobre main.
+# rama) y además el primer día de cada mes, sobre main. Al lanzarlo a mano
+# se puede indicar una dirección (por ejemplo la web publicada) para medirla
+# a ella en vez de la copia generada.
 
 name: Revisar calidad
 
 on:
   workflow_dispatch:
+    inputs:
+      web:
+        description: "Dirección a medir, con / final (vacío = la web generada de la rama)"
+        required: false
+        default: ""
   schedule:
     - cron: "0 6 1 * *"  # día 1 de cada mes a las 6:00 UTC
 
@@ -43,16 +50,21 @@ jobs:
           node-version: "22"
 
       - name: Generar la web
+        if: inputs.web == ''
         run: python scripts/build.py
 
       - name: Servir la web y pasar Lighthouse por cada página
         run: |
-          python -m http.server 8000 -d publicar >/dev/null 2>&1 &
-          sleep 2
+          WEB="${{ inputs.web }}"
+          if [ -z "$WEB" ]; then
+            python -m http.server 8000 -d publicar >/dev/null 2>&1 &
+            sleep 2
+            WEB="http://localhost:8000/"
+          fi
           mkdir -p informes
           for pagina in $PAGINAS; do
             nombre="${pagina%.html}"
-            npx -y lighthouse@12.2.1 "http://localhost:8000/$pagina" --quiet \
+            npx -y lighthouse@12.2.1 "$WEB$pagina" --quiet \
               --chrome-flags="--headless=new --no-sandbox" \
               --output=json --output=html \
               --output-path="informes/$nombre" || echo "::warning::Lighthouse falló en $pagina"

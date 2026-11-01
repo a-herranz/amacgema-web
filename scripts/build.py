@@ -3,13 +3,15 @@ pages/ y los archivos estáticos (css/, js/, img/, docs/).
 
 Uso:
     python scripts/build.py                  (web + índice del buscador)
-    python scripts/build.py --sin-buscador   (solo la web, sin Node.js)
+    python scripts/build.py --sin-buscador   (sin Node.js: sin buscador ni QR)
 
 No hace falta ejecutarlo antes de hacer commit: al subir cambios a main,
 GitHub Actions (.github/workflows/publicar.yml) lo ejecuta y publica la
 carpeta publicar/. En local sirve para ver la web antes de subirla:
     python -m http.server -d publicar
 """
+import datetime
+import html
 import json
 import os
 import re
@@ -43,11 +45,13 @@ ESTATICOS = ["css", "js", "img", "docs"]
 EN_CI = bool(os.environ.get("CI"))
 
 # Páginas que no deben aparecer en el buscador ni en el sitemap
-SIN_INDEXAR = {"404.html", "buscar.html"}
+SIN_INDEXAR = {"404.html", "buscar.html", "folleto-primeros-pasos.html"}
 
 # Versión fija de Pagefind (el buscador): una versión nueva podría cambiar
 # el formato del índice o de la interfaz sin avisar.
 PAGEFIND = "pagefind@1.3.0"
+# Igual para el generador del código QR del folleto «Primeros pasos»
+QRCODE = "qrcode@1.5.4"
 
 # Bloques de cierre opcionales: una pieza común que se añade al final del
 # contenido de una página (dentro de <main>, después de {{CONTENT}}), antes
@@ -207,6 +211,118 @@ def poner_correos(html, correos, fname):
     return re.sub(r"\{\{CORREO:([a-z0-9-]+)\}\}", cambiar, html)
 
 
+# ---------- Agenda ----------
+# Las citas viven en templates/agenda.txt (formato explicado en el propio
+# archivo). {{AGENDA}} pinta la página completa y {{PROXIMAS_CITAS}} el
+# bloque de la portada, que solo aparece si hay citas con fecha por venir.
+# Las citas pasadas se ocultan solas: el workflow regenera la web cada lunes.
+AGENDA_FUENTE = os.path.join("templates", "agenda.txt")
+DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+         "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+CITAS_EN_PORTADA = 3
+
+
+def leer_agenda():
+    """Devuelve (con_fecha, repetidas): con_fecha ordenadas por fecha."""
+    citas, actual = [], None
+    for numero, linea in enumerate(read(AGENDA_FUENTE).splitlines(), 1):
+        if linea.startswith("#") or not linea.strip():
+            continue
+        m = re.match(r"^\[(fecha|cada):\s*(.+?)\]\s*$", linea)
+        if m:
+            actual = {"tipo": m.group(1), "cuando": m.group(2), "texto": []}
+            if actual["tipo"] == "fecha":
+                try:
+                    actual["fecha"] = datetime.date.fromisoformat(actual["cuando"])
+                except ValueError:
+                    raise ValueError("%s, línea %d: la fecha debe ser AAAA-MM-DD"
+                                     % (AGENDA_FUENTE, numero))
+            citas.append(actual)
+            continue
+        if actual is None:
+            raise ValueError("%s, línea %d: texto fuera de una cita" % (AGENDA_FUENTE, numero))
+        campo = re.match(r"^(titulo|hora|lugar|enlace):\s*(.*)$", linea)
+        if campo:
+            actual[campo.group(1)] = campo.group(2).strip()
+        else:
+            actual["texto"].append(linea.strip())
+    for cita in citas:
+        if not cita.get("titulo"):
+            raise ValueError("%s: la cita [%s: %s] no tiene título"
+                             % (AGENDA_FUENTE, cita["tipo"], cita["cuando"]))
+    con_fecha = sorted((c for c in citas if c["tipo"] == "fecha"), key=lambda c: c["fecha"])
+    return con_fecha, [c for c in citas if c["tipo"] == "cada"]
+
+
+def fecha_larga(fecha):
+    return "%s %d de %s de %d" % (DIAS[fecha.weekday()], fecha.day,
+                                  MESES[fecha.month - 1], fecha.year)
+
+
+def cita_html(cita, nivel="h3"):
+    esc = html.escape
+    if cita["tipo"] == "fecha":
+        cuando = fecha_larga(cita["fecha"])
+        fecha_attr = ' datetime="%s"' % cita["fecha"].isoformat()
+    else:
+        cuando, fecha_attr = cita["cuando"], ""
+    if cita.get("hora"):
+        cuando += " · " + cita["hora"]
+    titulo = esc(cita["titulo"])
+    enlace = cita.get("enlace")
+    if enlace:
+        externo = ' target="_blank" rel="noopener noreferrer"' if enlace.startswith("http") else ""
+        titulo = '<a href="%s"%s>%s</a>' % (esc(enlace), externo, titulo)
+    partes = ['<li class="cita">',
+              '  <p class="cita-cuando"><time%s>%s</time></p>' % (fecha_attr, esc(cuando)),
+              '  <%s>%s</%s>' % (nivel, titulo, nivel)]
+    if cita.get("lugar"):
+        partes.append('  <p class="cita-lugar">%s</p>' % esc(cita["lugar"]))
+    if cita["texto"]:
+        partes.append("  <p>%s</p>" % esc(" ".join(cita["texto"])))
+    partes.append("</li>")
+    return "\n".join(partes)
+
+
+def lista_citas(citas):
+    return ('<ul class="citas">\n%s\n</ul>'
+            % "\n".join(cita_html(c) for c in citas))
+
+
+def es_anual(cita):
+    return re.match(r"(?i)cada (año|%s)" % "|".join(MESES), cita["cuando"]) is not None
+
+
+def agenda_html(con_fecha, repetidas):
+    if con_fecha:
+        proximas = lista_citas(con_fecha)
+    else:
+        proximas = ('<p class="citas-vacio">Todavía no hay fechas publicadas para '
+                    'los próximos meses. Llámanos al <a href="tel:+34976297764">976 297 764</a> '
+                    'y te informamos.</p>')
+    mensuales = [c for c in repetidas if not es_anual(c)]
+    anuales = [c for c in repetidas if es_anual(c)]
+    bloques = ['<h2 id="proximas-fechas">Próximas fechas</h2>', proximas]
+    if mensuales:
+        bloques += ['<h2 id="cada-mes">Durante el curso</h2>', lista_citas(mensuales)]
+    if anuales:
+        bloques += ['<h2 id="cada-anio">Cada año</h2>', lista_citas(anuales)]
+    return "\n".join(bloques)
+
+
+def proximas_citas_html(con_fecha):
+    if not con_fecha:
+        return ""
+    return ('<div class="citas-portada">\n'
+            '  <div class="seccion-titulo">\n'
+            '    <h2 id="proximas-citas">Próximas citas</h2>\n'
+            '  </div>\n'
+            '  %s\n'
+            '  <p class="ver-mas"><a href="agenda.html" class="enlace-flecha">Ver la agenda completa</a></p>\n'
+            '</div>' % lista_citas(con_fecha[:CITAS_EN_PORTADA]))
+
+
 # ---------- Índice de página ----------
 # En una página larga, el marcador {{INDICE}} se sustituye por un índice de
 # salto con sus títulos <h2>. Los <h2> sin id reciben uno a partir del texto,
@@ -303,26 +419,41 @@ def escribir_cname():
             fh.write(dominio + "\n")
 
 
-def generar_buscador():
-    """Índice del buscador (publicar/pagefind/), con Pagefind vía npx. En
-    cada página indexa solo lo que va dentro de <main data-pagefind-body>.
-    Sin Node.js, la web se genera igual pero el buscador no funciona."""
+def ejecutar_npx(argumentos, que):
+    """Ejecuta una herramienta de Node con npx. Sin Node.js, o si falla, la
+    web se genera igual sin esa parte; en GitHub Actions, en cambio, se
+    detiene la publicación."""
     npx = shutil.which("npx")
     if not npx:
-        print("AVISO: sin Node.js (npx) no se ha generado el índice del buscador.")
+        print("AVISO: sin Node.js (npx) no se ha generado %s." % que)
         if EN_CI:
             sys.exit(1)
         return
     resultado = subprocess.run(
-        [npx, "-y", PAGEFIND, "--site", SALIDA],
+        [npx, "-y"] + argumentos,
         capture_output=True, text=True, encoding="utf-8", errors="replace")
     if resultado.returncode != 0:
-        print("AVISO: no se ha podido generar el índice del buscador:\n"
-              + resultado.stdout[-1500:] + resultado.stderr[-1500:])
+        print("AVISO: no se ha podido generar %s:\n%s%s"
+              % (que, resultado.stdout[-1500:], resultado.stderr[-1500:]))
         if EN_CI:
             sys.exit(1)
     else:
-        print("Índice del buscador generado.")
+        print("Generado %s." % que)
+
+
+def generar_buscador():
+    """Índice del buscador (publicar/pagefind/). En cada página indexa solo
+    lo que va dentro de <main data-pagefind-body>."""
+    ejecutar_npx([PAGEFIND, "--site", SALIDA], "el índice del buscador")
+
+
+def generar_qr():
+    """QR del folleto, con la dirección pública de Primeros pasos: si cambia
+    SITE_URL (dominio propio), el QR cambia solo en la siguiente publicación."""
+    ejecutar_npx([QRCODE, "-t", "svg", "-e", "M",
+                  "-o", os.path.join(SALIDA, "img", "qr-primeros-pasos.svg"),
+                  SITE_URL + "me-acaban-de-diagnosticar.html"],
+                 "el código QR del folleto")
 
 
 def avisar(mensaje):
@@ -373,6 +504,9 @@ def build():
     aviso_ia_tpl = read(AVISO_IA_FILE)
     terminos_glosario = leer_terminos_glosario()
     correos = leer_correos()
+    citas_con_fecha, citas_repetidas = leer_agenda()
+    hoy = datetime.date.today()
+    citas_futuras = [c for c in citas_con_fecha if c["fecha"] >= hoy]
 
     page_paths = []
     for dirpath, _dirnames, filenames in os.walk("pages"):
@@ -411,6 +545,11 @@ def build():
             tpl = subnav_templates[subnav_key]
             subnav_html = apply_active(tpl, SUBNAV_LINKS[subnav_key], fname)
 
+        content = (content
+                   .replace("{{AGENDA}}", agenda_html(citas_futuras, citas_repetidas))
+                   .replace("{{PROXIMAS_CITAS}}", proximas_citas_html(citas_futuras))
+                   .replace("{{URL_PRIMEROS_PASOS}}",
+                            (SITE_URL + "me-acaban-de-diagnosticar.html").split("://", 1)[1]))
         content = generar_indice(content)
 
         en_hablando = os.path.normpath(page_path).split(os.sep)[1] == "hablando-de-cancer"
@@ -473,9 +612,10 @@ def build():
     escribir_sitemap(built)
     escribir_cname()
     if "--sin-buscador" in sys.argv:
-        print("AVISO: índice del buscador sin actualizar (--sin-buscador).")
+        print("AVISO: sin buscador ni QR del folleto (--sin-buscador).")
     else:
         generar_buscador()
+        generar_qr()
 
 
 if __name__ == "__main__":

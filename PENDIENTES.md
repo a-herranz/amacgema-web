@@ -52,11 +52,26 @@ No hay ninguna forma de donar: todo pasa por «contacta».
 
 ## Prioridad 2: contenidos que quedan
 
-- [ ] **Agenda**: una página «Próximas citas» (Jornadas, cafés de los martes,
-      talleres del trimestre) que se actualice cada trimestre. Mejor que un
-      blog, que acaba abandonado.
-- [ ] **Sexualidad**: página propia en Hablando de cáncer; podría escribirla la
-      psicooncóloga. Hoy no se menciona en ninguna página.
+- [x] **Agenda** (fase 4, nov. 2026): página [Agenda](pages/agenda.html) y
+      bloque «Próximas citas» en la portada, generados desde
+      [templates/agenda.txt](templates/agenda.txt), que se edita desde el
+      navegador. Las citas pasadas desaparecen solas (la web se regenera cada
+      lunes). Ya tiene las citas fijas (cafés, talleres, Jornadas, Marcha).
+  - [ ] Añadir las fechas concretas: próxima Jornada de Cáncer Ginecológico,
+        Marcha por la Salud y talleres del próximo trimestre.
+- [x] **Sexualidad** (fase 4, nov. 2026): página
+      [Sexualidad](pages/hablando-de-cancer/sexualidad.html), con aviso de IA.
+      Pendiente de revisión (ver registro).
+- [ ] **Folleto «Primeros pasos»** (fase 4, nov. 2026):
+      [folleto para imprimir](pages/folleto-primeros-pasos.html) con QR a la
+      web. **No imprimirlo para repartir hasta que se revise** Me acaban de
+      diagnosticar: el folleto resume esa página. Al revisarlo, quitar la
+      línea «Texto elaborado con ayuda de inteligencia artificial…» del final.
+- [ ] **Lectura fácil** (fase 4, nov. 2026): página
+      [Lectura fácil](pages/lectura-facil.html) adaptada pero sin validar.
+      Validarla con una entidad especializada (por ejemplo, Plena inclusión
+      Aragón) y un grupo de personas lectoras; solo entonces puede llevar el
+      logotipo europeo de Lectura Fácil.
 - [ ] **Historias**: la página ya existe
       ([Historias](pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html)),
       con la fundación y dos citas de la presidenta. Falta recoger historias
@@ -82,6 +97,20 @@ No hay ninguna forma de donar: todo pasa por «contacta».
       maquetarlas (como hace ASAMMA en Málaga).
 - [ ] **Entrevista del Heraldo** (19/10/2025): no se pudo leer automáticamente.
       Si tiene una cita mejor para la portada, pegar el fragmento.
+
+### Fase 3 del plan: cara humana (aplazada, nov. 2026)
+
+Depende de fotos y permisos de la asociación (apartados 5 y 7 del
+cuestionario para la junta).
+
+- [ ] **Sesión de fotos** de la sede y de actividades: lista de fotos
+      necesarias y dónde va cada una (incluye los huecos de Sede social y
+      Regalos solidarios de arriba).
+- [ ] **El equipo con nombre y cara**: psicooncóloga, fisioterapeuta,
+      trabajadora social y alguna voluntaria, en Quiénes somos o en cada
+      servicio.
+- [ ] **Campaña de historias de socias** (19 de octubre o las Jornadas) y
+      **modelo de autorización** por escrito para usar nombre, palabras y foto.
 
 ## Prioridad 3: técnica y visibilidad
 
@@ -122,6 +151,9 @@ registrada aquí.
 | Después del tratamiento | `pages/hablando-de-cancer/despues-del-tratamiento.html` | SEOM, AECC | Oncología; la parte laboral, trabajadora social | Pendiente | | |
 | Mujeres jóvenes | `pages/hablando-de-cancer/mujeres-jovenes.html` | SEOM, GEICAM, AECC | Oncología o ginecología | Pendiente | | |
 | Alimentación y ejercicio | `pages/hablando-de-cancer/alimentacion-y-ejercicio.html` | SEOM, AECC, OMS | Oncología o nutrición; la parte de ejercicio, fisioterapeuta | Pendiente | | |
+| Sexualidad | `pages/hablando-de-cancer/sexualidad.html` | SEOM, AECC | Psicooncóloga y ginecología u oncología | Pendiente | | |
+| Folleto «Primeros pasos» | `pages/folleto-primeros-pasos.html` | Resumen de Me acaban de diagnosticar | Oncología (junto con esa página) | Pendiente | | |
+| Lectura fácil | `pages/lectura-facil.html` | Web de AMAC-GEMA | Validación de lectura fácil (entidad especializada y personas lectoras) | Pendiente | | |
 | Historias | `pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html` | Web de AMAC-GEMA, entrevista de COPE Aragón (19/10/2026) | Junta directiva (textos y citas de la presidenta) | Pendiente | | |
 
 **Cuando una página quede revisada:**

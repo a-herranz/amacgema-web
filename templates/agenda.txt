@@ -1,0 +1,65 @@
+# AGENDA DE LA WEB
+#
+# De aquí salen la página «Agenda» (agenda.html) y el bloque «Próximas
+# citas» de la portada. Se puede editar desde el navegador (ver
+# COMO-EDITAR.md); al guardar, la web se actualiza sola.
+#
+# Las líneas que empiezan por # son comentarios y no se publican.
+#
+# --- Citas con fecha ---
+# Cada cita empieza con [fecha: AAAA-MM-DD] y debajo, una línea por dato:
+#
+#   [fecha: 2027-05-20]
+#   titulo: VII Jornada Aragonesa de Cáncer Ginecológico
+#   hora: 17:00
+#   lugar: Centro Joaquín Roncal, calle San Braulio, 5, Zaragoza
+#   enlace: proyecto-jornada-cancer-ginecologico.html
+#   Una o varias líneas de texto, si hace falta.
+#
+# Solo «titulo» es obligatorio. «enlace» puede ser una página de la web
+# (como arriba) o una dirección completa (https://...).
+# Las citas cuyo día ya ha pasado desaparecen solas: la web se vuelve a
+# generar cada lunes aunque nadie la toque.
+#
+# --- Citas que se repiten ---
+# Empiezan con [cada: ...] y el texto que se mostrará como cuándo,
+# por ejemplo [cada: Primer martes de cada mes]. Se muestran siempre.
+# Las mensuales van antes que las anuales si se escriben en ese orden.
+
+# ---------- Citas con fecha ----------
+# (Pendiente: fechas de la próxima Jornada de Cáncer Ginecológico, la Marcha
+# por la Salud y los talleres del próximo trimestre.)
+
+# ---------- Cada mes ----------
+
+[cada: Primer martes de cada mes]
+titulo: Café de nuevas acogidas
+enlace: ayuda-testimonial-cafes.html
+Para mujeres que están pasando ahora por la enfermedad. Lo coordina la psicooncóloga. Confirma antes tu asistencia.
+
+[cada: Tercer martes de cada mes]
+titulo: Café de voluntarias y socias
+enlace: ayuda-testimonial-cafes.html
+Encuentro entre compañeras para compartir el día a día. En julio, «Los cafés del verano».
+
+[cada: Cada trimestre]
+titulo: Talleres de la sede
+enlace: actividades-guiadas.html
+Ejercicio, relajación, danza y más, en tres trimestres: enero-marzo, abril-junio y septiembre-diciembre.
+
+# ---------- Cada año ----------
+
+[cada: Cada mayo]
+titulo: Jornada Aragonesa de Cáncer Ginecológico
+enlace: proyecto-jornada-cancer-ginecologico.html
+Jornada abierta de divulgación y prevención.
+
+[cada: Cada mayo]
+titulo: Marcha por la Salud
+enlace: proyecto-marcha-por-la-salud.html
+Andada popular de unos 3 km por el Parque José Antonio Labordeta.
+
+[cada: Cada octubre]
+titulo: Jornadas Aragonesas de Cáncer de Mama
+enlace: proyecto-jornada-cancer-mama.html
+Especialistas explican los avances en cáncer de mama, en torno al 19 de octubre.

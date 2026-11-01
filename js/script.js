@@ -198,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
       '<li><a href="aspectos-psicologicos.html">Aspectos psicológicos</a></li>' +
       '<li><a href="despues-del-tratamiento.html">Después del tratamiento</a></li>' +
       '<li><a href="mujeres-jovenes.html">Mujeres jóvenes</a></li>' +
+      '<li><a href="sexualidad.html">Sexualidad</a></li>' +
       '<li><a href="alimentacion-y-ejercicio.html">Alimentación y ejercicio</a></li></ul>'
     );
 
@@ -214,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
       'aspectos-psicologicos.html': ['aspectos-psicologicos.html'],
       'despues-del-tratamiento.html': ['despues-del-tratamiento.html'],
       'mujeres-jovenes.html': ['mujeres-jovenes.html'],
+      'sexualidad.html': ['sexualidad.html'],
       'alimentacion-y-ejercicio.html': ['alimentacion-y-ejercicio.html']
     };
     var paginaActualHablando = window.location.pathname.split('/').pop() || 'index.html';
@@ -261,6 +263,13 @@ document.addEventListener('DOMContentLoaded', function () {
       botonSubmenuAyudas.setAttribute('aria-expanded', abiertoAyudas);
     });
   }
+
+  // Botones «Imprimir» (folleto Primeros pasos)
+  document.querySelectorAll('[data-imprimir]').forEach(function (boton) {
+    boton.addEventListener('click', function () {
+      window.print();
+    });
+  });
 
   // Buscador (página Buscar): Pagefind trae su propia interfaz, que se
   // traduce sola al español por el lang="es" de la página. Si se llega con

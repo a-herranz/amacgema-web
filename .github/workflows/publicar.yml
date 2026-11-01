@@ -5,6 +5,8 @@
 # - En cualquier otra rama o pull request: solo genera y comprueba, para
 #   saber antes de unir los cambios si algo se ha roto.
 # - Se puede lanzar a mano desde la pestaña Actions ("Run workflow").
+# - Cada lunes se regenera y publica sola, para que las citas pasadas de la
+#   agenda (templates/agenda.txt) desaparezcan aunque nadie toque la web.
 #
 # Solo se publica la carpeta publicar/: el código fuente, las plantillas y
 # los documentos internos (PENDIENTES.md...) no llegan a la web.
@@ -18,6 +20,8 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * 1"  # lunes a las 5:00 UTC
 
 permissions:
   contents: read

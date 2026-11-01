@@ -118,8 +118,11 @@ nav: index.html
   </ul>
 </div></section>
 
-<!-- ============ JORNADAS Y ENCUENTROS ============ -->
+<!-- ============ JORNADAS Y ENCUENTROS ============
+     El marcador de abajo lo rellena el build con las próximas citas con
+     fecha de templates/agenda.txt; si no hay ninguna, no aparece nada. -->
 <section class="seccion seccion-alt"><div class="contenedor">
+{{PROXIMAS_CITAS}}
   <div class="seccion-titulo">
     <h2 id="jornadas">Jornadas y encuentros abiertos</h2>
     <p>Citas de cada año para pacientes, familias y cualquier persona que quiera informarse o sumarse.</p>

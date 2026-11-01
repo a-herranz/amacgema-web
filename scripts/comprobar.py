@@ -87,7 +87,8 @@ def main():
                 continue
             partes = urlparse(url)
             destino = unquote(partes.path) or fname
-            if destino.startswith("pagefind/") and not hay_buscador:
+            # Sin Node (build con --sin-buscador) no hay buscador ni QR
+            if destino.startswith(("pagefind/", "img/qr-")) and not hay_buscador:
                 continue
             ruta = os.path.join(SALIDA, *destino.split("/"))
             if destino.endswith("/"):
@@ -102,7 +103,7 @@ def main():
 
     if not hay_buscador:
         print("AVISO: sin carpeta pagefind/ (build con --sin-buscador): "
-              "no se comprueban los enlaces del buscador.")
+              "no se comprueban los enlaces del buscador ni el QR del folleto.")
 
     for fname, mensaje in errores:
         print("ERROR %s: %s" % (fname, mensaje))

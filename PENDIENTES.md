@@ -86,9 +86,8 @@ No hay ninguna forma de donar: todo pasa por «contacta».
 ## Prioridad 3: técnica y visibilidad
 
 - [x] **Índice del buscador**: lo genera GitHub Actions en cada publicación.
-- [ ] **Publicación con GitHub Actions** (fase 1 del plan, nov. 2026): en
-      GitHub, Settings › Pages › Source: «GitHub Actions». Hasta que se haga,
-      la web no se actualiza con los pushes a main.
+- [x] **Publicación con GitHub Actions** (fase 1 del plan, nov. 2026): activa.
+      Solo se publica la web generada; el código y estos documentos ya no.
 - [ ] **Persona de la asociación que edite textos**: darle acceso al
       repositorio en GitHub y pasarle [COMO-EDITAR.md](COMO-EDITAR.md).
 - [ ] **Dominio propio** (por ejemplo amacgema.org): comprarlo, cambiar

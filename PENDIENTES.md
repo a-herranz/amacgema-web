@@ -101,9 +101,9 @@ No hay ninguna forma de donar: todo pasa por «contacta».
         transcripción o se puede ver, sacar de ahí alguna cita.
   - [ ] La AECC (presentación de «Me voy a casa», 27/02/2026) cita a una
         paciente, pero no dice si es de AMAC-GEMA: no se ha usado.
-- [ ] **Fotos de la sede**: hacer fotos de los espacios para
-      [Sede social](pages/quienes-somos/sede-social.html), que hoy no tiene
-      ninguna: sala de acogida y atención, las dos salas polivalentes de la
+- [ ] **Fotos de la sede**: hacer fotos de los espacios para el bloque
+      «La sede» de [Contacto](pages/contacto.html), preparado y oculto (antes
+      estaba en Sede social, que ahora redirige a Contacto): sala de acogida y atención, las dos salas polivalentes de la
       ampliación de 2019, el espacio de apoyo biopsicosocial y la zona de
       encuentro. De paso, confirmar el nombre y el uso de cada sala (hay notas
       pendientes en el código de la página). Cada foto va en su hueco, marcado
@@ -130,7 +130,7 @@ Depende de fotos y permisos de la asociación (apartados 5 y 7 del
 cuestionario para la junta).
 
 - [ ] **Sesión de fotos** de la sede y de actividades: lista de fotos
-      necesarias y dónde va cada una (incluye los huecos de Sede social y
+      necesarias y dónde va cada una (incluye los huecos de «La sede» en Contacto y
       Regalos solidarios de arriba).
 - [ ] **El equipo con nombre y cara**: psicooncóloga, fisioterapeuta,
       trabajadora social y alguna voluntaria, en Quiénes somos o en cada
@@ -194,7 +194,7 @@ cuestionario para la junta).
       Cafés de los martes, Ayuda profesional y sus tres páginas
       (psicooncóloga, fisioterapeuta, trabajadora social), Actividades
       guiadas, Proyecto Contigo, Sensibilización, Investigación y Marcha por
-      la Salud, y el enlace a la memoria en Estructura. Buscar «2025» en
+      la Salud, y el enlace a la memoria en Equipo y organización. Buscar «2025» en
       `pages/` las encuentra todas.
 
 ## Descartado por ahora

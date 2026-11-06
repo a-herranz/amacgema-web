@@ -3451,6 +3451,20 @@ a.via-contacto-dato:focus-visible {
   font-weight: 600;
 }
 
+/* --- Quiénes somos: «Cómo lo hacemos» bajo los objetivos --- */
+.como-lo-hacemos {
+  margin-top: 2.5rem;
+}
+
+/* --- Historia: los primeros años de la cronología, plegados --- */
+.cronologia-antes {
+  margin-top: 2rem;
+}
+
+.cronologia-antes[open] > summary {
+  margin-bottom: 2rem;
+}
+
 /* --- Árbol plegado de Hablando de cáncer («Ver todos los temas») --- */
 .ver-todos > summary {
   display: block;

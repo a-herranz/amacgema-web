@@ -370,6 +370,15 @@ def preparar_calendarios(citas):
         cita["ics"] = CALENDARIO_SALIDA + "/" + nombre
 
 
+# «+N años acompañando» (portada y Quiénes somos): se calcula desde la
+# fundación, el 6 de junio de 1994, para que no se quede viejo.
+FUNDACION = datetime.date(1994, 6, 6)
+
+
+def anios_acompanando(hoy):
+    return hoy.year - FUNDACION.year - ((hoy.month, hoy.day) < (FUNDACION.month, FUNDACION.day))
+
+
 def fecha_larga(fecha):
     return "%s %d de %s de %d" % (DIAS[fecha.weekday()], fecha.day,
                                   MESES[fecha.month - 1], fecha.year)
@@ -911,6 +920,9 @@ REDIRECCIONES = {
         "cancer-vulva": "cancer-de-vulva-y-vagina.html#cancer-vulva",
     }),
     "proyecto-espacio-cuerpo.html": ("sensibilizacion.html#espacio-cuerpo", {}),
+    # Quiénes somos pasó de 5 páginas a 3 (nov. 2026)
+    "proposito.html": ("quienes-somos.html#proposito", {}),
+    "sede-social.html": ("contacto.html#como-llegar", {}),
 }
 
 
@@ -1134,6 +1146,7 @@ def build():
         content = (content
                    .replace("{{AGENDA}}", agenda_html(citas_futuras, citas_pasadas, citas_repetidas))
                    .replace("{{PROXIMAS_CITAS}}", proximas_citas_html(citas_futuras))
+                   .replace("{{ANIOS_ACOMPANANDO}}", str(anios_acompanando(hoy)))
                    .replace("{{URL_PRIMEROS_PASOS}}",
                             (SITE_URL + "me-acaban-de-diagnosticar.html").split("://", 1)[1]))
         for marcador, pintada in galerias.items():

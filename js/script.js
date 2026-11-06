@@ -161,11 +161,9 @@ document.addEventListener('DOMContentLoaded', function () {
       '<button class="boton-submenu" type="button" aria-expanded="false" aria-controls="' + idSubmenu + '">' +
       '<span class="sr-only">Abrir submenú de Quiénes somos</span><span aria-hidden="true">⌄</span></button>' +
       '<ul class="submenu" id="' + idSubmenu + '">' +
-      '<li><a href="quienes-somos.html">Resumen</a></li>' +
-      '<li><a href="proposito.html">Propósito</a></li>' +
+      '<li><a href="quienes-somos.html">Quiénes somos</a></li>' +
       '<li><a href="historia.html">Historia</a></li>' +
-      '<li><a href="sede-social.html">Sede social</a></li>' +
-      '<li><a href="estructura.html">Estructura</a></li></ul>'
+      '<li><a href="estructura.html">Equipo y organización</a></li></ul>'
     );
     var paginaActualQuienes = window.location.pathname.split('/').pop() || 'index.html';
     var enlaceSubmenuActual = elementoMenu.querySelector('.submenu a[href="' + paginaActualQuienes + '"]');

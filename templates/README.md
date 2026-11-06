@@ -33,8 +33,8 @@ pages/
   index.html
   contacto.html
   quienes-somos/
-    quienes-somos.html  proposito.html  historia.html
-    sede-social.html  estructura.html
+    quienes-somos.html  historia.html  estructura.html (Equipo y organización)
+    (proposito.html y sede-social.html redirigen: ver REDIRECCIONES)
   que-hacemos/                    (hub: los 2 frentes de trabajo)
     que-hacemos.html  actividades-guiadas.html
     ayuda-profesional/             (frente "Asistencia a población afectada")

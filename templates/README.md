@@ -37,12 +37,12 @@ pages/
     (proposito.html y sede-social.html redirigen: ver REDIRECCIONES)
   que-hacemos/                    (hub: los 2 frentes de trabajo)
     que-hacemos.html  actividades-guiadas.html
-    ayuda-profesional/             (frente "Asistencia a población afectada")
+    ayuda-profesional/             (frente "Atención a las mujeres y sus familias")
       ayuda-profesional.html
       ayuda-profesional-fisioterapeuta.html
       ayuda-profesional-psicooncologa.html
       ayuda-profesional-trabajadorasocial.html
-    ayuda-testimonial/              (frente "Asistencia a población afectada")
+    ayuda-testimonial/              (frente "Atención a las mujeres y sus familias")
       ayuda-testimonial.html
       ayuda-testimonial-acogida.html
       ayuda-testimonial-cafes.html
@@ -140,7 +140,7 @@ nav: contacto.html
 Todo lo que cuelga de "Qué hacemos" pertenece a uno de dos frentes de
 trabajo, y ningún grupo de páginas queda fuera de esa estructura:
 
-- **Asistencia a población afectada** → Ayuda profesional, Ayuda
+- **Atención a las mujeres y sus familias** → Ayuda profesional, Ayuda
   testimonial, Actividades guiadas.
 - **Sensibilización** → Educación y divulgación (que incluye los
   proyectos de divulgación: Contigo, las Jornadas, Yo me muevo por…, El

@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
       '<button class="boton-submenu" type="button" aria-expanded="false" aria-controls="' + idSubmenuAyudas + '">' +
       '<span class="sr-only">Abrir submenú de Qué hacemos</span><span aria-hidden="true">⌄</span></button>' +
       '<ul class="submenu" id="' + idSubmenuAyudas + '">' +
-      '<li class="submenu-frente">Asistencia a población afectada</li>' +
+      '<li class="submenu-frente">Atención a las mujeres y sus familias</li>' +
       '<li><a href="ayuda-profesional.html">Ayuda profesional</a></li>' +
       '<li><a href="ayuda-testimonial.html">Ayuda testimonial</a></li>' +
       '<li><a href="actividades-guiadas.html">Actividades guiadas</a></li>' +

@@ -286,10 +286,10 @@ en páginas largas, después de bajar una pantalla.
 
 **Temas de color por sección** (`TEMAS` en `build.py`): las páginas de
 `hablando-de-cancer/cancer-ginecologico/` llevan `<body data-tema="ginecologico">`
-y el CSS intercambia en ellas el rosa y el verde azulado del logo, el color
+y el CSS pone en ellas como principal el verde del logo (#58998D), el color
 que se asocia al cáncer ginecológico. Solo cambian el contenido y la barra
 de la sección; la cabecera y el pie siguen igual. Su imagen para compartir
-también sale en verde azulado.
+también sale en ese verde.
 
 La hoja de estilos incluye además una versión para imprimir (sección 18).
 El arco de la «M» del logo aparece, muy suave, en la esquina de las

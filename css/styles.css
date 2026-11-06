@@ -120,26 +120,29 @@
 }
 
 /* --- Temas por sección (data-tema en <body>, TEMAS en scripts/build.py) ---
-   Cáncer ginecológico: el verde azulado del logo pasa a ser el color
-   principal y el rosa el secundario, porque es el color que se asocia a
-   este cáncer. Solo cambia el contenido y la barra de la sección; la
-   cabecera, el menú y el pie siguen con los colores de la asociación.
-   Contrastes comprobados: títulos 7,6:1 y botones 5,5:1. */
+   Cáncer ginecológico: el verde del logo (#58998D, el del triángulo) pasa a
+   ser el color principal y el rosa el secundario, porque es el color que se
+   asocia a este cáncer. El verde del logo va tal cual en lo decorativo
+   (bordes, arcos, puntos); para texto y botones se usan tonos más oscuros
+   del mismo verde (mismo matiz, 169°), porque el del logo sobre blanco solo
+   da 3,3:1. Contrastes: títulos 8,5:1 y botones 5,3:1. Solo cambia el
+   contenido y la barra de la sección; la cabecera, el menú y el pie siguen
+   con los colores de la asociación. */
 [data-tema="ginecologico"] main,
 [data-tema="ginecologico"] .subnav,
 [data-tema="ginecologico"] .volver-arriba {
-  --color-primario: #119B8E;
+  --color-primario: #58998D;          /* verde del logo */
   --color-secundario: #E38DB0;
-  --color-primario-claro: #E3F7F5;
-  --color-primario-oscuro: #11756C;
-  --color-accion: #11756C;
-  --color-acento: #0D5C55;
-  --color-acento-oscuro: #08443F;
+  --color-primario-claro: #E8F2F0;
+  --color-primario-oscuro: #43756B;   /* texto sobre blanco · 5,1:1 */
+  --color-accion: #43756B;            /* fondo de botón · blanco encima 5,3:1 */
+  --color-acento: #2F514B;            /* títulos y enlaces · 8,5:1 */
+  --color-acento-oscuro: #294742;
   --color-secundario-claro: #F9E6EE;
   --color-secundario-oscuro: #AA466E;
-  --color-fondo-alt: #EFF8F7;
-  --color-borde: #CDEBE7;
-  --sombra-foco: 0 0 0 3px rgba(17, 155, 142, 0.35);
+  --color-fondo-alt: #EEF5F3;
+  --color-borde: #D2E5E1;
+  --sombra-foco: 0 0 0 3px rgba(88, 153, 141, 0.35);
 }
 
 /* ==========================================================================

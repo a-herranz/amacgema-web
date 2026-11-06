@@ -519,10 +519,10 @@ COMPARTIR_SALIDA = "img/compartir"
 COMPARTIR_TAMANO = (1200, 630)
 COMPARTIR_COLORES = {"fondo": "#FBF1F5", "arco": "#F3D3E1", "sobrelinea": "#11756C",
                      "titulo": "#893B5B"}
-# Cáncer ginecológico: el verde azulado del logo pasa a principal (es el
-# color que se asocia a este cáncer), igual que en sus páginas (ver TEMAS)
-COMPARTIR_COLORES_TEMA = {"ginecologico": {"fondo": "#EFF8F7", "arco": "#CDEBE7",
-                                           "sobrelinea": "#AA466E", "titulo": "#0D5C55"}}
+# Cáncer ginecológico: el verde del logo pasa a principal (es el color que
+# se asocia a este cáncer), igual que en sus páginas (ver TEMAS)
+COMPARTIR_COLORES_TEMA = {"ginecologico": {"fondo": "#EEF5F3", "arco": "#D2E5E1",
+                                           "sobrelinea": "#AA466E", "titulo": "#2F514B"}}
 _compartir_pil = None
 
 # ---------- Temas de color por sección ----------

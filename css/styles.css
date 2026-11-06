@@ -3,13 +3,14 @@
    ==========================================================================
 
    EJE DE COLOR
-   Los dos colores de esta web son los dos colores del logo, muestreados
-   del primer archivo del logo (un .jpg de baja resolución, ya retirado).
-   El logo en alta resolución (originales/amac-gema-logo-original.png) los tiene
-   algo más apagados (#CE8CAD y #58998D); la paleta mantiene los de abajo:
+   Los dos colores de esta web son los dos colores del logo, tal como
+   están en el logo en alta resolución (originales/amac-gema-logo-original.png):
 
-       rosa de la "M"        #E38DB0   (H 335.6)
-       teal del triángulo    #119B8E   (H 174.3)
+       rosa de la "M"        #CE8CAD   (H 330, S 40 %)
+       verde del triángulo   #58998D   (H 169, S 27 %)
+
+   (Hasta noviembre de 2026 la web usaba #E38DB0 y #119B8E, muestreados de
+   un .jpg de baja resolución: eran más vivos que los del logo real.)
 
    Todos los demás tonos son el MISMO matiz con distinta luminosidad, así
    que la web entera gira alrededor del logo. Cada tono tiene un papel
@@ -80,27 +81,27 @@
 
 :root {
   /* --- Los dos colores del logo, tal cual --- */
-  --color-primario: #E38DB0;          /* rosa de la "M" */
-  --color-secundario: #119B8E;        /* teal del triángulo */
+  --color-primario: #CE8CAD;          /* rosa de la "M" */
+  --color-secundario: #58998D;        /* verde del triángulo */
 
-  /* --- Escala del rosa (mismo matiz, distinta luminosidad) --- */
-  --color-primario-claro: #F9E6EE;    /* fondos y franjas suaves */
-  --color-primario-oscuro: #AA466E;   /* texto sobre blanco · 4.61:1 */
-  --color-accion: #BE306A;            /* fondo de botón · blanco encima 5.50:1 */
-  --color-acento: #893B5B;            /* texto, enlaces y títulos · 6.19:1 */
-  --color-acento-oscuro: #692B44;     /* hover de enlaces · 8.66:1 */
+  /* --- Escala del rosa (mismo matiz y saturación, distinta luminosidad) --- */
+  --color-primario-claro: #F3E2EB;    /* fondos y franjas suaves */
+  --color-primario-oscuro: #A14573;   /* texto sobre blanco · 5.65:1 */
+  --color-accion: #A14573;            /* fondo de botón · blanco encima 5.81:1 */
+  --color-acento: #8F3D66;            /* texto, enlaces y títulos · 6.75:1 */
+  --color-acento-oscuro: #723152;     /* hover de enlaces · 8.97:1 */
 
-  /* --- Escala del teal --- */
-  --color-secundario-claro: #E3F7F5;  /* franja de "colabora" */
-  --color-secundario-oscuro: #11756C; /* texto pequeño y etiquetas · 4.65:1 */
+  /* --- Escala del verde --- */
+  --color-secundario-claro: #E5F0EE;  /* franja de "colabora" */
+  --color-secundario-oscuro: #417168; /* texto pequeño y etiquetas · 5.40:1 */
 
   /* --- Neutros cálidos (nada de blanco ni negro puro) --- */
   --color-fondo: #FFFBFA;
-  --color-fondo-alt: #FBF1F5;
+  --color-fondo-alt: #F8F0F4;
   --color-texto: #333333;
   --color-texto-suave: #6E6666;
   --color-blanco: #FFFFFF;
-  --color-borde: #F1D5E0;
+  --color-borde: #EACDDB;
 
   /* --- Tipografía --- */
   --fuente-titulos: 'Poppins', 'Segoe UI', sans-serif;
@@ -114,7 +115,7 @@
   /* --- Profundidad --- */
   --sombra-suave: 0 4px 16px rgba(58, 46, 51, 0.08);
   --sombra-elevada: 0 8px 22px rgba(58, 46, 51, 0.14);
-  --sombra-foco: 0 0 0 3px rgba(227, 141, 176, 0.35);
+  --sombra-foco: 0 0 0 3px rgba(206, 140, 173, 0.35);
 
   --transicion: 0.25s ease;
 }
@@ -125,21 +126,21 @@
    asocia a este cáncer. El verde del logo va tal cual en lo decorativo
    (bordes, arcos, puntos); para texto y botones se usan tonos más oscuros
    del mismo verde (mismo matiz, 169°), porque el del logo sobre blanco solo
-   da 3,3:1. Contrastes: títulos 8,5:1 y botones 5,3:1. Solo cambia el
+   da 3,3:1. Contrastes: títulos 8,5:1 y botones 5,6:1. Solo cambia el
    contenido y la barra de la sección; la cabecera, el menú y el pie siguen
    con los colores de la asociación. */
 [data-tema="ginecologico"] main,
 [data-tema="ginecologico"] .subnav,
 [data-tema="ginecologico"] .volver-arriba {
   --color-primario: #58998D;          /* verde del logo */
-  --color-secundario: #E38DB0;
-  --color-primario-claro: #E8F2F0;
-  --color-primario-oscuro: #43756B;   /* texto sobre blanco · 5,1:1 */
-  --color-accion: #43756B;            /* fondo de botón · blanco encima 5,3:1 */
+  --color-secundario: #CE8CAD;          /* rosa del logo */
+  --color-primario-claro: #E5F0EE;
+  --color-primario-oscuro: #417168;   /* texto sobre blanco · 5,4:1 */
+  --color-accion: #417168;            /* fondo de botón · blanco encima 5,6:1 */
   --color-acento: #2F514B;            /* títulos y enlaces · 8,5:1 */
   --color-acento-oscuro: #294742;
-  --color-secundario-claro: #F9E6EE;
-  --color-secundario-oscuro: #AA466E;
+  --color-secundario-claro: #F3E2EB;
+  --color-secundario-oscuro: #A14573;
   --color-fondo-alt: #EEF5F3;
   --color-borde: #D2E5E1;
   --sombra-foco: 0 0 0 3px rgba(88, 153, 141, 0.35);

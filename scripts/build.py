@@ -517,12 +517,12 @@ def poner_iconos(content):
 COMPARTIR_GENERICA = "img/compartir.jpg"
 COMPARTIR_SALIDA = "img/compartir"
 COMPARTIR_TAMANO = (1200, 630)
-COMPARTIR_COLORES = {"fondo": "#FBF1F5", "arco": "#F3D3E1", "sobrelinea": "#11756C",
-                     "titulo": "#893B5B"}
+COMPARTIR_COLORES = {"fondo": "#F8F0F4", "arco": "#EACDDB", "sobrelinea": "#417168",
+                     "titulo": "#8F3D66"}
 # Cáncer ginecológico: el verde del logo pasa a principal (es el color que
 # se asocia a este cáncer), igual que en sus páginas (ver TEMAS)
 COMPARTIR_COLORES_TEMA = {"ginecologico": {"fondo": "#EEF5F3", "arco": "#D2E5E1",
-                                           "sobrelinea": "#AA466E", "titulo": "#2F514B"}}
+                                           "sobrelinea": "#A14573", "titulo": "#2F514B"}}
 _compartir_pil = None
 
 # ---------- Temas de color por sección ----------

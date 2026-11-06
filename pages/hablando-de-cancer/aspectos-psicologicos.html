@@ -38,53 +38,85 @@ cierre: apoyo
 
                     <h2>Reacciones emocionales frecuentes</h2>
 
-                    <h3>Negación</h3>
-                    <p>Es un mecanismo de defensa que surge como consecuencia del miedo. Se manifiesta como un deseo de no querer saber nada acerca de la enfermedad, siendo incapaces incluso de hablar de ella. No solo se observa en el paciente: en ocasiones, también ocurre que la familia o los amigos tratan de quitarle importancia a los síntomas y emociones que presenta la persona enferma.</p>
-
-                    <h3>Miedo</h3>
-                    <p>Ante el diagnóstico, el sujeto percibe que su vida cotidiana se interrumpe. Es en estos momentos donde, con mucha frecuencia, aparece el miedo: miedo a la propia enfermedad, a la nueva situación familiar, a la incertidumbre de un futuro, al fin y al cabo, miedo a lo desconocido y a la muerte.</p>
-
-                    <h3>Rabia</h3>
-                    <p>Es muy común que, tras hacer frente al diagnóstico, venga de la mano la sensación de mundo injusto: «¿Por qué yo?». Esta emoción se suele volcar sobre las personas más cercanas: familiares, amigos o incluso el personal sanitario.</p>
-
-                    <h3>Sentimientos de culpabilidad</h3>
-                    <p>Otra de las preguntas que más frecuentemente se hacen los pacientes es: «¿Qué he hecho yo para merecer esto?». La persona analiza y crea sus propias creencias acerca de qué originó su enfermedad, desde pensar que han sido ellos mismos los causantes, hasta creer que se trata de un castigo por algo que hicieron.</p>
-
-                    <h3>Ansiedad</h3>
-                    <p>Se trata de una reacción normal que experimenta el paciente a lo largo de todo el proceso. La ansiedad y el nerviosismo ayudan a aumentar la sensación de dolor, pueden causar vómitos y náuseas, alterar el ritmo del sueño, e interferir significativamente en la calidad de vida del paciente.</p>
-
-                    <h3>Depresión frente a tristeza</h3>
-                    <p>Es importante conocer la diferencia entre los episodios depresivos y la tristeza que surge ante el diagnóstico y durante los distintos momentos del proceso. Esta tristeza emerge como consecuencia de los múltiples cambios a los que el sujeto debe hacer frente durante la enfermedad, al no sentirse con la salud que antes disfrutaba, y al convivir con la incertidumbre de un futuro próximo. Según lo dicho, el hecho de que un paciente se encuentre triste no significa necesariamente que sufra una depresión mayor.</p>
+                    <p>Elige lo que sientes para leer sobre ello. Todas son reacciones frecuentes.</p>
+                    <div class="guia" data-guia="emociones">
+                        <div class="guia-botones" role="group" aria-label="Elige una opción" hidden>
+                            <button type="button" data-guia-boton="negacion" aria-pressed="false" aria-controls="emociones-negacion">Negación</button>
+                            <button type="button" data-guia-boton="miedo" aria-pressed="false" aria-controls="emociones-miedo">Miedo</button>
+                            <button type="button" data-guia-boton="rabia" aria-pressed="false" aria-controls="emociones-rabia">Rabia</button>
+                            <button type="button" data-guia-boton="culpa" aria-pressed="false" aria-controls="emociones-culpa">Culpa</button>
+                            <button type="button" data-guia-boton="ansiedad" aria-pressed="false" aria-controls="emociones-ansiedad">Ansiedad</button>
+                            <button type="button" data-guia-boton="tristeza" aria-pressed="false" aria-controls="emociones-tristeza">Tristeza o depresión</button>
+                        </div>
+                        <p class="guia-sin-elegir" hidden>Elige una emoción para leer sobre ella.</p>
+                        <div class="guia-panel" id="emociones-negacion" data-guia-panel="negacion">
+                            <h3>Negación</h3>
+                        <p>Es un mecanismo de defensa que surge como consecuencia del miedo. Se manifiesta como un deseo de no querer saber nada acerca de la enfermedad, siendo incapaces incluso de hablar de ella. No solo se observa en el paciente: en ocasiones, también ocurre que la familia o los amigos tratan de quitarle importancia a los síntomas y emociones que presenta la persona enferma.</p>
+                        </div>
+                        <div class="guia-panel" id="emociones-miedo" data-guia-panel="miedo">
+                            <h3>Miedo</h3>
+                        <p>Ante el diagnóstico, el sujeto percibe que su vida cotidiana se interrumpe. Es en estos momentos donde, con mucha frecuencia, aparece el miedo: miedo a la propia enfermedad, a la nueva situación familiar, a la incertidumbre de un futuro, al fin y al cabo, miedo a lo desconocido y a la muerte.</p>
+                        </div>
+                        <div class="guia-panel" id="emociones-rabia" data-guia-panel="rabia">
+                            <h3>Rabia</h3>
+                        <p>Es muy común que, tras hacer frente al diagnóstico, venga de la mano la sensación de mundo injusto: «¿Por qué yo?». Esta emoción se suele volcar sobre las personas más cercanas: familiares, amigos o incluso el personal sanitario.</p>
+                        </div>
+                        <div class="guia-panel" id="emociones-culpa" data-guia-panel="culpa">
+                            <h3>Sentimientos de culpabilidad</h3>
+                        <p>Otra de las preguntas que más frecuentemente se hacen los pacientes es: «¿Qué he hecho yo para merecer esto?». La persona analiza y crea sus propias creencias acerca de qué originó su enfermedad, desde pensar que han sido ellos mismos los causantes, hasta creer que se trata de un castigo por algo que hicieron.</p>
+                        </div>
+                        <div class="guia-panel" id="emociones-ansiedad" data-guia-panel="ansiedad">
+                            <h3>Ansiedad</h3>
+                        <p>Se trata de una reacción normal que experimenta el paciente a lo largo de todo el proceso. La ansiedad y el nerviosismo ayudan a aumentar la sensación de dolor, pueden causar vómitos y náuseas, alterar el ritmo del sueño, e interferir significativamente en la calidad de vida del paciente.</p>
+                        </div>
+                        <div class="guia-panel" id="emociones-tristeza" data-guia-panel="tristeza">
+                            <h3>Depresión frente a tristeza</h3>
+                        <p>Es importante conocer la diferencia entre los episodios depresivos y la tristeza que surge ante el diagnóstico y durante los distintos momentos del proceso. Esta tristeza emerge como consecuencia de los múltiples cambios a los que el sujeto debe hacer frente durante la enfermedad, al no sentirse con la salud que antes disfrutaba, y al convivir con la incertidumbre de un futuro próximo. Según lo dicho, el hecho de que un paciente se encuentre triste no significa necesariamente que sufra una depresión mayor.</p>
+                        </div>
+                    </div>
 
                     <h2>La importancia de la comunicación</h2>
                     <p>Una vez descritas algunas de las emociones más comunes con las que las personas se cruzan a lo largo de su enfermedad, parece imprescindible hablar de la importancia que tiene una buena comunicación para minimizar el posible efecto de todas estas reacciones.</p>
 
-                    <h3>Con tu médico</h3>
-                    <p>Una comunicación efectiva y de confianza con tu médico es muy importante para planificar los cuidados y el tratamiento. Cuanta más información tenga sobre tu estado físico y anímico, mejor podrá ayudarte a lo largo de la enfermedad.</p>
-                    <p><strong>Algunas recomendaciones:</strong></p>
-                    <ul class="lista-apoyo">
-                        <li>No dudes en preguntar todo lo que quieras, hasta que sientas que has entendido todas las explicaciones.</li>
-                        <li>Si no has entendido alguna explicación, vuelve a preguntar. Si los términos te resultan difíciles, pide que te los expliquen con un lenguaje más sencillo.</li>
-                        <li>Con la tensión de la consulta, es frecuente olvidar alguna de las preguntas que tenías pensadas. Apúntalas en un papel antes de ir.</li>
-                        <li>Si necesitas más tiempo con tu médico, díselo: puede alargar un poco la consulta, darte otra cita u orientarte hacia otro profesional, la enfermera u otra persona de confianza.</li>
-                    </ul>
+                    <p>Elige con quién te cuesta hablar.</p>
+                    <div class="guia" data-guia="comunicacion">
+                        <div class="guia-botones" role="group" aria-label="Elige una opción" hidden>
+                            <button type="button" data-guia-boton="medico" aria-pressed="false" aria-controls="comunicacion-medico">Con tu médico</button>
+                            <button type="button" data-guia-boton="familia" aria-pressed="false" aria-controls="comunicacion-familia">En la familia</button>
+                            <button type="button" data-guia-boton="ninos" aria-pressed="false" aria-controls="comunicacion-ninos">Con los más pequeños</button>
+                        </div>
+                        <p class="guia-sin-elegir" hidden>Elige una opción para ver algunas recomendaciones.</p>
+                        <div class="guia-panel" id="comunicacion-medico" data-guia-panel="medico">
+                            <h3>Con tu médico</h3>
+                        <p>Una comunicación efectiva y de confianza con tu médico es muy importante para planificar los cuidados y el tratamiento. Cuanta más información tenga sobre tu estado físico y anímico, mejor podrá ayudarte a lo largo de la enfermedad.</p>
+                        <p><strong>Algunas recomendaciones:</strong></p>
+                        <ul class="lista-apoyo">
+                            <li>No dudes en preguntar todo lo que quieras, hasta que sientas que has entendido todas las explicaciones.</li>
+                            <li>Si no has entendido alguna explicación, vuelve a preguntar. Si los términos te resultan difíciles, pide que te los expliquen con un lenguaje más sencillo.</li>
+                            <li>Con la tensión de la consulta, es frecuente olvidar alguna de las preguntas que tenías pensadas. Apúntalas en un papel antes de ir.</li>
+                            <li>Si necesitas más tiempo con tu médico, díselo: puede alargar un poco la consulta, darte otra cita u orientarte hacia otro profesional, la enfermera u otra persona de confianza.</li>
+                        </ul>
+                        </div>
+                        <div class="guia-panel" id="comunicacion-familia" data-guia-panel="familia">
+                            <h3>En la familia</h3>
+                        <p>Ante el diagnóstico, no solo el paciente sufre cambios físicos y psíquicos: toda la estructura familiar se ve alterada. Comienzan a observarse modificaciones en la dinámica; el paciente delega funciones que otros miembros de la familia asumen, es decir, nos encontramos con una modificación de los roles familiares.</p>
+                        <p>Cada miembro de la familia puede reaccionar de manera distinta, mostrando rabia, cansancio, ansiedad...</p>
+                        <p>En algunos casos, los familiares se encierran en sí mismos y evitan por todos los medios hacer partícipe a la persona enferma de cómo se sienten, suponiendo que de esta manera la están cuidando y protegiendo.</p>
 
-                    <h3>En la familia</h3>
-                    <p>Ante el diagnóstico, no solo el paciente sufre cambios físicos y psíquicos: toda la estructura familiar se ve alterada. Comienzan a observarse modificaciones en la dinámica; el paciente delega funciones que otros miembros de la familia asumen, es decir, nos encontramos con una modificación de los roles familiares.</p>
-                    <p>Cada miembro de la familia puede reaccionar de manera distinta, mostrando rabia, cansancio, ansiedad...</p>
-                    <p>En algunos casos, los familiares se encierran en sí mismos y evitan por todos los medios hacer partícipe a la persona enferma de cómo se sienten, suponiendo que de esta manera la están cuidando y protegiendo.</p>
-
-                    <div class="bloque-destacado bloque-nota">
-                        <p>Hablar claramente es la mejor manera de organizarse, cuidar y poder colaborar en el proceso: «las tristezas compartidas se reducen a la mitad».</p>
+                        <div class="bloque-destacado bloque-nota">
+                            <p>Hablar claramente es la mejor manera de organizarse, cuidar y poder colaborar en el proceso: «las tristezas compartidas se reducen a la mitad».</p>
+                        </div>
+                        </div>
+                        <div class="guia-panel" id="comunicacion-ninos" data-guia-panel="ninos">
+                            <h3>Con los más pequeños</h3>
+                        <p>Los niños son muy sensibles a los cambios de las rutinas familiares y detectan rápidamente que algo está ocurriendo.</p>
+                        <ul class="lista-apoyo">
+                            <li>Habla con los niños. El sentimiento de que se les está ocultando un problema crea en su imaginación fantasías erróneas, e incluso más problemáticas de lo que pudiera ser la realidad.</li>
+                            <li>Si el paciente no se ve capaz, es mejor que sea un familiar, o alguien cercano de confianza, quien se comunique con ellos.</li>
+                            <li>Es muy importante tener en cuenta la edad de los niños a la hora de saber cómo comunicarse con ellos, comprendiendo que existirán también reacciones diferentes en cada uno de ellos.</li>
+                        </ul>
+                        </div>
                     </div>
-
-                    <h3>Con los más pequeños</h3>
-                    <p>Los niños son muy sensibles a los cambios de las rutinas familiares y detectan rápidamente que algo está ocurriendo.</p>
-                    <ul class="lista-apoyo">
-                        <li>Habla con los niños. El sentimiento de que se les está ocultando un problema crea en su imaginación fantasías erróneas, e incluso más problemáticas de lo que pudiera ser la realidad.</li>
-                        <li>Si el paciente no se ve capaz, es mejor que sea un familiar, o alguien cercano de confianza, quien se comunique con ellos.</li>
-                        <li>Es muy importante tener en cuenta la edad de los niños a la hora de saber cómo comunicarse con ellos, comprendiendo que existirán también reacciones diferentes en cada uno de ellos.</li>
-                    </ul>
 
                     <p>De forma muy general, hemos hablado de algunas de las distintas reacciones y preocupaciones que aparecen en la persona afectada y en su entorno desde el momento del diagnóstico.</p>
 

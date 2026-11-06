@@ -12,6 +12,17 @@ subnav: actividades-guiadas
                 </div>
             </section>
 
+            <!-- Filtro por día (js/script.js): los botones salen de los días que
+                 aparecen en las tarjetas, así que no hay que tocarlos al cambiar
+                 los horarios. Sin JavaScript no aparece. -->
+            <section class="seccion seccion-filtro" data-filtro-dias hidden>
+                <div class="contenedor">
+                    <p class="filtro-dias-titulo">¿Qué día te viene bien?</p>
+                    <div class="guia-botones filtro-dias-botones" role="group" aria-label="Filtrar actividades por día"></div>
+                    <p class="filtro-dias-resultado" aria-live="polite"></p>
+                </div>
+            </section>
+
             <!-- Horarios tomados de la Memoria de actividades 2025. Al empezar
                  cada curso, revisa días, horas y lugares con la asociación. -->
             <section class="seccion">

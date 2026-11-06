@@ -94,11 +94,15 @@ subnav: hablando-de-cancer
                     </form>
 
                     <div class="seccion-titulo">
-                        <h2>Elige un tema</h2>
+                        <h2>Todos los temas</h2>
                         <p>Puedes leer cada apartado por separado, en el orden que necesites.</p>
                     </div>
 
-                    <!-- Mismo árbol que en Qué hacemos (sección 12 de styles.css) -->
+                    <!-- Mismo árbol que en Qué hacemos (sección 12 de styles.css).
+                         Plegado: arriba ya está «¿En qué momento estás?». Un enlace
+                         a algo de dentro (#titulo-vivir, desde el menú) lo abre. -->
+                    <details class="ver-todos">
+                    <summary>Ver todos los temas</summary>
                     <div class="arboles">
 
                         <section class="arbol arbol-asistencia" aria-labelledby="titulo-enfermedad">
@@ -205,6 +209,7 @@ subnav: hablando-de-cancer
                         </section>
 
                     </div>
+                    </details>
                 </div>
             </section>
 

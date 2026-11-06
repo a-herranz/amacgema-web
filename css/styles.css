@@ -137,7 +137,7 @@ body {
   font-family: var(--fuente-texto);
   background-color: var(--color-fondo);
   color: var(--color-texto);
-  font-size: 18px; /* base grande: legibilidad para todos los públicos */
+  font-size: 1.125rem; /* 18 px: base grande; en rem para que la agrande el botón «Aa» */
   line-height: 1.7;
 }
 
@@ -452,7 +452,7 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 }
 
 /* Pantallas medianas (tablet en horizontal, portátil pequeño): más compacto */
-@media (min-width: 1025px) and (max-width: 1200px) {
+@media (min-width: 1025px) and (max-width: 1320px) {
   .nav-principal > ul {
     gap: 0.7rem;
   }
@@ -522,6 +522,67 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 .nav-buscar a {
   display: inline-flex;
   align-items: center;
+}
+
+/* Tamaño de letra (botón «Aa» del menú, js/script.js): toda la web está en
+   rem, así que basta con cambiar la raíz. La cabecera se compensa con zoom
+   para que el menú siga cabiendo en una línea. */
+html[data-letra="grande"] {
+  font-size: 112.5%;
+}
+
+html[data-letra="muy-grande"] {
+  font-size: 125%;
+}
+
+html[data-letra="grande"] .cabecera {
+  zoom: 0.889;
+}
+
+html[data-letra="muy-grande"] .cabecera {
+  zoom: 0.8;
+}
+
+.boton-letra {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.3rem;
+}
+
+.boton-letra-icono {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.boton-letra-icono span:first-child {
+  font-size: 0.8rem;
+}
+
+.boton-letra-icono span:last-child {
+  font-size: 1.2rem;
+}
+
+/* En escritorio, solo el icono; en el menú de móvil, también el texto */
+.nav-letra-texto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+html[data-letra] .boton-letra {
+  color: var(--color-accion);
 }
 
 .nav-buscar-texto {
@@ -1255,6 +1316,26 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 }
 
 @media (max-width: 640px) {
+  .anterior-siguiente .contenedor {
+    grid-template-columns: 1fr;
+  }
+
+  .paso-siguiente {
+    grid-column: 1;
+  }
+
+  .paso {
+    padding: 1.1rem 1.1rem 1.1rem 3.8rem;
+  }
+
+  .paso::before {
+    left: 0.9rem;
+  }
+
+  .pasos-control .boton {
+    padding: 0.6rem 1rem;
+  }
+
   .lista-marcable {
     padding: 1.2rem;
   }
@@ -1263,8 +1344,7 @@ a[target="_blank"]:not(.logo-colaborador)::after {
     padding: 1.4rem 1.2rem;
   }
 
-  .guia-pestanas .guia-panel,
-  [data-guia="social"] .guia-panel {
+  .guia:not(.guia-momento) .guia-panel {
     padding: 1.3rem 1.2rem !important;
   }
 
@@ -3058,8 +3138,7 @@ a.via-contacto-dato:focus-visible {
   padding-top: 0;
 }
 
-.guia-pestanas .guia-panel,
-[data-guia="social"] .guia-panel {
+.guia:not(.guia-momento) .guia-panel {
   background-color: var(--color-blanco);
   border-left: 4px solid var(--color-primario);
   border-radius: var(--radio-chico);
@@ -3287,6 +3366,280 @@ a.via-contacto-dato:focus-visible {
 
 .filtro-glosario-resultado:empty {
   display: none;
+}
+
+/* --- «Anterior / Siguiente» al final de las páginas que se leen en orden
+   (RECORRIDOS en scripts/build.py) --- */
+.anterior-siguiente {
+  padding: 0 0 3rem;
+}
+
+.anterior-siguiente .contenedor {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 760px;
+}
+
+.paso-cuenta {
+  grid-column: 1 / -1;
+  color: var(--color-texto-suave);
+  font-family: var(--fuente-titulos);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+.paso-anterior,
+.paso-siguiente {
+  display: block;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-chico);
+  box-shadow: var(--sombra-suave);
+  color: var(--color-texto);
+  padding: 0.9rem 1.2rem;
+  text-decoration: none;
+}
+
+.paso-siguiente {
+  grid-column: 2;
+  text-align: right;
+}
+
+.paso-anterior:hover,
+.paso-siguiente:hover,
+.paso-anterior:focus-visible,
+.paso-siguiente:focus-visible {
+  border-color: var(--color-primario);
+  color: var(--color-texto);
+  text-decoration: none;
+}
+
+.paso-etiqueta {
+  display: block;
+  color: var(--color-secundario-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.paso-anterior .paso-etiqueta::before {
+  content: "← ";
+}
+
+.paso-siguiente .paso-etiqueta::after {
+  content: " →";
+}
+
+.paso-titulo {
+  display: block;
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+}
+
+/* --- Tiempo de lectura, junto a «Imprimir esta página» --- */
+.hero-imprimir {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+}
+
+.tiempo-lectura {
+  color: var(--color-texto-suave);
+  font-family: var(--fuente-titulos);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* --- Árbol plegado de Hablando de cáncer («Ver todos los temas») --- */
+.ver-todos > summary {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1.5rem;
+  border: 2px solid var(--color-secundario-oscuro);
+  border-radius: var(--radio-pill);
+  color: var(--color-secundario-oscuro);
+  cursor: pointer;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  list-style: none;
+  padding: 0.7rem 1.6rem;
+}
+
+.ver-todos > summary::-webkit-details-marker {
+  display: none;
+}
+
+.ver-todos > summary::after {
+  content: " ⌄";
+}
+
+.ver-todos[open] > summary::after {
+  content: " ⌃";
+}
+
+.ver-todos > summary:hover,
+.ver-todos > summary:focus-visible {
+  background-color: var(--color-secundario-oscuro);
+  color: var(--color-blanco);
+}
+
+/* --- Paso a paso ([data-pasos], autoexploración) --- */
+.pasos-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paso {
+  position: relative;
+  background-color: var(--color-blanco);
+  border-left: 4px solid var(--color-primario);
+  border-radius: var(--radio-chico);
+  box-shadow: var(--sombra-suave);
+  margin-bottom: 1rem;
+  padding: 1.3rem 1.5rem 1.3rem 4.6rem;
+}
+
+.paso::before {
+  content: attr(data-numero);
+  position: absolute;
+  left: 1.3rem;
+  top: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: var(--color-accion);
+  color: var(--color-blanco);
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+}
+
+.paso-fase {
+  color: var(--color-secundario-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.paso h3 {
+  margin: 0.1rem 0 0.5rem;
+}
+
+/* El foco pasa al título del paso al avanzar (para lectores de pantalla);
+   no hace falta recuadro, el paso entero ya cambia */
+.paso h3:focus {
+  outline: none;
+}
+
+.paso p:last-child {
+  margin-bottom: 0;
+}
+
+/* De uno en uno, el paso ocupa más: es lo único que hay que leer */
+.pasos-activos .paso:not(.paso-oculto) {
+  min-height: 12rem;
+}
+
+@media screen {
+  .paso-oculto {
+    display: none;
+  }
+}
+
+.pasos-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.pasos-control .boton {
+  padding: 0.7rem 1.4rem;
+}
+
+.pasos-control .boton:disabled {
+  cursor: default;
+  opacity: 0.4;
+  transform: none;
+}
+
+.pasos-cuenta {
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  margin: 0;
+}
+
+.pasos-todos {
+  margin: 0.8rem 0 2rem;
+  text-align: center;
+}
+
+/* --- Filtro por día (Actividades guiadas) --- */
+.seccion-filtro {
+  padding-bottom: 0;
+}
+
+.filtro-dias-titulo {
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+.filtro-dias-botones {
+  justify-content: center;
+  margin-bottom: 0.6rem;
+}
+
+.filtro-dias-resultado {
+  color: var(--color-texto-suave);
+  margin: 0;
+  text-align: center;
+}
+
+.filtro-dias-resultado:empty {
+  display: none;
+}
+
+/* --- «Volver arriba» (solo en páginas largas, js/script.js) --- */
+.volver-arriba {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 50;
+  background-color: var(--color-acento);
+  border: 0;
+  border-radius: var(--radio-pill);
+  box-shadow: var(--sombra-elevada);
+  color: var(--color-blanco);
+  cursor: pointer;
+  font-family: var(--fuente-titulos);
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-height: 48px;
+  padding: 0.6rem 1.1rem;
+}
+
+.volver-arriba:hover,
+.volver-arriba:focus-visible {
+  background-color: var(--color-acento-oscuro);
 }
 
 /* --- Guía «Me acaban de diagnosticar» ---
@@ -3642,6 +3995,20 @@ a.via-contacto-dato:focus-visible {
   .nav-buscar a {
     display: flex;
     gap: 0.5rem;
+  }
+
+  .boton-letra {
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .nav-letra-texto {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
   }
 
   .nav-buscar-texto {
@@ -4120,6 +4487,23 @@ a.via-contacto-dato:focus-visible {
     color: var(--color-secundario-oscuro);
     font-size: 11pt;
     margin: 4mm 0 1mm;
+  }
+
+  .anterior-siguiente,
+  .tiempo-lectura,
+  .pasos-control,
+  .pasos-todos,
+  .seccion-filtro,
+  .volver-arriba,
+  .nav-letra,
+  .ver-todos > summary,
+  .filtro-preguntas {
+    display: none !important;
+  }
+
+  .paso {
+    box-shadow: none;
+    break-inside: avoid;
   }
 
   /* «Imprimir mi lista» (Me acaban de diagnosticar): solo la hoja con lo

@@ -251,6 +251,21 @@ document.addEventListener('DOMContentLoaded', function () {
       '<li><a href="sensibilizacion.html">Educación y divulgación</a></li>' +
       '<li><a href="investigacion.html">Solidaridad e investigación</a></li></ul>'
     );
+    // Marca la parte de Qué hacemos en la que estás, también desde sus
+    // páginas interiores (un servicio, un proyecto)
+    var paginaActualAyudas = window.location.pathname.split('/').pop() || 'index.html';
+    var categoriasAyudas = {
+      'ayuda-profesional.html': /^ayuda-profesional/,
+      'ayuda-testimonial.html': /^ayuda-testimonial/,
+      'actividades-guiadas.html': /^actividades-guiadas/,
+      'sensibilizacion.html': /^(sensibilizacion|proyecto-contigo|proyecto-jornada-|proyecto-yo-me-muevo)/,
+      'investigacion.html': /^(investigacion|proyecto-marcha-por-la-salud)/
+    };
+    Object.keys(categoriasAyudas).forEach(function (href) {
+      if (categoriasAyudas[href].test(paginaActualAyudas)) {
+        elementoAyudas.querySelector('.submenu a[href="' + href + '"]').setAttribute('aria-current', 'page');
+      }
+    });
     var botonSubmenuAyudas = elementoAyudas.querySelector('.boton-submenu');
     botonSubmenuAyudas.addEventListener('click', function () {
       var abiertoAyudas = elementoAyudas.classList.toggle('submenu-abierto');
@@ -398,23 +413,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Desplegables (<details class="desplegable">): «Abrir todos», un enlace
   // del índice abre el apartado al que lleva, y al imprimir salen abiertos.
-  var desplegables = document.querySelectorAll('details.desplegable');
+  // Vale para cualquier <details>: desplegables, preguntas frecuentes y el
+  // árbol plegado de Hablando de cáncer.
+  var desplegables = document.querySelectorAll('details');
   if (desplegables.length) {
     var abrirTodo = document.querySelector('[data-abrir-todo]');
     if (abrirTodo) {
       abrirTodo.hidden = false;
       abrirTodo.addEventListener('click', function () {
         var abrir = abrirTodo.textContent === 'Abrir todos';
-        desplegables.forEach(function (d) { d.open = abrir; });
+        document.querySelectorAll('details.desplegable').forEach(function (d) { d.open = abrir; });
         abrirTodo.textContent = abrir ? 'Cerrar todos' : 'Abrir todos';
       });
     }
     var abrirDesplegable = function () {
       if (!location.hash) return;
       var destino = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-      var d = destino && destino.closest('details.desplegable');
+      var d = destino && destino.closest('details');
       if (d) {
         d.open = true;
+        if (d.parentElement.closest('details')) d.parentElement.closest('details').open = true;
         destino.scrollIntoView();
       }
     };
@@ -542,6 +560,184 @@ document.addEventListener('DOMContentLoaded', function () {
       resultadoFiltro.textContent = !buscado ? ''
         : visibles === 0 ? 'No hay ningún término con «' + campoFiltro.value.trim() + '». Prueba con otra palabra o pregúntanos.'
         : visibles === 1 ? '1 término.' : visibles + ' términos.';
+    });
+  }
+
+  // Paso a paso ([data-pasos], autoexploración): un paso cada vez, con
+  // «Anterior» y «Siguiente»; «Ver todos los pasos seguidos» los muestra todos
+  document.querySelectorAll('[data-pasos]').forEach(function (caja) {
+    var pasos = caja.querySelectorAll('.paso');
+    var control = caja.querySelector('.pasos-control');
+    var anterior = caja.querySelector('[data-paso-anterior]');
+    var siguiente = caja.querySelector('[data-paso-siguiente]');
+    var cuentaPasos = caja.querySelector('.pasos-cuenta');
+    var verTodos = caja.querySelector('[data-pasos-todos]');
+    var actual = 0;
+    var todos = false;
+    var mostrarPaso = function (moverFoco) {
+      pasos.forEach(function (p, i) {
+        p.classList.toggle('paso-oculto', !todos && i !== actual);
+      });
+      control.hidden = todos;
+      anterior.disabled = actual === 0;
+      siguiente.disabled = actual === pasos.length - 1;
+      cuentaPasos.textContent = 'Paso ' + (actual + 1) + ' de ' + pasos.length;
+      verTodos.textContent = todos ? 'Ver de uno en uno' : 'Ver todos los pasos seguidos';
+      if (moverFoco) {
+        var titulo = pasos[actual].querySelector('h3');
+        titulo.setAttribute('tabindex', '-1');
+        titulo.focus();
+      }
+    };
+    anterior.addEventListener('click', function () {
+      if (actual > 0) { actual--; mostrarPaso(true); }
+    });
+    siguiente.addEventListener('click', function () {
+      if (actual < pasos.length - 1) { actual++; mostrarPaso(true); }
+    });
+    verTodos.addEventListener('click', function () {
+      todos = !todos;
+      mostrarPaso(false);
+    });
+    caja.classList.add('pasos-activos');
+    verTodos.hidden = false;
+    mostrarPaso(false);
+  });
+
+  // Actividades guiadas: filtro por día. Los botones salen de los días que
+  // aparecen en los horarios de las tarjetas.
+  var filtroDias = document.querySelector('[data-filtro-dias]');
+  if (filtroDias) {
+    var DIAS = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+    var tarjetasActividad = Array.prototype.slice.call(document.querySelectorAll('main article.tarjeta'));
+    var diasDe = function (tarjeta) {
+      var horario = Array.prototype.map.call(tarjeta.querySelectorAll('li'), function (li) {
+        return li.textContent.toLowerCase();
+      }).join(' ');
+      return DIAS.filter(function (d) { return new RegExp('(^|[^a-záéíóú])' + d).test(horario); });
+    };
+    var presentes = DIAS.filter(function (d) {
+      return tarjetasActividad.some(function (t) { return diasDe(t).indexOf(d) !== -1; });
+    });
+    var botonesDias = filtroDias.querySelector('.filtro-dias-botones');
+    var resultadoDias = filtroDias.querySelector('.filtro-dias-resultado');
+    ['todos'].concat(presentes).forEach(function (d) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('data-dia', d);
+      b.setAttribute('aria-pressed', d === 'todos' ? 'true' : 'false');
+      b.textContent = d === 'todos' ? 'Todos los días' : d.charAt(0).toUpperCase() + d.slice(1);
+      botonesDias.appendChild(b);
+    });
+    filtroDias.hidden = false;
+    botonesDias.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-dia]');
+      if (!b) return;
+      var dia = b.getAttribute('data-dia');
+      botonesDias.querySelectorAll('[data-dia]').forEach(function (x) {
+        x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+      });
+      var visibles = 0;
+      tarjetasActividad.forEach(function (t) {
+        var ver = dia === 'todos' || diasDe(t).indexOf(dia) !== -1;
+        t.hidden = !ver;
+        if (ver) visibles++;
+      });
+      // Una sección sin ninguna tarjeta visible se oculta entera
+      document.querySelectorAll('main .rejilla-tarjetas').forEach(function (rejilla) {
+        var seccion = rejilla.closest('section');
+        seccion.hidden = !rejilla.querySelector('article.tarjeta:not([hidden])');
+      });
+      resultadoDias.textContent = dia === 'todos' ? ''
+        : (visibles === 1 ? '1 actividad' : visibles + ' actividades') + ' el ' + dia
+          + '. Algunas no tienen día fijo: pregúntanos por ellas.';
+    });
+  }
+
+  // Preguntas frecuentes: filtro mientras se escribe. Abre las que coinciden
+  // y deja cerradas las demás al borrar.
+  var filtroPreguntas = document.querySelector('.filtro-preguntas');
+  if (filtroPreguntas) {
+    var normalizarPregunta = function (texto) {
+      return texto.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    };
+    var campoPreguntas = document.getElementById('filtro-preguntas');
+    var resultadoPreguntas = filtroPreguntas.querySelector('.filtro-glosario-resultado');
+    var preguntas = Array.prototype.map.call(document.querySelectorAll('.preguntas details'), function (d) {
+      return { d: d, texto: normalizarPregunta(d.textContent) };
+    });
+    filtroPreguntas.hidden = false;
+    campoPreguntas.addEventListener('input', function () {
+      var buscado = normalizarPregunta(campoPreguntas.value.trim());
+      var visibles = 0;
+      preguntas.forEach(function (p) {
+        var ver = !buscado || p.texto.indexOf(buscado) !== -1;
+        p.d.hidden = !ver;
+        p.d.open = !!buscado && ver;
+        if (ver) visibles++;
+      });
+      document.querySelectorAll('.preguntas').forEach(function (grupo) {
+        var titulo = grupo.previousElementSibling;
+        var hay = !!grupo.querySelector('details:not([hidden])');
+        grupo.hidden = !hay;
+        if (titulo && titulo.tagName === 'H2') titulo.hidden = !hay;
+      });
+      resultadoPreguntas.textContent = !buscado ? ''
+        : visibles === 0 ? 'No hay ninguna pregunta con «' + campoPreguntas.value.trim() + '». Llámanos y te lo contamos.'
+        : visibles === 1 ? '1 pregunta.' : visibles + ' preguntas.';
+    });
+  }
+
+  // Tamaño de letra: normal → grande → muy grande → normal. Se recuerda
+  // entre páginas; layout.html lo aplica antes de pintar.
+  var botonLetra = document.querySelector('button[data-letra]');
+  if (botonLetra) {
+    var TAMANOS = ['', 'grande', 'muy-grande'];
+    var NOMBRES = { '': 'normal', 'grande': 'grande', 'muy-grande': 'muy grande' };
+    var textoLetra = botonLetra.querySelector('.nav-letra-texto');
+    var ponerLetra = function (tamano, guardar) {
+      if (tamano) {
+        document.documentElement.setAttribute('data-letra', tamano);
+      } else {
+        document.documentElement.removeAttribute('data-letra');
+      }
+      var siguienteTamano = TAMANOS[(TAMANOS.indexOf(tamano) + 1) % TAMANOS.length];
+      textoLetra.textContent = 'Tamaño de letra: ' + NOMBRES[tamano];
+      botonLetra.title = 'Letra ' + NOMBRES[tamano] + '. Pulsa para verla ' + NOMBRES[siguienteTamano] + '.';
+      if (guardar) {
+        try {
+          if (tamano) localStorage.setItem('amacgema-letra', tamano);
+          else localStorage.removeItem('amacgema-letra');
+        } catch (e) { /* sin almacenamiento: vale para esta página */ }
+      }
+    };
+    botonLetra.closest('li').hidden = false;
+    ponerLetra(document.documentElement.getAttribute('data-letra') || '', false);
+    botonLetra.addEventListener('click', function () {
+      var ahora = document.documentElement.getAttribute('data-letra') || '';
+      ponerLetra(TAMANOS[(TAMANOS.indexOf(ahora) + 1) % TAMANOS.length], true);
+    });
+  }
+
+  // «Volver arriba»: solo en páginas largas, y solo después de bajar una
+  // pantalla entera
+  if (document.documentElement.scrollHeight > window.innerHeight * 2.5) {
+    var arriba = document.createElement('button');
+    arriba.type = 'button';
+    arriba.className = 'volver-arriba';
+    arriba.hidden = true;
+    arriba.innerHTML = '<span aria-hidden="true">↑</span> Arriba';
+    arriba.setAttribute('aria-label', 'Volver arriba');
+    document.body.appendChild(arriba);
+    var mirarArriba = function () {
+      arriba.hidden = window.scrollY < window.innerHeight;
+    };
+    window.addEventListener('scroll', mirarArriba, { passive: true });
+    arriba.addEventListener('click', function () {
+      window.scrollTo({ top: 0 });
+      var saltar = document.getElementById('contenido-principal');
+      saltar.setAttribute('tabindex', '-1');
+      saltar.focus({ preventScroll: true });
     });
   }
 

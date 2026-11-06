@@ -265,6 +265,25 @@ hay nada marcado). Varias cajas con el mismo nombre forman una sola hoja;
 **Filtro del glosario**: el campo «Busca una palabra» deja solo los términos
 cuyo nombre o definición contienen lo escrito, sin tener en cuenta tildes.
 
+**«Anterior / Siguiente»**: las páginas de `RECORRIDOS` (en `build.py`) llevan
+al final un enlace a la anterior y a la siguiente del recorrido, con su
+título. Para añadir un recorrido, basta con una lista nueva de páginas.
+
+**Tiempo de lectura**: el build lo calcula (200 palabras por minuto) y lo
+pone junto a «Imprimir esta página» en las páginas de Hablando de cáncer.
+
+**Paso a paso** (`data-pasos`, autoexploración): un `<li class="paso"
+data-numero="N">` por paso; se ve uno cada vez con «Anterior» y
+«Siguiente». Sin JavaScript y al imprimir se ven todos.
+
+**Filtros**: en Actividades guiadas, por día (los botones salen de los
+horarios de las tarjetas); en Preguntas frecuentes, mientras se escribe.
+
+**Tamaño de letra** (botón «Aa» del menú): normal, grande y muy grande; se
+guarda en el navegador y `layout.html` lo aplica antes de pintar. Toda la
+web está en `rem`, así que escala entera. **«Volver arriba»** aparece solo
+en páginas largas, después de bajar una pantalla.
+
 La hoja de estilos incluye además una versión para imprimir (sección 18).
 El arco de la «M» del logo aparece, muy suave, en la esquina de las
 cabeceras interiores y de los recuadros rosas (`.hero-interior::after` y

@@ -590,22 +590,65 @@ def imagen_compartir(fname, titulo, content):
     return ruta
 
 
+# ---------- «Anterior / Siguiente» ----------
+# Páginas que se leen en orden: al final de cada una, un enlace a la
+# anterior y a la siguiente, para recorrer la sección sin volver al menú.
+RECORRIDOS = [
+    ["sintomas.html", "diagnostico.html", "tratamiento.html",
+     "cancer-de-mama-avanzado.html", "prevencion-diagnostico-precoz.html"],
+    ["cancer-de-ovario.html", "cancer-de-endometrio.html", "cancer-de-cervix.html",
+     "cancer-de-vulva-y-vagina.html", "prevencion-diagnostico-precoz-ginecologico.html"],
+    ["concepto.html", "itinerario-diagnostico.html", "planteamiento-terapeutico.html"],
+]
+
+
+def anterior_siguiente(fname, titulos):
+    for recorrido in RECORRIDOS:
+        if fname not in recorrido:
+            continue
+        i = recorrido.index(fname)
+        partes = []
+        for clase, etiqueta, j in (("anterior", "Anterior", i - 1), ("siguiente", "Siguiente", i + 1)):
+            if 0 <= j < len(recorrido):
+                partes.append('      <a class="paso-%s" href="%s"><span class="paso-etiqueta">%s</span>'
+                              '<span class="paso-titulo">%s</span></a>'
+                              % (clase, recorrido[j], etiqueta, titulos[recorrido[j]]))
+        return ('\n<nav class="anterior-siguiente" aria-label="Seguir leyendo" data-pagefind-ignore>\n'
+                '  <div class="contenedor">\n    <p class="paso-cuenta">%d de %d</p>\n%s\n  </div>\n</nav>\n'
+                % (i + 1, len(recorrido), "\n".join(partes)))
+    return ""
+
+
+# ---------- Tiempo de lectura ----------
+# En las páginas de Hablando de cáncer, bajo el título: «Lectura de N
+# minutos», a 200 palabras por minuto, para saber de antemano cuánto es.
+SIN_TIEMPO_LECTURA = {"glosario.html"}
+
+
+def tiempo_lectura(content):
+    texto = re.sub(r"<!--.*?-->|<[^>]+>", " ", content, flags=re.S)
+    palabras = len(re.findall(r"\w+", texto))
+    minutos = max(1, round(palabras / 200))
+    return "Lectura de 1 minuto" if minutos == 1 else "Lectura de %d minutos" % minutos
+
+
 # ---------- Botón «Imprimir esta página» ----------
 # Las páginas de Hablando de cáncer se imprimen a menudo para llevarlas a la
 # consulta: el botón se añade solo, al final de su cabecera. Las portadas de
 # sección, que solo reparten a otras páginas, no lo llevan.
 SIN_BOTON_IMPRIMIR = {"hablando-de-cancer.html", "aspectos-generales.html",
                       "cancer-de-mama.html", "cancer-ginecologico.html"}
-BOTON_IMPRIMIR = ('\n                    <p class="hero-imprimir" data-pagefind-ignore>'
+BOTON_IMPRIMIR = ('\n                    <p class="hero-imprimir" data-pagefind-ignore>%s'
                   '<button class="boton-imprimir" type="button" data-imprimir hidden>'
                   'Imprimir esta página</button></p>')
 # Al pie de la hoja impresa (templates/layout.html), solo en estas páginas
 NOTA_IMPRESION = "<p>Esta información no sustituye la de tu equipo médico: llévala a la consulta y pregunta todo lo que necesites.</p>"
 
 
-def poner_boton_imprimir(content):
+def poner_boton_imprimir(content, tiempo=""):
+    extra = '<span class="tiempo-lectura">%s</span>' % tiempo if tiempo else ""
     return re.sub(r'(<section class="hero[^"]*">.*?)(\s*</div>\s*</section>)',
-                  lambda m: m.group(1) + BOTON_IMPRIMIR + m.group(2),
+                  lambda m: m.group(1) + BOTON_IMPRIMIR % extra + m.group(2),
                   content, count=1, flags=re.S)
 
 
@@ -947,6 +990,10 @@ def build():
         if fname in seen:
             raise ValueError(f"Nombre de página duplicado: {page_path} y {seen[fname]}")
         seen[fname] = page_path
+    # Título corto de cada página (sin « | Sección | AMAC-GEMA»), para los
+    # enlaces «Anterior / Siguiente»
+    titulos = {os.path.basename(p): parse_page(read(p))[0].get("title", "").split(" | ")[0]
+               for p in page_paths}
 
     # La salida se rehace desde cero: así una página borrada o renombrada en
     # pages/ no deja un .html huérfano publicado.
@@ -990,7 +1037,9 @@ def build():
         if en_hablando and fname not in GLOSARIO_SIN_ENLACE:
             content = enlazar_glosario(content, fname, terminos_glosario)
         if en_hablando and fname not in SIN_BOTON_IMPRIMIR:
-            content = poner_boton_imprimir(content)
+            tiempo = "" if fname in SIN_TIEMPO_LECTURA else tiempo_lectura(content)
+            content = poner_boton_imprimir(content, tiempo)
+        content += anterior_siguiente(fname, titulos)
 
         if meta.get("aviso") == "ia":
             content = aviso_ia(aviso_ia_tpl, meta.get("revision", ""), en_hablando) + content

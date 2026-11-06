@@ -20,6 +20,16 @@ nav: contacto.html
 <section class="seccion">
   <div class="contenedor contenido-lectura">
 
+    <!-- Filtro (js/script.js): deja solo las preguntas que contienen lo
+         escrito, en la pregunta o en la respuesta, y las abre. -->
+    <div class="buscador-rapido filtro-preguntas" hidden>
+      <label for="filtro-preguntas">Busca en las preguntas</label>
+      <div class="buscador-rapido-fila">
+        <input id="filtro-preguntas" type="search" autocomplete="off" placeholder="Por ejemplo: pelucas, hospital, voluntaria">
+      </div>
+      <p class="filtro-glosario-resultado" aria-live="polite"></p>
+    </div>
+
     <h2>Sobre la asociación</h2>
     <div class="preguntas">
       <details>

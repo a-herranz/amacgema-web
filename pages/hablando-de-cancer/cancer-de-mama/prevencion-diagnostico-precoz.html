@@ -48,17 +48,59 @@ cierre: apoyo
                     <h2>¿Cómo debo realizar la autoexploración mamaria?</h2>
                     <p>Consta de dos partes: inspección y palpación.</p>
 
-                    <h3>Inspección</h3>
-                    <p>Desnuda hasta la cintura, sitúate frente a un espejo: primero con los brazos caídos a lo largo del cuerpo, luego con las manos apoyadas en la cintura para contraer el músculo pectoral, y finalmente elevándolos por encima de la cabeza.</p>
-                    <p>Observa y compara tus senos para detectar diferencias en la forma, tamaño, coloración, resaltes o bultos, hundimientos, piel de naranja, retracción reciente del pezón, ulceraciones o eczemas.</p>
-                    <p>Al elevar los brazos, comprueba si las dos mamas se mueven a la vez y si existe algún resalte o prominencia en las axilas.</p>
-
-                    <h3>Palpación</h3>
-                    <p>Se puede realizar de pie o acostada; en esta última posición los músculos están más relajados y se facilita la palpación.</p>
-                    <p>Si vas a explorar la mama izquierda, coloca primero una almohada debajo del hombro-escápula izquierda, eleva el brazo y sitúa la mano debajo de la nuca. Después, con los tres dedos centrales de la mano contraria (derecha), juntos y planos, realiza movimientos concéntricos alrededor de la mama, presionando suave pero firmemente con las yemas de los dedos, y efectuando movimientos circulares en cada punto palpado, desde la periferia de la mama hasta el pezón. Presta especial atención al cuadrante superoexterno, por ser el que contiene mayor cantidad de tejido mamario.</p>
-                    <p>Al concluir, presiona el pezón entre el dedo pulgar e índice para ver si existe alguna secreción. También conviene levantar el pezón junto a la areola para comprobar si hay buena movilidad o adherencia.</p>
-                    <p>En la misma posición, palpa la axila correspondiente a la mama que estás explorando, para descartar la aparición de bultos; para ello, desplaza la mano por toda la axila realizando movimientos circulares con una presión ligeramente superior a la de la mama.</p>
-                    <p>Terminada una mama, inicia la palpación en la otra.</p>
+                    <!-- Paso a paso (js/script.js): se ve un paso cada vez, con «Anterior» y
+                         «Siguiente». Sin JavaScript, y al imprimir, se leen todos seguidos. -->
+                    <div class="pasos" data-pasos>
+                        <ol class="pasos-lista">
+                            <li class="paso" data-numero="1">
+                                <p class="paso-fase">Inspección</p>
+                                <h3>Frente al espejo</h3>
+                                <p>Desnuda hasta la cintura, sitúate frente a un espejo: primero con los brazos caídos a lo largo del cuerpo, luego con las manos apoyadas en la cintura para contraer el músculo pectoral, y finalmente elevándolos por encima de la cabeza.</p>
+                            </li>
+                            <li class="paso" data-numero="2">
+                                <p class="paso-fase">Inspección</p>
+                                <h3>Observa y compara</h3>
+                                <p>Observa y compara tus senos para detectar diferencias en la forma, tamaño, coloración, resaltes o bultos, hundimientos, piel de naranja, retracción reciente del pezón, ulceraciones o eczemas.</p>
+                            </li>
+                            <li class="paso" data-numero="3">
+                                <p class="paso-fase">Inspección</p>
+                                <h3>Con los brazos en alto</h3>
+                                <p>Al elevar los brazos, comprueba si las dos mamas se mueven a la vez y si existe algún resalte o prominencia en las axilas.</p>
+                            </li>
+                            <li class="paso" data-numero="4">
+                                <p class="paso-fase">Palpación</p>
+                                <h3>Colócate</h3>
+                                <p>Se puede realizar de pie o acostada; en esta última posición los músculos están más relajados y se facilita la palpación.</p>
+                                <p>Si vas a explorar la mama izquierda, coloca primero una almohada debajo del hombro-escápula izquierda, eleva el brazo y sitúa la mano debajo de la nuca.</p>
+                            </li>
+                            <li class="paso" data-numero="5">
+                                <p class="paso-fase">Palpación</p>
+                                <h3>Recorre la mama</h3>
+                                <p>Después, con los tres dedos centrales de la mano contraria (derecha), juntos y planos, realiza movimientos concéntricos alrededor de la mama, presionando suave pero firmemente con las yemas de los dedos, y efectuando movimientos circulares en cada punto palpado, desde la periferia de la mama hasta el pezón. Presta especial atención al cuadrante superoexterno, por ser el que contiene mayor cantidad de tejido mamario.</p>
+                            </li>
+                            <li class="paso" data-numero="6">
+                                <p class="paso-fase">Palpación</p>
+                                <h3>El pezón</h3>
+                                <p>Al concluir, presiona el pezón entre el dedo pulgar e índice para ver si existe alguna secreción. También conviene levantar el pezón junto a la areola para comprobar si hay buena movilidad o adherencia.</p>
+                            </li>
+                            <li class="paso" data-numero="7">
+                                <p class="paso-fase">Palpación</p>
+                                <h3>La axila</h3>
+                                <p>En la misma posición, palpa la axila correspondiente a la mama que estás explorando, para descartar la aparición de bultos; para ello, desplaza la mano por toda la axila realizando movimientos circulares con una presión ligeramente superior a la de la mama.</p>
+                            </li>
+                            <li class="paso" data-numero="8">
+                                <p class="paso-fase">Palpación</p>
+                                <h3>La otra mama</h3>
+                                <p>Terminada una mama, inicia la palpación en la otra.</p>
+                            </li>
+                        </ol>
+                        <div class="pasos-control" hidden>
+                            <button class="boton boton-secundario" type="button" data-paso-anterior>← Anterior</button>
+                            <p class="pasos-cuenta" aria-live="polite"></p>
+                            <button class="boton boton-primario" type="button" data-paso-siguiente>Siguiente →</button>
+                        </div>
+                        <p class="pasos-todos"><button class="boton-texto" type="button" data-pasos-todos hidden>Ver todos los pasos seguidos</button></p>
+                    </div>
 
                     <div class="bloque-destacado bloque-rosa bloque-nota">
                         <p>Normalmente se detectan multitud de «bultitos» (nódulos) que forman parte de la estructura mamaria interna; con la práctica se aprende a identificarlos, y sobre todo a detectar las diferencias cuando surja alguno nuevo. La mayoría de las alteraciones observadas serán benignas, pero debe ser el médico quien confirme esta situación.</p>

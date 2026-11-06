@@ -20,6 +20,9 @@
   <link rel="preload" href="fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/poppins-600-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Tamaño de letra elegido (botón «Aa» del menú): se aplica antes de
+       pintar la página, para que no dé un salto al cargar -->
+  <script>try{var l=localStorage.getItem('amacgema-letra');if(l)document.documentElement.setAttribute('data-letra',l);}catch(e){}</script>
 {{DATOS_ESTRUCTURADOS}}{{CABECERA_EXTRA}}</head>
 <body>
   <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>

@@ -14,6 +14,13 @@ cierre: apoyo
                 </div>
             </section>
 
+            <!-- Guía interactiva: los mismos textos de siempre, ordenados para
+                 usarlos. Las casillas son <input type="checkbox"> de verdad, así
+                 que se pueden marcar aunque no haya JavaScript; js/script.js
+                 añade lo demás (guardar la lista en el navegador, preguntas
+                 propias, contador e imprimir solo la lista). Si cambias una
+                 pregunta, cambia también su texto en el folleto
+                 (folleto-primeros-pasos.html). -->
             <section class="seccion">
                 <div class="contenedor">
 
@@ -29,49 +36,113 @@ cierre: apoyo
                     </div>
 
                     <h2>Lo que suele pasar en las primeras semanas</h2>
-                    <ol class="lista-apoyo">
-                        <li><strong>Completar el estudio.</strong> Además de la biopsia, pueden pedirte análisis y pruebas de imagen para saber el tamaño del tumor, si afecta a los ganglios y si se ha extendido.</li>
-                        <li><strong>Conocer las características del tumor.</strong> En el cáncer de mama, el informe de la biopsia indica, por ejemplo, si es sensible a las hormonas o si es HER2 positivo. De eso depende buena parte del tratamiento.</li>
-                        <li><strong>Decisión en equipo.</strong> En los hospitales, cada caso lo estudia un comité de tumores en el que participan oncología, cirugía, radioterapia, radiología y anatomía patológica.</li>
-                        <li><strong>La propuesta de tratamiento.</strong> Te explicarán qué tratamientos te proponen y en qué orden: a veces se empieza por la cirugía y otras por fármacos para reducir el tumor antes de operar.</li>
+                    <ol class="camino">
+                        <li>
+                            <p class="camino-titulo">Completar el estudio</p>
+                            <p>Además de la biopsia, pueden pedirte análisis y pruebas de imagen para saber el tamaño del tumor, si afecta a los ganglios y si se ha extendido.</p>
+                        </li>
+                        <li>
+                            <p class="camino-titulo">Conocer las características del tumor</p>
+                            <p>En el cáncer de mama, el informe de la biopsia indica, por ejemplo, si es sensible a las hormonas o si es HER2 positivo. De eso depende buena parte del tratamiento.</p>
+                        </li>
+                        <li>
+                            <p class="camino-titulo">Decisión en equipo</p>
+                            <p>En los hospitales, cada caso lo estudia un comité de tumores en el que participan oncología, cirugía, radioterapia, radiología y anatomía patológica.</p>
+                        </li>
+                        <li>
+                            <p class="camino-titulo">La propuesta de tratamiento</p>
+                            <p>Te explicarán qué tratamientos te proponen y en qué orden: a veces se empieza por la cirugía y otras por fármacos para reducir el tumor antes de operar.</p>
+                        </li>
                     </ol>
                     <p>Si quieres saber más sobre cada paso, lee <a href="itinerario-diagnostico.html">cómo se diagnostica</a> y <a href="planteamiento-terapeutico.html">cómo se trata</a> un cáncer.</p>
 
-                    <h2>Preguntas que puedes llevar a la consulta</h2>
-                    <p>Apúntalas antes de ir y marca las que más te importan, por si no da tiempo a todas:</p>
-                    <ul class="lista-apoyo">
-                        <li>¿Qué tipo de cáncer tengo exactamente y en qué estadio está?</li>
-                        <li>¿Ha llegado a los ganglios o a otras partes del cuerpo?</li>
-                        <li>En cáncer de mama: ¿es sensible a las hormonas? ¿Es HER2 positivo?</li>
-                        <li>¿Qué tratamiento me proponéis, en qué orden y cuánto durará?</li>
-                        <li>¿Qué efectos secundarios son más frecuentes y qué puedo hacer para llevarlos mejor?</li>
-                        <li>¿Afectará a mi fertilidad? ¿Tengo que hacer algo antes de empezar?</li>
-                        <li>¿Debería hacerme un estudio genético?</li>
-                        <li>¿A quién llamo si tengo un problema entre una consulta y otra?</li>
-                        <li>¿Podré seguir trabajando durante el tratamiento?</li>
-                    </ul>
+                    <h2 id="preguntas">Preguntas que puedes llevar a la consulta</h2>
+                    <div class="mi-lista" data-mi-lista>
+                        <p class="mi-lista-intro">Apúntalas antes de ir y marca las que más te importan, por si no da tiempo a todas:</p>
 
-                    <div class="bloque-destacado bloque-nota">
-                        <p class="etiqueta">En la consulta</p>
-                        <h3>Trucos que ayudan</h3>
-                        <ul class="lista-apoyo">
-                            <li>Ve acompañada: cuatro oídos retienen más que dos.</li>
-                            <li>Toma notas o pide a quien te acompaña que las tome.</li>
-                            <li>Si no entiendes algo, pide que te lo expliquen otra vez con otras palabras. Es tu derecho.</li>
-                            <li>Pide una copia de cada informe y de cada resultado.</li>
-                        </ul>
+                        <fieldset>
+                            <legend>Sobre el diagnóstico</legend>
+                            <label><input type="checkbox" name="pregunta" value="tipo"> ¿Qué tipo de cáncer tengo exactamente y en qué estadio está?</label>
+                            <label><input type="checkbox" name="pregunta" value="extension"> ¿Ha llegado a los ganglios o a otras partes del cuerpo?</label>
+                            <label><input type="checkbox" name="pregunta" value="receptores"> En cáncer de mama: ¿es sensible a las hormonas? ¿Es HER2 positivo?</label>
+                            <label><input type="checkbox" name="pregunta" value="genetico"> ¿Debería hacerme un estudio genético?</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Sobre el tratamiento</legend>
+                            <label><input type="checkbox" name="pregunta" value="tratamiento"> ¿Qué tratamiento me proponéis, en qué orden y cuánto durará?</label>
+                            <label><input type="checkbox" name="pregunta" value="efectos"> ¿Qué efectos secundarios son más frecuentes y qué puedo hacer para llevarlos mejor?</label>
+                            <label><input type="checkbox" name="pregunta" value="fertilidad"> ¿Afectará a mi fertilidad? ¿Tengo que hacer algo antes de empezar?</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>En el día a día</legend>
+                            <label><input type="checkbox" name="pregunta" value="contacto"> ¿A quién llamo si tengo un problema entre una consulta y otra?</label>
+                            <label><input type="checkbox" name="pregunta" value="trabajo"> ¿Podré seguir trabajando durante el tratamiento?</label>
+                        </fieldset>
+
+                        <fieldset class="mi-lista-propias" hidden>
+                            <legend>Mis preguntas</legend>
+                            <div class="mi-lista-propias-lista"></div>
+                            <form class="mi-lista-anadir">
+                                <label for="pregunta-propia">Añade una pregunta tuya</label>
+                                <div class="mi-lista-fila">
+                                    <input id="pregunta-propia" type="text" maxlength="200" autocomplete="off">
+                                    <button class="boton boton-secundario" type="submit">Añadir</button>
+                                </div>
+                            </form>
+                        </fieldset>
+
+                        <div class="mi-lista-pie" hidden>
+                            <p class="mi-lista-cuenta" aria-live="polite"></p>
+                            <div class="mi-lista-acciones">
+                                <button class="boton boton-primario" type="button" data-mi-lista-imprimir>Imprimir mi lista</button>
+                                <button class="boton-texto" type="button" data-mi-lista-borrar>Empezar de nuevo</button>
+                            </div>
+                            <p class="nota">Lo que marcas y escribes se guarda solo en este navegador: no se envía a ningún sitio.</p>
+                        </div>
                     </div>
 
-                    <h2>Organiza tus papeles</h2>
-                    <p>Una carpeta con los informes, los resultados, las citas y la lista de medicamentos que tomas te ahorrará mucho tiempo y nervios, sobre todo si te atienden distintos profesionales. Pregunta también si en tu hospital hay una enfermera de referencia o gestora de casos: es la persona a la que acudir para dudas prácticas.</p>
+                    <h2>El día de la consulta</h2>
+                    <div class="dos-columnas consulta-columnas">
+                        <div class="mi-lista mi-lista-sencilla" data-mi-lista>
+                            <p class="etiqueta">En la consulta</p>
+                            <h3>Trucos que ayudan</h3>
+                            <label><input type="checkbox" name="truco" value="acompanada"> Ve acompañada: cuatro oídos retienen más que dos.</label>
+                            <label><input type="checkbox" name="truco" value="notas"> Toma notas o pide a quien te acompaña que las tome.</label>
+                            <label><input type="checkbox" name="truco" value="explicar"> Si no entiendes algo, pide que te lo expliquen otra vez con otras palabras. Es tu derecho.</label>
+                            <label><input type="checkbox" name="truco" value="copia"> Pide una copia de cada informe y de cada resultado.</label>
+                        </div>
+                        <div class="mi-lista mi-lista-sencilla" data-mi-lista>
+                            <p class="etiqueta">Organiza tus papeles</p>
+                            <h3>Una carpeta con…</h3>
+                            <label><input type="checkbox" name="carpeta" value="informes"> Los informes.</label>
+                            <label><input type="checkbox" name="carpeta" value="resultados"> Los resultados.</label>
+                            <label><input type="checkbox" name="carpeta" value="citas"> Las citas.</label>
+                            <label><input type="checkbox" name="carpeta" value="medicamentos"> La lista de medicamentos que tomas.</label>
+                            <p>Te ahorrará mucho tiempo y nervios, sobre todo si te atienden distintos profesionales. Pregunta también si en tu hospital hay una enfermera de referencia o gestora de casos: es la persona a la que acudir para dudas prácticas.</p>
+                        </div>
+                    </div>
 
                     <h2>Tus derechos como paciente</h2>
-                    <ul class="lista-apoyo">
-                        <li><strong>Información:</strong> tienes derecho a recibir información clara sobre tu diagnóstico y tu tratamiento, y a decidir sobre él.</li>
-                        <li><strong>Tu historia clínica:</strong> puedes pedir copia de tus informes y de tu historia clínica.</li>
-                        <li><strong>Segunda opinión:</strong> el sistema público de salud permite pedir una segunda opinión médica. Pregunta en el servicio de atención al paciente de tu hospital.</li>
-                        <li><strong>Baja laboral:</strong> la incapacidad temporal la tramita tu médico de familia.</li>
-                    </ul>
+                    <div class="derechos">
+                        <div class="derecho">
+                            <h3>Información</h3>
+                            <p>Tienes derecho a recibir información clara sobre tu diagnóstico y tu tratamiento, y a decidir sobre él.</p>
+                        </div>
+                        <div class="derecho">
+                            <h3>Tu historia clínica</h3>
+                            <p>Puedes pedir copia de tus informes y de tu historia clínica.</p>
+                        </div>
+                        <div class="derecho">
+                            <h3>Segunda opinión</h3>
+                            <p>El sistema público de salud permite pedir una segunda opinión médica. Pregunta en el servicio de atención al paciente de tu hospital.</p>
+                        </div>
+                        <div class="derecho">
+                            <h3>Baja laboral</h3>
+                            <p>La incapacidad temporal la tramita tu médico de familia.</p>
+                        </div>
+                    </div>
                     <p>Para todo lo que tiene que ver con el trabajo, las ayudas o los trámites, lee <a href="aspectos-sociales.html">aspectos sociales</a> o habla con nuestra <a href="ayuda-profesional-trabajadorasocial.html">trabajadora social</a>.</p>
 
                     <h2>Cuidarte mientras tanto</h2>

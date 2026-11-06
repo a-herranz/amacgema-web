@@ -1249,6 +1249,14 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 }
 
 @media (max-width: 640px) {
+  .derechos {
+    grid-template-columns: 1fr;
+  }
+
+  .mi-lista {
+    padding: 1.4rem 1.2rem;
+  }
+
   /* Tres cifras caben en una fila incluso en móvil */
   .cifras.cifras-intro {
     grid-template-columns: repeat(3, 1fr);
@@ -2934,6 +2942,248 @@ a.via-contacto-dato:focus-visible {
   font-weight: 600;
 }
 
+/* --- Guía «Me acaban de diagnosticar» ---
+   Pasos en línea, preguntas para marcar (js/script.js las guarda y las
+   imprime) y derechos en tarjetas */
+.camino {
+  list-style: none;
+  counter-reset: paso;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.camino li {
+  counter-increment: paso;
+  position: relative;
+  padding: 0 0 1.6rem 3.6rem;
+}
+
+/* Número del paso en un círculo */
+.camino li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--color-accion);
+  color: var(--color-blanco);
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+}
+
+/* Línea que une un paso con el siguiente */
+.camino li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(1.25rem - 1.5px);
+  top: 2.7rem;
+  bottom: 0.2rem;
+  border-left: 3px solid var(--color-primario-claro);
+}
+
+.camino-titulo {
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  margin: 0;
+}
+
+.camino li p:last-child {
+  margin-bottom: 0;
+}
+
+.mi-lista {
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-top: 4px solid var(--color-primario);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+  margin-bottom: 3rem;
+  padding: 1.8rem 2rem;
+}
+
+.mi-lista-intro {
+  margin-bottom: 1rem;
+}
+
+.mi-lista fieldset {
+  border: 0;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  min-width: 0;
+}
+
+.mi-lista legend {
+  color: var(--color-secundario-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+/* Cada pregunta: casilla grande y toda la fila pulsable */
+.mi-lista label:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  margin: 0 -0.8rem;
+  border-radius: var(--radio-chico);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.mi-lista label:has(input[type="checkbox"]):hover {
+  background-color: var(--color-fondo-alt);
+}
+
+.mi-lista label:has(input:checked) {
+  background-color: var(--color-primario-claro);
+}
+
+.mi-lista input[type="checkbox"] {
+  flex: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.15rem;
+  accent-color: var(--color-accion);
+  cursor: pointer;
+}
+
+.mi-lista-propia {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.mi-lista-propia label {
+  flex: 1;
+}
+
+.mi-lista-propia .boton-texto {
+  margin-top: 0.65rem;
+  font-size: 0.9rem;
+}
+
+.mi-lista-anadir {
+  margin-top: 0.6rem;
+}
+
+.mi-lista-anadir > label {
+  display: block;
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.mi-lista-fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.mi-lista-fila input {
+  flex: 1 1 240px;
+  min-height: 48px;
+  padding: 0 1rem;
+  border: 2px solid var(--color-borde);
+  border-radius: var(--radio-chico);
+  background-color: var(--color-blanco);
+  color: var(--color-texto);
+  font: inherit;
+}
+
+.mi-lista-fila input:focus {
+  border-color: var(--color-primario-oscuro);
+  outline: none;
+  box-shadow: var(--sombra-foco);
+}
+
+.mi-lista-fila .boton {
+  padding: 0.7rem 1.6rem;
+}
+
+.mi-lista-pie {
+  border-top: 1px solid var(--color-borde);
+  padding-top: 1.2rem;
+}
+
+.mi-lista-cuenta {
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.mi-lista-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Las dos listas del día de la consulta, una al lado de la otra */
+.consulta-columnas {
+  gap: 1.8rem;
+  margin-bottom: 3rem;
+}
+
+.mi-lista-sencilla {
+  height: 100%;
+  margin-bottom: 0;
+  border-top-color: var(--color-secundario);
+}
+
+.mi-lista-sencilla h3 {
+  margin-bottom: 0.6rem;
+}
+
+.mi-lista-sencilla > p:last-child {
+  color: var(--color-texto-suave);
+  font-size: 0.95rem;
+  margin: 1rem 0 0;
+}
+
+.derechos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.derecho {
+  background-color: var(--color-fondo-alt);
+  border-left: 4px solid var(--color-primario);
+  border-radius: var(--radio-chico);
+  padding: 1.1rem 1.3rem;
+}
+
+.derecho h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.3rem;
+}
+
+.derecho p {
+  margin: 0;
+}
+
+/* Hoja de «Imprimir mi lista»: solo existe mientras se imprime */
+.hoja-mi-lista {
+  display: none;
+}
+
 /* ==========================================================================
    16. RESPONSIVE
    Un único bloque por punto de ruptura, de mayor a menor.
@@ -3490,6 +3740,63 @@ a.via-contacto-dato:focus-visible {
   }
 
   .icono-tarjeta {
+    display: none;
+  }
+
+  /* «Imprimir mi lista» (Me acaban de diagnosticar): solo la hoja con lo
+     marcado, entre la cabecera y el pie impresos */
+  body.imprimiendo-lista main > :not(.hoja-mi-lista) {
+    display: none;
+  }
+
+  body.imprimiendo-lista .hoja-mi-lista {
+    display: block;
+  }
+
+  .hoja-mi-lista h2 {
+    font-size: 15pt;
+    margin: 5mm 0 2mm;
+  }
+
+  .hoja-casillas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hoja-casillas li {
+    position: relative;
+    padding: 1.5mm 0 1.5mm 7mm;
+    break-inside: avoid;
+  }
+
+  .hoja-casillas li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2.6mm;
+    width: 3.5mm;
+    height: 3.5mm;
+    border: 1.2pt solid var(--color-acento);
+    border-radius: 0.8mm;
+  }
+
+  /* Sitio para apuntar la respuesta debajo de cada pregunta */
+  .hoja-notas {
+    display: block;
+    height: 13mm;
+    border-bottom: 0.8pt solid var(--color-borde);
+    background: linear-gradient(transparent calc(50% - 0.4pt), var(--color-borde) calc(50% - 0.4pt), var(--color-borde) calc(50% + 0.4pt), transparent calc(50% + 0.4pt));
+  }
+
+  .mi-lista,
+  .derecho {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .mi-lista-propias,
+  .mi-lista-pie {
     display: none;
   }
 

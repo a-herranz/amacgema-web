@@ -357,6 +357,150 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Guía «Me acaban de diagnosticar»: las casillas marcadas y las preguntas
+  // propias se guardan solo en este navegador (localStorage), y «Imprimir
+  // mi lista» saca una hoja con lo marcado y sitio para apuntar respuestas.
+  var listas = document.querySelectorAll('[data-mi-lista]');
+  if (listas.length) {
+    var CLAVE_LISTA = 'amacgema-primeros-pasos';
+    var guia = listas[0];
+    var propias = guia.querySelector('.mi-lista-propias');
+    var listaPropias = guia.querySelector('.mi-lista-propias-lista');
+    var pieLista = guia.querySelector('.mi-lista-pie');
+    var cuenta = guia.querySelector('.mi-lista-cuenta');
+    var casillas = function () {
+      return document.querySelectorAll('[data-mi-lista] input[type="checkbox"]');
+    };
+
+    var leerLista = function () {
+      try {
+        return JSON.parse(localStorage.getItem(CLAVE_LISTA)) || {};
+      } catch (e) {
+        return {};
+      }
+    };
+
+    var guardarLista = function () {
+      var datos = { marcadas: [], propias: [] };
+      casillas().forEach(function (c) {
+        if (c.name === 'propia') {
+          datos.propias.push({ texto: c.value, marcada: c.checked });
+        } else if (c.checked) {
+          datos.marcadas.push(c.name + ':' + c.value);
+        }
+      });
+      try {
+        localStorage.setItem(CLAVE_LISTA, JSON.stringify(datos));
+      } catch (e) { /* sin almacenamiento: la lista vale para esta visita */ }
+      contarLista();
+    };
+
+    var contarLista = function () {
+      var n = guia.querySelectorAll('input[type="checkbox"]:checked').length;
+      cuenta.textContent = n === 0 ? 'Aún no has marcado ninguna pregunta.'
+        : n === 1 ? 'Has marcado 1 pregunta.' : 'Has marcado ' + n + ' preguntas.';
+    };
+
+    var anadirPropia = function (texto, marcada) {
+      var fila = document.createElement('div');
+      fila.className = 'mi-lista-propia';
+      var etiqueta = document.createElement('label');
+      var casilla = document.createElement('input');
+      casilla.type = 'checkbox';
+      casilla.name = 'propia';
+      casilla.value = texto;
+      casilla.checked = marcada;
+      etiqueta.appendChild(casilla);
+      etiqueta.appendChild(document.createTextNode(' ' + texto));
+      var quitar = document.createElement('button');
+      quitar.type = 'button';
+      quitar.className = 'boton-texto';
+      quitar.textContent = 'Quitar';
+      quitar.setAttribute('aria-label', 'Quitar la pregunta: ' + texto);
+      quitar.addEventListener('click', function () {
+        fila.remove();
+        guardarLista();
+      });
+      fila.appendChild(etiqueta);
+      fila.appendChild(quitar);
+      listaPropias.appendChild(fila);
+    };
+
+    var guardado = leerLista();
+    (guardado.marcadas || []).forEach(function (id) {
+      var partes = id.split(':');
+      var c = document.querySelector('[data-mi-lista] input[name="' + partes[0] + '"][value="' + partes[1] + '"]');
+      if (c) c.checked = true;
+    });
+    (guardado.propias || []).forEach(function (p) {
+      anadirPropia(p.texto, p.marcada);
+    });
+    propias.hidden = false;
+    pieLista.hidden = false;
+    contarLista();
+
+    document.addEventListener('change', function (e) {
+      if (e.target.closest('[data-mi-lista]')) guardarLista();
+    });
+
+    guia.querySelector('.mi-lista-anadir').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var campo = document.getElementById('pregunta-propia');
+      var texto = campo.value.trim();
+      if (!texto) return;
+      anadirPropia(texto, true);
+      campo.value = '';
+      campo.focus();
+      guardarLista();
+    });
+
+    guia.querySelector('[data-mi-lista-borrar]').addEventListener('click', function () {
+      if (!window.confirm('¿Quitar todas las marcas y tus preguntas?')) return;
+      casillas().forEach(function (c) { c.checked = false; });
+      listaPropias.innerHTML = '';
+      guardarLista();
+    });
+
+    // Hoja para imprimir: si no hay nada marcado, salen todas las preguntas
+    var textoCasilla = function (c) {
+      return c.parentNode.textContent.trim();
+    };
+    var bloqueHoja = function (titulo, elementos, conNotas) {
+      var html = '<h2>' + titulo + '</h2><ul class="hoja-casillas">';
+      elementos.forEach(function (texto) {
+        var div = document.createElement('div');
+        div.textContent = texto;
+        html += '<li>' + div.innerHTML + (conNotas ? '<span class="hoja-notas"></span>' : '') + '</li>';
+      });
+      return html + '</ul>';
+    };
+
+    guia.querySelector('[data-mi-lista-imprimir]').addEventListener('click', function () {
+      var todas = Array.prototype.slice.call(guia.querySelectorAll('input[type="checkbox"]'));
+      var marcadas = todas.filter(function (c) { return c.checked; });
+      var preguntas = (marcadas.length ? marcadas : todas).map(textoCasilla);
+      var porGrupo = function (nombre) {
+        return Array.prototype.slice.call(
+          document.querySelectorAll('[data-mi-lista] input[name="' + nombre + '"]')).map(textoCasilla);
+      };
+      var hoja = document.createElement('section');
+      hoja.className = 'hoja-mi-lista';
+      hoja.innerHTML = '<p class="sobrelinea">Me acaban de diagnosticar</p>'
+        + bloqueHoja('Mis preguntas para la consulta', preguntas, true)
+        + bloqueHoja('Trucos que ayudan', porGrupo('truco'), false)
+        + bloqueHoja('En mi carpeta', porGrupo('carpeta'), false);
+      document.querySelector('main').appendChild(hoja);
+      document.body.classList.add('imprimiendo-lista');
+      window.print();
+    });
+
+    window.addEventListener('afterprint', function () {
+      document.body.classList.remove('imprimiendo-lista');
+      var hoja = document.querySelector('.hoja-mi-lista');
+      if (hoja) hoja.remove();
+    });
+  }
+
   // Buscador (página Buscar): Pagefind trae su propia interfaz, que se
   // traduce sola al español por el lang="es" de la página. Si se llega con
   // ?q=..., por ejemplo desde el formulario de Hablando de cáncer, se

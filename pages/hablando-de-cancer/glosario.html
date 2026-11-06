@@ -15,6 +15,17 @@ subnav: glosario
             <section class="seccion">
                 <div class="contenedor contenido-lectura">
 
+                    <!-- Filtro (js/script.js): oculta los términos que no contienen lo que
+                         se escribe, sin tener en cuenta tildes ni mayúsculas. Sin JavaScript
+                         no aparece y el glosario se lee entero. -->
+                    <div class="buscador-rapido filtro-glosario" hidden>
+                        <label for="filtro-glosario">Busca una palabra</label>
+                        <div class="buscador-rapido-fila">
+                            <input id="filtro-glosario" type="search" autocomplete="off" placeholder="Por ejemplo: biopsia, estadio, HER2">
+                        </div>
+                        <p class="filtro-glosario-resultado" aria-live="polite"></p>
+                    </div>
+
                     <nav class="indice-rapido" aria-label="Índice alfabético del glosario">
                         <ul>
                             <li><a href="#letra-a">A</a></li>

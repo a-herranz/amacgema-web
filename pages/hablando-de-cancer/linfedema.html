@@ -36,34 +36,39 @@ cierre: apoyo
 
                     <h2>¿Tiene tratamiento?</h2>
 
-                    <h3>Medidas higiénico-dietéticas generales</h3>
-                    <ul class="lista-apoyo">
-                        <li>Alimentación pobre en calorías y sal.</li>
-                        <li>Higiene y limpieza corporal meticulosa con jabones de pH neutro.</li>
-                        <li>Evitar la exposición directa al sol y los baños calientes. La sauna está contraindicada.</li>
-                        <li>El corte de uñas debe ser cuidadoso, sin cortar las cutículas.</li>
-                        <li>No aplicar cremas o pomadas que puedan producir alergia o irritación.</li>
-                        <li>Evitar el riesgo de mordeduras o arañazos de animales domésticos, y picaduras de insectos.</li>
-                        <li>Están prohibidas las inyecciones en la extremidad con linfedema.</li>
-                    </ul>
-
-                    <h3>Medidas higiénico-dietéticas de miembros inferiores</h3>
-                    <ul class="lista-apoyo">
-                        <li>Posiciones elevadas de los miembros inferiores siempre que sea posible.</li>
-                        <li>Elevar los pies en la cama de forma sistemática (drenaje postural nocturno).</li>
-                        <li>Evitar mantener la postura sentada o de pie de forma prolongada.</li>
-                        <li>Evitar las marchas largas.</li>
-                        <li>Utilizar calzado cómodo y evitar medias con elásticos muy apretados.</li>
-                        <li>Elegir tacones intermedios.</li>
-                    </ul>
-
-                    <h3>Medidas higiénico-dietéticas de miembros superiores</h3>
-                    <ul class="lista-apoyo">
-                        <li>Evitar cargas pesadas en el lado afectado.</li>
-                        <li>No mantener posturas en flexión de forma prolongada.</li>
-                        <li>Cuidar los efectos compresivos de joyas en el lado afectado (pulsera, reloj, anillo).</li>
-                        <li>En el caso de pacientes con prótesis externa, utilizar sujetadores con tirantes anchos.</li>
-                    </ul>
+                    <div class="lista-marcable" data-lista-marcable="linfedema" data-hoja-titulo="Cuidados del linfedema">
+                        <p class="lista-marcable-intro">Marca los cuidados que te tocan para tenerlos a mano, por ejemplo en la nevera:</p>
+                        <fieldset data-hoja-seccion="Medidas higiénico-dietéticas generales">
+                            <legend>Medidas higiénico-dietéticas generales</legend>
+                            <label><input type="checkbox" value="medida1-1"> Alimentación pobre en calorías y sal.</label>
+                            <label><input type="checkbox" value="medida1-2"> Higiene y limpieza corporal meticulosa con jabones de pH neutro.</label>
+                            <label><input type="checkbox" value="medida1-3"> Evitar la exposición directa al sol y los baños calientes. La sauna está contraindicada.</label>
+                            <label><input type="checkbox" value="medida1-4"> El corte de uñas debe ser cuidadoso, sin cortar las cutículas.</label>
+                            <label><input type="checkbox" value="medida1-5"> No aplicar cremas o pomadas que puedan producir alergia o irritación.</label>
+                            <label><input type="checkbox" value="medida1-6"> Evitar el riesgo de mordeduras o arañazos de animales domésticos, y picaduras de insectos.</label>
+                            <label><input type="checkbox" value="medida1-7"> Están prohibidas las inyecciones en la extremidad con linfedema.</label>
+                        </fieldset>
+                        <fieldset data-hoja-seccion="Medidas higiénico-dietéticas de miembros inferiores">
+                            <legend>Medidas higiénico-dietéticas de miembros inferiores</legend>
+                            <label><input type="checkbox" value="medida2-1"> Posiciones elevadas de los miembros inferiores siempre que sea posible.</label>
+                            <label><input type="checkbox" value="medida2-2"> Elevar los pies en la cama de forma sistemática (drenaje postural nocturno).</label>
+                            <label><input type="checkbox" value="medida2-3"> Evitar mantener la postura sentada o de pie de forma prolongada.</label>
+                            <label><input type="checkbox" value="medida2-4"> Evitar las marchas largas.</label>
+                            <label><input type="checkbox" value="medida2-5"> Utilizar calzado cómodo y evitar medias con elásticos muy apretados.</label>
+                            <label><input type="checkbox" value="medida2-6"> Elegir tacones intermedios.</label>
+                        </fieldset>
+                        <fieldset data-hoja-seccion="Medidas higiénico-dietéticas de miembros superiores">
+                            <legend>Medidas higiénico-dietéticas de miembros superiores</legend>
+                            <label><input type="checkbox" value="medida3-1"> Evitar cargas pesadas en el lado afectado.</label>
+                            <label><input type="checkbox" value="medida3-2"> No mantener posturas en flexión de forma prolongada.</label>
+                            <label><input type="checkbox" value="medida3-3"> Cuidar los efectos compresivos de joyas en el lado afectado (pulsera, reloj, anillo).</label>
+                            <label><input type="checkbox" value="medida3-4"> En el caso de pacientes con prótesis externa, utilizar sujetadores con tirantes anchos.</label>
+                        </fieldset>
+                        <div class="lista-marcable-pie" hidden>
+                            <button class="boton boton-primario" type="button" data-lista-imprimir>Imprimir mis cuidados</button>
+                            <p class="nota">Si no marcas ninguna, se imprimen todas. Lo que marcas se guarda solo en este navegador.</p>
+                        </div>
+                    </div>
 
                     <div class="bloque-destacado bloque-nota">
                         <p class="etiqueta">Actividad física</p>

@@ -28,36 +28,66 @@ cierre: apoyo
                     <p>El médico realizará una exploración y observará unos signos que le llevan a plantear un posible diagnóstico que deberá confirmar con la realización de unas pruebas en colaboración con otros profesionales.</p>
 
                     <h2>Las pruebas que pueden hacerte</h2>
+                    <p>Elige la prueba que te han pedido para ver en qué consiste.</p>
+                    <!-- Guía con [data-guia] (js/script.js). Sin JavaScript se leen todas. -->
+                    <div class="guia guia-pestanas" data-guia="pruebas-mama">
+                        <div class="guia-botones" hidden>
+                            <div class="guia-grupo" role="group" aria-label="Para confirmar el diagnóstico">
+                                <p class="guia-grupo-titulo" aria-hidden="true">Para confirmar el diagnóstico</p>
+                                <button type="button" data-guia-boton="mamografia" aria-pressed="false" aria-controls="prueba-mamografia">Mamografía</button>
+                                <button type="button" data-guia-boton="ecografia" aria-pressed="false" aria-controls="prueba-ecografia">Ecografía</button>
+                                <button type="button" data-guia-boton="biopsia" aria-pressed="false" aria-controls="prueba-biopsia">Biopsia</button>
+                            </div>
+                            <div class="guia-grupo" role="group" aria-label="Para saber si se ha extendido">
+                                <p class="guia-grupo-titulo" aria-hidden="true">Para saber si se ha extendido</p>
+                                <button type="button" data-guia-boton="extension" aria-pressed="false" aria-controls="prueba-extension">Pruebas de extensión</button>
+                                <button type="button" data-guia-boton="resonancia" aria-pressed="false" aria-controls="prueba-resonancia">Resonancia magnética</button>
+                            </div>
+                        </div>
+                        <p class="guia-sin-elegir" hidden>Elige una prueba para ver su explicación.</p>
+                        <div class="guia-panel" id="prueba-mamografia" data-guia-panel="mamografia">
+                            <p class="etiqueta">Para confirmar el diagnóstico</p>
+                            <h3>Mamografía</h3>
+                            <p>Radiografía de la mama.</p>
+                        </div>
+                        <div class="guia-panel" id="prueba-ecografia" data-guia-panel="ecografia">
+                            <p class="etiqueta">Para confirmar el diagnóstico</p>
+                            <h3>Ecografía</h3>
+                            <p>Obtención de imágenes de nuestro cuerpo a través de ultrasonidos. Permite distinguir entre un nódulo sólido y uno líquido (un quiste, que es benigno). También sirve para guiar la aguja a la hora de hacer una biopsia.</p>
+                        </div>
+                        <div class="guia-panel" id="prueba-biopsia" data-guia-panel="biopsia">
+                            <p class="etiqueta">Para confirmar el diagnóstico</p>
+                            <h3>Toma de muestras de tejido por punción o biopsia</h3>
+                            <p>Es la extracción de una muestra de tejido para estudiarla al microscopio en el laboratorio de anatomía patológica. Existen diferentes técnicas:</p>
+                            <ul class="lista-apoyo">
+                                <li><strong>Punción aspiración con aguja fina (PAAF).</strong></li>
+                                <li><strong>Biopsia con aguja gruesa (BAG),</strong> también llamada a veces <em>trucut</em>.</li>
+                                <li><strong>Biopsia asistida por vacío (BAV).</strong></li>
+                                <li><strong>Biopsia por estereotaxia:</strong> con ayuda de técnicas de imagen se coloca un arpón que señala dónde está la lesión y guía al cirujano para retirarla.</li>
+                            </ul>
+                        </div>
+                        <div class="guia-panel" id="prueba-extension" data-guia-panel="extension">
+                            <p class="etiqueta">Para saber si se ha extendido</p>
+                            <h3>Pruebas para conocer la extensión</h3>
+                            <p>Una vez que ya se tiene confirmado el diagnóstico de cáncer se pueden pedir una serie de pruebas complementarias, alguna de ellas para conocer el grado de extensión de la enfermedad:</p>
 
-                    <h3>Mamografía</h3>
-                    <p>Radiografía de la mama.</p>
-
-                    <h3>Ecografía</h3>
-                    <p>Obtención de imágenes de nuestro cuerpo a través de ultrasonidos. Permite distinguir entre un nódulo sólido y uno líquido (un quiste, que es benigno). También sirve para guiar la aguja a la hora de hacer una biopsia.</p>
-
-                    <h3>Toma de muestras de tejido por punción o biopsia</h3>
-                    <p>Es la extracción de una muestra de tejido para estudiarla al microscopio en el laboratorio de anatomía patológica. Existen diferentes técnicas:</p>
-                    <ul class="lista-apoyo">
-                        <li><strong>Punción aspiración con aguja fina (PAAF).</strong></li>
-                        <li><strong>Biopsia con aguja gruesa (BAG),</strong> también llamada a veces <em>trucut</em>.</li>
-                        <li><strong>Biopsia asistida por vacío (BAV).</strong></li>
-                        <li><strong>Biopsia por estereotaxia:</strong> con ayuda de técnicas de imagen se coloca un arpón que señala dónde está la lesión y guía al cirujano para retirarla.</li>
-                    </ul>
-
-                    <p>Una vez que ya se tiene confirmado el diagnóstico de cáncer se pueden pedir una serie de pruebas complementarias, alguna de ellas para conocer el grado de extensión de la enfermedad:</p>
-
-                    <ul class="lista-apoyo">
-                        <li>Radiografía de tórax.</li>
-                        <li>Analítica de sangre con marcadores tumorales.</li>
-                        <li>Ecografía abdominopélvica.</li>
-                        <li>Gammagrafía ósea.</li>
-                        <li>Tomografía axial computarizada (TAC o escáner).</li>
-                        <li>Tomografía por emisión de positrones (PET).</li>
-                    </ul>
-                    <p>En qué consiste cada una lo explicamos en el <a href="itinerario-diagnostico.html#pruebas-complementarias">itinerario diagnóstico</a>. En el cáncer de mama se usa además a menudo la resonancia magnética:</p>
-
-                    <h3>Resonancia magnética nuclear (RMN)</h3>
-                    <p>Es una técnica que emplea ondas magnéticas de radiofrecuencia a través de un imán muy potente que permite crear imágenes muy precisas del interior de nuestro cuerpo. Tiene como defecto que puede confundir imágenes benignas con malignas, pero su virtud es que puede detectar con mucha precisión el número y la extensión de las lesiones cancerosas en la mama (multifocalidad que va a condicionar el tratamiento).</p>
+                            <ul class="lista-apoyo">
+                                <li>Radiografía de tórax.</li>
+                                <li>Analítica de sangre con marcadores tumorales.</li>
+                                <li>Ecografía abdominopélvica.</li>
+                                <li>Gammagrafía ósea.</li>
+                                <li>Tomografía axial computarizada (TAC o escáner).</li>
+                                <li>Tomografía por emisión de positrones (PET).</li>
+                            </ul>
+                            <p>En qué consiste cada una lo explicamos en el <a href="itinerario-diagnostico.html#pruebas-complementarias">itinerario diagnóstico</a>.</p>
+                        </div>
+                        <div class="guia-panel" id="prueba-resonancia" data-guia-panel="resonancia">
+                            <p class="etiqueta">Para saber si se ha extendido</p>
+                            <h3>Resonancia magnética nuclear (RMN)</h3>
+                            <p>En el cáncer de mama se usa además a menudo la resonancia magnética.</p>
+                            <p>Es una técnica que emplea ondas magnéticas de radiofrecuencia a través de un imán muy potente que permite crear imágenes muy precisas del interior de nuestro cuerpo. Tiene como defecto que puede confundir imágenes benignas con malignas, pero su virtud es que puede detectar con mucha precisión el número y la extensión de las lesiones cancerosas en la mama (multifocalidad que va a condicionar el tratamiento).</p>
+                        </div>
+                    </div>
 
                     <h2>Estadiaje de la enfermedad</h2>
 
@@ -76,29 +106,46 @@ cierre: apoyo
                         <p>El estadio es solo una parte de la información. La evolución depende también de la biología de cada tumor (su grado y sus receptores) y de cómo responde al tratamiento. Tu equipo médico es quien mejor puede explicarte qué significa en tu caso: pregúntale todo lo que necesites.</p>
                     </div>
 
-                    <h3>Estadio 0</h3>
-                    <p>Las células cancerosas no son invasivas: están dentro de los conductos o de los lóbulos de la mama. Es lo que se llama un cáncer <em>in situ</em>.</p>
-
-                    <h3>Estadio I</h3>
-                    <p>El tumor mide menos de 2 cm y no se ha extendido a ninguna otra parte.</p>
-
-                    <h3>Estadio II</h3>
-                    <p>Hay dos subgrupos:</p>
-                    <ul class="lista-apoyo">
-                        <li><strong>IIA:</strong> el tumor mide menos de 2 cm y afecta a entre 1 y 3 ganglios de la axila; o no hay tumor en la mama pero sí ganglios afectados en la axila; o el tumor mide entre 2 y 5 cm y no hay ganglios afectados.</li>
-                        <li><strong>IIB:</strong> el tumor mide entre 2 y 5 cm y hay entre 1 y 3 ganglios afectados en la axila; o el tumor mide más de 5 cm y no se ha extendido.</li>
-                    </ul>
-
-                    <h3>Estadio III</h3>
-                    <p>Hay tres subgrupos:</p>
-                    <ul class="lista-apoyo">
-                        <li><strong>IIIA:</strong> el tumor mide menos de 5 cm y afecta a entre 4 y 9 ganglios de la axila; o mide más de 5 cm y afecta a entre 1 y 9 ganglios de la axila.</li>
-                        <li><strong>IIIB:</strong> el tumor, de cualquier tamaño, ha invadido la pared del tórax o la piel.</li>
-                        <li><strong>IIIC:</strong> el tumor, de cualquier tamaño, afecta a 10 o más ganglios de la axila, o a ganglios de la clavícula o de la cadena mamaria interna.</li>
-                    </ul>
-
-                    <h3>Estadio IV</h3>
-                    <p>Hay metástasis en órganos a distancia.</p>
+                    <p class="desplegables-intro">Pulsa cada estadio para ver qué significa.</p>
+                    <details class="desplegable">
+                        <summary><h3>Estadio 0</h3></summary>
+                        <div class="desplegable-cuerpo">
+                            <p>Las células cancerosas no son invasivas: están dentro de los conductos o de los lóbulos de la mama. Es lo que se llama un cáncer <em>in situ</em>.</p>
+                        </div>
+                    </details>
+                    <details class="desplegable">
+                        <summary><h3>Estadio I</h3></summary>
+                        <div class="desplegable-cuerpo">
+                            <p>El tumor mide menos de 2 cm y no se ha extendido a ninguna otra parte.</p>
+                        </div>
+                    </details>
+                    <details class="desplegable">
+                        <summary><h3>Estadio II</h3></summary>
+                        <div class="desplegable-cuerpo">
+                            <p>Hay dos subgrupos:</p>
+                            <ul class="lista-apoyo">
+                                <li><strong>IIA:</strong> el tumor mide menos de 2 cm y afecta a entre 1 y 3 ganglios de la axila; o no hay tumor en la mama pero sí ganglios afectados en la axila; o el tumor mide entre 2 y 5 cm y no hay ganglios afectados.</li>
+                                <li><strong>IIB:</strong> el tumor mide entre 2 y 5 cm y hay entre 1 y 3 ganglios afectados en la axila; o el tumor mide más de 5 cm y no se ha extendido.</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="desplegable">
+                        <summary><h3>Estadio III</h3></summary>
+                        <div class="desplegable-cuerpo">
+                            <p>Hay tres subgrupos:</p>
+                            <ul class="lista-apoyo">
+                                <li><strong>IIIA:</strong> el tumor mide menos de 5 cm y afecta a entre 4 y 9 ganglios de la axila; o mide más de 5 cm y afecta a entre 1 y 9 ganglios de la axila.</li>
+                                <li><strong>IIIB:</strong> el tumor, de cualquier tamaño, ha invadido la pared del tórax o la piel.</li>
+                                <li><strong>IIIC:</strong> el tumor, de cualquier tamaño, afecta a 10 o más ganglios de la axila, o a ganglios de la clavícula o de la cadena mamaria interna.</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="desplegable">
+                        <summary><h3>Estadio IV</h3></summary>
+                        <div class="desplegable-cuerpo">
+                            <p>Hay metástasis en órganos a distancia.</p>
+                        </div>
+                    </details>
 
                 </div>
             </section>

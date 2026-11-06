@@ -251,6 +251,20 @@ tratamiento) y Aspectos sociales («¿Qué necesitas?»). Cada botón lleva
 todos los paneles seguidos, al imprimir salen todos y un enlace a algo que
 está dentro de un panel lo abre solo.
 
+**Desplegables** (`<details class="desplegable">`, cánceres ginecológicos y
+estadios del diagnóstico): el título va dentro de `<summary>` como `h2` o
+`h3`, para que siga en el índice. Un enlace a un apartado lo abre, el botón
+`data-abrir-todo` los abre todos y al imprimir salen abiertos.
+
+**Listas para marcar e imprimir** (`data-lista-marcable="nombre"`, en Después
+del tratamiento y Linfedema): casillas que se guardan en el navegador y un
+botón `data-lista-imprimir` que saca una hoja con lo marcado (o todo, si no
+hay nada marcado). Varias cajas con el mismo nombre forman una sola hoja;
+`data-hoja-titulo` y `data-hoja-seccion` dan sus títulos.
+
+**Filtro del glosario**: el campo «Busca una palabra» deja solo los términos
+cuyo nombre o definición contienen lo escrito, sin tener en cuenta tildes.
+
 La hoja de estilos incluye además una versión para imprimir (sección 18).
 El arco de la «M» del logo aparece, muy suave, en la esquina de las
 cabeceras interiores y de los recuadros rosas (`.hero-interior::after` y

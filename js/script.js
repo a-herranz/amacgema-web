@@ -405,6 +405,146 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('hashchange', abrirDesdeAncla);
   }
 
+  // Desplegables (<details class="desplegable">): «Abrir todos», un enlace
+  // del índice abre el apartado al que lleva, y al imprimir salen abiertos.
+  var desplegables = document.querySelectorAll('details.desplegable');
+  if (desplegables.length) {
+    var abrirTodo = document.querySelector('[data-abrir-todo]');
+    if (abrirTodo) {
+      abrirTodo.hidden = false;
+      abrirTodo.addEventListener('click', function () {
+        var abrir = abrirTodo.textContent === 'Abrir todos';
+        desplegables.forEach(function (d) { d.open = abrir; });
+        abrirTodo.textContent = abrir ? 'Cerrar todos' : 'Abrir todos';
+      });
+    }
+    var abrirDesplegable = function () {
+      if (!location.hash) return;
+      var destino = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var d = destino && destino.closest('details.desplegable');
+      if (d) {
+        d.open = true;
+        destino.scrollIntoView();
+      }
+    };
+    abrirDesplegable();
+    window.addEventListener('hashchange', abrirDesplegable);
+    var cerradosAlImprimir = [];
+    window.addEventListener('beforeprint', function () {
+      cerradosAlImprimir = Array.prototype.filter.call(desplegables, function (d) { return !d.open; });
+      cerradosAlImprimir.forEach(function (d) { d.open = true; });
+    });
+    window.addEventListener('afterprint', function () {
+      cerradosAlImprimir.forEach(function (d) { d.open = false; });
+    });
+  }
+
+  // Listas para marcar e imprimir ([data-lista-marcable]: Después del
+  // tratamiento, Linfedema). Varias cajas con el mismo nombre forman una
+  // sola lista y una sola hoja. Lo marcado se guarda en este navegador.
+  var cajasMarcables = document.querySelectorAll('[data-lista-marcable]');
+  if (cajasMarcables.length) {
+    var nombresListas = {};
+    cajasMarcables.forEach(function (c) {
+      nombresListas[c.getAttribute('data-lista-marcable')] = true;
+    });
+    Object.keys(nombresListas).forEach(function (nombre) {
+      var cajas = document.querySelectorAll('[data-lista-marcable="' + nombre + '"]');
+      var clave = 'amacgema-lista-' + nombre;
+      var marcadas = [];
+      try {
+        marcadas = JSON.parse(localStorage.getItem(clave)) || [];
+      } catch (e) { /* sin almacenamiento */ }
+      var todas = function () {
+        var lista = [];
+        cajas.forEach(function (c) {
+          lista = lista.concat(Array.prototype.slice.call(c.querySelectorAll('input[type="checkbox"]')));
+        });
+        return lista;
+      };
+      todas().forEach(function (c) {
+        c.checked = marcadas.indexOf(c.value) !== -1;
+        c.addEventListener('change', function () {
+          var valores = todas().filter(function (x) { return x.checked; }).map(function (x) { return x.value; });
+          try {
+            localStorage.setItem(clave, JSON.stringify(valores));
+          } catch (e) { /* sin almacenamiento */ }
+        });
+      });
+      var pie = cajas[cajas.length - 1].querySelector('.lista-marcable-pie');
+      if (!pie) return;
+      pie.hidden = false;
+      pie.querySelector('[data-lista-imprimir]').addEventListener('click', function () {
+        var hayMarcadas = todas().some(function (x) { return x.checked; });
+        var html = '<p class="sobrelinea">' + document.querySelector('h1').textContent + '</p>'
+          + '<h2>' + (cajas[0].getAttribute('data-hoja-titulo') || '') + '</h2>';
+        cajas.forEach(function (caja) {
+          caja.querySelectorAll('fieldset').forEach(function (grupo) {
+            var titulo = grupo.getAttribute('data-hoja-seccion') || caja.getAttribute('data-hoja-seccion');
+            var filas = Array.prototype.filter.call(grupo.querySelectorAll('input[type="checkbox"]'),
+              function (x) { return x.checked || !hayMarcadas; });
+            if (!filas.length) return;
+            html += '<h3>' + titulo + '</h3><ul class="hoja-casillas">';
+            filas.forEach(function (x) {
+              var div = document.createElement('div');
+              div.textContent = x.parentNode.textContent.trim();
+              html += '<li>' + div.innerHTML + '</li>';
+            });
+            html += '</ul>';
+          });
+        });
+        var hoja = document.createElement('section');
+        hoja.className = 'hoja-mi-lista';
+        hoja.innerHTML = html;
+        document.querySelector('main').appendChild(hoja);
+        document.body.classList.add('imprimiendo-lista');
+        window.print();
+      });
+    });
+    window.addEventListener('afterprint', function () {
+      document.body.classList.remove('imprimiendo-lista');
+      var hoja = document.querySelector('.hoja-mi-lista');
+      if (hoja) hoja.remove();
+    });
+  }
+
+  // Filtro del glosario: deja solo los términos (o definiciones) que
+  // contienen lo escrito, sin tener en cuenta tildes ni mayúsculas
+  var filtroGlosario = document.querySelector('.filtro-glosario');
+  if (filtroGlosario) {
+    var normalizar = function (texto) {
+      return texto.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    };
+    var campoFiltro = document.getElementById('filtro-glosario');
+    var resultadoFiltro = filtroGlosario.querySelector('.filtro-glosario-resultado');
+    var indiceLetras = document.querySelector('.indice-rapido');
+    var terminos = Array.prototype.map.call(document.querySelectorAll('.glosario-lista dt'), function (dt) {
+      var dd = dt.nextElementSibling;
+      return { dt: dt, dd: dd, texto: normalizar(dt.textContent + ' ' + (dd ? dd.textContent : '')) };
+    });
+    filtroGlosario.hidden = false;
+    campoFiltro.addEventListener('input', function () {
+      var buscado = normalizar(campoFiltro.value.trim());
+      var visibles = 0;
+      terminos.forEach(function (t) {
+        var ver = !buscado || t.texto.indexOf(buscado) !== -1;
+        t.dt.hidden = !ver;
+        if (t.dd) t.dd.hidden = !ver;
+        if (ver) visibles++;
+      });
+      document.querySelectorAll('.glosario-lista').forEach(function (dl) {
+        var algun = dl.querySelector('dt:not([hidden])');
+        dl.hidden = !algun;
+        var letra = dl.previousElementSibling;
+        if (letra && letra.tagName === 'H2') letra.hidden = !algun;
+      });
+      if (indiceLetras) indiceLetras.hidden = !!buscado;
+      resultadoFiltro.textContent = !buscado ? ''
+        : visibles === 0 ? 'No hay ningún término con «' + campoFiltro.value.trim() + '». Prueba con otra palabra o pregúntanos.'
+        : visibles === 1 ? '1 término.' : visibles + ' términos.';
+    });
+  }
+
   // Guía «Me acaban de diagnosticar»: las casillas marcadas y las preguntas
   // propias se guardan solo en este navegador (localStorage), y «Imprimir
   // mi lista» saca una hoja con lo marcado y sitio para apuntar respuestas.

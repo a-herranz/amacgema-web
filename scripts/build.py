@@ -1030,10 +1030,132 @@ def escribir_redirecciones(paginas):
     for antigua, (destino, por_ancla) in REDIRECCIONES.items():
         if antigua in paginas:
             raise ValueError("%s es a la vez una página y una redirección" % antigua)
-        esc = html.escape
-        anclas = json.dumps(por_ancla)
-        contenido = (
-            '<!DOCTYPE html>\n<html lang="es">\n<head>\n'
+        with open(os.path.join(SALIDA, antigua), "w", encoding="utf-8") as fh:
+            fh.write(pagina_traslado(SITE_URL + destino, destino, por_ancla))
+
+
+# ---------- Direcciones de la web antigua (mujerycancer.org) ----------
+# Reglas para llevar cada dirección de la web antigua (2004-2019) a su
+# equivalente: la primera que encaje gana, así que las más concretas van
+# antes. Cada regla es el principio de la ruta antigua (sin la barra
+# inicial); "" es la portada. Las direcciones concretas están en
+# templates/web-antigua.txt; las demás (sobre todo las .php) las resuelve la
+# página 404 con estas mismas reglas.
+WEB_ANTIGUA_FUENTE = os.path.join("templates", "web-antigua.txt")
+WEB_ANTIGUA = [
+    ("amac/conoce/fundadoras", "historia.html"),
+    ("amac/conoce/sede", "contacto.html#como-llegar"),
+    ("amac/conoce/objetivos", "quienes-somos.html#proposito"),
+    ("amac/conoce/", "quienes-somos.html"),
+    ("amac/mundo/jornadas", "proyecto-jornada-cancer-mama.html"),
+    ("amac/mundo/fotos", "agenda.html"),
+    ("amac/mundo/noticias", "agenda.html"),
+    ("amac/mundo/", "historia.html"),
+    ("amac/recursos/individual", "ayuda-profesional.html"),
+    ("amac/recursos/grupal", "ayuda-testimonial-cafes.html"),
+    ("amac/recursos/voluntariado", "ayuda-testimonial-voluntariado.html"),
+    ("amac/recursos/folletos", "folleto-primeros-pasos.html"),
+    ("amac/", "que-hacemos.html"),
+    ("clinico/diagnostico/", "diagnostico.html"),
+    ("clinico/genital/endometrio", "cancer-de-endometrio.html"),
+    ("clinico/genital/ovario", "cancer-de-ovario.html"),
+    ("clinico/genital/vagina", "cancer-de-vulva-y-vagina.html"),
+    ("clinico/genital/", "cancer-ginecologico.html"),
+    ("clinico/linfedema/", "linfedema.html"),
+    ("clinico/mama/causas", "cancer-de-mama.html#factores-de-riesgo"),
+    ("clinico/mama/fases", "diagnostico.html"),
+    ("clinico/mama/", "cancer-de-mama.html"),
+    ("clinico/prevencion/sintomas", "sintomas.html"),
+    ("clinico/prevencion/", "prevencion-diagnostico-precoz.html"),
+    ("clinico/tratamiento/", "tratamiento.html"),
+    ("clinico/", "hablando-de-cancer.html"),
+    ("humano/curacion+accion/familia", "familiares.html"),
+    ("humano/", "aspectos-psicologicos.html"),
+    ("psicologico/identidad/", "sexualidad.html"),
+    ("psicologico/", "aspectos-psicologicos.html"),
+    ("utilidades/glosario/", "glosario.html"),
+    ("utilidades/preguntas/", "preguntas-frecuentes.html"),
+    ("utilidades/historia/", "ayuda-testimonial-historias.html"),
+    ("utilidades/noticias/", "agenda.html"),
+    ("utilidades/", "hablando-de-cancer.html"),
+    ("dilocaminando/", "sensibilizacion.html"),
+    ("portada/premio", "historia.html#reconocimientos"),
+    ("premio", "historia.html#reconocimientos"),
+    ("portada/", "historia.html"),
+    ("cancion", "historia.html"),
+    ("disco", "historia.html"),
+    ("pelicula", "historia.html"),
+    ("decalogo", "historia.html"),
+    ("libro", "historia.html"),
+    ("contacto.php", "contacto.html"),
+    ("inscripcion_socios.php", "como-ayudar-socias.html"),
+    # Web de 2011-2019: noticias y actividades (charlas, Terapia Show,
+    # desfiles, Marcha por la Salud, jornadas...)
+    ("agenda.php", "agenda.html"),
+    ("informaciongeneral.php", "agenda.html"),
+    ("noticia.php", "agenda.html"),
+    ("titular", "agenda.html"),
+    ("index.", ""),
+    ("seccion", ""),
+]
+
+
+def script_web_antigua():
+    """Para la página 404: si la dirección pedida es de la web antigua (por
+    ejemplo noticia.php?ID=120), lleva a su equivalente con WEB_ANTIGUA."""
+    base = urlparse(SITE_URL).path
+    reglas = json.dumps([list(r) for r in WEB_ANTIGUA if r[0]], ensure_ascii=False)
+    return "\n".join([
+        "<script>",
+        "  (function () {",
+        "    var reglas = %s;" % reglas,
+        "    var ruta = decodeURIComponent(window.location.pathname);",
+        "    if (ruta.indexOf(%s) === 0) ruta = ruta.slice(%d);" % (json.dumps(base), len(base)),
+        "    ruta = ruta.replace(/^\\//, '');",
+        "    if (!ruta) return;",
+        "    for (var i = 0; i < reglas.length; i++) {",
+        "      if (ruta.indexOf(reglas[i][0]) === 0) {",
+        "        window.location.replace(%s + reglas[i][1]);" % json.dumps(SITE_URL),
+        "        return;",
+        "      }",
+        "    }",
+        "  })();",
+        "</script>",
+    ])
+
+
+def destino_web_antigua(ruta):
+    for principio, destino in WEB_ANTIGUA:
+        if ruta.startswith(principio):
+            return destino
+    return None
+
+
+def escribir_web_antigua(paginas):
+    """Una página de traslado en cada dirección conocida de la web antigua.
+    Solo tiene sentido cuando la web se publica en mujerycancer.org; antes
+    no estorba (son direcciones que nadie usa en github.io)."""
+    if not os.path.exists(WEB_ANTIGUA_FUENTE):
+        return
+    for linea in read(WEB_ANTIGUA_FUENTE).splitlines():
+        ruta = linea.strip()
+        if not ruta or ruta.startswith("#"):
+            continue
+        destino = destino_web_antigua(ruta)
+        if destino is None:
+            avisar("la dirección antigua %s no tiene regla en WEB_ANTIGUA" % ruta)
+            continue
+        if "/" not in ruta and ruta in paginas:
+            raise ValueError("%s es a la vez una página y una dirección antigua" % ruta)
+        archivo = os.path.join(SALIDA, *ruta.split("/"))
+        os.makedirs(os.path.dirname(archivo), exist_ok=True)
+        with open(archivo, "w", encoding="utf-8") as fh:
+            fh.write(pagina_traslado(SITE_URL + destino, SITE_URL + destino, {}))
+
+
+def pagina_traslado(canonica, destino, por_ancla):
+    esc = html.escape
+    return ('<!DOCTYPE html>\n<html lang="es">\n<head>\n'
             '  <meta charset="UTF-8">\n'
             '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
             '  <meta name="robots" content="noindex">\n'
@@ -1050,9 +1172,7 @@ def escribir_redirecciones(paginas):
             '  <h1>Esta página se ha trasladado</h1>\n'
             '  <p>Su contenido está ahora en <a href="%s">esta otra página</a>.</p>\n'
             '</body>\n</html>\n'
-            % (esc(SITE_URL + destino), esc(destino), anclas, destino, esc(destino)))
-        with open(os.path.join(SALIDA, antigua), "w", encoding="utf-8") as fh:
-            fh.write(contenido)
+            % (esc(canonica), esc(destino), json.dumps(por_ancla), destino, esc(destino)))
 
 
 def ejecutar_npx(argumentos, que):
@@ -1322,6 +1442,7 @@ def build():
         # a varias carpetas de profundidad: sin <base>, sus rutas relativas
         # (CSS, imágenes, enlaces) apuntarían a sitios que no existen.
         if fname == "404.html":
+            page_html = page_html.replace("{{WEB_ANTIGUA}}", script_web_antigua())
             page_html = page_html.replace(
                 '<meta charset="UTF-8">',
                 '<meta charset="UTF-8">\n  <base href="%s">' % SITE_URL, 1)
@@ -1345,6 +1466,7 @@ def build():
     escribir_sitemap(built, sin_indexar, seen)
     escribir_cname()
     escribir_redirecciones(set(built))
+    escribir_web_antigua(set(built))
     if "--sin-buscador" in sys.argv:
         print("AVISO: sin buscador, QR ni PDF del tríptico (--sin-buscador).")
     else:

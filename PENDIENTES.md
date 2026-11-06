@@ -170,6 +170,7 @@ cuestionario para la junta).
       .111.153; CNAME de `www` a a-herranz.github.io; borrar el A antiguo
       (93.174.4.71); después, cambiar `SITE_URL` y poner el dominio en GitHub
       Pages.
+      Plan completo, paso a paso: [PUBLICAR-EN-DOMINIO.md](PUBLICAR-EN-DOMINIO.md).
 - [ ] **Mismos datos en toda internet**: la guía del Ayuntamiento dice
       «Plaza del Pilar, 14, 3º C» y la web «1º izquierda». Pedir que se
       actualicen nombre, dirección, teléfono y web en la guía del

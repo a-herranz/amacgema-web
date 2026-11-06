@@ -38,6 +38,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Historial completo: el sitemap pone a cada página la fecha de su
+          # último cambio (git log), y con una copia parcial todas saldrían
+          # con la fecha de hoy
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:

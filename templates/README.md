@@ -234,8 +234,15 @@ Después de editar, haz commit y push (o genera en local para verlo antes).
   una página mínima que lleva a la nueva (incluso según el ancla, como
   `cancer-por-localizacion.html#cancer-ovario`), para no romper enlaces
   guardados ni resultados de Google.
-- **Datos para Google**: `sitemap.xml`, `robots.txt` y, solo en la portada,
-  la ficha de la asociación en formato schema.org. Si `SITE_URL` deja de ser
+- **Datos para Google**: `sitemap.xml` (con la fecha del último cambio de
+  cada página, sacada de git), `robots.txt`, una etiqueta canonical en cada
+  página (o `noindex` en las que no deben salir en buscadores: 404, Buscar,
+  el folleto) y datos schema.org: la ficha de la asociación con su horario
+  en la portada, la ruta de cada página (BreadcrumbList, a partir de la
+  sección y de los `subnav-nivel` de su barra), las preguntas frecuentes
+  (FAQPage) y las citas futuras de la Agenda (Event). Los títulos de los
+  servicios llevan «en Zaragoza»; el nombre visible de cada página es su
+  `<h1>`. Si `SITE_URL` deja de ser
   de github.io, el build crea también el archivo `CNAME` del dominio propio.
 
 - **Aviso de revisión pendiente**: el build avisa de cada página con

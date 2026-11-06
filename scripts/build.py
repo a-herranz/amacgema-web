@@ -870,23 +870,123 @@ def datos_estructurados():
             "addressRegion": "Aragón",
             "addressCountry": "ES",
         },
-        "areaServed": {"@type": "AdministrativeArea", "name": "Aragón"},
+        "description": ("Asociación de pacientes que acompaña desde 1994 a mujeres con cáncer "
+                        "de mama y ginecológico y a sus familias en Aragón."),
+        "areaServed": [{"@type": "AdministrativeArea", "name": provincia}
+                       for provincia in ("Provincia de Zaragoza", "Provincia de Huesca",
+                                         "Provincia de Teruel")],
+        "knowsAbout": ["Cáncer de mama", "Cáncer ginecológico", "Linfedema",
+                       "Apoyo psicológico oncológico", "Voluntariado hospitalario"],
+        # Mismo horario que data-horario en index.html y contacto.html
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification",
+             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+             "opens": "09:00", "closes": "14:00"},
+            {"@type": "OpeningHoursSpecification",
+             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+             "opens": "16:00", "closes": "20:00"},
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday",
+             "opens": "09:00", "closes": "14:00"},
+        ],
         "sameAs": [
             "https://www.facebook.com/amac.gema/",
             "https://www.instagram.com/amacgema/",
         ],
     }
+    return json_ld(datos)
+
+
+def json_ld(datos):
     return ('  <script type="application/ld+json">\n%s\n  </script>\n'
-            % json.dumps(datos, ensure_ascii=False, indent=2))
+            % json.dumps(datos, ensure_ascii=False, indent=2).replace("</", "<\\/"))
 
 
-def escribir_sitemap(paginas, sin_indexar):
+def migas(fname, meta, subnav_tpl, titulos):
+    """BreadcrumbList: Inicio › sección › niveles de la barra › página. Los
+    niveles salen de los <li class="subnav-nivel"> de la barra de sección."""
+    if fname == "index.html":
+        return ""
+    ruta = ["index.html"]
+    seccion = meta.get("nav", "")
+    if seccion and seccion != fname and seccion != "index.html":
+        ruta.append(seccion)
+    for nivel in re.findall(r'<li class="subnav-nivel"><a href="([^"#]+)"', subnav_tpl or ""):
+        if nivel not in ruta and nivel != fname:
+            ruta.append(nivel)
+    ruta.append(fname)
+    elementos = []
+    for i, p in enumerate(ruta, 1):
+        nombre = "Inicio" if p == "index.html" else titulos.get(p, p)
+        elementos.append({"@type": "ListItem", "position": i, "name": nombre,
+                          "item": SITE_URL + ("" if p == "index.html" else p)})
+    return json_ld({"@context": "https://schema.org", "@type": "BreadcrumbList",
+                    "itemListElement": elementos})
+
+
+def _texto_plano(fragmento):
+    return html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", fragmento))).strip()
+
+
+def preguntas_estructuradas(content):
+    """FAQPage a partir de los <details> de Preguntas frecuentes."""
+    preguntas = [{"@type": "Question", "name": _texto_plano(pregunta),
+                  "acceptedAnswer": {"@type": "Answer", "text": _texto_plano(respuesta)}}
+                 for pregunta, respuesta in re.findall(
+                     r"<details>\s*<summary>(.*?)</summary>(.*?)</details>", content, re.S)]
+    if not preguntas:
+        return ""
+    return json_ld({"@context": "https://schema.org", "@type": "FAQPage",
+                    "mainEntity": preguntas})
+
+
+def eventos_estructurados(citas):
+    """Event de cada cita futura de la agenda, para que Google pueda
+    mostrarlas con su fecha."""
+    eventos = []
+    for cita in citas:
+        horas = re.findall(r"(\d{1,2})[:.](\d{2})", cita.get("hora", ""))
+        inicio = cita["fecha"].isoformat()
+        if horas:
+            # Hora de España: +02:00 en horario de verano (aprox. abril-octubre)
+            verano = 3 < cita["fecha"].month < 11
+            inicio += "T%02d:%s:00%s" % (int(horas[0][0]), horas[0][1], "+02:00" if verano else "+01:00")
+        evento = {"@context": "https://schema.org", "@type": "Event",
+                  "name": cita["titulo"], "startDate": inicio,
+                  "eventStatus": "https://schema.org/EventScheduled",
+                  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                  "organizer": {"@type": "NGO", "name": "AMAC-GEMA", "url": SITE_URL}}
+        if cita.get("lugar"):
+            evento["location"] = {"@type": "Place", "name": cita["lugar"], "address": cita["lugar"]}
+        if cita["texto"]:
+            evento["description"] = " ".join(cita["texto"])
+        enlace = cita.get("enlace", "")
+        if enlace:
+            evento["url"] = enlace if enlace.startswith("http") else SITE_URL + enlace
+        eventos.append(json_ld(evento))
+    return "".join(eventos)
+
+
+def fecha_modificacion(ruta):
+    """Fecha del último commit que tocó el archivo (AAAA-MM-DD), o la de hoy
+    si no hay git o el archivo aún no está guardado en él."""
+    try:
+        fecha = subprocess.run(["git", "log", "-1", "--format=%cs", "--", ruta],
+                               capture_output=True, text=True, check=True).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        fecha = ""
+    return fecha or datetime.date.today().isoformat()
+
+
+def escribir_sitemap(paginas, sin_indexar, fuentes=None):
     """sitemap.xml para Google Search Console y robots.txt que lo anuncia.
     Ojo: los buscadores solo leen robots.txt en la raíz de un dominio, así
     que en github.io/amacgema-web/ no tiene efecto hasta tener dominio
     propio; el sitemap sí se puede enviar a mano en Search Console."""
+    fuentes = fuentes or {}
     urls = "\n".join(
-        "  <url><loc>%s</loc></url>" % (SITE_URL + ("" if p == "index.html" else p))
+        "  <url><loc>%s</loc>%s</url>" % (
+            SITE_URL + ("" if p == "index.html" else p),
+            "<lastmod>%s</lastmod>" % fecha_modificacion(fuentes[p]) if p in fuentes else "")
         for p in sorted(paginas) if p not in sin_indexar)
     with open(os.path.join(SALIDA, "sitemap.xml"), "w", encoding="utf-8") as fh:
         fh.write('<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -1111,8 +1211,14 @@ def build():
         seen[fname] = page_path
     # Título corto de cada página (sin « | Sección | AMAC-GEMA»), para los
     # enlaces «Anterior / Siguiente»
-    titulos = {os.path.basename(p): parse_page(read(p))[0].get("title", "").split(" | ")[0]
-               for p in page_paths}
+    titulos = {}
+    for p in page_paths:
+        # El nombre visible de la página es su <h1>; el título de la pestaña
+        # puede llevar además el lugar («… en Zaragoza») para los buscadores
+        meta_p, contenido_p = parse_page(read(p))
+        h1 = re.search(r"<h1[^>]*>(.*?)</h1>", contenido_p, re.S)
+        titulos[os.path.basename(p)] = (_texto_plano(h1.group(1)) if h1
+                                        else meta_p.get("title", "").split(" | ")[0])
 
     # La salida se rehace desde cero: así una página borrada o renombrada en
     # pages/ no deja un .html huérfano publicado.
@@ -1186,8 +1292,17 @@ def build():
             .replace("{{CIERRE}}", cierre_html)
             .replace("{{FOOTER}}", footer)
             .replace("{{NOTA_IMPRESION}}", NOTA_IMPRESION if en_hablando else "")
+            .replace("{{CANONICAL}}",
+                     '<meta name="robots" content="noindex">'
+                     if fname in sin_indexar or fname == "404.html"
+                     else '<link rel="canonical" href="%s">'
+                     % (SITE_URL + ("" if fname == "index.html" else fname)))
             .replace("{{DATOS_ESTRUCTURADOS}}",
-                     datos_estructurados() if fname == "index.html" else "")
+                     (datos_estructurados() if fname == "index.html" else "")
+                     + ("" if fname in sin_indexar or fname == "404.html"
+                        else migas(fname, meta, subnav_templates.get(subnav_key), titulos))
+                     + (preguntas_estructuradas(content) if fname == "preguntas-frecuentes.html" else "")
+                     + (eventos_estructurados(citas_futuras) if fname == "agenda.html" else ""))
             .replace("{{CABECERA_EXTRA}}", cabecera_extra())
             .replace("{{TEXTO_ANALITICA}}", TEXTO_ANALITICA[bool(GOATCOUNTER)])
             .replace("{{PROVEEDOR_ESTADISTICAS}}",
@@ -1227,7 +1342,7 @@ def build():
         avisar("contenido elaborado con IA sin revisión profesional en: "
                + ", ".join(sorted(sin_revisar)) + " (ver PENDIENTES.md)")
 
-    escribir_sitemap(built, sin_indexar)
+    escribir_sitemap(built, sin_indexar, seen)
     escribir_cname()
     escribir_redirecciones(set(built))
     if "--sin-buscador" in sys.argv:

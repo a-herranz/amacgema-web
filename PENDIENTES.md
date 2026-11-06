@@ -151,6 +151,28 @@ cuestionario para la junta).
       Solo se publica la web generada; el código y estos documentos ya no.
 - [ ] **Persona de la asociación que edite textos**: darle acceso al
       repositorio en GitHub y pasarle [COMO-EDITAR.md](COMO-EDITAR.md).
+- [ ] **URGENTE · El dominio antiguo mujerycancer.org** (análisis SEO,
+      nov. 2026): la guía de asociaciones del Ayuntamiento de Zaragoza lo da
+      como web de AMAC-GEMA, y hoy muestra un WordPress con el contenido de
+      ejemplo de una plantilla («Sample Page», textos de un estudio de
+      arquitectura) titulado «AMACGEMA», con Google Site Kit conectado.
+      1. Averiguar quién controla el dominio y ese WordPress.
+      2. Lo mejor: usar mujerycancer.org como dominio de esta web (ver el
+         punto siguiente). Si no, redirigirlo de forma permanente a ella.
+      3. En cualquier caso, quitar ya el contenido de ejemplo.
+      Es un dominio con años y con enlaces: es lo que más ayuda a posicionar.
+- [ ] **Mismos datos en toda internet**: la guía del Ayuntamiento dice
+      «Plaza del Pilar, 14, 3º C» y la web «1º izquierda». Pedir que se
+      actualicen nombre, dirección, teléfono y web en la guía del
+      Ayuntamiento, FECMA, el Gobierno de Aragón (cartera de servicios),
+      Facebook e Instagram (poner la web en la biografía).
+- [ ] **Enlaces hacia la web**: pedir a FECMA, el Ayuntamiento, los hospitales
+      y los medios que han entrevistado a la asociación (COPE, Aragón
+      Digital, Aragón TV, Heraldo) que enlacen a la web nueva.
+- [ ] **«Revisado por» en el contenido de salud**: cuando un profesional
+      revise una página (registro de abajo), poner `revision:` en su
+      cabecera para que muestre quién y cuándo. Google es especialmente
+      exigente con las páginas de salud.
 - [ ] **Dominio propio** (por ejemplo amacgema.org): comprarlo, cambiar
       `SITE_URL` en [scripts/build.py](scripts/build.py) (el build crea el
       archivo CNAME solo) y configurar el dominio en GitHub Pages.

@@ -184,9 +184,10 @@ Después de editar, haz commit y push (o genera en local para verlo antes).
   de `build.py`; si la web pasa a un dominio propio, cambia solo esa línea.
 - **Botón «Imprimir esta página»**: en las páginas de Hablando de cáncer
   (salvo las portadas de sección, `SIN_BOTON_IMPRIMIR`), al final de la
-  cabecera. La hoja impresa lleva arriba el nombre y el teléfono de la
-  asociación y abajo la dirección de la página y el contacto, en lugar del
-  pie de la web.
+  cabecera. La hoja impresa conserva los colores y tipografías de la web,
+  como el tríptico: arriba el logo con «No estás sola» y el contacto, y
+  abajo un recuadro en el color de acento con el teléfono, la dirección y
+  la página de la que sale, en lugar del pie de la web.
 - **Iconos**: `{{ICONO:nombre}}` mete el dibujo de
   `templates/iconos/nombre.svg` (líneas de 24×24 que toman el color del
   texto). Se usan en las tarjetas de servicios dentro de

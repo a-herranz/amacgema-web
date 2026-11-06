@@ -24,11 +24,19 @@
 <body>
   <a href="#contenido-principal" class="enlace-saltar">Saltar al contenido principal</a>
 {{NAVBAR}}
-{{SUBNAV}}  <p class="solo-impresion cabecera-impresion"><strong>AMAC-GEMA</strong> · Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama · 976 297 764</p>
+{{SUBNAV}}  <div class="solo-impresion cabecera-impresion">
+    <img src="img/amac-gema-logo-cabecera.webp" width="200" height="125" alt="">
+    <p><span class="impresion-lema">No estás sola</span><br>Asociación de Mujeres Aragonesas de Cáncer Genital y de Mama<br>976 297 764 · amacgema@gmail.com</p>
+  </div>
   <main id="contenido-principal" data-pagefind-body>
 {{CONTENT}}
 {{CIERRE}}  </main>
-  <p class="solo-impresion pie-impresion">Impreso desde {{URL}} · Plaza del Pilar, 14, 1º izq., 50003 Zaragoza · 976 297 764 · amacgema@gmail.com{{NOTA_IMPRESION}}</p>
+  <div class="solo-impresion pie-impresion">
+    <p class="impresion-sobre">Estamos para escucharte</p>
+    <p class="impresion-telefono">976 297 764</p>
+    <p>Plaza del Pilar, 14, 1º izq. · 50003 Zaragoza · amacgema@gmail.com</p>
+    {{NOTA_IMPRESION}}<p class="impresion-url">Impreso desde {{URL}}</p>
+  </div>
 {{FOOTER}}
   <script src="js/script.js"></script>
 </body>

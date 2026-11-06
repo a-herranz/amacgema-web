@@ -600,7 +600,7 @@ BOTON_IMPRIMIR = ('\n                    <p class="hero-imprimir" data-pagefind-
                   '<button class="boton-imprimir" type="button" data-imprimir hidden>'
                   'Imprimir esta página</button></p>')
 # Al pie de la hoja impresa (templates/layout.html), solo en estas páginas
-NOTA_IMPRESION = "<br>Esta información no sustituye la de tu equipo médico: llévala a la consulta y pregunta todo lo que necesites."
+NOTA_IMPRESION = "<p>Esta información no sustituye la de tu equipo médico: llévala a la consulta y pregunta todo lo que necesites.</p>"
 
 
 def poner_boton_imprimir(content):

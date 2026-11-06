@@ -3349,60 +3349,105 @@ a.via-contacto-dato:focus-visible {
     display: none;
   }
 
-  /* En lugar del pie de la web, una línea arriba y otra abajo con quiénes
-     somos y cómo contactar: quien recibe la hoja sabe de dónde sale */
+  /* La hoja impresa conserva los colores y tipografías de la web, como el
+     tríptico: arriba el logo, abajo el contacto sobre el color de acento */
+  body {
+    background: var(--color-blanco);
+    font-size: 11pt;
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   .solo-impresion {
     display: block;
-    color: #000;
-    font-size: 9pt;
   }
 
   .cabecera-impresion {
-    border-bottom: 2px solid #000;
-    margin-bottom: 0.6rem;
-    padding-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8mm;
+    padding-bottom: 4mm;
+    margin-bottom: 5mm;
+    border-bottom: 2pt solid var(--color-primario);
+  }
+
+  .cabecera-impresion img {
+    width: 38mm;
+    height: auto;
+  }
+
+  .cabecera-impresion p {
+    color: var(--color-texto-suave);
+    font-size: 8.5pt;
+    line-height: 1.45;
+    text-align: right;
+  }
+
+  .impresion-lema {
+    color: var(--color-acento);
+    font-family: var(--fuente-titulos);
+    font-size: 15pt;
+    font-weight: 700;
   }
 
   .pie-impresion {
-    border-top: 1px solid #000;
-    margin-top: 1rem;
-    padding-top: 0.4rem;
+    margin-top: 8mm;
+    padding: 6mm 8mm;
+    border-radius: 4mm;
+    background-color: var(--color-acento);
     break-inside: avoid;
   }
 
-  .aviso-ia {
-    border: 1px solid #999;
-    padding: 0.4rem 0;
+  .pie-impresion p {
+    color: var(--color-blanco);
+    font-size: 9pt;
+    margin: 0 0 1.5mm;
   }
 
-  .hero-interior::after,
-  .bloque-rosa::after,
-  .icono-tarjeta {
-    display: none;
+  .pie-impresion .impresion-sobre {
+    font-family: var(--fuente-titulos);
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
-  /* En papel un enlace no se puede pulsar: el subrayado solo estorba */
-  main a {
-    text-decoration: none;
+  .pie-impresion .impresion-telefono {
+    font-family: var(--fuente-titulos);
+    font-size: 21pt;
+    font-weight: 700;
+    line-height: 1.1;
   }
 
-  body {
-    background: #fff;
-    color: #000;
-    font-size: 12pt;
-    line-height: 1.5;
+  .pie-impresion .impresion-url {
+    margin: 3mm 0 0;
+    opacity: 0.8;
+    font-size: 8pt;
+    word-break: break-all;
   }
 
-  h1, h2, h3, h4, a, .sobrelinea, .etiqueta {
-    color: #000;
+  /* Cabecera de la página: la misma franja rosa, más compacta */
+  .hero-interior {
+    border-radius: 4mm;
+    padding: 6mm 0;
+    margin-bottom: 2mm;
   }
 
-  .hero,
+  .hero-interior h1 {
+    font-size: 21pt;
+  }
+
+  .hero-interior p {
+    font-size: 10.5pt;
+  }
+
   .seccion,
   .seccion-alt,
   .seccion-colabora {
     background: none;
-    padding: 0.8rem 0;
+    padding: 3mm 0;
   }
 
   .contenedor,
@@ -3411,13 +3456,46 @@ a.via-contacto-dato:focus-visible {
     padding: 0;
   }
 
+  .aviso-ia {
+    border: 1px solid var(--color-borde);
+    border-left: 4pt solid var(--color-acento);
+    border-radius: 2mm;
+    margin-bottom: 4mm;
+    padding: 2mm 0;
+  }
+
+  .aviso-ia .contenedor {
+    padding: 0 4mm;
+  }
+
   .tarjeta,
   .bloque-destacado,
   .opcion-ahora,
   .vias-contacto li {
     box-shadow: none;
-    border: 1px solid #999;
+    border: 1px solid var(--color-borde);
     break-inside: avoid;
+  }
+
+  .bloque-destacado {
+    border-left: 4pt solid var(--color-secundario);
+  }
+
+  .bloque-rosa {
+    border-left-color: var(--color-primario);
+  }
+
+  .bloque-entrada {
+    margin-bottom: 5mm;
+  }
+
+  .icono-tarjeta {
+    display: none;
+  }
+
+  /* En papel un enlace no se puede pulsar: el subrayado solo estorba */
+  main a {
+    text-decoration: none;
   }
 
   h2, h3 {

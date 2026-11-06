@@ -30,43 +30,73 @@ cierre: apoyo
                     <h2>Un protocolo basado en la evidencia</h2>
                     <p>El plan de tratamiento se hace en base a un protocolo: el conjunto de normas y pautas terapéuticas que se establecen basándose en la experiencia científica de tratamiento de ese tumor.</p>
 
-                    <h2>1. Abordaje local</h2>
-                    <p>Actúa sobre el tumor y la zona donde se encuentra. Se hace con cirugía y radioterapia.</p>
-
-                    <h3>1.1. Cirugía</h3>
-                    <p>Antes de la operación se realiza el preoperatorio y se firma el consentimiento informado. Según su objetivo, la cirugía puede ser:</p>
+                    <h2>Los tratamientos, uno a uno</h2>
+                    <p>La enfermedad se aborda desde dos frentes:</p>
                     <ul class="lista-apoyo">
-                        <li>Preventiva.</li>
-                        <li>Diagnóstica.</li>
-                        <li>De estadiaje, para saber hasta dónde ha llegado la enfermedad.</li>
-                        <li>Curativa.</li>
-                        <li>Paliativa.</li>
-                        <li>Reparadora.</li>
+                        <li><strong>Abordaje local:</strong> Actúa sobre el tumor y la zona donde se encuentra. Se hace con cirugía y radioterapia.</li>
+                        <li><strong>Abordaje general:</strong> Actúa sobre todo el organismo. Se hace con quimioterapia, hormonoterapia y medicamentos diana.</li>
                     </ul>
+                    <p>Elige el tratamiento que te interese.</p>
+                    <div class="guia guia-pestanas" data-guia="tratamiento-general" data-guia-inicial="cirugia">
+                        <div class="guia-botones" hidden>
+                            <div class="guia-grupo" role="group" aria-label="Abordaje local: cirugía y radioterapia">
+                                <p class="guia-grupo-titulo" aria-hidden="true">Abordaje local: cirugía y radioterapia</p>
+                                <button type="button" data-guia-boton="cirugia" aria-pressed="false" aria-controls="tratamiento-general-cirugia">Cirugía</button>
+                                <button type="button" data-guia-boton="radioterapia" aria-pressed="false" aria-controls="tratamiento-general-radioterapia">Radioterapia</button>
+                            </div>
+                            <div class="guia-grupo" role="group" aria-label="Abordaje general: quimioterapia, hormonoterapia y medicamentos diana">
+                                <p class="guia-grupo-titulo" aria-hidden="true">Abordaje general: quimioterapia, hormonoterapia y medicamentos diana</p>
+                                <button type="button" data-guia-boton="quimioterapia" aria-pressed="false" aria-controls="tratamiento-general-quimioterapia">Quimioterapia</button>
+                                <button type="button" data-guia-boton="hormonoterapia" aria-pressed="false" aria-controls="tratamiento-general-hormonoterapia">Hormonoterapia</button>
+                                <button type="button" data-guia-boton="diana" aria-pressed="false" aria-controls="tratamiento-general-diana">Medicamentos diana</button>
+                            </div>
+                        </div>
+                        <p class="guia-sin-elegir" hidden></p>
+                        <div class="guia-panel" id="tratamiento-general-cirugia" data-guia-panel="cirugia">
+                            <p class="etiqueta">Abordaje local</p>
+                            <h3>Cirugía</h3>
+                            <p>Antes de la operación se realiza el preoperatorio y se firma el consentimiento informado. Según su objetivo, la cirugía puede ser:</p>
+                            <ul class="lista-apoyo">
+                            <li>Preventiva.</li>
+                            <li>Diagnóstica.</li>
+                            <li>De estadiaje, para saber hasta dónde ha llegado la enfermedad.</li>
+                            <li>Curativa.</li>
+                            <li>Paliativa.</li>
+                            <li>Reparadora.</li>
+                            </ul>
+                        </div>
+                        <div class="guia-panel" id="tratamiento-general-radioterapia" data-guia-panel="radioterapia">
+                            <p class="etiqueta">Abordaje local</p>
+                            <h3>Radioterapia</h3>
+                            <p>Consiste en la utilización de radiaciones ionizantes generadas por máquinas (aceleradores de electrones) o por sustancias radiactivas. Puede ser externa o interna:</p>
+                            <ul class="lista-apoyo">
+                            <li><strong>Externa:</strong> las radiaciones se administran desde el exterior mediante aceleradores lineales, con colimadores (laminillas que ajustan la ventana de salida a la forma del tumor). Antes de empezar se hace una planificación o simulación, en la que se determina la zona de tratamiento, la dosis total, el número de sesiones y la postura más correcta para el paciente.</li>
+                            <li><strong>Interna (braquiterapia):</strong> la radiación se administra con materiales radiactivos (isótopos) que se introducen en el organismo, muy cerca o en contacto con el tumor. Para el implante es preciso administrar algún tipo de anestesia.</li>
+                            </ul>
 
-                    <h3>1.2. Radioterapia</h3>
-                    <p>Consiste en la utilización de radiaciones ionizantes generadas por máquinas (aceleradores de electrones) o por sustancias radiactivas. Puede ser externa o interna:</p>
-                    <ul class="lista-apoyo">
-                        <li><strong>Externa:</strong> las radiaciones se administran desde el exterior mediante aceleradores lineales, con colimadores (laminillas que ajustan la ventana de salida a la forma del tumor). Antes de empezar se hace una planificación o simulación, en la que se determina la zona de tratamiento, la dosis total, el número de sesiones y la postura más correcta para el paciente.</li>
-                        <li><strong>Interna (braquiterapia):</strong> la radiación se administra con materiales radiactivos (isótopos) que se introducen en el organismo, muy cerca o en contacto con el tumor. Para el implante es preciso administrar algún tipo de anestesia.</li>
-                    </ul>
 
-                    <h2>2. Abordaje general</h2>
-                    <p>Actúa sobre todo el organismo. Se hace con quimioterapia, hormonoterapia y medicamentos diana.</p>
-
-                    <h3>2.1. Quimioterapia</h3>
-                    <p>Su objetivo es destruir, empleando una gran variedad de fármacos, las células que componen el tumor, con el fin de reducir y/o eliminar la enfermedad.</p>
-                    <p>A los fármacos empleados en este tratamiento se les denomina antineoplásicos o quimioterápicos, y están diseñados para destruir las células mientras se dividen: cuanto más rápido se dividen, más sensibles son al tratamiento. Atacan a células en proceso de división, tanto malignas como benignas (mucosas, folículo piloso, células sanguíneas...), lo que produce efectos secundarios por la destrucción de estas últimas.</p>
-                    <p>Este tratamiento se administra en forma de ciclos: la administración de los fármacos durante uno o varios días, seguida de un tiempo variable de descanso, que suele oscilar entre una y cuatro semanas.</p>
-                    <p>Dependiendo del tipo de cáncer y de los fármacos empleados, la quimioterapia puede administrarse en pastillas (vía oral) o inyectada en una vena (vía intravenosa). Generalmente, cuando se administra por vía intravenosa, la paciente acude al hospital de día y, tras unas horas, puede volver a su domicilio hasta el próximo ciclo.</p>
-                    <p>La duración total del tratamiento y sus efectos secundarios dependen de factores como el tipo de tumor, su respuesta al tratamiento y el tipo de quimioterapia empleada.</p>
-                    <p>Puede administrarse antes de la cirugía (neoadyuvante) o después (adyuvante). La neoadyuvante, cuando está indicada, permite observar de forma rápida la respuesta del tumor al tratamiento y modificarlo en consecuencia, además de posibilitar intervenciones menos agresivas.</p>
-
-                    <h3>2.2. Hormonoterapia</h3>
-                    <p>Algunos tumores crecen por efecto de las hormonas. La hormonoterapia son tratamientos que detienen la formación de esas hormonas o bloquean sus efectos sobre las células.</p>
-
-                    <h3>2.3. Medicamentos diana</h3>
-                    <p>Son agentes biológicos (como los anticuerpos monoclonales) que actúan sobre mecanismos concretos de las células tumorales, impidiendo su crecimiento y replicación.</p>
+                        </div>
+                        <div class="guia-panel" id="tratamiento-general-quimioterapia" data-guia-panel="quimioterapia">
+                            <p class="etiqueta">Abordaje general</p>
+                            <h3>Quimioterapia</h3>
+                            <p>Su objetivo es destruir, empleando una gran variedad de fármacos, las células que componen el tumor, con el fin de reducir y/o eliminar la enfermedad.</p>
+                            <p>A los fármacos empleados en este tratamiento se les denomina antineoplásicos o quimioterápicos, y están diseñados para destruir las células mientras se dividen: cuanto más rápido se dividen, más sensibles son al tratamiento. Atacan a células en proceso de división, tanto malignas como benignas (mucosas, folículo piloso, células sanguíneas...), lo que produce efectos secundarios por la destrucción de estas últimas.</p>
+                            <p>Este tratamiento se administra en forma de ciclos: la administración de los fármacos durante uno o varios días, seguida de un tiempo variable de descanso, que suele oscilar entre una y cuatro semanas.</p>
+                            <p>Dependiendo del tipo de cáncer y de los fármacos empleados, la quimioterapia puede administrarse en pastillas (vía oral) o inyectada en una vena (vía intravenosa). Generalmente, cuando se administra por vía intravenosa, la paciente acude al hospital de día y, tras unas horas, puede volver a su domicilio hasta el próximo ciclo.</p>
+                            <p>La duración total del tratamiento y sus efectos secundarios dependen de factores como el tipo de tumor, su respuesta al tratamiento y el tipo de quimioterapia empleada.</p>
+                            <p>Puede administrarse antes de la cirugía (neoadyuvante) o después (adyuvante). La neoadyuvante, cuando está indicada, permite observar de forma rápida la respuesta del tumor al tratamiento y modificarlo en consecuencia, además de posibilitar intervenciones menos agresivas.</p>
+                        </div>
+                        <div class="guia-panel" id="tratamiento-general-hormonoterapia" data-guia-panel="hormonoterapia">
+                            <p class="etiqueta">Abordaje general</p>
+                            <h3>Hormonoterapia</h3>
+                            <p>Algunos tumores crecen por efecto de las hormonas. La hormonoterapia son tratamientos que detienen la formación de esas hormonas o bloquean sus efectos sobre las células.</p>
+                        </div>
+                        <div class="guia-panel" id="tratamiento-general-diana" data-guia-panel="diana">
+                            <p class="etiqueta">Abordaje general</p>
+                            <h3>Medicamentos diana</h3>
+                            <p>Son agentes biológicos (como los anticuerpos monoclonales) que actúan sobre mecanismos concretos de las células tumorales, impidiendo su crecimiento y replicación.</p>
+                        </div>
+                    </div>
 
                     <div class="bloque-destacado bloque-nota">
                         <p class="etiqueta">Cada cáncer tiene sus particularidades</p>

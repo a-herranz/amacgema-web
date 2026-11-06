@@ -3429,6 +3429,12 @@ a.via-contacto-dato:focus-visible {
   font-weight: 700;
 }
 
+/* --- «¿Prefieres leerlo más sencillo?» (Primeros pasos, Hablando de cáncer) --- */
+.hero-interior .hero-lectura-facil {
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
 /* --- Tiempo de lectura, junto a «Imprimir esta página» --- */
 .hero-imprimir {
   display: flex;

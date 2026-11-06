@@ -98,12 +98,13 @@ No hay ninguna forma de donar: todo pasa por «contacta».
       pendientes en el código de la página). Cada foto va en su hueco, marcado
       con un comentario «Foto pendiente», como
       `<img class="espacio-imagen" src="img/..." alt="...">`.
-- [ ] **Fotos de los regalos solidarios**: hacer fotos de los detalles para
-      [Regalos solidarios](pages/como-ayudar/como-ayudar-regalos.html) y
-      añadir una sección «Nuestros detalles». Faltan también los tipos de
-      detalle, si llevan tarjeta o mensaje personalizado, el donativo
-      orientativo y con cuánta antelación conviene encargarlos (hay un
-      comentario «PENDIENTE» en el código de la página).
+- [ ] **Fotos de los regalos solidarios**: la sección «Detalles que hemos
+      preparado» ya está montada (nov. 2026) y aparece sola con la primera
+      foto: subirlas a `galeria/regalos/` y describirlas en
+      `templates/regalos.txt`. Faltan también los tipos de detalle, qué se
+      puede personalizar exactamente (la web pone como ejemplo nombres, fecha
+      o un mensaje), el donativo orientativo y con cuánta antelación conviene
+      encargarlos.
 - [ ] Para las fotos, en general: fotos reales y luminosas, con permiso por
       escrito de cualquier persona que salga en ellas; nada de imágenes de
       banco de imágenes.

@@ -1,0 +1,4 @@
+Fotos de ejemplos de regalos solidarios (página Regalos solidarios).
+
+Sube aquí las fotos tal cual y descríbelas en templates/regalos.txt, con el
+nombre de archivo precedido de regalos/ (por ejemplo, regalos/boda.jpg).

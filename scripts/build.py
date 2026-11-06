@@ -365,22 +365,44 @@ def proximas_citas_html(con_fecha):
             '</div>' % lista_citas(con_fecha[:CITAS_EN_PORTADA]))
 
 
-# ---------- Galería de fotos ----------
-# Las fotos originales se suben a galeria/ (no se publica) y se describen en
-# templates/galeria.txt. El build prepara de cada una una miniatura y una
-# versión grande en WebP (necesita Pillow) y {{GALERIA}} pinta la galería; si
-# no hay fotos, no pinta nada.
+# ---------- Galerías de fotos ----------
+# Las fotos originales se suben a galeria/ (no se publica; se pueden ordenar
+# en subcarpetas, como galeria/regalos/) y cada galería se describe en su
+# archivo de templates/. El build prepara de cada foto una miniatura y una
+# versión grande en WebP (necesita Pillow) y el marcador de la galería
+# ({{GALERIA}}, {{GALERIA_REGALOS}}...) la pinta; si no tiene fotos, no pinta
+# nada, para no dejar un hueco vacío.
 GALERIA_ORIGENES = "galeria"
-GALERIA_FUENTE = os.path.join("templates", "galeria.txt")
 GALERIA_SALIDA = os.path.join("img", "galeria")
 GALERIA_MINIATURA = 600   # px del lado mayor
 GALERIA_GRANDE = 1600
 INSTAGRAM = "https://www.instagram.com/amacgema/"
 
+GALERIAS = {
+    "GALERIA": {
+        "fuente": os.path.join("templates", "galeria.txt"),
+        "id": "galeria",
+        "titulo": "Galería",
+        "intro": "Algunos momentos de nuestras actividades y encuentros.",
+        "clase": "seccion seccion-alt",
+        "instagram": True,
+    },
+    "GALERIA_REGALOS": {
+        "fuente": os.path.join("templates", "regalos.txt"),
+        "id": "detalles",
+        "titulo": "Detalles que hemos preparado",
+        "intro": ("Algunos regalos hechos a mano y personalizados para otras "
+                  "celebraciones. Con lo recaudado seguimos acompañando a mujeres "
+                  "con cáncer de mama y ginecológico."),
+        "clase": "seccion",
+        "instagram": False,
+    },
+}
 
-def leer_galeria():
+
+def leer_galeria(fuente):
     fotos, actual = [], None
-    for numero, linea in enumerate(read(GALERIA_FUENTE).splitlines(), 1):
+    for numero, linea in enumerate(read(fuente).splitlines(), 1):
         if linea.startswith("#") or not linea.strip():
             continue
         m = re.match(r"^\[foto:\s*(.+?)\]\s*$", linea)
@@ -390,10 +412,10 @@ def leer_galeria():
             continue
         campo = re.match(r"^(texto|fecha|enlace):\s*(.*)$", linea)
         if actual is None or not campo:
-            raise ValueError("%s, línea %d: no se entiende «%s»" % (GALERIA_FUENTE, numero, linea))
+            raise ValueError("%s, línea %d: no se entiende «%s»" % (fuente, numero, linea))
         actual[campo.group(1)] = campo.group(2).strip()
     for foto in fotos:
-        donde = "%s, línea %d" % (GALERIA_FUENTE, foto["linea"])
+        donde = "%s, línea %d" % (fuente, foto["linea"])
         if not foto.get("texto"):
             raise ValueError("%s: la foto %s no tiene texto" % (donde, foto["archivo"]))
         if not os.path.isfile(os.path.join(GALERIA_ORIGENES, foto["archivo"])):
@@ -409,28 +431,31 @@ def leer_galeria():
 
 
 def preparar_fotos(fotos):
-    """Miniatura y versión grande de cada foto en publicar/img/galeria/."""
+    """Miniatura y versión grande de cada foto en publicar/img/galeria/,
+    respetando la subcarpeta que tenga dentro de galeria/."""
     if not fotos:
         return
     try:
         from PIL import Image, ImageOps
     except ImportError:
-        raise SystemExit("La galería necesita Pillow: pip install pillow")
-    destino = os.path.join(SALIDA, GALERIA_SALIDA)
-    os.makedirs(destino, exist_ok=True)
+        raise SystemExit("Las galerías necesitan Pillow: pip install pillow")
     for foto in fotos:
         base = os.path.splitext(foto["archivo"])[0]
+        subcarpeta = os.path.dirname(base)
+        destino = os.path.join(SALIDA, GALERIA_SALIDA, subcarpeta)
+        os.makedirs(destino, exist_ok=True)
         imagen = Image.open(os.path.join(GALERIA_ORIGENES, foto["archivo"]))
         imagen = ImageOps.exif_transpose(imagen).convert("RGB")  # fotos de móvil giradas
         for lado, sufijo, calidad in ((GALERIA_MINIATURA, "mini", 78), (GALERIA_GRANDE, "grande", 82)):
             copia = imagen.copy()
             copia.thumbnail((lado, lado), Image.LANCZOS)
-            nombre = "%s-%s.webp" % (base, sufijo)
+            nombre = "%s-%s.webp" % (os.path.basename(base), sufijo)
             copia.save(os.path.join(destino, nombre), "WEBP", quality=calidad, method=6)
-            foto[sufijo] = (GALERIA_SALIDA.replace(os.sep, "/") + "/" + nombre, copia.size)
+            ruta = os.path.join(GALERIA_SALIDA, subcarpeta, nombre).replace(os.sep, "/")
+            foto[sufijo] = (ruta, copia.size)
 
 
-def galeria_html(fotos):
+def galeria_html(fotos, ajustes):
     if not fotos:
         return ""
     esc = html.escape
@@ -448,17 +473,21 @@ def galeria_html(fotos):
             '<img src="%s" width="%d" height="%d" alt="%s" loading="lazy" decoding="async"></a>\n'
             '      <p class="galeria-pie">%s</p>\n'
             '    </li>' % (grande, pie, enlace, mini, ancho, alto, esc(foto["texto"]), pie))
-    return ('<section class="seccion seccion-alt" aria-labelledby="galeria-titulo">\n'
+    instagram = ""
+    if ajustes["instagram"]:
+        instagram = ('    <p class="ver-mas"><a href="%s" class="enlace-flecha" target="_blank" '
+                     'rel="noopener noreferrer">Más fotos en Instagram</a></p>\n' % INSTAGRAM)
+    return ('<section class="%s" aria-labelledby="%s-titulo">\n'
             '  <div class="contenedor">\n'
             '    <div class="seccion-titulo">\n'
-            '      <h2 id="galeria-titulo">Galería</h2>\n'
-            '      <p>Algunos momentos de nuestras actividades y encuentros.</p>\n'
+            '      <h2 id="%s-titulo">%s</h2>\n'
+            '      <p>%s</p>\n'
             '    </div>\n'
             '    <ul class="galeria">\n%s\n    </ul>\n'
-            '    <p class="ver-mas"><a href="%s" class="enlace-flecha" target="_blank" '
-            'rel="noopener noreferrer">Más fotos en Instagram</a></p>\n'
+            '%s'
             '  </div>\n'
-            '</section>' % ("\n".join(elementos), INSTAGRAM))
+            '</section>' % (ajustes["clase"], ajustes["id"], ajustes["id"], ajustes["titulo"],
+                            ajustes["intro"], "\n".join(elementos), instagram))
 
 
 # ---------- Índice de página ----------
@@ -760,8 +789,11 @@ def build():
     os.makedirs(SALIDA)
     for carpeta in ESTATICOS:
         shutil.copytree(carpeta, os.path.join(SALIDA, carpeta))
-    fotos_galeria = leer_galeria()
-    preparar_fotos(fotos_galeria)
+    galerias = {}
+    for marcador, ajustes in GALERIAS.items():
+        fotos = leer_galeria(ajustes["fuente"])
+        preparar_fotos(fotos)
+        galerias[marcador] = galeria_html(fotos, ajustes)
 
     built = []
     sin_revisar = []
@@ -781,9 +813,10 @@ def build():
         content = (content
                    .replace("{{AGENDA}}", agenda_html(citas_futuras, citas_pasadas, citas_repetidas))
                    .replace("{{PROXIMAS_CITAS}}", proximas_citas_html(citas_futuras))
-                   .replace("{{GALERIA}}", galeria_html(fotos_galeria))
                    .replace("{{URL_PRIMEROS_PASOS}}",
                             (SITE_URL + "me-acaban-de-diagnosticar.html").split("://", 1)[1]))
+        for marcador, pintada in galerias.items():
+            content = content.replace("{{%s}}" % marcador, pintada)
         content = generar_indice(content)
 
         en_hablando = os.path.normpath(page_path).split(os.sep)[1] == "hablando-de-cancer"

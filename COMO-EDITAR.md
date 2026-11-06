@@ -25,6 +25,7 @@ Algunos textos no están en una página sino en piezas comunes a todas:
 | Bloque final «¿Te preocupa algo de lo que acabas de leer?» | `templates/cierre-apoyo.html` |
 | Citas de la Agenda | `templates/agenda.txt` (las instrucciones están al principio del archivo) |
 | Fotos de la galería (al final de la Agenda) | Sube la foto a la carpeta `galeria/` («Add file» › «Upload files») y descríbela en `templates/galeria.txt` |
+| Fotos de ejemplos de Regalos solidarios | Sube la foto a la carpeta `galeria/regalos/` y descríbela en `templates/regalos.txt` |
 
 ## 2. Editar
 

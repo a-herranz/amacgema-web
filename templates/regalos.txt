@@ -1,0 +1,26 @@
+# FOTOS DE REGALOS SOLIDARIOS
+#
+# De aquí sale la sección «Detalles que hemos preparado» de la página
+# Regalos solidarios: ejemplos de productos hechos para recaudar fondos.
+# Si no hay ninguna foto, la sección no se muestra.
+#
+# Cómo añadir una foto (también desde el navegador, ver COMO-EDITAR.md):
+#   1. Sube la foto a la carpeta galeria/regalos/ del proyecto (en GitHub:
+#      entra en la carpeta, «Add file» › «Upload files»). Sirve cualquier
+#      JPG o PNG, tal cual sale del móvil: la web la reduce sola.
+#   2. Añade aquí un bloque con su nombre, incluida la carpeta regalos/:
+#
+#   [foto: regalos/boda-jabones.jpg]
+#   texto: Jabones artesanales con los nombres de los novios, para una boda
+#   fecha: 2026-06-14
+#
+# Solo [foto: ...] y «texto» son obligatorios. En «texto» cuenta qué es y
+# para qué celebración se hizo: sirve de ejemplo a quien quiere encargar y
+# describe la foto para quien no puede verla. Con «fecha», las más recientes
+# salen primero; «enlace» es opcional.
+#
+# Si en el detalle aparecen nombres o datos de una familia, pide permiso
+# antes de publicar la foto.
+#
+# Las líneas que empiezan por # son comentarios y no se publican.
+

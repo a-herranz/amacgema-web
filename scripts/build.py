@@ -629,6 +629,54 @@ def escribir_cname():
             fh.write(dominio + "\n")
 
 
+# ---------- Páginas trasladadas ----------
+# Cuando una página se integra en otra o se divide, su dirección antigua no
+# debe dar error (enlaces guardados, resultados de Google, folletos
+# impresos). Cada entrada genera una página mínima que lleva a la nueva.
+# Formato: "antigua.html": ("destino por defecto", {"ancla antigua": "destino"}).
+REDIRECCIONES = {
+    "anatomia.html": ("cancer-de-mama.html#anatomia", {}),
+    "factores-asociados.html": ("cancer-de-mama.html#factores-de-riesgo", {}),
+    "anatomia-genital.html": ("cancer-ginecologico.html#anatomia", {}),
+    "cancer-por-localizacion.html": ("cancer-ginecologico.html", {
+        "cancer-ovario": "cancer-de-ovario.html",
+        "cancer-utero": "cancer-de-endometrio.html",
+        "cancer-vagina": "cancer-de-vulva-y-vagina.html#cancer-vagina",
+        "cancer-vulva": "cancer-de-vulva-y-vagina.html#cancer-vulva",
+    }),
+    "proyecto-espacio-cuerpo.html": ("sensibilizacion.html#espacio-cuerpo", {}),
+}
+
+
+def escribir_redirecciones(paginas):
+    for antigua, (destino, por_ancla) in REDIRECCIONES.items():
+        if antigua in paginas:
+            raise ValueError("%s es a la vez una página y una redirección" % antigua)
+        esc = html.escape
+        anclas = json.dumps(por_ancla)
+        contenido = (
+            '<!DOCTYPE html>\n<html lang="es">\n<head>\n'
+            '  <meta charset="UTF-8">\n'
+            '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
+            '  <meta name="robots" content="noindex">\n'
+            '  <title>Página trasladada | AMAC-GEMA</title>\n'
+            '  <link rel="canonical" href="%s">\n'
+            '  <meta http-equiv="refresh" content="0; url=%s">\n'
+            '  <script>\n'
+            '    // Las anclas antiguas llevan a su página nueva\n'
+            '    var anclas = %s;\n'
+            '    var ancla = window.location.hash.slice(1);\n'
+            '    window.location.replace(anclas[ancla] || "%s");\n'
+            '  </script>\n'
+            '</head>\n<body>\n'
+            '  <h1>Esta página se ha trasladado</h1>\n'
+            '  <p>Su contenido está ahora en <a href="%s">esta otra página</a>.</p>\n'
+            '</body>\n</html>\n'
+            % (esc(SITE_URL + destino), esc(destino), anclas, destino, esc(destino)))
+        with open(os.path.join(SALIDA, antigua), "w", encoding="utf-8") as fh:
+            fh.write(contenido)
+
+
 def ejecutar_npx(argumentos, que):
     """Ejecuta una herramienta de Node con npx. Sin Node.js, o si falla, la
     web se genera igual sin esa parte; en GitHub Actions, en cambio, se
@@ -884,6 +932,7 @@ def build():
 
     escribir_sitemap(built, sin_indexar)
     escribir_cname()
+    escribir_redirecciones(set(built))
     if "--sin-buscador" in sys.argv:
         print("AVISO: sin buscador, QR ni PDF del tríptico (--sin-buscador).")
     else:

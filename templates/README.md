@@ -52,24 +52,25 @@ pages/
       sensibilizacion.html  proyecto-contigo.html
       proyecto-jornada-cancer-mama.html
       proyecto-jornada-cancer-ginecologico.html
-      proyecto-yo-me-muevo.html  proyecto-espacio-cuerpo.html
+      proyecto-yo-me-muevo.html
     investigacion/                  (frente "Sensibilización")
       investigacion.html  proyecto-marcha-por-la-salud.html
   hablando-de-cancer/
     hablando-de-cancer.html  me-acaban-de-diagnosticar.html
     linfedema.html  aspectos-sociales.html  aspectos-psicologicos.html
     despues-del-tratamiento.html  mujeres-jovenes.html
-    alimentacion-y-ejercicio.html
+    alimentacion-y-ejercicio.html  sexualidad.html  familiares.html
     aspectos-generales/
       aspectos-generales.html  concepto.html
       itinerario-diagnostico.html  planteamiento-terapeutico.html
     cancer-de-mama/
-      cancer-de-mama.html  anatomia.html  factores-asociados.html
+      cancer-de-mama.html
       sintomas.html  diagnostico.html  tratamiento.html
       cancer-de-mama-avanzado.html  prevencion-diagnostico-precoz.html
     cancer-ginecologico/
-      cancer-ginecologico.html  anatomia-genital.html
-      cancer-por-localizacion.html
+      cancer-ginecologico.html  cancer-de-ovario.html
+      cancer-de-endometrio.html  cancer-de-cervix.html
+      cancer-de-vulva-y-vagina.html
       prevencion-diagnostico-precoz-ginecologico.html
   como-ayudar/
     como-ayudar.html  como-ayudar-difunde.html
@@ -77,7 +78,7 @@ pages/
     como-ayudar-empresas.html
   legal/
     aviso-legal.html  politica-privacidad.html  politica-cookies.html
-  buscar.html
+  buscar.html  preguntas-frecuentes.html
   404.html
 ```
 
@@ -215,6 +216,11 @@ Después de editar, haz commit y push (o genera en local para verlo antes).
   indexa lo que va dentro de `<main>`; para que un bloque no salga en los
   resultados, ponle `data-pagefind-ignore`. La página `buscar.html` y la 404
   no se indexan (`SIN_INDEXAR` en el build).
+- **Páginas trasladadas**: si una página se integra en otra o se divide,
+  añade su nombre antiguo a `REDIRECCIONES` en `build.py`. El build genera
+  una página mínima que lleva a la nueva (incluso según el ancla, como
+  `cancer-por-localizacion.html#cancer-ovario`), para no romper enlaces
+  guardados ni resultados de Google.
 - **Datos para Google**: `sitemap.xml`, `robots.txt` y, solo en la portada,
   la ficha de la asociación en formato schema.org. Si `SITE_URL` deja de ser
   de github.io, el build crea también el archivo `CNAME` del dominio propio.

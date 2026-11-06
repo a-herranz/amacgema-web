@@ -200,7 +200,8 @@ document.addEventListener('DOMContentLoaded', function () {
       '<li><a href="despues-del-tratamiento.html">Después del tratamiento</a></li>' +
       '<li><a href="mujeres-jovenes.html">Mujeres jóvenes</a></li>' +
       '<li><a href="sexualidad.html">Sexualidad</a></li>' +
-      '<li><a href="alimentacion-y-ejercicio.html">Alimentación y ejercicio</a></li></ul>'
+      '<li><a href="alimentacion-y-ejercicio.html">Alimentación y ejercicio</a></li>' +
+      '<li><a href="familiares.html">Si eres familiar</a></li></ul>'
     );
 
     // Marca como activa la categoría a la que pertenece la página actual,
@@ -209,15 +210,16 @@ document.addEventListener('DOMContentLoaded', function () {
     var categoriasHablando = {
       'aspectos-generales.html': ['aspectos-generales.html', 'concepto.html', 'itinerario-diagnostico.html', 'planteamiento-terapeutico.html'],
       'me-acaban-de-diagnosticar.html': ['me-acaban-de-diagnosticar.html'],
-      'cancer-de-mama.html': ['cancer-de-mama.html', 'anatomia.html', 'factores-asociados.html', 'sintomas.html', 'diagnostico.html', 'tratamiento.html', 'cancer-de-mama-avanzado.html', 'prevencion-diagnostico-precoz.html'],
-      'cancer-ginecologico.html': ['cancer-ginecologico.html', 'anatomia-genital.html', 'cancer-por-localizacion.html', 'prevencion-diagnostico-precoz-ginecologico.html'],
+      'cancer-de-mama.html': ['cancer-de-mama.html', 'sintomas.html', 'diagnostico.html', 'tratamiento.html', 'cancer-de-mama-avanzado.html', 'prevencion-diagnostico-precoz.html'],
+      'cancer-ginecologico.html': ['cancer-ginecologico.html', 'cancer-de-ovario.html', 'cancer-de-endometrio.html', 'cancer-de-cervix.html', 'cancer-de-vulva-y-vagina.html', 'prevencion-diagnostico-precoz-ginecologico.html'],
       'linfedema.html': ['linfedema.html'],
       'aspectos-sociales.html': ['aspectos-sociales.html'],
       'aspectos-psicologicos.html': ['aspectos-psicologicos.html'],
       'despues-del-tratamiento.html': ['despues-del-tratamiento.html'],
       'mujeres-jovenes.html': ['mujeres-jovenes.html'],
       'sexualidad.html': ['sexualidad.html'],
-      'alimentacion-y-ejercicio.html': ['alimentacion-y-ejercicio.html']
+      'alimentacion-y-ejercicio.html': ['alimentacion-y-ejercicio.html'],
+      'familiares.html': ['familiares.html']
     };
     var paginaActualHablando = window.location.pathname.split('/').pop() || 'index.html';
     var hrefCategoriaActual = null;

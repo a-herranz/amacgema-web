@@ -1916,6 +1916,43 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   font-size: 1rem;
 }
 
+/* Preguntas frecuentes: cada pregunta es un <details> que se abre al
+   pulsarla, sin JavaScript */
+.preguntas {
+  margin: 1rem 0 2.5rem;
+}
+
+.preguntas details {
+  background-color: var(--color-blanco);
+  border-left: 4px solid var(--color-primario);
+  border-radius: 0 var(--radio-chico) var(--radio-chico) 0;
+  box-shadow: var(--sombra-suave);
+  margin-bottom: 0.8rem;
+}
+
+.preguntas summary {
+  cursor: pointer;
+  color: var(--color-acento);
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  padding: 1rem 1.2rem;
+  list-style-position: inside;
+}
+
+.preguntas summary:focus-visible {
+  outline: 3px solid var(--color-primario);
+  outline-offset: 2px;
+}
+
+.preguntas details[open] summary {
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.preguntas details p {
+  margin: 0;
+  padding: 0.9rem 1.2rem 1.1rem;
+}
+
 /* Deliberadamente distintas de .tarjeta: menos opciones, más grandes y un
    único acento de color, para no añadir carga de decisión a quien acaba de
    llegar y puede estar angustiada. */

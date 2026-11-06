@@ -195,6 +195,7 @@ registrada aquí.
 | Sexualidad | `pages/hablando-de-cancer/sexualidad.html` | SEOM, AECC | Psicooncóloga y ginecología u oncología | Pendiente | | |
 | Folleto «Primeros pasos» | `pages/folleto-primeros-pasos.html` | Resumen de Me acaban de diagnosticar | Oncología (junto con esa página) | Pendiente | | |
 | Lectura fácil | `pages/lectura-facil.html` | Web de AMAC-GEMA | Validación de lectura fácil (entidad especializada y personas lectoras) | Pendiente | | |
+| Glosario: 9 términos añadidos (nov. 2026): CDK4/6, cuidados paliativos, densitometría, ensayo clínico, inmunoterapia, metástasis, PARP, triple negativo y vitrificación | `pages/hablando-de-cancer/glosario.html` | SEOM, AECC | Oncología (junto con las páginas médicas) | Pendiente | | El glosario no muestra aviso de IA porque el resto de términos son anteriores |
 | Historias | `pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html` | Web de AMAC-GEMA; entrevistas a la presidenta en COPE Aragón (19/10/2026), Aragón Digital (19/10/2026) y Aragón TV (18/10/2024) | Junta directiva y la propia María José Rivas (su historia personal y sus citas) | Pendiente | | Por decisión de nov. 2026, esta página no muestra el aviso de IA |
 
 **Cuando una página quede revisada:**

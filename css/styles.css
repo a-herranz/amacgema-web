@@ -159,9 +159,11 @@ a:focus {
 }
 
 /* Enlaces dentro de un texto: subrayados, para que no se distingan solo
-   por el color (WCAG 1.4.1). Los enlaces con clase propia (botones,
-   flechas, teléfono, glosario...) ya tienen su propio aspecto. */
-main :is(p, li, dd, td, figcaption) a:not([class]) {
+   por el color (WCAG 1.4.1). Solo en párrafos y listas de texto: en menús,
+   árboles, tarjetas o títulos el enlace ya se reconoce por su posición.
+   Los enlaces con clase propia (botones, flechas, teléfono, glosario...)
+   tienen su propio aspecto. */
+main :is(p, .lista-apoyo li, dd, td, figcaption) a:not([class]) {
   text-decoration: underline;
   text-underline-offset: 0.15em;
   text-decoration-thickness: 1px;
@@ -290,9 +292,10 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   gap: 1.8rem;
 }
 
-/* Rejilla de 4 estable para los índices de sección */
+/* Índices de sección: 2x2 estable. Con 4 columnas, las tarjetas de
+   Quiénes somos quedaban tan estrechas que partían «Conocer el propósito →» */
 .tarjetas-indice {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .ver-mas {
@@ -1967,18 +1970,37 @@ a[target="_blank"]:not(.logo-colaborador)::after {
   margin: 1.1rem 0 0;
 }
 
+/* Mismo tamaño que el texto y sin rayas entre líneas: en las páginas
+   médicas largas, las listas son buena parte de lo que se lee. */
 .lista-apoyo li {
-  border-top: 1px solid var(--color-borde);
-  font-size: 0.95rem;
-  padding: 0.45rem 0 0.45rem 1.4rem;
+  padding: 0.25rem 0 0.25rem 1.4rem;
   position: relative;
 }
 
+/* Viñeta neutra (un punto rosa). Antes era un ✓ verde en todas las listas,
+   también en las de síntomas o señales de alarma, donde un ✓ dice
+   «correcto» justo cuando el texto dice «consulta». */
 .lista-apoyo li::before {
-  color: var(--color-secundario-oscuro);
-  content: "✓";
-  left: 0;
+  content: "";
   position: absolute;
+  left: 0.3rem;
+  top: 0.95em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background-color: var(--color-primario-oscuro);
+}
+
+/* ✓ solo donde significa algo positivo (ventajas, lo que se ofrece) */
+.lista-check li::before {
+  content: "✓";
+  top: 0.25rem;
+  left: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  color: var(--color-secundario-oscuro);
 }
 
 /* Un párrafo o un título justo después de una lista no deben quedar
@@ -1993,7 +2015,7 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 }
 
 /* En una lista numerada (<ol class="lista-apoyo">) el orden importa: se
-   cambia el ✓ por el número. */
+   cambia la viñeta por el número. */
 ol.lista-apoyo {
   counter-reset: lista-apoyo;
 }
@@ -2004,6 +2026,13 @@ ol.lista-apoyo li {
 
 ol.lista-apoyo li::before {
   content: counter(lista-apoyo) ".";
+  top: 0.25rem;
+  left: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  color: var(--color-secundario-oscuro);
   font-weight: 700;
 }
 
@@ -2685,8 +2714,11 @@ a.via-contacto-dato:focus-visible {
   padding: 3rem 0 1.5rem;
 }
 
+/* Con la letra de títulos: Lora no tiene peso 600 y el navegador la
+   engordaba de forma artificial */
 .pie a {
   color: var(--color-blanco);
+  font-family: var(--fuente-titulos);
   font-weight: 600;
 }
 

@@ -161,6 +161,15 @@ cuestionario para la junta).
          punto siguiente). Si no, redirigirlo de forma permanente a ella.
       3. En cualquier caso, quitar ya el contenido de ejemplo.
       Es un dominio con años y con enlaces: es lo que más ayuda a posicionar.
+      **Datos comprobados (nov. 2026):** registrado en 2004; **caduca el
+      9 de enero de 2027** (renovarlo antes); registrador Arsys / Nicline;
+      DNS en Interdominios; tiene correo propio (`mail.mujerycancer.org`):
+      al cambiar la web, no tocar los registros MX ni dar de baja el
+      alojamiento sin saber si el correo depende de él. Pasos para publicar
+      la web ahí: registros A de `@` a 185.199.108.153, .109.153, .110.153 y
+      .111.153; CNAME de `www` a a-herranz.github.io; borrar el A antiguo
+      (93.174.4.71); después, cambiar `SITE_URL` y poner el dominio en GitHub
+      Pages.
 - [ ] **Mismos datos en toda internet**: la guía del Ayuntamiento dice
       «Plaza del Pilar, 14, 3º C» y la web «1º izquierda». Pedir que se
       actualicen nombre, dirección, teléfono y web en la guía del

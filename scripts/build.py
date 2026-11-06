@@ -519,7 +519,22 @@ COMPARTIR_SALIDA = "img/compartir"
 COMPARTIR_TAMANO = (1200, 630)
 COMPARTIR_COLORES = {"fondo": "#FBF1F5", "arco": "#F3D3E1", "sobrelinea": "#11756C",
                      "titulo": "#893B5B"}
+# Cáncer ginecológico: el verde azulado del logo pasa a principal (es el
+# color que se asocia a este cáncer), igual que en sus páginas (ver TEMAS)
+COMPARTIR_COLORES_TEMA = {"ginecologico": {"fondo": "#EFF8F7", "arco": "#CDEBE7",
+                                           "sobrelinea": "#AA466E", "titulo": "#0D5C55"}}
 _compartir_pil = None
+
+# ---------- Temas de color por sección ----------
+# Las páginas de una carpeta llevan <body data-tema="..."> y el CSS cambia
+# sus colores (sección «Temas» de styles.css). La cabecera y el pie no
+# cambian: siguen siendo los de la asociación.
+TEMAS = {os.path.join("hablando-de-cancer", "cancer-ginecologico"): "ginecologico"}
+
+
+def tema_de(page_path):
+    carpeta = os.path.relpath(os.path.dirname(page_path), "pages")
+    return TEMAS.get(carpeta, "")
 
 
 def _pil():
@@ -547,7 +562,7 @@ def _partir_lineas(draw, texto, fuente, ancho):
     return lineas + [actual]
 
 
-def imagen_compartir(fname, titulo, content):
+def imagen_compartir(fname, titulo, content, tema=""):
     """Devuelve la ruta (relativa a la web) de la imagen de og:image."""
     pil = _pil()
     if fname == "index.html" or not pil:
@@ -555,7 +570,7 @@ def imagen_compartir(fname, titulo, content):
     Image, ImageDraw, ImageFont = pil
     ancho, alto = COMPARTIR_TAMANO
     margen = 80
-    c = COMPARTIR_COLORES
+    c = COMPARTIR_COLORES_TEMA.get(tema, COMPARTIR_COLORES)
     lienzo = Image.new("RGB", COMPARTIR_TAMANO, c["fondo"])
     draw = ImageDraw.Draw(lienzo)
 
@@ -1053,7 +1068,8 @@ def build():
             layout
             .replace("{{URL}}", SITE_URL + ("" if fname == "index.html" else fname))
             .replace("{{IMAGEN_COMPARTIR}}",
-                     SITE_URL + imagen_compartir(fname, meta.get("title", ""), content))
+                     SITE_URL + imagen_compartir(fname, meta.get("title", ""), content,
+                                                 tema_de(page_path)))
             .replace("{{SITE_URL}}", SITE_URL)
             .replace("{{TITLE}}", meta.get("title", ""))
             .replace("{{DESCRIPTION}}", meta.get("description", ""))
@@ -1074,6 +1090,8 @@ def build():
         if fname in sin_indexar:
             page_html = page_html.replace(" data-pagefind-body", "", 1)
 
+        if tema_de(page_path):
+            page_html = page_html.replace("<body>", '<body data-tema="%s">' % tema_de(page_path), 1)
         page_html = avisar_pestana_nueva(page_html)
         page_html = poner_correos(page_html, correos, fname)
         page_html = marcar_clics(page_html)

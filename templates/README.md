@@ -291,6 +291,19 @@ que se asocia al cáncer ginecológico. Solo cambian el contenido y la barra
 de la sección; la cabecera y el pie siguen igual. Su imagen para compartir
 también sale en ese verde.
 
+**Definiciones al pulsar una palabra**: el build mete en cada página de
+Hablando de cáncer, como JSON (`#definiciones-glosario`), las definiciones
+de los términos que enlaza. Al pulsar uno se abre un recuadro con su
+definición y «Ver en el glosario»; Ctrl + clic sigue llevando al glosario.
+
+**«Ahora estamos abiertas / cerradas»**: en la portada y en Contacto, a
+partir de `data-horario` («1-4 09:00-14:00 16:00-20:00; 5 09:00-14:00», días
+1 = lunes … 7 = domingo) y con la hora de España.
+
+**«Añadir a mi calendario»**: cada cita futura de la agenda tiene un
+archivo `.ics` en `publicar/agenda/`, con su hora (si la hay; si no, ocupa
+el día entero, y si no tiene hora de fin, dura dos horas) y su lugar.
+
 La hoja de estilos incluye además una versión para imprimir (sección 18).
 El arco de la «M» del logo aparece, muy suave, en la esquina de las
 cabeceras interiores y de los recuadros rosas (`.hero-interior::after` y

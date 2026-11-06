@@ -38,6 +38,11 @@ No hay ninguna forma de donar: todo pasa por «contacta».
 - [ ] Poner el mismo horario en Contacto (hoy solo dice «Lunes a viernes»),
       el pie de todas las páginas y la portada:
       lunes a jueves de 9:00 a 14:00 y de 16:00 a 20:00; viernes de 9:00 a 14:00.
+- [ ] El aviso «Ahora estamos abiertas / cerradas» (portada y Contacto) sale
+      de `data-horario` en `pages/index.html` y `pages/contacto.html`. Cuando la
+      asociación confirme el horario, actualizarlo también ahí. No sabe de
+      festivos ni de vacaciones: si en verano o en Navidad cambia el horario,
+      conviene quitar o ajustar ese atributo mientras tanto.
 
 ### 4. Revisión médica de Hablando de cáncer
 

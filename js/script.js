@@ -741,6 +741,160 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Definiciones del glosario sin salir de la página: al pulsar una palabra
+  // enlazada se abre un recuadro con su definición (las trae la propia
+  // página, en #definiciones-glosario). Ctrl/Cmd + clic sigue abriendo el
+  // glosario, y sin JavaScript el enlace funciona como siempre.
+  var datosGlosario = document.getElementById('definiciones-glosario');
+  if (datosGlosario) {
+    var definiciones = {};
+    try {
+      definiciones = JSON.parse(datosGlosario.textContent);
+    } catch (e) { /* sin datos: los enlaces llevan al glosario */ }
+    var recuadro = document.createElement('div');
+    recuadro.className = 'definicion';
+    recuadro.setAttribute('role', 'dialog');
+    recuadro.hidden = true;
+    recuadro.innerHTML = '<button class="definicion-cerrar" type="button" aria-label="Cerrar">×</button>'
+      + '<p class="definicion-termino" tabindex="-1"></p><p class="definicion-texto"></p>'
+      + '<p class="definicion-mas"><a href="glosario.html">Ver en el glosario</a></p>';
+    document.body.appendChild(recuadro);
+    var enlaceActual = null;
+    var cerrarDefinicion = function (devolverFoco) {
+      if (recuadro.hidden) return;
+      recuadro.hidden = true;
+      if (enlaceActual) {
+        enlaceActual.setAttribute('aria-expanded', 'false');
+        if (devolverFoco) enlaceActual.focus();
+      }
+      enlaceActual = null;
+    };
+    var colocarDefinicion = function (enlace) {
+      var caja = enlace.getBoundingClientRect();
+      var ancho = Math.min(340, document.documentElement.clientWidth - 24);
+      var izquierda = Math.max(12, Math.min(caja.left, document.documentElement.clientWidth - ancho - 12));
+      recuadro.style.width = ancho + 'px';
+      recuadro.style.left = (izquierda + window.scrollX) + 'px';
+      recuadro.style.top = (caja.bottom + window.scrollY + 8) + 'px';
+      // Si no cabe debajo, va encima de la palabra
+      var alto = recuadro.offsetHeight;
+      if (caja.bottom + 8 + alto > window.innerHeight && caja.top - 8 - alto > 0) {
+        recuadro.style.top = (caja.top + window.scrollY - alto - 8) + 'px';
+      }
+    };
+    document.querySelectorAll('a.termino-glosario').forEach(function (enlace) {
+      var id = enlace.getAttribute('href').split('#')[1];
+      if (!definiciones[id]) return;
+      enlace.setAttribute('aria-haspopup', 'dialog');
+      enlace.setAttribute('aria-expanded', 'false');
+      enlace.removeAttribute('title');
+      enlace.addEventListener('click', function (e) {
+        if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+        e.preventDefault();
+        if (enlaceActual === enlace) { cerrarDefinicion(true); return; }
+        cerrarDefinicion(false);
+        enlaceActual = enlace;
+        recuadro.querySelector('.definicion-termino').textContent = definiciones[id].termino;
+        recuadro.querySelector('.definicion-texto').textContent = definiciones[id].definicion;
+        recuadro.querySelector('.definicion-mas a').href = 'glosario.html#' + id;
+        recuadro.setAttribute('aria-label', 'Qué significa ' + definiciones[id].termino);
+        recuadro.hidden = false;
+        colocarDefinicion(enlace);
+        enlace.setAttribute('aria-expanded', 'true');
+        recuadro.querySelector('.definicion-termino').focus();
+      });
+    });
+    recuadro.querySelector('.definicion-cerrar').addEventListener('click', function () {
+      cerrarDefinicion(true);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') cerrarDefinicion(true);
+    });
+    document.addEventListener('click', function (e) {
+      if (!recuadro.hidden && !recuadro.contains(e.target) && e.target.closest('a.termino-glosario') !== enlaceActual) {
+        cerrarDefinicion(false);
+      }
+    });
+    // Solo si cambia el ancho (girar el móvil): en el móvil, al desplazarse,
+    // la barra de direcciones aparece y desaparece y lanza «resize» también
+    var anchoVentana = window.innerWidth;
+    window.addEventListener('resize', function () {
+      if (window.innerWidth !== anchoVentana) {
+        anchoVentana = window.innerWidth;
+        cerrarDefinicion(false);
+      }
+    });
+  }
+
+  // «Ahora estamos abiertas / cerradas»: con la hora de España, a partir del
+  // horario de data-horario («1-4 09:00-14:00 16:00-20:00; 5 09:00-14:00»,
+  // días 1 = lunes … 7 = domingo). Es el horario habitual: no sabe de
+  // festivos ni de vacaciones, y así lo dice.
+  var estadosHorario = document.querySelectorAll('.estado-horario[data-horario]');
+  if (estadosHorario.length && window.Intl) {
+    var NOMBRES_DIAS = ['', 'el lunes', 'el martes', 'el miércoles', 'el jueves', 'el viernes', 'el sábado', 'el domingo'];
+    var leerHorario = function (texto) {
+      var porDia = {};
+      texto.split(';').forEach(function (parte) {
+        var trozos = parte.trim().split(/\s+/);
+        var dias = trozos.shift().split('-').map(Number);
+        for (var d = dias[0]; d <= (dias[1] || dias[0]); d++) {
+          porDia[d] = trozos.map(function (tramo) {
+            return tramo.split('-').map(function (h) {
+              var hm = h.split(':').map(Number);
+              return hm[0] * 60 + hm[1];
+            });
+          });
+        }
+      });
+      return porDia;
+    };
+    var ahoraEnEspana = function () {
+      var partes = {};
+      new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Madrid', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+      }).formatToParts(new Date()).forEach(function (p) { partes[p.type] = p.value; });
+      var dia = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(partes.weekday) + 1;
+      return { dia: dia, minuto: (Number(partes.hour) % 24) * 60 + Number(partes.minute) };
+    };
+    var hora = function (minutos) {
+      return Math.floor(minutos / 60) + ':' + ('0' + minutos % 60).slice(-2);
+    };
+    var estadoHorario = function (porDia) {
+      var ahora = ahoraEnEspana();
+      var hoy = porDia[ahora.dia] || [];
+      for (var i = 0; i < hoy.length; i++) {
+        if (ahora.minuto >= hoy[i][0] && ahora.minuto < hoy[i][1]) {
+          return { abierto: true, texto: 'Ahora estamos abiertas · hasta las ' + hora(hoy[i][1]) };
+        }
+      }
+      for (var j = 0; j < hoy.length; j++) {
+        if (hoy[j][0] > ahora.minuto) {
+          return { abierto: false, texto: 'Ahora estamos cerradas · abrimos hoy a las ' + hora(hoy[j][0]) };
+        }
+      }
+      for (var k = 1; k <= 7; k++) {
+        var dia = (ahora.dia - 1 + k) % 7 + 1;
+        if (porDia[dia] && porDia[dia].length) {
+          return {
+            abierto: false,
+            texto: 'Ahora estamos cerradas · abrimos ' + (k === 1 ? 'mañana' : NOMBRES_DIAS[dia])
+              + ' a las ' + hora(porDia[dia][0][0])
+          };
+        }
+      }
+      return null;
+    };
+    estadosHorario.forEach(function (p) {
+      var estado = estadoHorario(leerHorario(p.getAttribute('data-horario')));
+      if (!estado) return;
+      p.textContent = estado.texto;
+      p.title = 'Según el horario habitual: no tiene en cuenta festivos ni vacaciones.';
+      p.classList.add(estado.abierto ? 'estado-abierto' : 'estado-cerrado');
+      p.hidden = false;
+    });
+  }
+
   // Guía «Me acaban de diagnosticar»: las casillas marcadas y las preguntas
   // propias se guardan solo en este navegador (localStorage), y «Imprimir
   // mi lista» saca una hoja con lo marcado y sitio para apuntar respuestas.

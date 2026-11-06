@@ -21,6 +21,10 @@ nav: index.html
     <aside class="hero-info" aria-labelledby="hero-info-titulo">
       <h2 id="hero-info-titulo">Cuándo y dónde</h2>
       <p><strong>Horario de atención</strong><br>Lunes a jueves, de 9:00 a 14:00 y de 16:00 a 20:00<br>Viernes, de 9:00 a 14:00</p>
+      <!-- «Ahora estamos abiertas / cerradas» (js/script.js), con la hora de
+           España. Si cambia el horario, cámbialo también en data-horario
+           (días 1 = lunes … 5 = viernes; tramos de hora) y en contacto.html. -->
+      <p class="estado-horario" data-horario="1-4 09:00-14:00 16:00-20:00; 5 09:00-14:00" hidden></p>
       <p><strong>Sede</strong><br>Plaza del Pilar, 14, 1º izq. · Zaragoza<br><a href="contacto.html#como-llegar">Cómo llegar</a></p>
       <p><strong>Para socias</strong><br>Los servicios de la asociación son para socias. Si aún no lo eres, te explicamos cómo hacerte socia cuando nos llames.</p>
       <p class="nota">Si vas a venir, llámanos antes para confirmar que podemos atenderte.</p>

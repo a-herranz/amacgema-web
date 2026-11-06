@@ -131,6 +131,31 @@ def leer_terminos_glosario():
     return sorted(terminos, key=lambda t: -len(t[1]))
 
 
+def leer_definiciones_glosario():
+    """{id: (término tal cual, definición en texto)} para los recuadros que
+    se abren al pulsar una palabra enlazada (js/script.js)."""
+    texto = open(GLOSARIO_FUENTE, encoding="utf-8").read()
+    definiciones = {}
+    for ident, termino, dd in re.findall(
+            r'<dt id="([^"]+)">([^<]+)</dt>\s*<dd>(.*?)</dd>', texto, re.S):
+        definiciones[ident] = (html.unescape(termino.strip()),
+                               html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", dd)).strip()))
+    return definiciones
+
+
+def definiciones_de_pagina(content, definiciones):
+    """Las definiciones de los términos enlazados en esta página, como JSON
+    dentro de la propia página: así el recuadro se abre al instante y
+    funciona también sin conexión."""
+    usados = dict.fromkeys(re.findall(r'class="termino-glosario" href="glosario\.html#([^"]+)"', content))
+    datos = {i: {"termino": definiciones[i][0], "definicion": definiciones[i][1]}
+             for i in usados if i in definiciones}
+    if not datos:
+        return ""
+    return ('\n<script type="application/json" id="definiciones-glosario">%s</script>\n'
+            % json.dumps(datos, ensure_ascii=False).replace("</", "<\\/"))
+
+
 def enlazar_glosario(content, fname, terminos):
     for ident, base in terminos:
         if TERMINO_PAGINA_PROPIA.get(ident) == fname:
@@ -282,6 +307,69 @@ def leer_agenda():
     return con_fecha, [c for c in citas if c["tipo"] == "cada"]
 
 
+# Cada cita futura tiene su archivo .ics («Añadir a mi calendario»), que el
+# móvil o el ordenador abren con su calendario. La hora se toma de «hora:»
+# (la primera, y la segunda si hay un «de 10:00 a 12:00»); sin hora, la cita
+# ocupa el día entero, y sin hora de fin, dura dos horas.
+CALENDARIO_SALIDA = "agenda"
+CALENDARIO_ZONA = """BEGIN:VTIMEZONE
+TZID:Europe/Madrid
+BEGIN:STANDARD
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+END:DAYLIGHT
+END:VTIMEZONE"""
+
+
+def _ics_texto(texto):
+    return (texto.replace("\\", "\\\\").replace(";", "\\;")
+            .replace(",", "\\,").replace("\n", "\\n"))
+
+
+def preparar_calendarios(citas):
+    os.makedirs(os.path.join(SALIDA, CALENDARIO_SALIDA), exist_ok=True)
+    ahora = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    for cita in citas:
+        nombre = "%s-%s.ics" % (cita["fecha"].isoformat(), _slug(cita["titulo"])[:50])
+        horas = re.findall(r"(\d{1,2})[:.](\d{2})", cita.get("hora", ""))
+        dia = cita["fecha"].strftime("%Y%m%d")
+        if horas:
+            inicio = datetime.datetime.combine(cita["fecha"], datetime.time(int(horas[0][0]), int(horas[0][1])))
+            fin = (datetime.datetime.combine(cita["fecha"], datetime.time(int(horas[1][0]), int(horas[1][1])))
+                   if len(horas) > 1 else inicio + datetime.timedelta(hours=2))
+            cuando = ["DTSTART;TZID=Europe/Madrid:" + inicio.strftime("%Y%m%dT%H%M%S"),
+                      "DTEND;TZID=Europe/Madrid:" + fin.strftime("%Y%m%dT%H%M%S")]
+        else:
+            manana = (cita["fecha"] + datetime.timedelta(days=1)).strftime("%Y%m%d")
+            cuando = ["DTSTART;VALUE=DATE:" + dia, "DTEND;VALUE=DATE:" + manana]
+        descripcion = " ".join(cita["texto"])
+        enlace = cita.get("enlace", "")
+        if enlace:
+            url = enlace if enlace.startswith("http") else SITE_URL + enlace
+            descripcion = (descripcion + "\n\n" if descripcion else "") + url
+        lineas = (["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//AMAC-GEMA//Agenda//ES",
+                   "CALSCALE:GREGORIAN"] + CALENDARIO_ZONA.split("\n") + ["BEGIN:VEVENT",
+                   "UID:%s@amac-gema" % nombre[:-4], "DTSTAMP:" + ahora]
+                  + cuando
+                  + ["SUMMARY:" + _ics_texto(cita["titulo"])]
+                  + (["LOCATION:" + _ics_texto(cita["lugar"])] if cita.get("lugar") else [])
+                  + (["DESCRIPTION:" + _ics_texto(descripcion)] if descripcion else [])
+                  + ["END:VEVENT", "END:VCALENDAR"])
+        with open(os.path.join(SALIDA, CALENDARIO_SALIDA, nombre), "w", encoding="utf-8", newline="") as fh:
+            fh.write("\r\n".join(lineas) + "\r\n")
+        cita["ics"] = CALENDARIO_SALIDA + "/" + nombre
+
+
 def fecha_larga(fecha):
     return "%s %d de %s de %d" % (DIAS[fecha.weekday()], fecha.day,
                                   MESES[fecha.month - 1], fecha.year)
@@ -308,6 +396,9 @@ def cita_html(cita, nivel="h3"):
         partes.append('  <p class="cita-lugar">%s</p>' % esc(cita["lugar"]))
     if cita["texto"]:
         partes.append("  <p>%s</p>" % esc(" ".join(cita["texto"])))
+    if cita.get("ics"):
+        partes.append('  <p class="cita-calendario"><a href="%s" download>Añadir a mi calendario</a></p>'
+                      % cita["ics"])
     partes.append("</li>")
     return "\n".join(partes)
 
@@ -641,7 +732,7 @@ SIN_TIEMPO_LECTURA = {"glosario.html"}
 
 
 def tiempo_lectura(content):
-    texto = re.sub(r"<!--.*?-->|<[^>]+>", " ", content, flags=re.S)
+    texto = re.sub(r"<!--.*?-->|<script.*?</script>|<[^>]+>", " ", content, flags=re.S)
     palabras = len(re.findall(r"\w+", texto))
     minutos = max(1, round(palabras / 200))
     return "Lectura de 1 minuto" if minutos == 1 else "Lectura de %d minutos" % minutos
@@ -977,6 +1068,7 @@ def build():
     cierre_templates = {key: read(path) for key, path in CIERRE_FILES.items()}
     aviso_ia_tpl = read(AVISO_IA_FILE)
     terminos_glosario = leer_terminos_glosario()
+    definiciones_glosario = leer_definiciones_glosario()
     correos = leer_correos()
     citas_con_fecha, citas_repetidas = leer_agenda()
     hoy = datetime.date.today()
@@ -1017,6 +1109,7 @@ def build():
     os.makedirs(SALIDA)
     for carpeta in ESTATICOS:
         shutil.copytree(carpeta, os.path.join(SALIDA, carpeta))
+    preparar_calendarios(citas_futuras)
     galerias = {}
     for marcador, ajustes in GALERIAS.items():
         fotos = leer_galeria(ajustes["fuente"])
@@ -1051,6 +1144,7 @@ def build():
         en_hablando = os.path.normpath(page_path).split(os.sep)[1] == "hablando-de-cancer"
         if en_hablando and fname not in GLOSARIO_SIN_ENLACE:
             content = enlazar_glosario(content, fname, terminos_glosario)
+            content += definiciones_de_pagina(content, definiciones_glosario)
         if en_hablando and fname not in SIN_BOTON_IMPRIMIR:
             tiempo = "" if fname in SIN_TIEMPO_LECTURA else tiempo_lectura(content)
             content = poner_boton_imprimir(content, tiempo)

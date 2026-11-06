@@ -1316,46 +1316,6 @@ html[data-letra] .boton-letra {
 }
 
 @media (max-width: 640px) {
-  .anterior-siguiente .contenedor {
-    grid-template-columns: 1fr;
-  }
-
-  .paso-siguiente {
-    grid-column: 1;
-  }
-
-  .paso {
-    padding: 1.1rem 1.1rem 1.1rem 3.8rem;
-  }
-
-  .paso::before {
-    left: 0.9rem;
-  }
-
-  .pasos-control .boton {
-    padding: 0.6rem 1rem;
-  }
-
-  .lista-marcable {
-    padding: 1.2rem;
-  }
-
-  .guia-momento {
-    padding: 1.4rem 1.2rem;
-  }
-
-  .guia:not(.guia-momento) .guia-panel {
-    padding: 1.3rem 1.2rem !important;
-  }
-
-  .derechos {
-    grid-template-columns: 1fr;
-  }
-
-  .mi-lista {
-    padding: 1.4rem 1.2rem;
-  }
-
   /* Tres cifras caben en una fila incluso en móvil */
   .cifras.cifras-intro {
     grid-template-columns: repeat(3, 1fr);
@@ -3079,7 +3039,7 @@ a.via-contacto-dato:focus-visible {
   font-weight: 600;
   min-height: 48px;
   padding: 0.55rem 1.2rem;
-  transition: background-color var(--transicion), border-color var(--transicion);
+  transition: border-color var(--transicion);
 }
 
 .guia-botones button:hover {
@@ -3691,8 +3651,10 @@ a.via-contacto-dato:focus-visible {
   font-family: var(--fuente-titulos);
   font-size: 1.1rem;
   font-weight: 700;
-  line-height: 2.5rem;
+  line-height: 1.35;
   margin: 0;
+  /* El centro de la primera línea, a la altura del número */
+  padding-top: 0.55rem;
 }
 
 .camino li p:last-child {
@@ -4002,6 +3964,13 @@ a.via-contacto-dato:focus-visible {
     width: 100%;
   }
 
+  .boton-letra {
+    font-family: var(--fuente-titulos);
+    font-weight: 600;
+    text-align: left;
+    white-space: normal;
+  }
+
   .nav-letra-texto {
     position: static;
     width: auto;
@@ -4268,6 +4237,74 @@ a.via-contacto-dato:focus-visible {
 
   .cifra-texto {
     font-size: 0.85rem;
+  }
+}
+
+/* Móvil: ajustes de las guías, listas y pasos. Van aquí, al final, para
+   que ganen a las reglas generales de cada pieza. */
+@media (max-width: 640px) {
+  .anterior-siguiente .contenedor {
+    grid-template-columns: 1fr;
+  }
+
+  .paso-siguiente {
+    grid-column: 1;
+  }
+
+  .paso {
+    padding: 1.1rem 1.1rem 1.1rem 3.8rem;
+  }
+
+  .paso::before {
+    left: 0.9rem;
+  }
+
+  .pasos-control .boton {
+    padding: 0.6rem 1rem;
+  }
+
+  .lista-marcable {
+    padding: 1.2rem;
+  }
+
+  .guia-momento {
+    padding: 1.4rem 1.2rem;
+  }
+
+  .guia:not(.guia-momento) .guia-panel {
+    padding: 1.3rem 1.2rem !important;
+  }
+
+  .derechos {
+    grid-template-columns: 1fr;
+  }
+
+  .mi-lista {
+    padding: 1.4rem 1.2rem;
+  }
+
+  .pasos-control {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .pasos-cuenta {
+    order: -1;
+    width: 100%;
+    text-align: center;
+  }
+
+  .pasos-control .boton {
+    flex: 1;
+    white-space: nowrap;
+  }
+}
+
+/* Con letra grande, el menú de escritorio se compensa con zoom para que
+   quepa en una línea; en el menú de móvil no hace falta */
+@media (max-width: 1024px) {
+  html[data-letra] .cabecera {
+    zoom: 1;
   }
 }
 

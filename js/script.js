@@ -702,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.documentElement.removeAttribute('data-letra');
       }
       var siguienteTamano = TAMANOS[(TAMANOS.indexOf(tamano) + 1) % TAMANOS.length];
-      textoLetra.textContent = 'Tamaño de letra: ' + NOMBRES[tamano];
+      textoLetra.textContent = 'Letra: ' + NOMBRES[tamano];
       botonLetra.title = 'Letra ' + NOMBRES[tamano] + '. Pulsa para verla ' + NOMBRES[siguienteTamano] + '.';
       if (guardar) {
         try {

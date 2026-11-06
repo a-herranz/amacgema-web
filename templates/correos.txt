@@ -290,7 +290,7 @@ Teléfono:
 Muchas gracias. Un saludo.
 
 [jornada-mama]
-asunto: Jornadas Aragonesas de Cáncer de Mama
+asunto: Jornada Aragonesa de Cáncer de Mama
 
 Hola:
 

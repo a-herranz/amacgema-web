@@ -80,6 +80,6 @@ enlace: proyecto-marcha-por-la-salud.html
 Andada popular de unos 3 km por el Parque José Antonio Labordeta.
 
 [cada: Cada octubre]
-titulo: Jornadas Aragonesas de Cáncer de Mama
+titulo: Jornada Aragonesa de Cáncer de Mama
 enlace: proyecto-jornada-cancer-mama.html
 Especialistas explican los avances en cáncer de mama, en torno al 19 de octubre.

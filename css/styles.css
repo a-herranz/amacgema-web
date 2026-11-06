@@ -2427,6 +2427,11 @@ h2[id],
   padding: 0;
 }
 
+/* Destino de «Vivir con la enfermedad» en el menú: que no quede bajo la cabecera fija */
+.arbol-cabecera h3 {
+  scroll-margin-top: 7rem;
+}
+
 .arbol-ramas {
   margin-left: var(--arbol-eje);
 }

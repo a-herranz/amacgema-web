@@ -189,37 +189,28 @@ document.addEventListener('DOMContentLoaded', function () {
       '<button class="boton-submenu" type="button" aria-expanded="false" aria-controls="' + idSubmenuHablando + '">' +
       '<span class="sr-only">Abrir submenú de Hablando de cáncer</span><span aria-hidden="true">⌄</span></button>' +
       '<ul class="submenu" id="' + idSubmenuHablando + '">' +
-      '<li><a href="hablando-de-cancer.html">Resumen</a></li>' +
+      '<li><a href="hablando-de-cancer.html">¿En qué momento estás?</a></li>' +
       '<li><a href="me-acaban-de-diagnosticar.html">Primeros pasos</a></li>' +
-      '<li><a href="aspectos-generales.html">Aspectos generales</a></li>' +
       '<li><a href="cancer-de-mama.html">Cáncer de mama</a></li>' +
       '<li><a href="cancer-ginecologico.html">Cáncer ginecológico</a></li>' +
-      '<li><a href="linfedema.html">Linfedema</a></li>' +
-      '<li><a href="aspectos-sociales.html">Aspectos sociales</a></li>' +
-      '<li><a href="aspectos-psicologicos.html">Aspectos psicológicos</a></li>' +
-      '<li><a href="despues-del-tratamiento.html">Después del tratamiento</a></li>' +
-      '<li><a href="mujeres-jovenes.html">Mujeres jóvenes</a></li>' +
-      '<li><a href="sexualidad.html">Sexualidad</a></li>' +
-      '<li><a href="alimentacion-y-ejercicio.html">Alimentación y ejercicio</a></li>' +
-      '<li><a href="familiares.html">Si eres familiar</a></li></ul>'
+      '<li><a href="hablando-de-cancer.html#titulo-vivir">Vivir con la enfermedad</a></li>' +
+      '<li><a href="glosario.html">Glosario</a></li></ul>'
     );
 
     // Marca como activa la categoría a la que pertenece la página actual,
     // aunque estemos en una subpágina (p. ej. concepto.html pertenece a
     // Aspectos generales; sintomas.html pertenece a Cáncer de mama).
+    // El menú solo tiene seis entradas (el resto de temas están en la
+    // portada de la sección, en el mismo orden que su árbol): las páginas
+    // de «Vivir con la enfermedad» marcan esa entrada, y las de Aspectos
+    // generales, la portada.
     var categoriasHablando = {
-      'aspectos-generales.html': ['aspectos-generales.html', 'concepto.html', 'itinerario-diagnostico.html', 'planteamiento-terapeutico.html'],
+      'hablando-de-cancer.html': ['hablando-de-cancer.html', 'aspectos-generales.html', 'concepto.html', 'itinerario-diagnostico.html', 'planteamiento-terapeutico.html'],
       'me-acaban-de-diagnosticar.html': ['me-acaban-de-diagnosticar.html'],
       'cancer-de-mama.html': ['cancer-de-mama.html', 'sintomas.html', 'diagnostico.html', 'tratamiento.html', 'cancer-de-mama-avanzado.html', 'prevencion-diagnostico-precoz.html'],
       'cancer-ginecologico.html': ['cancer-ginecologico.html', 'cancer-de-ovario.html', 'cancer-de-endometrio.html', 'cancer-de-cervix.html', 'cancer-de-vulva-y-vagina.html', 'prevencion-diagnostico-precoz-ginecologico.html'],
-      'linfedema.html': ['linfedema.html'],
-      'aspectos-sociales.html': ['aspectos-sociales.html'],
-      'aspectos-psicologicos.html': ['aspectos-psicologicos.html'],
-      'despues-del-tratamiento.html': ['despues-del-tratamiento.html'],
-      'mujeres-jovenes.html': ['mujeres-jovenes.html'],
-      'sexualidad.html': ['sexualidad.html'],
-      'alimentacion-y-ejercicio.html': ['alimentacion-y-ejercicio.html'],
-      'familiares.html': ['familiares.html']
+      'hablando-de-cancer.html#titulo-vivir': ['linfedema.html', 'aspectos-sociales.html', 'aspectos-psicologicos.html', 'despues-del-tratamiento.html', 'mujeres-jovenes.html', 'sexualidad.html', 'alimentacion-y-ejercicio.html', 'familiares.html'],
+      'glosario.html': ['glosario.html']
     };
     var paginaActualHablando = window.location.pathname.split('/').pop() || 'index.html';
     var hrefCategoriaActual = null;

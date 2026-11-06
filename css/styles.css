@@ -4156,6 +4156,40 @@ a.via-contacto-dato:focus-visible {
   }
 
   /* Sitio para apuntar la respuesta debajo de cada pregunta */
+  /* Hoja para llevar a la consulta (Después del tratamiento): fecha,
+     tres líneas bajo cada punto y un espacio libre al final */
+  .hoja-fecha {
+    font-size: 10pt;
+    margin: 0 0 3mm;
+  }
+
+  .hoja-fecha span {
+    display: inline-block;
+    width: 45mm;
+    border-bottom: 0.8pt solid var(--color-texto-suave);
+  }
+
+  .hoja-respuesta {
+    display: block;
+    height: 24mm;
+    margin: 1mm 0 3mm;
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(8mm - 0.8pt), var(--color-borde) calc(8mm - 0.8pt), var(--color-borde) 8mm);
+  }
+
+  .hoja-respuesta-etiqueta {
+    color: var(--color-texto-suave);
+    font-size: 8pt;
+    font-style: italic;
+  }
+
+  .hoja-respuesta-libre {
+    height: 64mm;
+  }
+
+  .hoja-casillas li:has(.hoja-respuesta) {
+    break-inside: avoid;
+  }
+
   .hoja-notas {
     display: block;
     height: 13mm;

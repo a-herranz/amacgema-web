@@ -476,8 +476,12 @@ document.addEventListener('DOMContentLoaded', function () {
       pie.hidden = false;
       pie.querySelector('[data-lista-imprimir]').addEventListener('click', function () {
         var hayMarcadas = todas().some(function (x) { return x.checked; });
+        // Con data-hoja-notas, la hoja es para llevar a la consulta: fecha,
+        // líneas bajo cada punto para apuntar la respuesta y sitio al final
+        var conNotas = cajas[0].hasAttribute('data-hoja-notas');
         var html = '<p class="sobrelinea">' + document.querySelector('h1').textContent + '</p>'
-          + '<h2>' + (cajas[0].getAttribute('data-hoja-titulo') || '') + '</h2>';
+          + '<h2>' + (cajas[0].getAttribute('data-hoja-titulo') || '') + '</h2>'
+          + (conNotas ? '<p class="hoja-fecha">Fecha de la consulta: <span></span></p>' : '');
         cajas.forEach(function (caja) {
           caja.querySelectorAll('fieldset').forEach(function (grupo) {
             var titulo = grupo.getAttribute('data-hoja-seccion') || caja.getAttribute('data-hoja-seccion');
@@ -488,11 +492,16 @@ document.addEventListener('DOMContentLoaded', function () {
             filas.forEach(function (x) {
               var div = document.createElement('div');
               div.textContent = x.parentNode.textContent.trim();
-              html += '<li>' + div.innerHTML + '</li>';
+              html += '<li>' + div.innerHTML + (conNotas
+                ? '<span class="hoja-respuesta"><span class="hoja-respuesta-etiqueta">Lo que me dicen en consulta:</span></span>'
+                : '') + '</li>';
             });
             html += '</ul>';
           });
         });
+        if (conNotas) {
+          html += '<h3>Otras notas de la consulta</h3><span class="hoja-respuesta hoja-respuesta-libre"></span>';
+        }
         var hoja = document.createElement('section');
         hoja.className = 'hoja-mi-lista';
         hoja.innerHTML = html;

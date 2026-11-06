@@ -85,18 +85,19 @@ Teléfono:
 Muchas gracias. Un saludo.
 
 [regalos-solidarios]
-asunto: Regalos solidarios para una celebración
+asunto: Regalos solidarios
 
 Hola:
 
-Me gustaría encargar detalles solidarios de AMAC-GEMA para una celebración. Os dejo los datos:
+Me gustaría información sobre los regalos solidarios de AMAC-GEMA.
 
+[Cuéntanos aquí qué necesitas]
+
+Si es un encargo para una celebración, rellena también:
 Tipo de celebración (boda, bautizo, comunión...):
 Fecha:
 Número aproximado de invitados:
 Qué me gustaría personalizar (nombres, fecha, un mensaje, colores...):
-
-¿Podríais enviarme información sobre los detalles disponibles y cómo hacer el encargo?
 
 Nombre:
 Teléfono:

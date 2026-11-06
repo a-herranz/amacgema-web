@@ -391,9 +391,10 @@ GALERIAS = {
         "fuente": os.path.join("templates", "regalos.txt"),
         "id": "detalles",
         "titulo": "Detalles que hemos preparado",
-        "intro": ("Algunos regalos hechos a mano y personalizados para otras "
-                  "celebraciones. Con lo recaudado seguimos acompañando a mujeres "
-                  "con cáncer de mama y ginecológico."),
+        "intro": ("Algunos de los detalles hechos a mano en la asociación, para la "
+                  "venta en la sede y en stands o personalizados para celebraciones. "
+                  "Con lo recaudado seguimos acompañando a mujeres con cáncer de "
+                  "mama y ginecológico."),
         "clase": "seccion",
         "instagram": False,
     },

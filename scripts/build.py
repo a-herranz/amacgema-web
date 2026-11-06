@@ -492,6 +492,123 @@ def galeria_html(fotos, ajustes):
 
 
 # ---------- Índice de página ----------
+# ---------- Iconos ----------
+# {{ICONO:nombre}} se sustituye por el dibujo de templates/iconos/nombre.svg,
+# metido en la página: así toma el color del texto (currentColor) y no
+# cuesta ninguna descarga. Para un icono nuevo basta con añadir su .svg.
+ICONOS = "templates/iconos"
+
+
+def poner_iconos(content):
+    def icono(m):
+        ruta = os.path.join(ICONOS, m.group(1) + ".svg")
+        if not os.path.exists(ruta):
+            raise ValueError("No existe el icono %s" % ruta)
+        return read(ruta).strip()
+    return re.sub(r"\{\{ICONO:([a-z0-9-]+)\}\}", icono, content)
+
+
+# ---------- Imagen para compartir de cada página ----------
+# Al compartir un enlace en WhatsApp, Facebook..., se ve una tarjeta con la
+# imagen de og:image. La portada usa img/compartir.jpg (el logo); el resto
+# de páginas, una imagen hecha aquí con su sección, su título y el logo,
+# para que se sepa de qué trata antes de abrirla. Si Pillow no está
+# instalado, todas usan la de la portada.
+COMPARTIR_GENERICA = "img/compartir.jpg"
+COMPARTIR_SALIDA = "img/compartir"
+COMPARTIR_TAMANO = (1200, 630)
+COMPARTIR_COLORES = {"fondo": "#FBF1F5", "arco": "#F3D3E1", "sobrelinea": "#11756C",
+                     "titulo": "#893B5B"}
+_compartir_pil = None
+
+
+def _pil():
+    global _compartir_pil
+    if _compartir_pil is None:
+        try:
+            from PIL import Image, ImageDraw, ImageFont
+            _compartir_pil = (Image, ImageDraw, ImageFont)
+        except ImportError:
+            avisar("sin Pillow, todas las páginas comparten con img/compartir.jpg "
+                   "(pip install pillow).")
+            _compartir_pil = False
+    return _compartir_pil
+
+
+def _partir_lineas(draw, texto, fuente, ancho):
+    lineas, actual = [], ""
+    for palabra in texto.split():
+        prueba = (actual + " " + palabra).strip()
+        if actual and draw.textlength(prueba, font=fuente) > ancho:
+            lineas.append(actual)
+            actual = palabra
+        else:
+            actual = prueba
+    return lineas + [actual]
+
+
+def imagen_compartir(fname, titulo, content):
+    """Devuelve la ruta (relativa a la web) de la imagen de og:image."""
+    pil = _pil()
+    if fname == "index.html" or not pil:
+        return COMPARTIR_GENERICA
+    Image, ImageDraw, ImageFont = pil
+    ancho, alto = COMPARTIR_TAMANO
+    margen = 80
+    c = COMPARTIR_COLORES
+    lienzo = Image.new("RGB", COMPARTIR_TAMANO, c["fondo"])
+    draw = ImageDraw.Draw(lienzo)
+
+    # El arco de la «M» del logo, grande y suave, asomando por la derecha
+    draw.arc((890, 200, 1370, 680), 180, 360, fill=c["arco"], width=64)
+
+    m = re.search(r'<p class="sobrelinea">(.*?)</p>', content, re.S)
+    sobrelinea = html.unescape(re.sub(r"<[^>]+>", "", m.group(1))).strip() if m else "AMAC-GEMA"
+    fuente = ImageFont.truetype("fonts/poppins-600-latin.woff2", 26)
+    draw.text((margen, 90), sobrelinea.upper(), font=fuente, fill=c["sobrelinea"])
+
+    # El título, lo más grande posible sin pasar de tres líneas
+    titulo = html.unescape(titulo.split(" | ")[0]).strip()
+    for tamano in range(76, 40, -4):
+        fuente = ImageFont.truetype("fonts/poppins-700-latin.woff2", tamano)
+        lineas = _partir_lineas(draw, titulo, fuente, 760)
+        if len(lineas) <= 3:
+            break
+    interlinea = int(tamano * 1.18)
+    y = 150 + (260 - interlinea * len(lineas)) // 2
+    for linea in lineas:
+        draw.text((margen, y), linea, font=fuente, fill=c["titulo"])
+        y += interlinea
+
+    logo = Image.open("img/amac-gema-logo.png").convert("RGBA")
+    logo.thumbnail((260, 150), Image.LANCZOS)
+    lienzo.paste(logo, (margen - 10, alto - margen - logo.height + 20), logo)
+
+    ruta = "%s/%s.jpg" % (COMPARTIR_SALIDA, os.path.splitext(fname)[0])
+    os.makedirs(os.path.join(SALIDA, COMPARTIR_SALIDA), exist_ok=True)
+    lienzo.save(os.path.join(SALIDA, ruta), "JPEG", quality=85, optimize=True)
+    return ruta
+
+
+# ---------- Botón «Imprimir esta página» ----------
+# Las páginas de Hablando de cáncer se imprimen a menudo para llevarlas a la
+# consulta: el botón se añade solo, al final de su cabecera. Las portadas de
+# sección, que solo reparten a otras páginas, no lo llevan.
+SIN_BOTON_IMPRIMIR = {"hablando-de-cancer.html", "aspectos-generales.html",
+                      "cancer-de-mama.html", "cancer-ginecologico.html"}
+BOTON_IMPRIMIR = ('\n                    <p class="hero-imprimir" data-pagefind-ignore>'
+                  '<button class="boton-imprimir" type="button" data-imprimir hidden>'
+                  'Imprimir esta página</button></p>')
+# Al pie de la hoja impresa (templates/layout.html), solo en estas páginas
+NOTA_IMPRESION = "<br>Esta información no sustituye la de tu equipo médico: llévala a la consulta y pregunta todo lo que necesites."
+
+
+def poner_boton_imprimir(content):
+    return re.sub(r'(<section class="hero[^"]*">.*?)(\s*</div>\s*</section>)',
+                  lambda m: m.group(1) + BOTON_IMPRIMIR + m.group(2),
+                  content, count=1, flags=re.S)
+
+
 # En una página larga, el marcador {{INDICE}} se sustituye por un índice de
 # salto con sus títulos <h2>. Los <h2> sin id reciben uno a partir del texto,
 # así que basta con escribir el marcador donde deba aparecer el índice.
@@ -867,10 +984,13 @@ def build():
         for marcador, pintada in galerias.items():
             content = content.replace("{{%s}}" % marcador, pintada)
         content = generar_indice(content)
+        content = poner_iconos(content)
 
         en_hablando = os.path.normpath(page_path).split(os.sep)[1] == "hablando-de-cancer"
         if en_hablando and fname not in GLOSARIO_SIN_ENLACE:
             content = enlazar_glosario(content, fname, terminos_glosario)
+        if en_hablando and fname not in SIN_BOTON_IMPRIMIR:
+            content = poner_boton_imprimir(content)
 
         if meta.get("aviso") == "ia":
             content = aviso_ia(aviso_ia_tpl, meta.get("revision", ""), en_hablando) + content
@@ -883,6 +1003,8 @@ def build():
         page_html = (
             layout
             .replace("{{URL}}", SITE_URL + ("" if fname == "index.html" else fname))
+            .replace("{{IMAGEN_COMPARTIR}}",
+                     SITE_URL + imagen_compartir(fname, meta.get("title", ""), content))
             .replace("{{SITE_URL}}", SITE_URL)
             .replace("{{TITLE}}", meta.get("title", ""))
             .replace("{{DESCRIPTION}}", meta.get("description", ""))
@@ -891,6 +1013,7 @@ def build():
             .replace("{{CONTENT}}", content)
             .replace("{{CIERRE}}", cierre_html)
             .replace("{{FOOTER}}", footer)
+            .replace("{{NOTA_IMPRESION}}", NOTA_IMPRESION if en_hablando else "")
             .replace("{{DATOS_ESTRUCTURADOS}}",
                      datos_estructurados() if fname == "index.html" else "")
             .replace("{{CABECERA_EXTRA}}", cabecera_extra())

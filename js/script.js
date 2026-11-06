@@ -348,8 +348,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Botones «Imprimir» (folleto Primeros pasos)
+  // Botones «Imprimir» (folleto Primeros pasos y páginas de Hablando de
+  // cáncer). Los de Hablando llegan ocultos: sin JavaScript no harían nada.
   document.querySelectorAll('[data-imprimir]').forEach(function (boton) {
+    boton.hidden = false;
     boton.addEventListener('click', function () {
       window.print();
     });

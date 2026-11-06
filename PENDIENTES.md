@@ -177,6 +177,20 @@ cuestionario para la junta).
       en velocidad y 100 en accesibilidad, buenas prácticas y SEO. El
       workflow «Revisar calidad» lo repite el día 1 de cada mes; mirar el
       resumen de esa ejecución en la pestaña Actions de GitHub.
+- [x] **Imagen y pulido** (prioridad 3 del análisis, nov. 2026): iconos de
+      línea propios en las tarjetas de servicios, el arco del logo como
+      motivo en cabeceras y recuadros, una imagen para compartir por página,
+      botón «Imprimir esta página» con hoja impresa cuidada, recuadros «Lo
+      esencial» en las páginas médicas que no lo tenían y limpieza de fechas
+      que caducan y de textos repetidos.
+- [ ] **Cifras anuales**: cada vez que salga una memoria nueva, actualizar
+      las cifras «En 2025» de: portada (pacientes visitadas y Marcha),
+      Preguntas frecuentes, Historias, Voluntariado testimonial, Acogida,
+      Cafés de los martes, Ayuda profesional y sus tres páginas
+      (psicooncóloga, fisioterapeuta, trabajadora social), Actividades
+      guiadas, Proyecto Contigo, Sensibilización, Investigación y Marcha por
+      la Salud, y el enlace a la memoria en Estructura. Buscar «2025» en
+      `pages/` las encuentra todas.
 
 ## Descartado por ahora
 
@@ -204,6 +218,7 @@ registrada aquí.
 | Glosario: 9 términos añadidos (nov. 2026): CDK4/6, cuidados paliativos, densitometría, ensayo clínico, inmunoterapia, metástasis, PARP, triple negativo y vitrificación | `pages/hablando-de-cancer/glosario.html` | SEOM, AECC | Oncología (junto con las páginas médicas) | Pendiente | | El glosario no muestra aviso de IA porque el resto de términos son anteriores |
 | Si acompañas a alguien con cáncer (familiares) | `pages/hablando-de-cancer/familiares.html` | AECC, SEOM; Estatuto de los Trabajadores (permiso de 5 días) | Psicooncóloga y trabajadora social | Pendiente | | |
 | Preguntas frecuentes | `pages/preguntas-frecuentes.html` | Datos ya publicados en la web | Junta directiva | Pendiente | | |
+| Recuadros «Lo esencial» (nov. 2026) en Diagnóstico (mama), Cáncer de ovario, de endometrio, de cuello de útero y de vulva y vagina | `pages/hablando-de-cancer/cancer-de-mama/diagnostico.html` y `pages/hablando-de-cancer/cancer-ginecologico/` | Resumen de cada página, sin datos nuevos | Oncología o ginecología (junto con las páginas médicas) | Pendiente | | Cada recuadro lleva su propia nota de IA; el resto de la página es anterior |
 | Historias | `pages/que-hacemos/ayuda-testimonial/ayuda-testimonial-historias.html` | Web de AMAC-GEMA; entrevistas a la presidenta en COPE Aragón (19/10/2026), Aragón Digital (19/10/2026) y Aragón TV (18/10/2024) | Junta directiva y la propia María José Rivas (su historia personal y sus citas) | Pendiente | | Por decisión de nov. 2026, esta página no muestra el aviso de IA |
 
 **Cuando una página quede revisada:**

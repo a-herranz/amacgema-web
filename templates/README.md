@@ -177,9 +177,21 @@ Después de editar, haz commit y push (o genera en local para verlo antes).
 `scripts/build.py` añade automáticamente, en cada página:
 
 - **Etiquetas para compartir** (WhatsApp, Facebook): título, descripción e
-  imagen `img/compartir.jpg`. Usan la dirección pública definida en
-  `SITE_URL`, al principio de `build.py`; si la web pasa a un dominio
-  propio, cambia solo esa línea.
+  imagen. La portada usa `img/compartir.jpg` (el logo); cada una de las
+  demás páginas, una imagen que el build dibuja con Pillow en
+  `publicar/img/compartir/` con su sección (la `sobrelinea`), su título y
+  el logo. Usan la dirección pública definida en `SITE_URL`, al principio
+  de `build.py`; si la web pasa a un dominio propio, cambia solo esa línea.
+- **Botón «Imprimir esta página»**: en las páginas de Hablando de cáncer
+  (salvo las portadas de sección, `SIN_BOTON_IMPRIMIR`), al final de la
+  cabecera. La hoja impresa lleva arriba el nombre y el teléfono de la
+  asociación y abajo la dirección de la página y el contacto, en lugar del
+  pie de la web.
+- **Iconos**: `{{ICONO:nombre}}` mete el dibujo de
+  `templates/iconos/nombre.svg` (líneas de 24×24 que toman el color del
+  texto). Se usan en las tarjetas de servicios dentro de
+  `<div class="icono-tarjeta">`. Para uno nuevo, añade su `.svg` con la
+  misma cabecera que los demás.
 - **Enlaces al glosario**: en las páginas de Hablando de cáncer, la primera
   aparición de cada término del glosario se enlaza a su definición. Los
   términos se leen de `pages/hablando-de-cancer/glosario.html`: añadir una
@@ -230,6 +242,9 @@ Después de editar, haz commit y push (o genera en local para verlo antes).
   aparece en el resumen de cada publicación.
 
 La hoja de estilos incluye además una versión para imprimir (sección 18).
+El arco de la «M» del logo aparece, muy suave, en la esquina de las
+cabeceras interiores y de los recuadros rosas (`.hero-interior::after` y
+`.bloque-rosa::after`).
 
 ## Publicación y comprobaciones
 

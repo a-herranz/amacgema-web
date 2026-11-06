@@ -789,6 +789,33 @@ a[target="_blank"]:not(.logo-colaborador)::after {
    con el contenido real en vez de dar paso a él. */
 .hero-interior {
   padding: 1.75rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* El arco de la «M» del logo, como motivo: asoma, muy suave, por la
+   esquina de las cabeceras interiores y de los recuadros rosas */
+.hero-interior::after,
+.bloque-rosa::after {
+  content: "";
+  position: absolute;
+  border: 2.2rem solid var(--color-primario);
+  border-radius: 50%;
+  clip-path: inset(0 0 50% 0);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.hero-interior::after {
+  width: 15rem;
+  height: 15rem;
+  right: -3rem;
+  bottom: -9.5rem;
+}
+
+.hero-interior > .contenedor {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-interior h1 {
@@ -798,6 +825,45 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 .hero-interior p {
   font-size: 1.05rem;
   margin-bottom: 0;
+}
+
+/* «Imprimir esta página» (Hablando de cáncer): lo añade scripts/build.py y
+   js/script.js lo muestra, porque sin JavaScript no haría nada */
+.hero-interior .hero-imprimir {
+  margin-top: 0.9rem;
+}
+
+.boton-imprimir {
+  background: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-radius: 999px;
+  color: var(--color-acento);
+  cursor: pointer;
+  font-family: var(--fuente-titulos);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem 0.45rem 0.85rem;
+}
+
+.boton-imprimir::before {
+  content: "";
+  display: inline-block;
+  width: 1.05em;
+  height: 1.05em;
+  margin-right: 0.45em;
+  vertical-align: -0.15em;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9V3h12v6'/%3E%3Crect x='3' y='9' width='18' height='8' rx='2'/%3E%3Cpath d='M6 14h12v7H6z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9V3h12v6'/%3E%3Crect x='3' y='9' width='18' height='8' rx='2'/%3E%3Cpath d='M6 14h12v7H6z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.boton-imprimir:hover {
+  border-color: var(--color-acento);
+}
+
+/* Cabecera y pie que solo aparecen en la hoja impresa (sección 18) */
+.solo-impresion {
+  display: none;
 }
 
 /* Aviso de contenido elaborado con IA (templates/aviso-ia.html): franja
@@ -982,6 +1048,24 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 .tarjeta-enlace:focus {
   color: var(--color-texto);
   text-decoration: none;
+}
+
+/* Icono de línea de cada servicio ({{ICONO:...}}, templates/iconos/) */
+.icono-tarjeta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background-color: var(--color-primario-claro);
+  color: var(--color-acento);
+}
+
+.icono-tarjeta .icono {
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 .tarjeta-enlace > span {
@@ -1246,7 +1330,25 @@ a[target="_blank"]:not(.logo-colaborador)::after {
 .tarjeta--oscuro { border-top-color: var(--color-primario-oscuro); }
 
 /* Variantes del recuadro destacado (páginas de "Hablando de cáncer") */
-.bloque-rosa { border-left-color: var(--color-primario); }
+.bloque-rosa {
+  border-left-color: var(--color-primario);
+  position: relative;
+  overflow: hidden;
+}
+
+.bloque-rosa::after {
+  width: 9rem;
+  height: 9rem;
+  border-width: 1.3rem;
+  right: -2rem;
+  bottom: -5rem;
+  opacity: 0.1;
+}
+
+.bloque-rosa > * {
+  position: relative;
+  z-index: 1;
+}
 .bloque-esencial { margin-bottom: 2rem; }
 .bloque-nota { margin: 2rem 0; }
 .bloque-entrada { margin-bottom: 3rem; }
@@ -3241,9 +3343,47 @@ a.via-contacto-dato:focus-visible {
   .indice-rapido,
   .mapa-contenedor,
   .cierre-apoyo,
-  .pie .redes,
+  .pie,
+  .hero-imprimir,
   iframe {
     display: none;
+  }
+
+  /* En lugar del pie de la web, una línea arriba y otra abajo con quiénes
+     somos y cómo contactar: quien recibe la hoja sabe de dónde sale */
+  .solo-impresion {
+    display: block;
+    color: #000;
+    font-size: 9pt;
+  }
+
+  .cabecera-impresion {
+    border-bottom: 2px solid #000;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.3rem;
+  }
+
+  .pie-impresion {
+    border-top: 1px solid #000;
+    margin-top: 1rem;
+    padding-top: 0.4rem;
+    break-inside: avoid;
+  }
+
+  .aviso-ia {
+    border: 1px solid #999;
+    padding: 0.4rem 0;
+  }
+
+  .hero-interior::after,
+  .bloque-rosa::after,
+  .icono-tarjeta {
+    display: none;
+  }
+
+  /* En papel un enlace no se puede pulsar: el subrayado solo estorba */
+  main a {
+    text-decoration: none;
   }
 
   body {
@@ -3295,28 +3435,10 @@ a.via-contacto-dato:focus-visible {
     content: "";
   }
 
-  .pie {
-    background: none;
-    color: #000;
-    border-top: 1px solid #000;
-    padding: 0.8rem 0 0;
-  }
-
-  .pie-grid {
-    display: block;
-  }
-
-  .pie-columna p,
-  .pie small,
-  .pie-legal,
-  .pie a {
-    color: #000;
-  }
-
   /* Tríptico: solo las dos caras, una por hoja A4 apaisada y sin márgenes
      de página (el propio panel tiene los suyos), sin pie ni avisos de
      pantalla (la nota de revisión va dentro del tríptico) */
-  body:has(.triptico) .pie,
+  body:has(.triptico) .solo-impresion,
   body:has(.triptico) .aviso-ia,
   .folleto-pantalla,
   .triptico-etiqueta {

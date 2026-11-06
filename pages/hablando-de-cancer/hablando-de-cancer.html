@@ -14,13 +14,75 @@ subnav: hablando-de-cancer
 
             <section class="seccion">
                 <div class="contenedor">
-                    <!-- Antes que el árbol: quien acaba de recibir el diagnóstico
-                         no sabe aún qué tema buscar, necesita un punto de partida. -->
-                    <div class="bloque-destacado bloque-rosa bloque-entrada">
-                        <p class="etiqueta">¿Te acaban de diagnosticar?</p>
-                        <h2>Empieza por aquí</h2>
-                        <p>Qué suele pasar las primeras semanas, qué preguntar en la consulta, tus derechos y dónde pedir apoyo.</p>
-                        <a class="boton boton-primario" href="me-acaban-de-diagnosticar.html">Primeros pasos</a>
+                    <!-- Antes que el árbol: quien llega aquí no sabe aún qué tema buscar.
+                         Elige su momento y ve solo las páginas que le tocan (guía con
+                         [data-guia], js/script.js). Los textos son los del árbol de abajo. -->
+                    <div class="guia guia-momento" data-guia="momento">
+                        <p class="etiqueta">Para empezar</p>
+                        <h2 id="en-que-momento-estas">¿En qué momento estás?</h2>
+                        <div class="guia-botones" role="group" aria-label="Elige tu momento" hidden>
+                            <button type="button" data-guia-boton="diagnostico" aria-pressed="false" aria-controls="momento-diagnostico">Me acaban de diagnosticar</button>
+                            <button type="button" data-guia-boton="tratamiento" aria-pressed="false" aria-controls="momento-tratamiento">Estoy en tratamiento</button>
+                            <button type="button" data-guia-boton="despues" aria-pressed="false" aria-controls="momento-despues">He terminado el tratamiento</button>
+                            <button type="button" data-guia-boton="avanzado" aria-pressed="false" aria-controls="momento-avanzado">Mi cáncer se ha extendido</button>
+                            <button type="button" data-guia-boton="acompano" aria-pressed="false" aria-controls="momento-acompano">Acompaño a alguien</button>
+                            <button type="button" data-guia-boton="prevenir" aria-pressed="false" aria-controls="momento-prevenir">Quiero prevenir</button>
+                        </div>
+                        <p class="guia-sin-elegir" hidden>Elige una opción y te enseñamos por dónde seguir.</p>
+                        <div class="guia-panel" id="momento-diagnostico" data-guia-panel="diagnostico">
+                            <h3>Me acaban de diagnosticar</h3>
+                            <ul class="guia-enlaces">
+                                <li><a class="guia-enlace guia-enlace-principal" href="me-acaban-de-diagnosticar.html"><span class="guia-enlace-titulo">Primeros pasos</span><span class="guia-enlace-desc">Qué suele pasar las primeras semanas, qué preguntar en la consulta, tus derechos y dónde pedir apoyo.</span></a></li>
+                                <li><a class="guia-enlace" href="diagnostico.html"><span class="guia-enlace-titulo">Diagnóstico del cáncer de mama</span><span class="guia-enlace-desc">Las pruebas que pueden hacerte y qué significa el estadio.</span></a></li>
+                                <li><a class="guia-enlace" href="cancer-ginecologico.html"><span class="guia-enlace-titulo">Cáncer ginecológico</span><span class="guia-enlace-desc">Ovario, útero, vagina y vulva.</span></a></li>
+                                <li><a class="guia-enlace" href="aspectos-psicologicos.html"><span class="guia-enlace-titulo">Aspectos psicológicos</span><span class="guia-enlace-desc">Las emociones más frecuentes y cómo hablar con tu médico, tu familia y los más pequeños.</span></a></li>
+                                <li><a class="guia-enlace" href="mujeres-jovenes.html"><span class="guia-enlace-titulo">Mujeres jóvenes</span><span class="guia-enlace-desc">Fertilidad, embarazo, anticoncepción y cáncer hereditario.</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="guia-panel" id="momento-tratamiento" data-guia-panel="tratamiento">
+                            <h3>Estoy en tratamiento</h3>
+                            <ul class="guia-enlaces">
+                                <li><a class="guia-enlace guia-enlace-principal" href="tratamiento.html"><span class="guia-enlace-titulo">Tratamiento del cáncer de mama</span><span class="guia-enlace-desc">Cirugía, reconstrucción, radioterapia y tratamientos con fármacos.</span></a></li>
+                                <li><a class="guia-enlace" href="planteamiento-terapeutico.html"><span class="guia-enlace-titulo">Cómo se trata un cáncer</span><span class="guia-enlace-desc">Abordaje local y general, común a cualquier cáncer.</span></a></li>
+                                <li><a class="guia-enlace" href="linfedema.html"><span class="guia-enlace-titulo">Linfedema</span><span class="guia-enlace-desc">Qué es, por qué se produce y cómo prevenirlo y tratarlo.</span></a></li>
+                                <li><a class="guia-enlace" href="alimentacion-y-ejercicio.html"><span class="guia-enlace-titulo">Alimentación y ejercicio</span><span class="guia-enlace-desc">Qué comer, cómo moverse y qué mitos conviene olvidar.</span></a></li>
+                                <li><a class="guia-enlace" href="aspectos-sociales.html"><span class="guia-enlace-titulo">Aspectos sociales</span><span class="guia-enlace-desc">Cambios en el trabajo, la familia y la vida social, y los recursos y ayudas disponibles.</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="guia-panel" id="momento-despues" data-guia-panel="despues">
+                            <h3>He terminado el tratamiento</h3>
+                            <ul class="guia-enlaces">
+                                <li><a class="guia-enlace guia-enlace-principal" href="despues-del-tratamiento.html"><span class="guia-enlace-titulo">Después del tratamiento</span><span class="guia-enlace-desc">Revisiones, miedo a la recaída, efectos que duran y vuelta al trabajo.</span></a></li>
+                                <li><a class="guia-enlace" href="linfedema.html"><span class="guia-enlace-titulo">Linfedema</span><span class="guia-enlace-desc">Qué es, por qué se produce y cómo prevenirlo y tratarlo.</span></a></li>
+                                <li><a class="guia-enlace" href="sexualidad.html"><span class="guia-enlace-titulo">Sexualidad</span><span class="guia-enlace-desc">Los cambios más frecuentes, qué ayuda y con quién hablarlo.</span></a></li>
+                                <li><a class="guia-enlace" href="alimentacion-y-ejercicio.html"><span class="guia-enlace-titulo">Alimentación y ejercicio</span><span class="guia-enlace-desc">Qué comer, cómo moverse y qué mitos conviene olvidar.</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="guia-panel" id="momento-avanzado" data-guia-panel="avanzado">
+                            <h3>Mi cáncer se ha extendido</h3>
+                            <ul class="guia-enlaces">
+                                <li><a class="guia-enlace guia-enlace-principal" href="cancer-de-mama-avanzado.html"><span class="guia-enlace-titulo">Cáncer de mama avanzado</span><span class="guia-enlace-desc">Cuando se ha extendido a otros órganos: tratamiento y vida diaria.</span></a></li>
+                                <li><a class="guia-enlace" href="aspectos-psicologicos.html"><span class="guia-enlace-titulo">Aspectos psicológicos</span><span class="guia-enlace-desc">Las emociones más frecuentes y cómo hablar con tu médico, tu familia y los más pequeños.</span></a></li>
+                                <li><a class="guia-enlace" href="aspectos-sociales.html"><span class="guia-enlace-titulo">Aspectos sociales</span><span class="guia-enlace-desc">Cambios en el trabajo, la familia y la vida social, y los recursos y ayudas disponibles.</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="guia-panel" id="momento-acompano" data-guia-panel="acompano">
+                            <h3>Acompaño a alguien</h3>
+                            <ul class="guia-enlaces">
+                                <li><a class="guia-enlace guia-enlace-principal" href="familiares.html"><span class="guia-enlace-titulo">Si acompañas a alguien con cáncer</span><span class="guia-enlace-desc">Para familiares y amigas: qué ayuda, qué evitar y cómo cuidarte.</span></a></li>
+                                <li><a class="guia-enlace" href="me-acaban-de-diagnosticar.html"><span class="guia-enlace-titulo">Primeros pasos</span><span class="guia-enlace-desc">Qué suele pasar las primeras semanas, qué preguntar en la consulta, tus derechos y dónde pedir apoyo.</span></a></li>
+                                <li><a class="guia-enlace" href="aspectos-psicologicos.html"><span class="guia-enlace-titulo">Aspectos psicológicos</span><span class="guia-enlace-desc">Las emociones más frecuentes y cómo hablar con tu médico, tu familia y los más pequeños.</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="guia-panel" id="momento-prevenir" data-guia-panel="prevenir">
+                            <h3>Quiero prevenir</h3>
+                            <ul class="guia-enlaces">
+                                <li><a class="guia-enlace guia-enlace-principal" href="sintomas.html"><span class="guia-enlace-titulo">Síntomas del cáncer de mama</span><span class="guia-enlace-desc">Signos a los que prestar atención.</span></a></li>
+                                <li><a class="guia-enlace" href="prevencion-diagnostico-precoz.html"><span class="guia-enlace-titulo">Prevención del cáncer de mama</span><span class="guia-enlace-desc">Mamografía, examen clínico y cómo hacer la autoexploración.</span></a></li>
+                                <li><a class="guia-enlace" href="prevencion-diagnostico-precoz-ginecologico.html"><span class="guia-enlace-titulo">Prevención del cáncer ginecológico</span><span class="guia-enlace-desc">Citología, prueba y vacuna del virus del papiloma humano, y revisiones.</span></a></li>
+                                <li><a class="guia-enlace" href="mujeres-jovenes.html#cancer-hereditario"><span class="guia-enlace-titulo">Cáncer hereditario</span><span class="guia-enlace-desc">Genes BRCA y cuándo te pueden derivar a una unidad de consejo genético.</span></a></li>
+                            </ul>
+                        </div>
                     </div>
 
                     <form class="buscador-rapido" action="buscar.html" method="get" role="search">

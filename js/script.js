@@ -357,6 +357,54 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Guías por opciones ([data-guia]): una fila de botones y un panel por
+  // opción; solo se ve el panel elegido. Sin JavaScript los botones no
+  // aparecen y se leen todos los paneles seguidos; al imprimir salen todos.
+  // Un enlace a algo que está dentro de un panel (#anclas, el índice) lo abre.
+  var guias = document.querySelectorAll('[data-guia]');
+  var abrirPanel = function (guia, id, guardar) {
+    guia.querySelectorAll('[data-guia-boton]').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-guia-boton') === id ? 'true' : 'false');
+    });
+    guia.querySelectorAll('[data-guia-panel]').forEach(function (p) {
+      p.hidden = p.getAttribute('data-guia-panel') !== id;
+    });
+    var aviso = guia.querySelector('.guia-sin-elegir');
+    if (aviso) aviso.hidden = !!id;
+    if (guardar) {
+      try {
+        localStorage.setItem('amacgema-guia-' + guia.getAttribute('data-guia'), id);
+      } catch (e) { /* sin almacenamiento: se elige de nuevo en cada visita */ }
+    }
+  };
+  var abrirDesdeAncla = function () {
+    if (!location.hash) return false;
+    var destino = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    var panel = destino && destino.closest('[data-guia-panel]');
+    if (!panel) return false;
+    abrirPanel(panel.closest('[data-guia]'), panel.getAttribute('data-guia-panel'), false);
+    destino.scrollIntoView();
+    return true;
+  };
+  guias.forEach(function (guia) {
+    var botones = guia.querySelector('.guia-botones');
+    botones.hidden = false;
+    var elegido = guia.getAttribute('data-guia-inicial') || '';
+    try {
+      var recordado = localStorage.getItem('amacgema-guia-' + guia.getAttribute('data-guia'));
+      if (recordado && guia.querySelector('[data-guia-panel="' + recordado + '"]')) elegido = recordado;
+    } catch (e) { /* sin almacenamiento */ }
+    abrirPanel(guia, elegido, false);
+    botones.addEventListener('click', function (e) {
+      var boton = e.target.closest('[data-guia-boton]');
+      if (boton) abrirPanel(guia, boton.getAttribute('data-guia-boton'), true);
+    });
+  });
+  if (guias.length) {
+    abrirDesdeAncla();
+    window.addEventListener('hashchange', abrirDesdeAncla);
+  }
+
   // Guía «Me acaban de diagnosticar»: las casillas marcadas y las preguntas
   // propias se guardan solo en este navegador (localStorage), y «Imprimir
   // mi lista» saca una hoja con lo marcado y sitio para apuntar respuestas.

@@ -242,6 +242,15 @@ Después de editar, haz commit y push (o genera en local para verlo antes).
   `aviso: ia` que aún no tiene `revision:`. En GitHub Actions, el aviso
   aparece en el resumen de cada publicación.
 
+**Guías por opciones** (`data-guia`, en `js/script.js`): una fila de botones
+y un panel por opción, de los que solo se ve el elegido. Se usan en Hablando
+de cáncer («¿En qué momento estás?»), Tratamiento (una pestaña por
+tratamiento) y Aspectos sociales («¿Qué necesitas?»). Cada botón lleva
+`data-guia-boton="id"` y cada panel `data-guia-panel="id"`;
+`data-guia-inicial` elige el que se abre al entrar. Sin JavaScript se leen
+todos los paneles seguidos, al imprimir salen todos y un enlace a algo que
+está dentro de un panel lo abre solo.
+
 La hoja de estilos incluye además una versión para imprimir (sección 18).
 El arco de la «M» del logo aparece, muy suave, en la esquina de las
 cabeceras interiores y de los recuadros rosas (`.hero-interior::after` y
